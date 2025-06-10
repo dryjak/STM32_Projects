@@ -1,0 +1,2 @@
+../Core/Src/parser_simple.c:15:6:ParserTakeLine	3
+../Core/Src/parser_simple.c:36:6:ParserParse	3
