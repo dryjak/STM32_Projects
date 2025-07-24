@@ -92,6 +92,9 @@ int main(void)
   MX_USART1_UART_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
+  HAL_GPIO_WritePin(Dir1_GPIO_Port,Dir1_Pin , GPIO_PIN_SET);
+  HAL_GPIO_WritePin(Dir2_GPIO_Port,Dir2_Pin , GPIO_PIN_RESET);
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 
   /* USER CODE END 2 */
 
