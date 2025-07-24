@@ -98,31 +98,31 @@ int main(void)
   {
 	  if(HAL_GPIO_ReadPin(CzujnikL_GPIO_Port, CzujnikL_Pin))
 	  {
-		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, GPIO_PIN_RESET);
 	  }
 	  else
 	  {
-		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, GPIO_PIN_SET);
 	  }
 
 
 	  if(HAL_GPIO_ReadPin(CzujnikS_GPIO_Port, CzujnikS_Pin))
 	  {
-	  		  HAL_GPIO_WritePin(LedS_GPIO_Port, LedS_Pin, GPIO_PIN_SET);
+	  		  HAL_GPIO_WritePin(LedS_GPIO_Port, LedS_Pin, GPIO_PIN_RESET);
 	  }
 	  else
 	  {
-	  		  HAL_GPIO_WritePin(LedS_GPIO_Port, LedS_Pin, GPIO_PIN_RESET);
+	  		  HAL_GPIO_WritePin(LedS_GPIO_Port, LedS_Pin, GPIO_PIN_SET);
 	  }
 
 
 	  if(HAL_GPIO_ReadPin(CzujnikP_GPIO_Port, CzujnikP_Pin))
 	  {
-	  		  HAL_GPIO_WritePin(LedP_GPIO_Port, LedP_Pin, GPIO_PIN_SET);
+	  		  HAL_GPIO_WritePin(LedP_GPIO_Port, LedP_Pin, GPIO_PIN_RESET);
 	  }
 	  else
 	  {
-	  		  HAL_GPIO_WritePin(LedP_GPIO_Port, LedP_Pin, GPIO_PIN_RESET);
+	  		  HAL_GPIO_WritePin(LedP_GPIO_Port, LedP_Pin, GPIO_PIN_SET);
 	  }
     /* USER CODE END WHILE */
 
