@@ -96,13 +96,33 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(HAL_GPIO_ReadPin(Button1_GPIO_Port, Button1_Pin))
+	  if(HAL_GPIO_ReadPin(CzujnikL_GPIO_Port, CzujnikL_Pin))
 	  {
-		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, GPIO_PIN_SET);
 	  }
 	  else
 	  {
-		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, GPIO_PIN_RESET);
+	  }
+
+
+	  if(HAL_GPIO_ReadPin(CzujnikS_GPIO_Port, CzujnikS_Pin))
+	  {
+	  		  HAL_GPIO_WritePin(LedS_GPIO_Port, LedS_Pin, GPIO_PIN_SET);
+	  }
+	  else
+	  {
+	  		  HAL_GPIO_WritePin(LedS_GPIO_Port, LedS_Pin, GPIO_PIN_RESET);
+	  }
+
+
+	  if(HAL_GPIO_ReadPin(CzujnikP_GPIO_Port, CzujnikP_Pin))
+	  {
+	  		  HAL_GPIO_WritePin(LedP_GPIO_Port, LedP_Pin, GPIO_PIN_SET);
+	  }
+	  else
+	  {
+	  		  HAL_GPIO_WritePin(LedP_GPIO_Port, LedP_Pin, GPIO_PIN_RESET);
 	  }
     /* USER CODE END WHILE */
 
