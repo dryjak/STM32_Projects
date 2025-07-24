@@ -65,12 +65,18 @@ void Error_Handler(void);
 #define CzujnikS_GPIO_Port GPIOA
 #define CzujnikP_Pin GPIO_PIN_2
 #define CzujnikP_GPIO_Port GPIOA
+#define PWM1_Pin GPIO_PIN_8
+#define PWM1_GPIO_Port GPIOA
 #define LedP_Pin GPIO_PIN_3
 #define LedP_GPIO_Port GPIOB
 #define LedS_Pin GPIO_PIN_4
 #define LedS_GPIO_Port GPIOB
 #define LedL_Pin GPIO_PIN_5
 #define LedL_GPIO_Port GPIOB
+#define Dir1_Pin GPIO_PIN_6
+#define Dir1_GPIO_Port GPIOB
+#define Dir2_Pin GPIO_PIN_7
+#define Dir2_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
