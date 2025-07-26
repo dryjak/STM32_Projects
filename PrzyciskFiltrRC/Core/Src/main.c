@@ -108,6 +108,7 @@ int main(void)
 	  }
 	  else
 	  {
+		  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 80);
 		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, GPIO_PIN_SET);
 
 		  HAL_GPIO_WritePin(Dir1_GPIO_Port,Dir1_Pin , GPIO_PIN_RESET);
@@ -122,6 +123,17 @@ int main(void)
 	  else
 	  {
 	  		  HAL_GPIO_WritePin(LedS_GPIO_Port, LedS_Pin, GPIO_PIN_SET);
+	  		  for(i = 0; i < 100; i++)
+	  		  {
+	  			  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, i);
+	  			  HAL_Delay(10);
+	  		  }
+	  		  for(i = 100; i > 0; i--)
+	  		  {
+	  			  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, i);
+	  			  HAL_Delay(10);
+
+	  		  }
 	  }
 
 
@@ -131,6 +143,7 @@ int main(void)
 	  }
 	  else
 	  {
+		  	  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 80);
 	  		  HAL_GPIO_WritePin(LedP_GPIO_Port, LedP_Pin, GPIO_PIN_SET);
 
 	  		  HAL_GPIO_WritePin(Dir1_GPIO_Port,Dir1_Pin , GPIO_PIN_SET);
