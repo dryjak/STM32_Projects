@@ -126,12 +126,12 @@ int main(void)
 	  		  for(i = 0; i < 100; i++)
 	  		  {
 	  			  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, i);
-	  			  HAL_Delay(10);
+	  			  HAL_Delay(30);
 	  		  }
 	  		  for(i = 100; i > 0; i--)
 	  		  {
 	  			  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, i);
-	  			  HAL_Delay(10);
+	  			  HAL_Delay(30);
 
 	  		  }
 	  }

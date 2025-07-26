@@ -654,8 +654,8 @@ int main(void)
  80006b0:	4b24      	ldr	r3, [pc, #144]	@ (8000744 <main+0x138>)
  80006b2:	681b      	ldr	r3, [r3, #0]
  80006b4:	635a      	str	r2, [r3, #52]	@ 0x34
-	  			  HAL_Delay(10);
- 80006b6:	200a      	movs	r0, #10
+	  			  HAL_Delay(30);
+ 80006b6:	201e      	movs	r0, #30
  80006b8:	f000 fb22 	bl	8000d00 <HAL_Delay>
 	  		  for(i = 0; i < 100; i++)
  80006bc:	4b23      	ldr	r3, [pc, #140]	@ (800074c <main+0x140>)
@@ -681,8 +681,8 @@ int main(void)
  80006dc:	4b19      	ldr	r3, [pc, #100]	@ (8000744 <main+0x138>)
  80006de:	681b      	ldr	r3, [r3, #0]
  80006e0:	635a      	str	r2, [r3, #52]	@ 0x34
-	  			  HAL_Delay(10);
- 80006e2:	200a      	movs	r0, #10
+	  			  HAL_Delay(30);
+ 80006e2:	201e      	movs	r0, #30
  80006e4:	f000 fb0c 	bl	8000d00 <HAL_Delay>
 	  		  for(i = 100; i > 0; i--)
  80006e8:	4b18      	ldr	r3, [pc, #96]	@ (800074c <main+0x140>)
