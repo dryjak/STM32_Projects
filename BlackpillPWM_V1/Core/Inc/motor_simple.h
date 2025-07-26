@@ -25,7 +25,7 @@ typedef struct
 
 }Motors_t;
 
-MotorsStatus_t Motors_Init(Motors_t Motor, TIM_HandleTypeDef *timer, GPIO_TypeDef *MotorLeftPort, uint16_t MotorLeftPin, GPIO_TypeDef *MotorRightPort, uint16_t MotorRightPin);
+MotorsStatus_t Motors_Init(Motors_t *Motor, TIM_HandleTypeDef *timer, GPIO_TypeDef *MotorLeftPort, uint16_t MotorLeftPin, GPIO_TypeDef *MotorRightPort, uint16_t MotorRightPin);
 
 
 #endif /* INC_MOTOR_SIMPLE_H_ */

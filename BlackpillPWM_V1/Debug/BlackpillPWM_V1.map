@@ -229,9 +229,9 @@ Discarded input sections
  .data          0x00000000        0x0 ./Core/Src/motor_simple.o
  .bss           0x00000000        0x0 ./Core/Src/motor_simple.o
  .text.Motors_Init
-                0x00000000       0x1a ./Core/Src/motor_simple.o
- .debug_info    0x00000000      0x7b5 ./Core/Src/motor_simple.o
- .debug_abbrev  0x00000000      0x161 ./Core/Src/motor_simple.o
+                0x00000000       0x3a ./Core/Src/motor_simple.o
+ .debug_info    0x00000000      0x7be ./Core/Src/motor_simple.o
+ .debug_abbrev  0x00000000      0x163 ./Core/Src/motor_simple.o
  .debug_aranges
                 0x00000000       0x20 ./Core/Src/motor_simple.o
  .debug_rnglists
@@ -277,7 +277,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x2aa ./Core/Src/motor_simple.o
  .debug_macro   0x00000000      0x126 ./Core/Src/motor_simple.o
  .debug_macro   0x00000000       0x10 ./Core/Src/motor_simple.o
- .debug_line    0x00000000      0x69b ./Core/Src/motor_simple.o
+ .debug_line    0x00000000      0x6ac ./Core/Src/motor_simple.o
  .debug_str     0x00000000    0x87641 ./Core/Src/motor_simple.o
  .comment       0x00000000       0x44 ./Core/Src/motor_simple.o
  .debug_frame   0x00000000       0x38 ./Core/Src/motor_simple.o
