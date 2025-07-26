@@ -45,7 +45,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint8_t i;
 
 /* USER CODE END PV */
 
@@ -109,6 +109,9 @@ int main(void)
 	  else
 	  {
 		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, GPIO_PIN_SET);
+
+		  HAL_GPIO_WritePin(Dir1_GPIO_Port,Dir1_Pin , GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Dir2_GPIO_Port,Dir2_Pin , GPIO_PIN_SET);
 	  }
 
 
@@ -129,6 +132,9 @@ int main(void)
 	  else
 	  {
 	  		  HAL_GPIO_WritePin(LedP_GPIO_Port, LedP_Pin, GPIO_PIN_SET);
+
+	  		  HAL_GPIO_WritePin(Dir1_GPIO_Port,Dir1_Pin , GPIO_PIN_SET);
+	  		  HAL_GPIO_WritePin(Dir2_GPIO_Port,Dir2_Pin , GPIO_PIN_RESET);
 	  }
 
     /* USER CODE END WHILE */
