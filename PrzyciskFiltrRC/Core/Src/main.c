@@ -47,7 +47,7 @@
 /* USER CODE BEGIN PV */
 uint8_t i;
 
-Motors_t Silniki;
+Motor_t Silnik;
 
 
 /* USER CODE END PV */
@@ -71,7 +71,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-	Motors_Init(Motor, &htim1, MotorLeftPort, MotorLeftPin, MotorRightPort, MotorRightPin)
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/

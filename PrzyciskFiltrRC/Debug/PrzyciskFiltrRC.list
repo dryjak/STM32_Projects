@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000400c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000c2fa  00000000  00000000  0000403c  2**0
+ 12 .debug_info   0000c37c  00000000  00000000  0000403c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00001c7e  00000000  00000000  00010336  2**0
+ 13 .debug_abbrev 00001c91  00000000  00000000  000103b8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000bc8  00000000  00000000  00011fb8  2**3
+ 14 .debug_aranges 00000bc8  00000000  00000000  00012050  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00000933  00000000  00000000  00012b80  2**0
+ 15 .debug_rnglists 00000933  00000000  00000000  00012c18  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00015c5f  00000000  00000000  000134b3  2**0
+ 16 .debug_macro  00015c5f  00000000  00000000  0001354b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000d1ee  00000000  00000000  00029112  2**0
+ 17 .debug_line   0000d1ee  00000000  00000000  000291aa  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0008a73c  00000000  00000000  00036300  2**0
+ 18 .debug_str    0008a78a  00000000  00000000  00036398  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000c0a3c  2**0
+ 19 .comment      00000043  00000000  00000000  000c0b22  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000030f8  00000000  00000000  000c0a80  2**2
+ 20 .debug_frame  000030f8  00000000  00000000  000c0b68  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000068  00000000  00000000  000c3b78  2**0
+ 21 .debug_line_str 00000068  00000000  00000000  000c3c60  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
