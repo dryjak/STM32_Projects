@@ -48,6 +48,7 @@
 uint8_t i;
 
 Motor_t Silnik;
+uint8_t PWM;
 
 
 /* USER CODE END PV */
@@ -99,6 +100,8 @@ int main(void)
   HAL_GPIO_WritePin(Dir2_GPIO_Port,Dir2_Pin , GPIO_PIN_RESET);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 
+
+  Motors_Init(&Silnik, &htim1, TIM_CHANNEL_1, PWM, Dir1_GPIO_Port, Dir1_Pin, Dir2_GPIO_Port, Dir2_Pin);
   /* USER CODE END 2 */
 
   /* Infinite loop */
