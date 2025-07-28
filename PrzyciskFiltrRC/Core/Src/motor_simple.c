@@ -9,7 +9,9 @@
 #include "tim.h"
 #include "motor_simple.h"
 
-#define DIR(a) ((a)>(0)?(1):(0))
+#define DIR1(a) ((a)>(0)?(1):(0))
+#define DIR2(a) ((a)>(0)?(0):(1))
+
 
 MotorStatus_t Motor_SetRideParameters(Motor_t *Motor, uint8_t PWM, uint8_t Dir)
 {
@@ -24,8 +26,9 @@ MotorStatus_t Motor_SetRideParameters(Motor_t *Motor, uint8_t PWM, uint8_t Dir)
 	}
 
 	//setting direction
-	HAL_GPIO_WritePin(Motor->MotorDir1Port, Motor->MotorDir1Pin, DIR(Motor->Direction));
-	HAL_GPIO_WritePin(Motor->MotorDir1Port, Motor->MotorDir2Pin, DIR(Motor->Direction));
+	Motor->Direction = Dir;
+	HAL_GPIO_WritePin(Motor->MotorDir1Port, Motor->MotorDir1Pin, DIR1(Motor->Direction));
+	HAL_GPIO_WritePin(Motor->MotorDir1Port, Motor->MotorDir2Pin, DIR2(Motor->Direction));
 
 	//setting PWM
 	//__HAL_TIM_SET_COMPARE(Motor->htim, Motor->Channel, Motor->MotorPWM);

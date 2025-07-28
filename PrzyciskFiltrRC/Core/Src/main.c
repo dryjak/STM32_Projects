@@ -96,8 +96,6 @@ int main(void)
   MX_USART1_UART_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_GPIO_WritePin(Dir1_GPIO_Port,Dir1_Pin , GPIO_PIN_SET);
-  HAL_GPIO_WritePin(Dir2_GPIO_Port,Dir2_Pin , GPIO_PIN_RESET);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 
 
@@ -114,11 +112,11 @@ int main(void)
 	  }
 	  else
 	  {
-		  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 80);
-		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, 1);
 
-		  HAL_GPIO_WritePin(Dir1_GPIO_Port,Dir1_Pin , GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(Dir2_GPIO_Port,Dir2_Pin , GPIO_PIN_SET);
+		  Motor_SetRideParameters(&SilnikPrawy, 80, 1);
+		  Motor_Ride(&SilnikPrawy);
+
+		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, 1);
 	  }
 
 
@@ -149,11 +147,9 @@ int main(void)
 	  }
 	  else
 	  {
-		  	  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 80);
-	  		  HAL_GPIO_WritePin(LedP_GPIO_Port, LedP_Pin, GPIO_PIN_SET);
-
-	  		  HAL_GPIO_WritePin(Dir1_GPIO_Port,Dir1_Pin , GPIO_PIN_SET);
-	  		  HAL_GPIO_WritePin(Dir2_GPIO_Port,Dir2_Pin , GPIO_PIN_RESET);
+		  Motor_SetRideParameters(&SilnikPrawy, 30, 1);
+		  Motor_Ride(&SilnikPrawy);
+		  HAL_GPIO_WritePin(LedP_GPIO_Port, LedP_Pin, GPIO_PIN_SET);
 	  }
 
     /* USER CODE END WHILE */
