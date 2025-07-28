@@ -11,21 +11,24 @@
 typedef enum{
 	MOTORS_OK = 0,
 	MOTORS_ERROR
-}MotorsStatus_t;
+}MotorStatus_t;
 
 typedef struct
 {
 	TIM_HandleTypeDef	*htim;
+	uint32_t 			Channel;
 
-	GPIO_TypeDef 		*MotorLeftPort;
-	uint16_t			MotorLeftPin;
+	GPIO_TypeDef 		*MotorDir1Port;
+	uint16_t			MotorDir1Pin;
 
-	GPIO_TypeDef 		*MotorRightPort;
-	uint16_t			MotorRightPin;
+	GPIO_TypeDef 		*MotorDir2Port;
+	uint16_t			MotorDir2Pin;
 
-}Motors_t;
+	uint8_t 			MotorPWM;
 
-MotorsStatus_t Motors_Init(Motors_t *Motor, TIM_HandleTypeDef *timer, GPIO_TypeDef *MotorLeftPort, uint16_t MotorLeftPin, GPIO_TypeDef *MotorRightPort, uint16_t MotorRightPin);
+}Motor_t;
+
+MotorStatus_t Motors_Init(Motor_t *Motor, TIM_HandleTypeDef *timer, uint16_t PWM, GPIO_TypeDef *MotorDir1Port, uint16_t MotorDir1Pin, GPIO_TypeDef **MotorDir2Port, uint16_t MotorDir2Pin);
 
 
 #endif /* INC_MOTOR_SIMPLE_H_ */

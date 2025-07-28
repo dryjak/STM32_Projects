@@ -10,13 +10,11 @@
 #include "motor_simple.h"
 
 
-MotorsStatus_t Motors_Init(Motors_t *Motor, TIM_HandleTypeDef *timer, GPIO_TypeDef *MotorLeftPort, uint16_t MotorLeftPin, GPIO_TypeDef *MotorRightPort, uint16_t MotorRightPin)
+MotorsStatus_t Motors_Init(Motors_t *Motor, TIM_HandleTypeDef *timer, GPIO_TypeDef *MotorDir1Port, uint16_t MotorDir1Pin)
 {
 	Motor->htim = timer;
 	Motor->MotorLeftPort 	= MotorLeftPort;
 	Motor->MotorLeftPin 	= MotorLeftPin;
-	Motor->MotorRightPort 	= MotorRightPort;
-	Motor->MotorRightPin 	= MotorRightPin;
 
-	return MOTORS_OK;
+	return Motors_OK;
 }
