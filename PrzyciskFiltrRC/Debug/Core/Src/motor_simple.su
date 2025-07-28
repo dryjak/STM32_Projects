@@ -1,1 +1,2 @@
-../Core/Src/motor_simple.c:13:15:Motors_Init	24	static
+../Core/Src/motor_simple.c:14:15:Motor_Ride	16	static
+../Core/Src/motor_simple.c:24:15:Motor_Init	24	static

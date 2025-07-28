@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000400c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000cbfb  00000000  00000000  0000403c  2**0
+ 12 .debug_info   0000cc82  00000000  00000000  0000403c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00001e07  00000000  00000000  00010c37  2**0
+ 13 .debug_abbrev 00001e36  00000000  00000000  00010cbe  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000be8  00000000  00000000  00012a40  2**3
+ 14 .debug_aranges 00000bf0  00000000  00000000  00012af8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00000946  00000000  00000000  00013628  2**0
+ 15 .debug_rnglists 0000094d  00000000  00000000  000136e8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00015e54  00000000  00000000  00013f6e  2**0
+ 16 .debug_macro  00015e5a  00000000  00000000  00014035  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000d8a5  00000000  00000000  00029dc2  2**0
+ 17 .debug_line   0000d8ed  00000000  00000000  00029e8f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0008a7ef  00000000  00000000  00037667  2**0
+ 18 .debug_str    0008a815  00000000  00000000  0003777c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000c1e56  2**0
+ 19 .comment      00000043  00000000  00000000  000c1f91  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00003134  00000000  00000000  000c1e9c  2**2
+ 20 .debug_frame  00003158  00000000  00000000  000c1fd4  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000068  00000000  00000000  000c4fd0  2**0
+ 21 .debug_line_str 00000068  00000000  00000000  000c512c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -577,7 +577,7 @@ int main(void)
  800063e:	f001 fb59 	bl	8001cf4 <HAL_TIM_PWM_Start>
 
 
-  Motors_Init(&Silnik, &htim1, TIM_CHANNEL_1, PWM, Dir1_GPIO_Port, Dir1_Pin, Dir2_GPIO_Port, Dir2_Pin);
+  Motor_Init(&SilnikPrawy, &htim1, TIM_CHANNEL_1, PWM, Dir1_GPIO_Port, Dir1_Pin, Dir2_GPIO_Port, Dir2_Pin);
  8000642:	4b4a      	ldr	r3, [pc, #296]	@ (800076c <main+0x160>)
  8000644:	781b      	ldrb	r3, [r3, #0]
  8000646:	461a      	mov	r2, r3
@@ -593,7 +593,7 @@ int main(void)
  800065a:	2200      	movs	r2, #0
  800065c:	4942      	ldr	r1, [pc, #264]	@ (8000768 <main+0x15c>)
  800065e:	4844      	ldr	r0, [pc, #272]	@ (8000770 <main+0x164>)
- 8000660:	f000 f8f0 	bl	8000844 <Motors_Init>
+ 8000660:	f000 f8f0 	bl	8000844 <Motor_Init>
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -607,7 +607,7 @@ int main(void)
  800066e:	2b00      	cmp	r3, #0
  8000670:	d005      	beq.n	800067e <main+0x72>
 	  {
-		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, 0);
  8000672:	2200      	movs	r2, #0
  8000674:	2120      	movs	r1, #32
  8000676:	483b      	ldr	r0, [pc, #236]	@ (8000764 <main+0x158>)
@@ -621,7 +621,7 @@ int main(void)
  8000680:	681b      	ldr	r3, [r3, #0]
  8000682:	2250      	movs	r2, #80	@ 0x50
  8000684:	635a      	str	r2, [r3, #52]	@ 0x34
-		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, 1);
  8000686:	2201      	movs	r2, #1
  8000688:	2120      	movs	r1, #32
  800068a:	4836      	ldr	r0, [pc, #216]	@ (8000764 <main+0x158>)
@@ -914,12 +914,12 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  8000840:	bf00      	nop
  8000842:	e7fd      	b.n	8000840 <Error_Handler+0x8>
 
-08000844 <Motors_Init>:
-#include "tim.h"
-#include "motor_simple.h"
+08000844 <Motor_Init>:
 
+	return MOTOR_OK;
+}
 
-MotorStatus_t Motors_Init(Motor_t *Motor, TIM_HandleTypeDef *Timer, uint32_t TimerChannel, uint16_t PWM, GPIO_TypeDef *Dir1Port, uint16_t Dir1Pin, GPIO_TypeDef *Dir2Port, uint16_t Dir2Pin)
+MotorStatus_t Motor_Init(Motor_t *Motor, TIM_HandleTypeDef *Timer, uint32_t TimerChannel, uint16_t PWM, GPIO_TypeDef *Dir1Port, uint16_t Dir1Pin, GPIO_TypeDef *Dir2Port, uint16_t Dir2Pin)
 {
  8000844:	b480      	push	{r7}
  8000846:	b085      	sub	sp, #20
@@ -960,7 +960,7 @@ MotorStatus_t Motors_Init(Motor_t *Motor, TIM_HandleTypeDef *Timer, uint32_t Tim
  800087a:	8cba      	ldrh	r2, [r7, #36]	@ 0x24
  800087c:	829a      	strh	r2, [r3, #20]
 
-	return MOTORS_OK;
+	return MOTOR_OK;
  800087e:	2300      	movs	r3, #0
 }
  8000880:	4618      	mov	r0, r3

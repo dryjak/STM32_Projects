@@ -47,7 +47,7 @@
 /* USER CODE BEGIN PV */
 uint8_t i;
 
-Motor_t Silnik;
+Motor_t SilnikPrawy;
 uint8_t PWM;
 
 
@@ -101,7 +101,7 @@ int main(void)
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 
 
-  Motors_Init(&Silnik, &htim1, TIM_CHANNEL_1, PWM, Dir1_GPIO_Port, Dir1_Pin, Dir2_GPIO_Port, Dir2_Pin);
+  Motor_Init(&SilnikPrawy, &htim1, TIM_CHANNEL_1, PWM, Dir1_GPIO_Port, Dir1_Pin, Dir2_GPIO_Port, Dir2_Pin);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -110,12 +110,12 @@ int main(void)
   {
 	  if(HAL_GPIO_ReadPin(CzujnikL_GPIO_Port, CzujnikL_Pin))
 	  {
-		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, 0);
 	  }
 	  else
 	  {
 		  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 80);
-		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, 1);
 
 		  HAL_GPIO_WritePin(Dir1_GPIO_Port,Dir1_Pin , GPIO_PIN_RESET);
 		  HAL_GPIO_WritePin(Dir2_GPIO_Port,Dir2_Pin , GPIO_PIN_SET);
