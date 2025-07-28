@@ -1,2 +1,3 @@
-../Core/Src/motor_simple.c:14:15:Motor_Ride	16	static
-../Core/Src/motor_simple.c:24:15:Motor_Init	24	static
+../Core/Src/motor_simple.c:14:15:Motor_SetRideParameters	16	static
+../Core/Src/motor_simple.c:36:6:Motor_Ride	16	static
+../Core/Src/motor_simple.c:42:15:Motor_Init	24	static

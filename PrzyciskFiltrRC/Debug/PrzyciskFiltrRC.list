@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000400c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000cc82  00000000  00000000  0000403c  2**0
+ 12 .debug_info   0000ccc2  00000000  00000000  0000403c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00001e36  00000000  00000000  00010cbe  2**0
+ 13 .debug_abbrev 00001e52  00000000  00000000  00010cfe  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000bf0  00000000  00000000  00012af8  2**3
+ 14 .debug_aranges 00000bf8  00000000  00000000  00012b50  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 0000094d  00000000  00000000  000136e8  2**0
+ 15 .debug_rnglists 00000952  00000000  00000000  00013748  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00015e5a  00000000  00000000  00014035  2**0
+ 16 .debug_macro  00015e5a  00000000  00000000  0001409a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000d8ed  00000000  00000000  00029e8f  2**0
+ 17 .debug_line   0000d91c  00000000  00000000  00029ef4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0008a815  00000000  00000000  0003777c  2**0
+ 18 .debug_str    0008a82d  00000000  00000000  00037810  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000c1f91  2**0
+ 19 .comment      00000043  00000000  00000000  000c203d  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00003158  00000000  00000000  000c1fd4  2**2
+ 20 .debug_frame  00003180  00000000  00000000  000c2080  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000068  00000000  00000000  000c512c  2**0
+ 21 .debug_line_str 00000068  00000000  00000000  000c5200  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -915,8 +915,8 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  8000842:	e7fd      	b.n	8000840 <Error_Handler+0x8>
 
 08000844 <Motor_Init>:
-
-	return MOTOR_OK;
+	//setting PWM
+	__HAL_TIM_SET_COMPARE(Motor->htim, Motor->Channel, Motor->MotorPWM);
 }
 
 MotorStatus_t Motor_Init(Motor_t *Motor, TIM_HandleTypeDef *Timer, uint32_t TimerChannel, uint16_t PWM, GPIO_TypeDef *Dir1Port, uint16_t Dir1Pin, GPIO_TypeDef *Dir2Port, uint16_t Dir2Pin)
