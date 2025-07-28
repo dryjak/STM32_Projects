@@ -147,7 +147,7 @@ int main(void)
 	  }
 	  else
 	  {
-		  Motor_SetRideParameters(&SilnikPrawy, 30, 1);
+		  Motor_SetRideParameters(&SilnikPrawy, 30, 0);
 		  Motor_Ride(&SilnikPrawy);
 		  HAL_GPIO_WritePin(LedP_GPIO_Port, LedP_Pin, GPIO_PIN_SET);
 	  }
