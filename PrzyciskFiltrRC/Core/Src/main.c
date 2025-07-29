@@ -20,11 +20,13 @@
 #include "main.h"
 #include "tim.h"
 #include "usart.h"
-#include "gpio.h"
+//#include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stdint.h"
 #include "motor_simple.h"
+#include "sumo_strategy.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

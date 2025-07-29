@@ -10,7 +10,12 @@
 
 #include "motor_simple.h"
 
-void Sumo_Init(Motor_T *MotorL, Motor_T *MotorR);
+typedef struct{
+	Motor_t *MotorL;
+	Motor_t *MotorR;
+}SumoMotors_t;
+
+void Sumo_Init(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR);
 
 
 

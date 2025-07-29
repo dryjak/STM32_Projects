@@ -8,6 +8,8 @@
 #ifndef INC_MOTOR_SIMPLE_H_
 #define INC_MOTOR_SIMPLE_H_
 
+#include "main.h"
+
 typedef enum{
 	MOTOR_OK = 0,
 	MOTOR_ERROR
