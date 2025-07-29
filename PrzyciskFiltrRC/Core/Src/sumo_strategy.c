@@ -36,6 +36,13 @@ void Sumo_TurnSlightRight(SumoMotors_t *SumoMotors)
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
+void Sumo_TurnSlightLeft(SumoMotors_t *SumoMotors)
+{
+	Motor_SetRideParameters(SumoMotors->MotorL, 40, 0);   // Lewy do przodu
+	Motor_SetRideParameters(SumoMotors->MotorR, 70, 1);   // Prawy do tyłu
+	Motor_Ride(SumoMotors->MotorL);
+	Motor_Ride(SumoMotors->MotorR);
+}
 
 void Sumo_Init(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR)
 {
