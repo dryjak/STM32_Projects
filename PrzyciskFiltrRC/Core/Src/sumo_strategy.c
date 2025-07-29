@@ -22,6 +22,13 @@ void Sumo_SearchRight(SumoMotors_t *SumoMotors)
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
+void Sumo_SearchLeft(SumoMotors_t *SumoMotors)
+{
+	Motor_SetRideParameters(SumoMotors->MotorL, 60, 0);   // Lewy do przodu
+	Motor_SetRideParameters(SumoMotors->MotorR, 60, 1);   // Prawy do tyłu
+	Motor_Ride(SumoMotors->MotorL);
+	Motor_Ride(SumoMotors->MotorR);
+}
 
 void Sumo_Init(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR)
 {
