@@ -1,4 +1,5 @@
 ../Core/Src/sumo_strategy.c:10:6:SumoAtack	16	static
 ../Core/Src/sumo_strategy.c:18:6:Sumo_SearchRight	16	static
 ../Core/Src/sumo_strategy.c:25:6:Sumo_SearchLeft	16	static
-../Core/Src/sumo_strategy.c:33:6:Sumo_Init	24	static
+../Core/Src/sumo_strategy.c:32:6:Sumo_TurnSlightRight	16	static
+../Core/Src/sumo_strategy.c:40:6:Sumo_Init	24	static

@@ -483,14 +483,16 @@ Discarded input sections
                 0x00000000       0x40 ./Core/Src/sumo_strategy.o
  .text.Sumo_SearchLeft
                 0x00000000       0x40 ./Core/Src/sumo_strategy.o
+ .text.Sumo_TurnSlightRight
+                0x00000000       0x40 ./Core/Src/sumo_strategy.o
  .text.Sumo_Init
                 0x00000000       0x24 ./Core/Src/sumo_strategy.o
- .debug_info    0x00000000      0x8a2 ./Core/Src/sumo_strategy.o
+ .debug_info    0x00000000      0x8c5 ./Core/Src/sumo_strategy.o
  .debug_abbrev  0x00000000      0x1c2 ./Core/Src/sumo_strategy.o
  .debug_aranges
-                0x00000000       0x38 ./Core/Src/sumo_strategy.o
+                0x00000000       0x40 ./Core/Src/sumo_strategy.o
  .debug_rnglists
-                0x00000000       0x25 ./Core/Src/sumo_strategy.o
+                0x00000000       0x2b ./Core/Src/sumo_strategy.o
  .debug_macro   0x00000000      0x1f5 ./Core/Src/sumo_strategy.o
  .debug_macro   0x00000000      0xad8 ./Core/Src/sumo_strategy.o
  .debug_macro   0x00000000      0x29b ./Core/Src/sumo_strategy.o
@@ -532,10 +534,10 @@ Discarded input sections
  .debug_macro   0x00000000      0x2aa ./Core/Src/sumo_strategy.o
  .debug_macro   0x00000000      0x126 ./Core/Src/sumo_strategy.o
  .debug_macro   0x00000000       0x7c ./Core/Src/sumo_strategy.o
- .debug_line    0x00000000      0x6fa ./Core/Src/sumo_strategy.o
- .debug_str     0x00000000    0x87851 ./Core/Src/sumo_strategy.o
+ .debug_line    0x00000000      0x714 ./Core/Src/sumo_strategy.o
+ .debug_str     0x00000000    0x87866 ./Core/Src/sumo_strategy.o
  .comment       0x00000000       0x44 ./Core/Src/sumo_strategy.o
- .debug_frame   0x00000000       0xa4 ./Core/Src/sumo_strategy.o
+ .debug_frame   0x00000000       0xc8 ./Core/Src/sumo_strategy.o
  .ARM.attributes
                 0x00000000       0x34 ./Core/Src/sumo_strategy.o
  .group         0x00000000        0xc ./Core/Src/syscalls.o
