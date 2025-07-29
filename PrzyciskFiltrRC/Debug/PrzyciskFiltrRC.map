@@ -434,6 +434,21 @@ Discarded input sections
  .debug_macro   0x00000000      0x2aa ./Core/Src/stm32f4xx_it.o
  .debug_macro   0x00000000      0x126 ./Core/Src/stm32f4xx_it.o
  .debug_macro   0x00000000       0x7c ./Core/Src/stm32f4xx_it.o
+ .group         0x00000000        0xc ./Core/Src/sumo_strategy.o
+ .text          0x00000000        0x0 ./Core/Src/sumo_strategy.o
+ .data          0x00000000        0x0 ./Core/Src/sumo_strategy.o
+ .bss           0x00000000        0x0 ./Core/Src/sumo_strategy.o
+ .debug_info    0x00000000       0x22 ./Core/Src/sumo_strategy.o
+ .debug_abbrev  0x00000000       0x12 ./Core/Src/sumo_strategy.o
+ .debug_aranges
+                0x00000000       0x18 ./Core/Src/sumo_strategy.o
+ .debug_macro   0x00000000       0x11 ./Core/Src/sumo_strategy.o
+ .debug_macro   0x00000000      0xad8 ./Core/Src/sumo_strategy.o
+ .debug_line    0x00000000       0x3c ./Core/Src/sumo_strategy.o
+ .debug_str     0x00000000     0x2e82 ./Core/Src/sumo_strategy.o
+ .comment       0x00000000       0x44 ./Core/Src/sumo_strategy.o
+ .ARM.attributes
+                0x00000000       0x34 ./Core/Src/sumo_strategy.o
  .group         0x00000000        0xc ./Core/Src/syscalls.o
  .group         0x00000000        0xc ./Core/Src/syscalls.o
  .group         0x00000000        0xc ./Core/Src/syscalls.o
@@ -3287,6 +3302,7 @@ LOAD ./Core/Src/main.o
 LOAD ./Core/Src/motor_simple.o
 LOAD ./Core/Src/stm32f4xx_hal_msp.o
 LOAD ./Core/Src/stm32f4xx_it.o
+LOAD ./Core/Src/sumo_strategy.o
 LOAD ./Core/Src/syscalls.o
 LOAD ./Core/Src/sysmem.o
 LOAD ./Core/Src/system_stm32f4xx.o

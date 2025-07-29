@@ -1052,6 +1052,7 @@ void Motor_Ride(Motor_t *Motor)
 
 080008fa <Motor_Init>:
 
+
 MotorStatus_t Motor_Init(Motor_t *Motor, TIM_HandleTypeDef *Timer, uint32_t TimerChannel, uint16_t PWM, GPIO_TypeDef *Dir1Port, uint16_t Dir1Pin, GPIO_TypeDef *Dir2Port, uint16_t Dir2Pin)
 {
  80008fa:	b480      	push	{r7}

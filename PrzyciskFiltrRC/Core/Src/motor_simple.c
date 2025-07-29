@@ -49,6 +49,7 @@ void Motor_Ride(Motor_t *Motor)
 	__HAL_TIM_SET_COMPARE(Motor->htim, Motor->Channel, Motor->MotorPWM);
 }
 
+
 MotorStatus_t Motor_Init(Motor_t *Motor, TIM_HandleTypeDef *Timer, uint32_t TimerChannel, uint16_t PWM, GPIO_TypeDef *Dir1Port, uint16_t Dir1Pin, GPIO_TypeDef *Dir2Port, uint16_t Dir2Pin)
 {
 	Motor->htim = Timer;
