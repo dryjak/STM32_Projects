@@ -3,4 +3,5 @@
 ../Core/Src/sumo_strategy.c:25:6:Sumo_SearchLeft	1
 ../Core/Src/sumo_strategy.c:32:6:Sumo_TurnSlightRight	1
 ../Core/Src/sumo_strategy.c:39:6:Sumo_TurnSlightLeft	1
-../Core/Src/sumo_strategy.c:47:6:Sumo_Init	1
+../Core/Src/sumo_strategy.c:46:6:Sumo_Stop	1
+../Core/Src/sumo_strategy.c:54:6:Sumo_Init	1

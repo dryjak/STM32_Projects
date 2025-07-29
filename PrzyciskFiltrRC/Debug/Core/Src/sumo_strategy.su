@@ -3,4 +3,5 @@
 ../Core/Src/sumo_strategy.c:25:6:Sumo_SearchLeft	16	static
 ../Core/Src/sumo_strategy.c:32:6:Sumo_TurnSlightRight	16	static
 ../Core/Src/sumo_strategy.c:39:6:Sumo_TurnSlightLeft	16	static
-../Core/Src/sumo_strategy.c:47:6:Sumo_Init	24	static
+../Core/Src/sumo_strategy.c:46:6:Sumo_Stop	16	static
+../Core/Src/sumo_strategy.c:54:6:Sumo_Init	24	static
