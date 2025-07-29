@@ -1,2 +1,3 @@
 ../Core/Src/sumo_strategy.c:10:6:SumoAtack	1
-../Core/Src/sumo_strategy.c:18:6:Sumo_Init	1
+../Core/Src/sumo_strategy.c:18:6:Sumo_SearchRight	1
+../Core/Src/sumo_strategy.c:26:6:Sumo_Init	1
