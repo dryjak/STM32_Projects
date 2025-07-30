@@ -7,6 +7,16 @@
 #include "sumo_strategy.h"
 #include "main.h"
 
+
+typedef enum{
+	STATE_ATTACK = 0,
+	STATE_SEARCH,
+	STATE_TURN_LEFT,
+	STATE_TURN_RIGHT
+}SumoState;
+
+SumoState CurrentState = STATE_SEARCH;
+
 void SumoAtack(SumoMotors_t *SumoMotors)
 {
 	Motor_SetRideParameters(SumoMotors->MotorL, 100, 1);  // Przód
@@ -50,6 +60,9 @@ void Sumo_Stop(SumoMotors_t *SumoMotors)
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
+
+void UpdateState(SumoState )
+
 
 void Sumo_Init(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR)
 {
