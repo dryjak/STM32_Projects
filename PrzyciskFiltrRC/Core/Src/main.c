@@ -52,6 +52,7 @@ uint8_t i;
 Motor_t SilnikPrawy;
 Motor_t SilnikLewy;
 uint8_t PWM;
+SumoMotors_t SumoMotors;
 
 
 /* USER CODE END PV */
@@ -104,6 +105,7 @@ int main(void)
 
   Motor_Init(&SilnikPrawy, &htim1, TIM_CHANNEL_1, PWM, Dir1_GPIO_Port, Dir1_Pin, Dir2_GPIO_Port, Dir2_Pin);
   Motor_Init(&SilnikLewy, &htim1, TIM_CHANNEL_2, PWM, DirMotor2V1_GPIO_Port, DirMotor2V1_Pin, DirMotor2V2_GPIO_Port, DirMotor2V2_Pin);
+  Sumo_Init(&SumoMotors, &SilnikLewy, &SilnikPrawy);
   /* USER CODE END 2 */
 
   /* Infinite loop */
