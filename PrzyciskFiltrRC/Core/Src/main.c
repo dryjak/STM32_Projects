@@ -119,8 +119,7 @@ int main(void)
 	  else
 	  {
 
-		  Motor_SetRideParameters(&SilnikPrawy, 80, 1);
-		  Motor_Ride(&SilnikPrawy);
+		  Sumo_SearchLeft(&SumoMotors);
 
 		  HAL_GPIO_WritePin(LedL_GPIO_Port, LedL_Pin, 1);
 	  }
@@ -132,7 +131,11 @@ int main(void)
 	  }
 	  else
 	  {
+		  	  SumoAtack(&SumoMotors);
 	  		  HAL_GPIO_WritePin(LedS_GPIO_Port, LedS_Pin, GPIO_PIN_SET);
+
+
+	  		  /*
 	  		  for(i = 0; i < 100; i++)
 	  		  {
 	  			  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, i);
@@ -143,7 +146,7 @@ int main(void)
 	  			  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, i);
 	  			  HAL_Delay(30);
 
-	  		  }
+	  		  }*/
 	  }
 
 
@@ -153,8 +156,7 @@ int main(void)
 	  }
 	  else
 	  {
-		  Motor_SetRideParameters(&SilnikPrawy, 30, 0);
-		  Motor_Ride(&SilnikPrawy);
+		  Sumo_SearchRight(&SumoMotors);
 		  HAL_GPIO_WritePin(LedP_GPIO_Port, LedP_Pin, GPIO_PIN_SET);
 	  }
 
