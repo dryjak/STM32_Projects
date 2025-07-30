@@ -55,7 +55,7 @@ void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, LedP_Pin|LedS_Pin|LedL_Pin|Dir1_Pin
-                          |Dir2_Pin, GPIO_PIN_RESET);
+                          |Dir2_Pin|DirMotor2V1_Pin|DirMotor2V2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : LD2_Pin */
   GPIO_InitStruct.Pin = LD2_Pin;
@@ -71,9 +71,9 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LedP_Pin LedS_Pin LedL_Pin Dir1_Pin
-                           Dir2_Pin */
+                           Dir2_Pin DirMotor2V1_Pin DirMotor2V2_Pin */
   GPIO_InitStruct.Pin = LedP_Pin|LedS_Pin|LedL_Pin|Dir1_Pin
-                          |Dir2_Pin;
+                          |Dir2_Pin|DirMotor2V1_Pin|DirMotor2V2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

@@ -77,6 +77,10 @@ void Error_Handler(void);
 #define Dir1_GPIO_Port GPIOB
 #define Dir2_Pin GPIO_PIN_7
 #define Dir2_GPIO_Port GPIOB
+#define DirMotor2V1_Pin GPIO_PIN_8
+#define DirMotor2V1_GPIO_Port GPIOB
+#define DirMotor2V2_Pin GPIO_PIN_9
+#define DirMotor2V2_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
