@@ -62,6 +62,10 @@ void Sumo_Stop(SumoMotors_t *SumoMotors)
 }
 
 //void UpdateState(SumoState )
+void UpdateState(SumoState CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t SumoSensors)
+{
+
+}
 
 
 void Sumo_Init(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR)

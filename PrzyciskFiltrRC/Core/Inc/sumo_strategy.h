@@ -29,7 +29,7 @@ typedef struct{
 	uint16_t DistanceSensorR;
 	uint16_t FlorSensorL;
 	uint16_t FlorSensorR;
-}SumoSensors;
+}SumoSensors_t;
 
 
 void Sumo_Init(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR);
