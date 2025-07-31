@@ -1400,8 +1400,8 @@ void Sumo_SearchLeft(SumoMotors_t *SumoMotors)
  8000a80:	bd80      	pop	{r7, pc}
 
 08000a82 <Sumo_Init>:
-		CurrentState = STATE_TURN_LEFT;
 	}
+	//do zrobienia juz z wykorzystaniem sensorów więc najpierw trzeba poczekać na przesylkę i nauczyć się adc
 }
 
 void Sumo_Init(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR)

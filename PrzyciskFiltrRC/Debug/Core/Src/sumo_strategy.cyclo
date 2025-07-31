@@ -5,4 +5,4 @@
 ../Core/Src/sumo_strategy.c:41:6:Sumo_TurnSlightLeft	1
 ../Core/Src/sumo_strategy.c:48:6:Sumo_Stop	1
 ../Core/Src/sumo_strategy.c:57:6:UpdateState	2
-../Core/Src/sumo_strategy.c:65:6:Sumo_Init	1
+../Core/Src/sumo_strategy.c:66:6:Sumo_Init	1

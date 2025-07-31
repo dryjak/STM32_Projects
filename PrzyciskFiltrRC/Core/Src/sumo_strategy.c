@@ -60,6 +60,7 @@ void UpdateState(SumoState CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t
 	{
 		CurrentState = STATE_TURN_LEFT;
 	}
+	//do zrobienia juz z wykorzystaniem sensorów więc najpierw trzeba poczekać na przesylkę i nauczyć się adc
 }
 
 void Sumo_Init(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR)
