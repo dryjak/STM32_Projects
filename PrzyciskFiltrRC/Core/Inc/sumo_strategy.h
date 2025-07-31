@@ -13,6 +13,7 @@
 typedef struct{
 	Motor_t *MotorL;
 	Motor_t *MotorR;
+	gpio_pin
 }SumoMotors_t;
 
 void Sumo_Init(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR);
