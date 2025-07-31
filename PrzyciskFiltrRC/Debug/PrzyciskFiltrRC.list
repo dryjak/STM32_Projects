@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000400c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000d7c4  00000000  00000000  0000403c  2**0
+ 12 .debug_info   0000d804  00000000  00000000  0000403c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 0000202a  00000000  00000000  00011800  2**0
+ 13 .debug_abbrev 00002029  00000000  00000000  00011840  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000c50  00000000  00000000  00013830  2**3
+ 14 .debug_aranges 00000c50  00000000  00000000  00013870  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 0000098f  00000000  00000000  00014480  2**0
+ 15 .debug_rnglists 0000098f  00000000  00000000  000144c0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  0001606f  00000000  00000000  00014e0f  2**0
+ 16 .debug_macro  0001606f  00000000  00000000  00014e4f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000e05a  00000000  00000000  0002ae7e  2**0
+ 17 .debug_line   0000e068  00000000  00000000  0002aebe  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0008aa42  00000000  00000000  00038ed8  2**0
+ 18 .debug_str    0008aa42  00000000  00000000  00038f26  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000c391a  2**0
+ 19 .comment      00000043  00000000  00000000  000c3968  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000032b8  00000000  00000000  000c3960  2**2
+ 20 .debug_frame  000032b4  00000000  00000000  000c39ac  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000068  00000000  00000000  000c6c18  2**0
+ 21 .debug_line_str 00000068  00000000  00000000  000c6c60  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1284,7 +1284,7 @@ void SysTick_Handler(void)
  80009c0:	bd80      	pop	{r7, pc}
 
 080009c2 <SumoAtack>:
-}SumoState;
+#include "main.h"
 
 SumoState CurrentState = STATE_SEARCH;
 
@@ -1400,9 +1400,9 @@ void Sumo_SearchLeft(SumoMotors_t *SumoMotors)
  8000a80:	bd80      	pop	{r7, pc}
 
 08000a82 <Sumo_Init>:
-
+		CurrentState = STATE_TURN_LEFT;
+	}
 }
-
 
 void Sumo_Init(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR)
 {

@@ -12,6 +12,14 @@
 
 //struktura / coś do zapamiętania strony wykrycia
 
+
+typedef enum{
+	STATE_ATTACK = 0,
+	STATE_SEARCH,
+	STATE_TURN_LEFT,
+	STATE_TURN_RIGHT
+}SumoState;
+
 typedef struct{
 	Motor_t *MotorL;
 	Motor_t *MotorR;
@@ -40,6 +48,7 @@ void Sumo_TurnSlightRight(SumoMotors_t *SumoMotors);
 void Sumo_TurnSlightLeft(SumoMotors_t *SumoMotors);
 void Sumo_Stop(SumoMotors_t *SumoMotors);
 
+void UpdateState(SumoState CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t SumoSensors);
 
 
 
