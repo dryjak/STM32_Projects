@@ -10,6 +10,8 @@
 
 #include "motor_simple.h"
 
+//struktura / coś do zapamiętania strony wykrycia
+
 typedef struct{
 	Motor_t *MotorL;
 	Motor_t *MotorR;
@@ -22,6 +24,12 @@ typedef struct{
 	uint16_t SensorMPin;
 }SumoMotors_t;
 
+typedef struct{
+	uint16_t DistanceSensorL;
+	uint16_t DistanceSensorR;
+	uint16_t FlorSensorL;
+	uint16_t FlorSensorR;
+}SumoSensors;
 
 
 void Sumo_Init(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR);
