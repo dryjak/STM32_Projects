@@ -21,31 +21,31 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   8 .data         0000000c  20000000  08002fd0  00004000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          000000ec  2000000c  08002fdc  0000400c  2**2
+  9 .bss          00000104  2000000c  08002fdc  0000400c  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  200000f8  08002fdc  000040f8  2**0
+ 10 ._user_heap_stack 00000600  20000110  08002fdc  00004110  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000400c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000d65f  00000000  00000000  0000403c  2**0
+ 12 .debug_info   0000d73e  00000000  00000000  0000403c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00002015  00000000  00000000  0001169b  2**0
+ 13 .debug_abbrev 00002028  00000000  00000000  0001177a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000c48  00000000  00000000  000136b0  2**3
+ 14 .debug_aranges 00000c48  00000000  00000000  000137a8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00000989  00000000  00000000  000142f8  2**0
+ 15 .debug_rnglists 00000989  00000000  00000000  000143f0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  0001606f  00000000  00000000  00014c81  2**0
+ 16 .debug_macro  0001606f  00000000  00000000  00014d79  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000e046  00000000  00000000  0002acf0  2**0
+ 17 .debug_line   0000e047  00000000  00000000  0002ade8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0008a94d  00000000  00000000  00038d36  2**0
+ 18 .debug_str    0008a9e4  00000000  00000000  00038e2f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000c3683  2**0
+ 19 .comment      00000043  00000000  00000000  000c3813  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00003290  00000000  00000000  000c36c8  2**2
+ 20 .debug_frame  00003290  00000000  00000000  000c3858  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000068  00000000  00000000  000c6958  2**0
+ 21 .debug_line_str 00000068  00000000  00000000  000c6ae8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -698,7 +698,7 @@ int main(void)
  80006fe:	f000 fe71 	bl	80013e4 <HAL_GPIO_WritePin>
 	  if(HAL_GPIO_ReadPin(CzujnikL_GPIO_Port, CzujnikL_Pin))
  8000702:	e7bf      	b.n	8000684 <main+0x74>
- 8000704:	20000064 	.word	0x20000064
+ 8000704:	2000007c 	.word	0x2000007c
  8000708:	20000058 	.word	0x20000058
  800070c:	40020400 	.word	0x40020400
  8000710:	20000028 	.word	0x20000028
@@ -1284,9 +1284,9 @@ void SysTick_Handler(void)
  80009c0:	bd80      	pop	{r7, pc}
 
 080009c2 <SumoAtack>:
- */
-#include "sumo_strategy.h"
-#include "main.h"
+}SumoState;
+
+SumoState CurrentState = STATE_SEARCH;
 
 void SumoAtack(SumoMotors_t *SumoMotors)
 {
@@ -1400,9 +1400,9 @@ void Sumo_SearchLeft(SumoMotors_t *SumoMotors)
  8000a80:	bd80      	pop	{r7, pc}
 
 08000a82 <Sumo_Init>:
-	Motor_Ride(SumoMotors->MotorL);
-	Motor_Ride(SumoMotors->MotorR);
-}
+
+//void UpdateState(SumoState )
+
 
 void Sumo_Init(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR)
 {
@@ -1665,7 +1665,7 @@ void MX_TIM1_Init(void)
  8000bfe:	3758      	adds	r7, #88	@ 0x58
  8000c00:	46bd      	mov	sp, r7
  8000c02:	bd80      	pop	{r7, pc}
- 8000c04:	20000064 	.word	0x20000064
+ 8000c04:	2000007c 	.word	0x2000007c
  8000c08:	40010000 	.word	0x40010000
 
 08000c0c <HAL_TIM_Base_MspInit>:
@@ -1856,7 +1856,7 @@ void MX_USART1_UART_Init(void)
  8000d0a:	bf00      	nop
  8000d0c:	bd80      	pop	{r7, pc}
  8000d0e:	bf00      	nop
- 8000d10:	200000ac 	.word	0x200000ac
+ 8000d10:	200000c4 	.word	0x200000c4
  8000d14:	40011000 	.word	0x40011000
 
 08000d18 <HAL_UART_MspInit>:
@@ -2042,7 +2042,7 @@ LoopFillZerobss:
   ldr r2, =_sbss
  8000df0:	2000000c 	.word	0x2000000c
   ldr r4, =_ebss
- 8000df4:	200000f8 	.word	0x200000f8
+ 8000df4:	20000110 	.word	0x20000110
 
 08000df8 <ADC_IRQHandler>:
  * @retval None       
@@ -2205,7 +2205,7 @@ __weak void HAL_IncTick(void)
  8000ebc:	4770      	bx	lr
  8000ebe:	bf00      	nop
  8000ec0:	20000008 	.word	0x20000008
- 8000ec4:	200000f4 	.word	0x200000f4
+ 8000ec4:	2000010c 	.word	0x2000010c
 
 08000ec8 <HAL_GetTick>:
   * @note This function is declared as __weak to be overwritten in case of other 
@@ -2225,7 +2225,7 @@ __weak uint32_t HAL_GetTick(void)
  8000ed4:	f85d 7b04 	ldr.w	r7, [sp], #4
  8000ed8:	4770      	bx	lr
  8000eda:	bf00      	nop
- 8000edc:	200000f4 	.word	0x200000f4
+ 8000edc:	2000010c 	.word	0x2000010c
 
 08000ee0 <__NVIC_SetPriorityGrouping>:
            In case of a conflict between priority grouping and available

@@ -13,8 +13,16 @@
 typedef struct{
 	Motor_t *MotorL;
 	Motor_t *MotorR;
-	gpio_pin
+	//for simulation of sensors
+	GPIO_TypeDef *SensorLPort;
+	uint16_t SensorLPin;
+	GPIO_TypeDef *SensorRPort;
+	uint16_t SensorRPin;
+	GPIO_TypeDef *SensorMPort;
+	uint16_t SensorMPin;
 }SumoMotors_t;
+
+
 
 void Sumo_Init(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR);
 void SumoAtack(SumoMotors_t *SumoMotors);

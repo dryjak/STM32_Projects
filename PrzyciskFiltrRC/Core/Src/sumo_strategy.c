@@ -61,7 +61,7 @@ void Sumo_Stop(SumoMotors_t *SumoMotors)
 	Motor_Ride(SumoMotors->MotorR);
 }
 
-void UpdateState(SumoState )
+//void UpdateState(SumoState )
 
 
 void Sumo_Init(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR)
