@@ -47,12 +47,13 @@
 
 /* USER CODE BEGIN PV */
 uint16_t SharpValueL;
+float SharpVoltageL;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+void AdcValueToVoltage(uint16_t *Value, float *Voltage);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -66,7 +67,6 @@ void SystemClock_Config(void);
   */
 int main(void)
 {
-
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -100,7 +100,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
+	  SharpVoltageL = (SharpValueL / 4095.0) * 3.3;
+	  /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
@@ -149,7 +150,10 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void AdcValueToVoltage(uint16_t *Value, float *Voltage)
+{
+    *Voltage = ((float)(*Value) / 4095.0f) * 3.3f;
+}
 /* USER CODE END 4 */
 
 /**
