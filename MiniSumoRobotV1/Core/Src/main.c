@@ -46,7 +46,11 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+uint16_t AdcValues[2];
 uint16_t SharpValueL;
+uint16_t SharpValueR;
+
+float SharpVoltageR;
 float SharpVoltageL;
 /* USER CODE END PV */
 
@@ -67,6 +71,7 @@ void AdcValueToVoltage(uint16_t *Value, float *Voltage);
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -93,15 +98,16 @@ int main(void)
   MX_USART1_UART_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t*) &SharpValueL, 1);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t*) AdcValues, 2);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  SharpVoltageL = (SharpValueL / 4095.0) * 3.3;
-	  /* USER CODE END WHILE */
+	  //SharpVoltageL = (SharpValueL / 4095.0) * 3.3;
+    /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
