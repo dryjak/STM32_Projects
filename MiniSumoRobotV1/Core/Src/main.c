@@ -17,6 +17,7 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
+//to do: dodaj silniki, zrób obsługę przynajmniej jednego silnika do przodu
 #include "main.h"
 #include "adc.h"
 #include "dma.h"
