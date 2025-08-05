@@ -20,6 +20,7 @@
 #include "main.h"
 #include "adc.h"
 #include "dma.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -54,6 +55,9 @@ uint16_t SharpMeanR, SharpMeanL;
 
 float SharpVoltageR;
 float SharpVoltageL;
+
+
+uint16_t LastMeasure;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -99,6 +103,7 @@ int main(void)
   MX_DMA_Init();
   MX_USART1_UART_Init();
   MX_ADC1_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*) AdcValues, 2 * AdcValuesSize);
 
@@ -120,6 +125,7 @@ int main(void)
 	  }
 	  SharpMeanL = MeanTmpL / AdcValuesSize;
 	  SharpMeanR = MeanTmpR / AdcValuesSize;
+	  LastMeasure = AdcValues[0][1];
 
 	  //SharpVoltageL = (SharpValueL / 4095.0) * 3.3;
     /* USER CODE END WHILE */
