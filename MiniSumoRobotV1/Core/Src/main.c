@@ -117,7 +117,10 @@ int main(void)
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*) AdcValues, 2 * AdcValuesSize);
 
   //Initialize motors
-  Motor_Init(&MotorL, htim1, TIM_CHANNEL_1, PwmL, , Dir1Pin, Dir2Port, Dir2Pin)
+  Motor_Init(&MotorL, &htim1, TIM_CHANNEL_1, PwmL, MotorLDir1_GPIO_Port , MotorLDir1_Pin, MotorLDir2_GPIO_Port, MotorLDir2_Pin);
+  Motor_Init(&MotorR, &htim1, TIM_CHANNEL_2, PwmR, MotorRDir1_GPIO_Port , MotorRDir1_Pin, MotorRDir2_GPIO_Port, MotorRDir2_Pin);
+
+
 
   /* USER CODE END 2 */
 
