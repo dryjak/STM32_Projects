@@ -27,6 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "motor_simple.h"
+#include "sumo_strategy.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -64,6 +65,9 @@ uint16_t PwmL;
 
 Motor_t MotorR;
 uint16_t PwmR;
+
+//Initialize Strategy
+SumoMotors_t SumoMotors;
 
 
 uint16_t LastMeasure;
@@ -120,7 +124,16 @@ int main(void)
   Motor_Init(&MotorL, &htim1, TIM_CHANNEL_1, PwmL, MotorLDir1_GPIO_Port , MotorLDir1_Pin, MotorLDir2_GPIO_Port, MotorLDir2_Pin);
   Motor_Init(&MotorR, &htim1, TIM_CHANNEL_2, PwmR, MotorRDir1_GPIO_Port , MotorRDir1_Pin, MotorRDir2_GPIO_Port, MotorRDir2_Pin);
 
+  //Initialize motors with sumo strategy
+  Sumo_Init(&SumoMotors, &MotorL, &MotorR);
 
+//motors test
+  /*
+  Motor_SetRideParameters(&MotorL, 50, 1);
+  Motor_Ride(&MotorL);
+  Motor_SetRideParameters(&MotorR, 50, 1);
+  Motor_Ride(&MotorR);
+   */
 
   /* USER CODE END 2 */
 
