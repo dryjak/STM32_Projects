@@ -49,14 +49,13 @@
 
 /* USER CODE BEGIN PV */
 //ADC Sharp Sensors
-uint8_t AdcValuesSize = 5;
-uint16_t AdcValues[5][2];
+//uint8_t AdcValuesSize = 5;
+uint16_t AdcValues[2];
 uint16_t SharpValueL;
 uint16_t SharpValueR;
 uint16_t SharpMeanR, SharpMeanL;
 
-float SharpVoltageR;
-float SharpVoltageL;
+
 
 
 //Motors
@@ -68,7 +67,7 @@ uint16_t PwmR;
 
 //Initialize Strategy
 SumoMotors_t SumoMotors;
-
+SumoSensors_t SumoSensors;
 
 uint16_t LastMeasure;
 /* USER CODE END PV */
@@ -118,15 +117,15 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t*) AdcValues, 2 * AdcValuesSize);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t*) AdcValues, 2);
 
   //Initialize motors
   Motor_Init(&MotorL, &htim1, TIM_CHANNEL_1, PwmL, MotorLDir1_GPIO_Port , MotorLDir1_Pin, MotorLDir2_GPIO_Port, MotorLDir2_Pin);
   Motor_Init(&MotorR, &htim1, TIM_CHANNEL_2, PwmR, MotorRDir1_GPIO_Port , MotorRDir1_Pin, MotorRDir2_GPIO_Port, MotorRDir2_Pin);
 
   //Initialize motors with sumo strategy
-  Sumo_Init(&SumoMotors, &MotorL, &MotorR);
-
+  Sumo_InitMotors(&SumoMotors, &MotorL, &MotorR);
+  Sumo_InitDistanceSensors(&SumoSensors, AdcValues[0], AdcValues[1]);
 //motors test
   /*
   Motor_SetRideParameters(&MotorL, 50, 1);
@@ -134,7 +133,7 @@ int main(void)
   Motor_SetRideParameters(&MotorR, 50, 1);
   Motor_Ride(&MotorR);
    */
-  SumoAtack(&SumoMotors);
+  //SumoAtack(&SumoMotors);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -144,6 +143,8 @@ int main(void)
 	  //SharpValueL = AdcValues[0];
 	  //SharpValueR = AdcValues[1];
 	  //HAL_Delay(50);
+
+	 /*
 	  uint16_t MeanTmpL = 0;
 	  uint16_t MeanTmpR = 0;
 	  for(uint8_t i = 0; i < AdcValuesSize; i++)
@@ -153,7 +154,9 @@ int main(void)
 	  }
 	  SharpMeanL = MeanTmpL / AdcValuesSize;
 	  SharpMeanR = MeanTmpR / AdcValuesSize;
-	  LastMeasure = AdcValues[0][1];
+	  LastMeasure = AdcValues[0][1]
+	*/
+
 
 	  //SharpVoltageL = (SharpValueL / 4095.0) * 3.3;
     /* USER CODE END WHILE */

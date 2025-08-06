@@ -4,5 +4,5 @@
 ../Core/Src/sumo_strategy.c:34:6:Sumo_TurnSlightRight	1
 ../Core/Src/sumo_strategy.c:41:6:Sumo_TurnSlightLeft	1
 ../Core/Src/sumo_strategy.c:48:6:Sumo_Stop	1
-../Core/Src/sumo_strategy.c:57:6:UpdateState	2
-../Core/Src/sumo_strategy.c:66:6:Sumo_Init	1
+../Core/Src/sumo_strategy.c:66:6:Sumo_InitMotors	1
+../Core/Src/sumo_strategy.c:72:6:Sumo_InitDistanceSensors	1

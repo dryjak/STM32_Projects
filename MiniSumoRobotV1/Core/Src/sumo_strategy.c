@@ -54,17 +54,24 @@ void Sumo_Stop(SumoMotors_t *SumoMotors)
 }
 
 //void UpdateState(SumoState )
-void UpdateState(SumoState CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t SumoSensors)
-{
-	if (HAL_GPIO_ReadPin(SumoMotors->SensorLPort, SumoMotors->SensorLPin))
-	{
-		CurrentState = STATE_TURN_LEFT;
-	}
-	//do zrobienia juz z wykorzystaniem sensorów więc najpierw trzeba poczekać na przesylkę i nauczyć się adc
-}
+//void UpdateState(SumoState CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t SumoSensors)
+//{
+//	if (SumoSensors->DistanceSensorL)
+//	{
+//		CurrentState = STATE_TURN_LEFT;
+//	}
+//	//do zrobienia juz z wykorzystaniem sensorów więc najpierw trzeba poczekać na przesylkę i nauczyć się adc
+//}
 
-void Sumo_Init(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR)
+void Sumo_InitMotors(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR)
 {
 	SumoMotors->MotorL = MotorL;
 	SumoMotors->MotorR = MotorR;
 }
+
+void Sumo_InitDistanceSensors(SumoSensors_t *SumoSensors, uint16_t DistanceSensorL, uint16_t DistanceSensorR)
+{
+	SumoSensors->DistanceSensorL = DistanceSensorL;
+	SumoSensors->DistanceSensorR = DistanceSensorR;
+}
+
