@@ -10,6 +10,8 @@
 #include "motor_simple.h"
 
 
+
+
 MotorStatus_t Motor_SetRideParameters(Motor_t *Motor, uint8_t PWM, uint8_t Dir)
 {
 	//making sure PWM is in range from 0 to 100

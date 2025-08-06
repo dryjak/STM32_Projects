@@ -9,6 +9,27 @@
 
 SumoState CurrentState = STATE_SEARCH;
 
+uint16_t DistanceFilteredValueL;
+uint16_t DistanceFilteredValueR;
+float alpha = 0.3;
+
+void AdcValueToVoltage(uint16_t *Value, float *Voltage)
+{
+	*Voltage = (*Value / 4096.0) * 3.3;
+}
+
+float IIRFilter(float alpha, float filtered_value, float input)
+{
+    filtered_value = alpha * input + (1.0 - alpha) * filtered_value;
+
+    return filtered_value;
+}
+
+void FilterDistanceValues(SumoSensors_t SumoSensors, uint8_t DistanceFilteredValue)
+{
+
+}
+
 void SumoAtack(SumoMotors_t *SumoMotors)
 {
 	Motor_SetRideParameters(SumoMotors->MotorL, 100, 1);  // Przód
@@ -62,6 +83,8 @@ void Sumo_Stop(SumoMotors_t *SumoMotors)
 //	}
 //	//do zrobienia juz z wykorzystaniem sensorów więc najpierw trzeba poczekać na przesylkę i nauczyć się adc
 //}
+
+
 
 void Sumo_InitMotors(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR)
 {
