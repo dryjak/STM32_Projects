@@ -47,6 +47,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+//ADC Sharp Sensors
 uint8_t AdcValuesSize = 5;
 uint16_t AdcValues[5][2];
 uint16_t SharpValueL;
@@ -55,6 +56,14 @@ uint16_t SharpMeanR, SharpMeanL;
 
 float SharpVoltageR;
 float SharpVoltageL;
+
+
+//Motors
+Motor_t MotorL;
+uint16_t PwmL;
+
+Motor_t MotorR;
+uint16_t PwmR;
 
 
 uint16_t LastMeasure;
@@ -106,6 +115,9 @@ int main(void)
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*) AdcValues, 2 * AdcValuesSize);
+
+  //Initialize motors
+  Motor_Init(&MotorL, htim1, TIM_CHANNEL_1, PwmL, , Dir1Pin, Dir2Port, Dir2Pin)
 
   /* USER CODE END 2 */
 
