@@ -134,7 +134,7 @@ int main(void)
   Motor_SetRideParameters(&MotorR, 50, 1);
   Motor_Ride(&MotorR);
    */
-
+  SumoAtack(&SumoMotors);
   /* USER CODE END 2 */
 
   /* Infinite loop */
