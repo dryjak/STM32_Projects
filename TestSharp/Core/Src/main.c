@@ -52,7 +52,7 @@
 
 	uint16_t *SharpPointerL;
 
-	uint16_t SharpValueThroughPointer;
+	volatile uint16_t SharpValueThroughPointer;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -104,7 +104,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  SharpL = AdcValues[0];S
+	  SharpL = AdcValues[0];
 	  SharpPointerL = &AdcValues[0];
 
 	  SharpValueThroughPointer = *SharpPointerL;
