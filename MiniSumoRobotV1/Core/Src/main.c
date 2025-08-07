@@ -79,7 +79,6 @@ uint16_t LastMeasure;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-void AdcValueToVoltage(uint16_t *Value, float *Voltage);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
