@@ -47,7 +47,7 @@
 /* USER CODE BEGIN PV */
 	uint16_t AdcValues[2];
 
-	uint16_t SharpL;
+	volatile uint16_t SharpL;
 	uint16_t SharpR;
 
 	uint16_t *SharpPointerL;
