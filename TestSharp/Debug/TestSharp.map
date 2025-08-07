@@ -3225,9 +3225,9 @@ LOAD /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.
  .bss.SharpPointerL
                 0x200000d8        0x4 ./Core/Src/main.o
                 0x200000d8                SharpPointerL
- .bss.SharpValuethroughPointer
+ .bss.SharpValueThroughPointer
                 0x200000dc        0x2 ./Core/Src/main.o
-                0x200000dc                SharpValuethroughPointer
+                0x200000dc                SharpValueThroughPointer
  *fill*         0x200000de        0x2 
  .bss.uwTick    0x200000e0        0x4 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
                 0x200000e0                uwTick

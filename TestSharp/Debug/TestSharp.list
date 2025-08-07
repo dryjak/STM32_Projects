@@ -804,7 +804,7 @@ int main(void)
  8000770:	4a04      	ldr	r2, [pc, #16]	@ (8000784 <main+0x40>)
  8000772:	601a      	str	r2, [r3, #0]
 
-	  SharpValuethroughPointer = *SharpPointerL;
+	  SharpValueThroughPointer = *SharpPointerL;
  8000774:	4b06      	ldr	r3, [pc, #24]	@ (8000790 <main+0x4c>)
  8000776:	681b      	ldr	r3, [r3, #0]
  8000778:	881a      	ldrh	r2, [r3, #0]
