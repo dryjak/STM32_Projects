@@ -51,7 +51,8 @@
 //ADC Sharp Sensors
 //uint8_t AdcValuesSize = 5;
 uint16_t AdcValues[2];
-uint16_t SharpValueL;
+uint16_t *SharpValueL;
+uint16_t L;
 uint16_t SharpValueR;
 uint16_t SharpMeanR, SharpMeanL;
 float SharpVoltageL;
@@ -137,6 +138,10 @@ int main(void)
   Motor_Ride(&MotorR);
    */
   //SumoAtack(&SumoMotors);
+
+
+  SharpValueL = &AdcValues[0];
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -145,6 +150,7 @@ int main(void)
   while (1)
   {
 
+	  L = *SharpValueL;
 	  AdcToVoltage(&AdcValues[0], &SharpVoltageL);
 	  IIRFilter(0.3, SharpVoltageL, &SharpVoltageFilteredL);
 	  //SharpValueL = AdcValues[0];
