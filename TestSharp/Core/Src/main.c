@@ -51,6 +51,8 @@
 	uint16_t SharpR;
 
 	uint16_t *SharpPointerL;
+
+	uint16_t SharpValuethroughPointer;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -104,6 +106,8 @@ int main(void)
   {
 	  SharpL = AdcValues[0];
 	  SharpPointerL = &AdcValues[0];
+
+	  SharpValuethroughPointer = *SharpPointerL;
 
     /* USER CODE END WHILE */
 
