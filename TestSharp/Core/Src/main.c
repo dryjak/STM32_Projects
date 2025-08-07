@@ -46,8 +46,11 @@
 
 /* USER CODE BEGIN PV */
 	uint16_t AdcValues[2];
+
 	uint16_t SharpL;
 	uint16_t SharpR;
+
+	uint16_t *SharpPointerL;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -99,6 +102,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  SharpL = AdcValues[0];
+	  SharpPointerL = &AdcValues[0];
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
