@@ -13,21 +13,30 @@ uint16_t DistanceFilteredValueL;
 uint16_t DistanceFilteredValueR;
 float alpha = 0.3;
 
-void AdcValueToVoltage(uint16_t *Value, float *Voltage)
+float VoltageL = 0.0f;
+float VoltageR = 0.0f;
+float FilteredVoltageL = 0.0f;
+float FilteredVoltageR = 0.0f;
+
+float AdcToVoltage(uint16_t adc_val)
 {
-	*Voltage = (*Value / 4096.0) * 3.3;
+    return (adc_val / 4095.0f) * 3.3f;
 }
 
-float IIRFilter(float alpha, float filtered_value, float input)
+void IIRFilter(float alpha, float input, float *filtered_value)
 {
-    filtered_value = alpha * input + (1.0 - alpha) * filtered_value;
-
-    return filtered_value;
+    *filtered_value = alpha * input + (1.0f - alpha) * (*filtered_value);
 }
 
-void FilterDistanceValues(SumoSensors_t SumoSensors, uint8_t DistanceFilteredValue)
+void Sumo_UpdateSensors(SumoSensors_t *SumoSensors)
 {
+    // Przelicz na napięcie
+    VoltageL = AdcToVoltage(SumoSensors->DistanceSensorL);
+    VoltageR = AdcToVoltage(SumoSensors->DistanceSensorR);
 
+    // Zastosuj filtr IIR
+    IIRFilter(alpha, VoltageL, &FilteredVoltageL);
+    IIRFilter(alpha, VoltageR, &FilteredVoltageR);
 }
 
 void SumoAtack(SumoMotors_t *SumoMotors)
@@ -74,14 +83,13 @@ void Sumo_Stop(SumoMotors_t *SumoMotors)
 	Motor_Ride(SumoMotors->MotorR);
 }
 
-//void UpdateState(SumoState )
 //void UpdateState(SumoState CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t SumoSensors)
 //{
 //	if (SumoSensors->DistanceSensorL)
 //	{
 //		CurrentState = STATE_TURN_LEFT;
 //	}
-//	//do zrobienia juz z wykorzystaniem sensorów więc najpierw trzeba poczekać na przesylkę i nauczyć się adc
+	//do zrobienia juz z wykorzystaniem sensorów więc najpierw trzeba poczekać na przesylkę i nauczyć się adc
 //}
 
 

@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000500c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00010122  00000000  00000000  0000503c  2**0
+ 12 .debug_info   0001022d  00000000  00000000  0000503c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00002831  00000000  00000000  0001515e  2**0
+ 13 .debug_abbrev 00002834  00000000  00000000  00015269  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000e28  00000000  00000000  00017990  2**3
+ 14 .debug_aranges 00000e40  00000000  00000000  00017aa0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00000af4  00000000  00000000  000187b8  2**0
+ 15 .debug_rnglists 00000b07  00000000  00000000  000188e0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00017a9c  00000000  00000000  000192ac  2**0
+ 16 .debug_macro  00017a9c  00000000  00000000  000193e7  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00011374  00000000  00000000  00030d48  2**0
+ 17 .debug_line   000113e3  00000000  00000000  00030e83  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00096955  00000000  00000000  000420bc  2**0
+ 18 .debug_str    000969f2  00000000  00000000  00042266  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000d8a11  2**0
+ 19 .comment      00000043  00000000  00000000  000d8c58  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000039f8  00000000  00000000  000d8a54  2**2
+ 20 .debug_frame  00003a6c  00000000  00000000  000d8c9c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000068  00000000  00000000  000dc44c  2**0
+ 21 .debug_line_str 00000068  00000000  00000000  000dc708  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1372,9 +1372,9 @@ void DMA2_Stream0_IRQHandler(void)
  8000a30:	20000070 	.word	0x20000070
 
 08000a34 <Sumo_InitMotors>:
-//	}
-//	//do zrobienia juz z wykorzystaniem sensorów więc najpierw trzeba poczekać na przesylkę i nauczyć się adc
 //}
+
+
 
 void Sumo_InitMotors(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR)
 {
