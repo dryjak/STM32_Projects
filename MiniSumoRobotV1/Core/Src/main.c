@@ -54,8 +54,11 @@ uint16_t AdcValues[2];
 uint16_t SharpValueL;
 uint16_t SharpValueR;
 uint16_t SharpMeanR, SharpMeanL;
+float SharpVoltageL;
+float SharpVoltageR;
 
-
+float SharpVoltageFilteredL;
+float SharpVoltageFilteredR;
 
 
 //Motors
@@ -138,8 +141,12 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  	  HAL_Delay(50);
   while (1)
   {
+
+	  AdcToVoltage(&AdcValues[0], &SharpVoltageL);
+	  IIRFilter(0.3, SharpVoltageL, &SharpVoltageFilteredL);
 	  //SharpValueL = AdcValues[0];
 	  //SharpValueR = AdcValues[1];
 	  //HAL_Delay(50);
@@ -208,10 +215,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void AdcValueToVoltage(uint16_t *Value, float *Voltage)
-{
-    *Voltage = ((float)(*Value) / 4095.0f) * 3.3f;
-}
+
 /* USER CODE END 4 */
 
 /**

@@ -18,21 +18,22 @@ float VoltageR = 0.0f;
 float FilteredVoltageL = 0.0f;
 float FilteredVoltageR = 0.0f;
 
-float AdcToVoltage(uint16_t adc_val)
+void AdcToVoltage(uint16_t *AdcValue, float *Voltage)
 {
-    return (adc_val / 4095.0f) * 3.3f;
+    *Voltage = ((*AdcValue) / 4095.0f) * 3.3f;
 }
 
 void IIRFilter(float alpha, float input, float *filtered_value)
 {
-    *filtered_value = alpha * input + (1.0f - alpha) * (*filtered_value);
+    *filtered_value = alpha * (input) + (1.0f - alpha) * (*filtered_value);
 }
 
 void Sumo_UpdateSensors(SumoSensors_t *SumoSensors)
 {
     // Przelicz na napięcie
-    VoltageL = AdcToVoltage(SumoSensors->DistanceSensorL);
-    VoltageR = AdcToVoltage(SumoSensors->DistanceSensorR);
+	AdcToVoltage(&SumoSensors->DistanceSensorL, &VoltageL);
+	AdcToVoltage(&SumoSensors->DistanceSensorR, &VoltageR);
+
 
     // Zastosuj filtr IIR
     IIRFilter(alpha, VoltageL, &FilteredVoltageL);
