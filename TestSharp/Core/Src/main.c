@@ -104,7 +104,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  SharpL = AdcValues[0];
+	  SharpL = AdcValues[0];S
 	  SharpPointerL = &AdcValues[0];
 
 	  SharpValueThroughPointer = *SharpPointerL;
