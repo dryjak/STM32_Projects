@@ -109,6 +109,7 @@ int main(void)
 
 	  SharpValueThroughPointer = *SharpPointerL;
 
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
