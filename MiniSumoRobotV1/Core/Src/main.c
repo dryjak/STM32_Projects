@@ -51,8 +51,8 @@
 //ADC Sharp Sensors
 //uint8_t AdcValuesSize = 5;
 uint16_t AdcValues[2];
-uint16_t *SharpValueL;
-uint16_t L;
+volatile uint16_t *SharpValueL;
+uint16_t L, W;
 uint16_t SharpValueR;
 uint16_t SharpMeanR, SharpMeanL;
 float SharpVoltageL;
@@ -139,19 +139,20 @@ int main(void)
   //SumoAtack(&SumoMotors);
 
 
-  SharpValueL = &AdcValues[0];
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  	  HAL_Delay(50);
   while (1)
   {
-
+	  W = AdcValues[0];
+	  SharpValueL = &AdcValues[0];
 	  L = *SharpValueL;
-	  AdcToVoltage(&AdcValues[0], &SharpVoltageL);
-	  IIRFilter(0.3, SharpVoltageL, &SharpVoltageFilteredL);
+
+
+	  //AdcToVoltage(&AdcValues[0], &SharpVoltageL);
+	  //IIRFilter(0.3, SharpVoltageL, &SharpVoltageFilteredL);
 	  //SharpValueL = AdcValues[0];
 	  //SharpValueR = AdcValues[1];
 	  //HAL_Delay(50);
