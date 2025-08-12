@@ -149,6 +149,8 @@ int main(void)
 	  W = AdcValues[0];
 	  SharpValueL = &AdcValues[0];
 	  L = *SharpValueL;
+	  HAL_UART_Transmit(&huart1, (uint8_t*)W, strlen(W), 1000);
+	  HAL_Delay(1000);
 
 
 	  //AdcToVoltage(&AdcValues[0], &SharpVoltageL);
