@@ -8,4 +8,4 @@
 ../Core/Src/sumo_strategy.c:72:6:Sumo_TurnSlightLeft	16	static
 ../Core/Src/sumo_strategy.c:79:6:Sumo_Stop	16	static
 ../Core/Src/sumo_strategy.c:98:6:Sumo_InitMotors	24	static
-../Core/Src/sumo_strategy.c:104:6:Sumo_InitDistanceSensors	16	static
+../Core/Src/sumo_strategy.c:104:6:Sumo_InitDistanceSensors	24	static

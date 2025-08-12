@@ -101,7 +101,7 @@ void Sumo_InitMotors(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR)
 	SumoMotors->MotorR = MotorR;
 }
 
-void Sumo_InitDistanceSensors(SumoSensors_t *SumoSensors, uint16_t DistanceSensorL, uint16_t DistanceSensorR)
+void Sumo_InitDistanceSensors(SumoSensors_t *SumoSensors, uint16_t *DistanceSensorL, uint16_t *DistanceSensorR)
 {
 	SumoSensors->DistanceSensorL = DistanceSensorL;
 	SumoSensors->DistanceSensorR = DistanceSensorR;

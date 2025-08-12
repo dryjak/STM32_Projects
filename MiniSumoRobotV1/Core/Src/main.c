@@ -50,9 +50,9 @@
 /* USER CODE BEGIN PV */
 //ADC Sharp Sensors
 //uint8_t AdcValuesSize = 5;
-uint16_t AdcValues[2];
+uint16_t AdcValues[3][2];
 volatile uint16_t *SharpValueL;
-uint16_t L, W;
+
 uint16_t SharpValueR;
 uint16_t SharpMeanR, SharpMeanL;
 float SharpVoltageL;
@@ -120,7 +120,7 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t*) AdcValues, 2);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t*) AdcValues, 3 * 2);
 
   //Initialize motors
   Motor_Init(&MotorL, &htim1, TIM_CHANNEL_1, PwmL, MotorLDir1_GPIO_Port , MotorLDir1_Pin, MotorLDir2_GPIO_Port, MotorLDir2_Pin);
@@ -146,12 +146,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  W = AdcValues[0];
-	  SharpValueL = &AdcValues[0];
-	  L = *SharpValueL;
-	  HAL_UART_Transmit(&huart1, (uint8_t*)W, strlen(W), 1000);
-	  HAL_Delay(1000);
+	  uint8_t i;
+	  for(i = 0; i < 3; i++)
+	  {
 
+	  }
 
 	  //AdcToVoltage(&AdcValues[0], &SharpVoltageL);
 	  //IIRFilter(0.3, SharpVoltageL, &SharpVoltageFilteredL);

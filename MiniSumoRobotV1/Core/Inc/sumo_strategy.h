@@ -41,7 +41,7 @@ typedef struct{
 
 
 void Sumo_InitMotors(SumoMotors_t *SumoMotors, Motor_t *MotorL, Motor_t *MotorR);
-void Sumo_InitDistanceSensors(SumoSensors_t *SumoSensors, uint16_t DistanceSensorL, uint16_t DistanceSensorR);
+void Sumo_InitDistanceSensors(SumoSensors_t *SumoSensors, uint16_t *DistanceSensorL, uint16_t *DistanceSensorR);
 
 void SumoAtack(SumoMotors_t *SumoMotors);
 void Sumo_SearchRight(SumoMotors_t *SumoMotors);
