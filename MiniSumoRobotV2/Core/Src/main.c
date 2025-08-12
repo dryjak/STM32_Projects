@@ -52,6 +52,7 @@
 uint16_t AdcValues[2];
 
 uint16_t *SharpPointerL;
+uint16_t *SharpPointerR;
 
 //MotorLVariablesR
 Motor_t MotorR;
@@ -60,6 +61,10 @@ uint16_t MotorPwmR;
 //MotorLVariablesL
 Motor_t MotorL;
 uint16_t MotorPwmL;
+
+//Sumo Strategy
+SumoMotors_t SumoMotors;
+SumoSensors_t SumoSensors;
 
 /* USER CODE END PV */
 
@@ -91,8 +96,18 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+//initialize sensors
+  SharpPointerL = &AdcValues[0];
+  SharpPointerR = &AdcValues[1];
+
+//initialize motors
 Motor_Init(&MotorR, &htim1, TIM_CHANNEL_1, MotorPwmL, MotorRDir1_GPIO_Port, MotorRDir1_Pin, MotorRDir2_GPIO_Port, MotorRDir2_Pin);
 Motor_Init(&MotorL, &htim1, TIM_CHANNEL_2, MotorPwmR, MotorLDir1_GPIO_Port, MotorLDir1_Pin, MotorLDir2_GPIO_Port, MotorLDir2_Pin);
+
+//initialize motors to streategy
+Sumo_InitMotors(&SumoMotors, &MotorL, &MotorR);
+//initialize sensors to sumo strategy
+Sumo_InitDistanceSensors(&SumoSensors, SharpPointerL , SharpPointerR);
 
 
 
