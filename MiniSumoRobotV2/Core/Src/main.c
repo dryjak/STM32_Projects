@@ -26,6 +26,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "motor_simple.h"
+#include "sumo_strategy.h"
 
 /* USER CODE END Includes */
 
@@ -50,6 +52,14 @@
 uint16_t AdcValues[2];
 
 uint16_t *SharpPointerL;
+
+//MotorLVariablesR
+Motor_t MotorR;
+uint16_t MotorPwmR;
+
+//MotorLVariablesL
+Motor_t MotorL;
+uint16_t MotorPwmL;
 
 /* USER CODE END PV */
 
@@ -81,6 +91,10 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+Motor_Init(&MotorR, &htim1, TIM_CHANNEL_1, MotorPwmL, MotorRDir1_GPIO_Port, MotorRDir1_Pin, MotorRDir2_GPIO_Port, MotorRDir2_Pin);
+Motor_Init(&MotorL, &htim1, TIM_CHANNEL_2, MotorPwmR, MotorLDir1_GPIO_Port, MotorLDir1_Pin, MotorLDir2_GPIO_Port, MotorLDir2_Pin);
+
+
 
   /* USER CODE END Init */
 

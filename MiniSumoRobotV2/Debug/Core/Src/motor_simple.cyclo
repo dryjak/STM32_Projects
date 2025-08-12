@@ -1,0 +1,3 @@
+../Core/Src/motor_simple.c:15:15:Motor_SetRideParameters	3
+../Core/Src/motor_simple.c:48:6:Motor_Ride	4
+../Core/Src/motor_simple.c:55:15:Motor_Init	1
