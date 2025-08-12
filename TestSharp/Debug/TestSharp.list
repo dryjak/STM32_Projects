@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000400c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   000062ba  00000000  00000000  0000403c  2**0
+ 12 .debug_info   000062bf  00000000  00000000  0000403c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 0000177f  00000000  00000000  0000a2f6  2**0
+ 13 .debug_abbrev 0000177f  00000000  00000000  0000a2fb  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 000005f0  00000000  00000000  0000ba78  2**3
+ 14 .debug_aranges 000005f0  00000000  00000000  0000ba80  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 0000044f  00000000  00000000  0000c068  2**0
+ 15 .debug_rnglists 0000044f  00000000  00000000  0000c070  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00015e72  00000000  00000000  0000c4b7  2**0
+ 16 .debug_macro  00015e72  00000000  00000000  0000c4bf  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00007e63  00000000  00000000  00022329  2**0
+ 17 .debug_line   00007e63  00000000  00000000  00022331  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0008b82b  00000000  00000000  0002a18c  2**0
+ 18 .debug_str    0008b82b  00000000  00000000  0002a194  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000b59b7  2**0
+ 19 .comment      00000043  00000000  00000000  000b59bf  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000015b4  00000000  00000000  000b59fc  2**2
+ 20 .debug_frame  000015b4  00000000  00000000  000b5a04  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000062  00000000  00000000  000b6fb0  2**0
+ 21 .debug_line_str 00000062  00000000  00000000  000b6fb8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -796,24 +796,24 @@ int main(void)
   {
 	  SharpL = AdcValues[0];
  8000766:	4b07      	ldr	r3, [pc, #28]	@ (8000784 <main+0x40>)
- 8000768:	881a      	ldrh	r2, [r3, #0]
- 800076a:	4b08      	ldr	r3, [pc, #32]	@ (800078c <main+0x48>)
- 800076c:	801a      	strh	r2, [r3, #0]
+ 8000768:	881b      	ldrh	r3, [r3, #0]
+ 800076a:	b29a      	uxth	r2, r3
+ 800076c:	4b07      	ldr	r3, [pc, #28]	@ (800078c <main+0x48>)
+ 800076e:	801a      	strh	r2, [r3, #0]
 	  SharpPointerL = &AdcValues[0];
- 800076e:	4b08      	ldr	r3, [pc, #32]	@ (8000790 <main+0x4c>)
- 8000770:	4a04      	ldr	r2, [pc, #16]	@ (8000784 <main+0x40>)
- 8000772:	601a      	str	r2, [r3, #0]
+ 8000770:	4b07      	ldr	r3, [pc, #28]	@ (8000790 <main+0x4c>)
+ 8000772:	4a04      	ldr	r2, [pc, #16]	@ (8000784 <main+0x40>)
+ 8000774:	601a      	str	r2, [r3, #0]
 
 	  SharpValueThroughPointer = *SharpPointerL;
- 8000774:	4b06      	ldr	r3, [pc, #24]	@ (8000790 <main+0x4c>)
- 8000776:	681b      	ldr	r3, [r3, #0]
- 8000778:	881a      	ldrh	r2, [r3, #0]
- 800077a:	4b06      	ldr	r3, [pc, #24]	@ (8000794 <main+0x50>)
- 800077c:	801a      	strh	r2, [r3, #0]
+ 8000776:	4b06      	ldr	r3, [pc, #24]	@ (8000790 <main+0x4c>)
+ 8000778:	681b      	ldr	r3, [r3, #0]
+ 800077a:	881a      	ldrh	r2, [r3, #0]
+ 800077c:	4b05      	ldr	r3, [pc, #20]	@ (8000794 <main+0x50>)
+ 800077e:	801a      	strh	r2, [r3, #0]
 	  SharpL = AdcValues[0];
- 800077e:	bf00      	nop
- 8000780:	e7f1      	b.n	8000766 <main+0x22>
- 8000782:	bf00      	nop
+ 8000780:	bf00      	nop
+ 8000782:	e7f0      	b.n	8000766 <main+0x22>
  8000784:	200000d0 	.word	0x200000d0
  8000788:	20000028 	.word	0x20000028
  800078c:	200000d4 	.word	0x200000d4

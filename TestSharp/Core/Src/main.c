@@ -45,7 +45,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-	uint16_t AdcValues[2];
+	volatile uint16_t AdcValues[2];
 
 	volatile uint16_t SharpL;
 	uint16_t SharpR;
