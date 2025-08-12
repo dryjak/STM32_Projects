@@ -49,7 +49,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint16_t AdcValues[2];
+uint16_t AdcValues[3][2];
+uint8_t Mean = 3;
+uint16_t MeanL, MeanR;
 
 uint16_t *SharpPointerL;
 uint16_t *SharpPointerR;
@@ -100,8 +102,8 @@ int main(void)
 
   /* USER CODE BEGIN Init */
 //initialize sensors
-  SharpPointerL = &AdcValues[0];
-  SharpPointerR = &AdcValues[1];
+  //SharpPointerL = &AdcValues[0];
+  //SharpPointerR = &AdcValues[1];
 
 //initialize motors
 Motor_Init(&MotorR, &htim1, TIM_CHANNEL_1, MotorPwmL, MotorRDir1_GPIO_Port, MotorRDir1_Pin, MotorRDir2_GPIO_Port, MotorRDir2_Pin);
@@ -130,15 +132,32 @@ Sumo_InitDistanceSensors(&SumoSensors, SharpPointerL , SharpPointerR);
   MX_USART1_UART_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t *) AdcValues, 2);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t *) AdcValues, 3 * 2);
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  //HAL_Delay(50);
   while (1)
   {
-	  AdcToVoltage(SharpPointerL, (float*)&SharpVoltageL);
+
+	  //mean value from adc values
+	  uint32_t MeanXtmp = 0;
+	  uint32_t MeanYtmp = 0;
+	  	  for(uint8_t i = 0; i < 3; i++)
+	  	  {
+	  		  MeanXtmp += AdcValues[i][0];
+	  		  MeanYtmp += AdcValues[i][1];
+	  	  }
+	  MeanL = MeanXtmp / 3;
+	  MeanR = MeanYtmp / 3;
+
+	  //MeanValue(AdcValues, Mean, &MeanL, &MeanR);
+
+
+
+	  //AdcToVoltage(SharpPointerL, &SharpVoltageL);
 
     /* USER CODE END WHILE */
 
@@ -189,6 +208,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
 
 /* USER CODE END 4 */
 

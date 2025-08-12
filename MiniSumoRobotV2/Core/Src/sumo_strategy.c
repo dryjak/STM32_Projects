@@ -17,7 +17,7 @@ float alpha = 0.3;
 
 void AdcToVoltage(uint16_t *AdcValue, float *Voltage)
 {
-    *Voltage = ((*AdcValue) / 4095.0f) * 3.3f;
+    *Voltage = (((float)*AdcValue) / 4095.0f) * 3.3f;
 }
 
 void IIRFilter(float alpha, float input, float *filtered_value)
