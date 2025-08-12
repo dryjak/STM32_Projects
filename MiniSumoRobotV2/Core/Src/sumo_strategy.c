@@ -13,10 +13,7 @@ uint16_t DistanceFilteredValueL;
 uint16_t DistanceFilteredValueR;
 float alpha = 0.3;
 
-float VoltageL = 0.0f;
-float VoltageR = 0.0f;
-float FilteredVoltageL = 0.0f;
-float FilteredVoltageR = 0.0f;
+
 
 void AdcToVoltage(uint16_t *AdcValue, float *Voltage)
 {
@@ -28,6 +25,7 @@ void IIRFilter(float alpha, float input, float *filtered_value)
     *filtered_value = alpha * (input) + (1.0f - alpha) * (*filtered_value);
 }
 
+/*
 void Sumo_UpdateSensors(SumoSensors_t *SumoSensors)
 {
     // Przelicz na napięcie
@@ -39,7 +37,7 @@ void Sumo_UpdateSensors(SumoSensors_t *SumoSensors)
     IIRFilter(alpha, VoltageL, &FilteredVoltageL);
     IIRFilter(alpha, VoltageR, &FilteredVoltageR);
 }
-
+*/
 void SumoAtack(SumoMotors_t *SumoMotors)
 {
 	Motor_SetRideParameters(SumoMotors->MotorL, 100, 1);  // Przód

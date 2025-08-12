@@ -13,6 +13,7 @@
 //struktura / coś do zapamiętania strony wykrycia
 
 
+
 typedef enum{
 	STATE_ATTACK = 0,
 	STATE_SEARCH,
@@ -33,8 +34,14 @@ typedef struct{
 }SumoMotors_t;
 
 typedef struct{
-	uint16_t DistanceSensorL;
-	uint16_t DistanceSensorR;
+	uint16_t *DistanceSensorL;
+	float DistanceSensorLVoltage;
+	float DistanceSensorLVoltageFiltered;
+
+	uint16_t *DistanceSensorR;
+	float DistanceSensorRVoltage;
+	float DistanceSensorRVoltageFiltered;
+
 	uint16_t FlorSensorL;
 	uint16_t FlorSensorR;
 }SumoSensors_t;
@@ -54,11 +61,7 @@ void Sumo_Stop(SumoMotors_t *SumoMotors);
 void AdcToVoltage(uint16_t *AdcValue, float *Voltage);
 void IIRFilter(float alpha, float input, float *filtered_value);
 
-
-
 void UpdateState(SumoState CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t *SumoSensors);
-
-
 
 
 #endif /* INC_SUMO_STRATEGY_H_ */

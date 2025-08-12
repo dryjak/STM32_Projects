@@ -53,6 +53,9 @@ uint16_t AdcValues[2];
 
 uint16_t *SharpPointerL;
 uint16_t *SharpPointerR;
+//sensors
+volatile float SharpVoltageL;
+
 
 //MotorLVariablesR
 Motor_t MotorR;
@@ -135,7 +138,7 @@ Sumo_InitDistanceSensors(&SumoSensors, SharpPointerL , SharpPointerR);
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  SharpPointerL = &AdcValues[0];
+	  AdcToVoltage(SharpPointerL, (float*)&SharpVoltageL);
 
     /* USER CODE END WHILE */
 
