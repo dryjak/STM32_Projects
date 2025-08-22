@@ -1,0 +1,2 @@
+../Core/Src/NRF24_L1.c:9:6:InitNRF24	1
+../Core/Src/NRF24_L1.c:19:6:WriteRegister	1
