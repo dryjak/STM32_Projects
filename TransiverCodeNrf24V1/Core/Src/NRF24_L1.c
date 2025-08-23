@@ -24,6 +24,14 @@ void CS_Unselect(NRF24_t *NRF24_Module)
 {
 	HAL_GPIO_WritePin(NRF24_Module->NRF24CSN_Port, NRF24_Module->NRF24CSN_Pin, GPIO_PIN_SET);
 }
+void CE_Select(NRF24_t *NRF24_Module)
+{
+	HAL_GPIO_WritePin(NRF24_Module->NRF24CE_Port, NRF24_Module->NRF24CE_Pin, GPIO_PIN_RESET);
+}
+void CE_Unselect(NRF24_t *NRF24_Module)
+{
+	HAL_GPIO_WritePin(NRF24_Module->NRF24CE_Port, NRF24_Module->NRF24CE_Pin, GPIO_PIN_SET);
+}
 
 void WriteRegister(uint8_t Register, uint8_t Data)
 {

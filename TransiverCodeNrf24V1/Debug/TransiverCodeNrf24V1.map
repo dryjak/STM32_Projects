@@ -106,14 +106,18 @@ Discarded input sections
                 0x00000000       0x20 ./Core/Src/NRF24_L1.o
  .text.CS_Unselect
                 0x00000000       0x20 ./Core/Src/NRF24_L1.o
+ .text.CE_Select
+                0x00000000       0x20 ./Core/Src/NRF24_L1.o
+ .text.CE_Unselect
+                0x00000000       0x20 ./Core/Src/NRF24_L1.o
  .text.WriteRegister
                 0x00000000       0x26 ./Core/Src/NRF24_L1.o
- .debug_info    0x00000000      0x2ed ./Core/Src/NRF24_L1.o
+ .debug_info    0x00000000      0x333 ./Core/Src/NRF24_L1.o
  .debug_abbrev  0x00000000      0x170 ./Core/Src/NRF24_L1.o
  .debug_aranges
-                0x00000000       0x38 ./Core/Src/NRF24_L1.o
+                0x00000000       0x48 ./Core/Src/NRF24_L1.o
  .debug_rnglists
-                0x00000000       0x25 ./Core/Src/NRF24_L1.o
+                0x00000000       0x31 ./Core/Src/NRF24_L1.o
  .debug_macro   0x00000000      0x1e8 ./Core/Src/NRF24_L1.o
  .debug_macro   0x00000000      0xad8 ./Core/Src/NRF24_L1.o
  .debug_macro   0x00000000      0x15b ./Core/Src/NRF24_L1.o
@@ -153,10 +157,10 @@ Discarded input sections
  .debug_macro   0x00000000       0xa6 ./Core/Src/NRF24_L1.o
  .debug_macro   0x00000000      0x358 ./Core/Src/NRF24_L1.o
  .debug_macro   0x00000000       0xa6 ./Core/Src/NRF24_L1.o
- .debug_line    0x00000000      0x6f8 ./Core/Src/NRF24_L1.o
- .debug_str     0x00000000    0xe42f2 ./Core/Src/NRF24_L1.o
+ .debug_line    0x00000000      0x726 ./Core/Src/NRF24_L1.o
+ .debug_str     0x00000000    0xe4308 ./Core/Src/NRF24_L1.o
  .comment       0x00000000       0x44 ./Core/Src/NRF24_L1.o
- .debug_frame   0x00000000       0xa8 ./Core/Src/NRF24_L1.o
+ .debug_frame   0x00000000       0xf0 ./Core/Src/NRF24_L1.o
  .ARM.attributes
                 0x00000000       0x34 ./Core/Src/NRF24_L1.o
  .group         0x00000000        0xc ./Core/Src/main.o
