@@ -13,6 +13,8 @@
 
 
 typedef struct{
+	SPI_HandleTypeDef *NRF24_SPI;
+
 	GPIO_TypeDef 	*NRF24CE_Port;
 	uint16_t 		NRF24CE_Pin;
 
@@ -20,9 +22,9 @@ typedef struct{
 	uint16_t 		NRF24CSN_Pin;
 }NRF24_t;
 
-void InitNRF24(NRF24_t *NRF24_Module, GPIO_TypeDef *NRF24CE_Port, uint16_t NRF24CE_Pin, GPIO_TypeDef *NRF24CSN_Port, uint16_t NRF24CSN_Pin);
+void InitNRF24(NRF24_t *NRF24_Module, GPIO_TypeDef *NRF24CE_Port, uint16_t NRF24CE_Pin, GPIO_TypeDef *NRF24CSN_Port, uint16_t NRF24CSN_Pin, SPI_HandleTypeDef *hspi);
 
-void WriteRegister(uint8_t Register, uint8_t Data);
+void WriteRegister(NRF24_t *NRF24_Module, uint8_t Register, uint8_t Data);
 
 
 #endif /* INC_NRF24_L1_H_ */
