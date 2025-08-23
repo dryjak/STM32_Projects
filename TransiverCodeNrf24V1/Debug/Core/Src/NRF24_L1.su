@@ -5,3 +5,5 @@
 ../Core/Src/NRF24_L1.c:35:6:CE_Unselect	16	static
 ../Core/Src/NRF24_L1.c:42:6:WriteRegister	24	static
 ../Core/Src/NRF24_L1.c:60:6:WriteMultiRegister	32	static
+../Core/Src/NRF24_L1.c:77:9:ReadRegister	24	static
+../Core/Src/NRF24_L1.c:93:6:ReadMultipleRegister	24	static

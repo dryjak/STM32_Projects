@@ -73,3 +73,32 @@ void WriteMultiRegister(NRF24_t *NRF24_Module, uint8_t Register, uint8_t *Data, 
 	CS_Unselect(NRF24_Module);
 
 }
+
+uint8_t ReadRegister(NRF24_t *NRF24_Module, uint8_t Register)
+{
+	uint8_t Data = 0;
+	//Pull cs pin low to select the device
+	CS_Select(NRF24_Module);
+
+	HAL_SPI_Transmit(NRF24_Module->NRF24_SPI, &Register, 1, 1000);
+	HAL_SPI_Receive(NRF24_Module->NRF24_SPI, &Data, 1, 1000);
+
+	//Pull cs pin high to release the device
+	CS_Unselect(NRF24_Module);
+
+	return Data;
+}
+
+
+void ReadMultipleRegister(NRF24_t *NRF24_Module, uint8_t Register, uint8_t Size, uint8_t *Data)
+{
+	//Pull cs pin low to select the device
+	CS_Select(NRF24_Module);
+
+	HAL_SPI_Transmit(NRF24_Module->NRF24_SPI, &Register, 1, 1000);
+	HAL_SPI_Receive(NRF24_Module->NRF24_SPI, Data, Size, 1000);
+
+	//Pull cs pin high to release the device
+	CS_Unselect(NRF24_Module);
+
+}
