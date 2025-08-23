@@ -1,2 +1,4 @@
 ../Core/Src/NRF24_L1.c:9:6:InitNRF24	24	static
-../Core/Src/NRF24_L1.c:19:6:WriteRegister	16	static
+../Core/Src/NRF24_L1.c:18:6:CS_Select	16	static
+../Core/Src/NRF24_L1.c:23:6:CS_Unselect	16	static
+../Core/Src/NRF24_L1.c:28:6:WriteRegister	24	static
