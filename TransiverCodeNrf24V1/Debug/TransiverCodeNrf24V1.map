@@ -97,34 +97,37 @@ Discarded input sections
  .group         0x00000000        0xc ./Core/Src/NRF24_L1.o
  .group         0x00000000        0xc ./Core/Src/NRF24_L1.o
  .group         0x00000000        0xc ./Core/Src/NRF24_L1.o
+ .group         0x00000000        0xc ./Core/Src/NRF24_L1.o
  .text          0x00000000        0x0 ./Core/Src/NRF24_L1.o
  .data          0x00000000        0x0 ./Core/Src/NRF24_L1.o
  .bss           0x00000000        0x0 ./Core/Src/NRF24_L1.o
- .text.InitNRF24
-                0x00000000       0x3a ./Core/Src/NRF24_L1.o
  .text.CS_Select
                 0x00000000       0x20 ./Core/Src/NRF24_L1.o
  .text.CS_Unselect
                 0x00000000       0x20 ./Core/Src/NRF24_L1.o
- .text.CE_Select
+ .text.CE_Enable
                 0x00000000       0x20 ./Core/Src/NRF24_L1.o
- .text.CE_Unselect
+ .text.CE_Disable
                 0x00000000       0x20 ./Core/Src/NRF24_L1.o
- .text.WriteRegister
+ .text.Nrf24_WriteRegister
                 0x00000000       0x44 ./Core/Src/NRF24_L1.o
- .text.WriteMultiRegister
+ .text.Nrf24_WriteMultiRegister
                 0x00000000       0x56 ./Core/Src/NRF24_L1.o
- .text.ReadRegister
+ .text.Nrf24_ReadRegister
                 0x00000000       0x48 ./Core/Src/NRF24_L1.o
- .text.ReadMultipleRegister
+ .text.Nrf24_ReadMultipleRegister
                 0x00000000       0x4a ./Core/Src/NRF24_L1.o
- .debug_info    0x00000000      0xa9e ./Core/Src/NRF24_L1.o
- .debug_abbrev  0x00000000      0x1cb ./Core/Src/NRF24_L1.o
+ .text.Nrf24_SendCommand
+                0x00000000       0x30 ./Core/Src/NRF24_L1.o
+ .text.Nrf24_InitNRF24
+                0x00000000       0x82 ./Core/Src/NRF24_L1.o
+ .debug_info    0x00000000      0xad0 ./Core/Src/NRF24_L1.o
+ .debug_abbrev  0x00000000      0x1dc ./Core/Src/NRF24_L1.o
  .debug_aranges
-                0x00000000       0x60 ./Core/Src/NRF24_L1.o
+                0x00000000       0x68 ./Core/Src/NRF24_L1.o
  .debug_rnglists
-                0x00000000       0x43 ./Core/Src/NRF24_L1.o
- .debug_macro   0x00000000      0x1e8 ./Core/Src/NRF24_L1.o
+                0x00000000       0x4a ./Core/Src/NRF24_L1.o
+ .debug_macro   0x00000000      0x1ed ./Core/Src/NRF24_L1.o
  .debug_macro   0x00000000      0xad8 ./Core/Src/NRF24_L1.o
  .debug_macro   0x00000000      0x15b ./Core/Src/NRF24_L1.o
  .debug_macro   0x00000000       0x2e ./Core/Src/NRF24_L1.o
@@ -163,10 +166,11 @@ Discarded input sections
  .debug_macro   0x00000000       0xa6 ./Core/Src/NRF24_L1.o
  .debug_macro   0x00000000      0x358 ./Core/Src/NRF24_L1.o
  .debug_macro   0x00000000       0xa6 ./Core/Src/NRF24_L1.o
- .debug_line    0x00000000      0x788 ./Core/Src/NRF24_L1.o
- .debug_str     0x00000000    0xe487b ./Core/Src/NRF24_L1.o
+ .debug_macro   0x00000000       0xe8 ./Core/Src/NRF24_L1.o
+ .debug_line    0x00000000      0x7ad ./Core/Src/NRF24_L1.o
+ .debug_str     0x00000000    0xe4ad4 ./Core/Src/NRF24_L1.o
  .comment       0x00000000       0x44 ./Core/Src/NRF24_L1.o
- .debug_frame   0x00000000      0x158 ./Core/Src/NRF24_L1.o
+ .debug_frame   0x00000000      0x178 ./Core/Src/NRF24_L1.o
  .ARM.attributes
                 0x00000000       0x34 ./Core/Src/NRF24_L1.o
  .group         0x00000000        0xc ./Core/Src/main.o
