@@ -149,4 +149,20 @@ void Nrf24_TxMode(NRF24_t *NRF24_Module, uint8_t *Address, uint8_t channel)
 	CE_Enable(NRF24_Module);
 }
 
+uint8_t Nrf24_Transmit(NRF24_t *NRF24_Module, uint8_t Data, uint8_t Address)
+{
+	uint8_t CommandToSend = 0;
 
+	//select the device
+	CS_Select(NRF24_Module);
+
+	//payload command
+	CommandToSend = W_TX_PAYLOAD;
+	HAL_SPI_Transmit(NRF24_Module->NRF24_SPI, CommandToSend, 1, 100);
+	//send the payload
+	HAL_SPI_Transmit(NRF24_Module->NRF24_SPI, Data, 32, 1000);
+
+	//Unselect the device
+	CS_Unselect(NRF24_Module);
+
+}

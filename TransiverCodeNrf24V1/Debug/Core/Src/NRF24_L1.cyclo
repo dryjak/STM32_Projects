@@ -9,3 +9,4 @@
 ../Core/Src/NRF24_L1.c:96:6:Nrf24_SendCommand	1
 ../Core/Src/NRF24_L1.c:107:6:Nrf24_InitNRF24	1
 ../Core/Src/NRF24_L1.c:135:6:Nrf24_TxMode	1
+../Core/Src/NRF24_L1.c:152:9:Nrf24_Transmit	1
