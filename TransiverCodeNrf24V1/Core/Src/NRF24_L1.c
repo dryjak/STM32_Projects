@@ -149,7 +149,7 @@ void Nrf24_TxMode(NRF24_t *NRF24_Module, uint8_t *Address, uint8_t channel)
 	CE_Enable(NRF24_Module);
 }
 
-uint8_t Nrf24_Transmit(NRF24_t *NRF24_Module, uint8_t Data, uint8_t Address)
+uint8_t Nrf24_Transmit(NRF24_t *NRF24_Module, uint8_t *Data, uint8_t Address)
 {
 	uint8_t CommandToSend = 0;
 
@@ -158,11 +158,27 @@ uint8_t Nrf24_Transmit(NRF24_t *NRF24_Module, uint8_t Data, uint8_t Address)
 
 	//payload command
 	CommandToSend = W_TX_PAYLOAD;
-	HAL_SPI_Transmit(NRF24_Module->NRF24_SPI, CommandToSend, 1, 100);
+	HAL_SPI_Transmit(NRF24_Module->NRF24_SPI, &CommandToSend, 1, 100);
 	//send the payload
 	HAL_SPI_Transmit(NRF24_Module->NRF24_SPI, Data, 32, 1000);
 
 	//Unselect the device
 	CS_Unselect(NRF24_Module);
+
+	HAL_DeInit(1);
+
+	uint8_t FifoStatus = Nrf24_ReadRegister(NRF24_Module, FIFO_STATUS);
+
+	if(FifoStatus & (1<<4)) && (!(FifoStatus & (1<<3)))
+	{
+		CommandToSend = FLUSH_TX;
+		Nrf24_SendCommand(NRF24_Module, CommandToSend);
+
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
 
 }
