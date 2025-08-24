@@ -120,7 +120,7 @@ Discarded input sections
  .text.Nrf24_SendCommand
                 0x00000000       0x30 ./Core/Src/NRF24_L1.o
  .text.Nrf24_InitNRF24
-                0x00000000       0x82 ./Core/Src/NRF24_L1.o
+                0x00000000       0x94 ./Core/Src/NRF24_L1.o
  .debug_info    0x00000000      0xad0 ./Core/Src/NRF24_L1.o
  .debug_abbrev  0x00000000      0x1dc ./Core/Src/NRF24_L1.o
  .debug_aranges
@@ -167,7 +167,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x358 ./Core/Src/NRF24_L1.o
  .debug_macro   0x00000000       0xa6 ./Core/Src/NRF24_L1.o
  .debug_macro   0x00000000       0xe8 ./Core/Src/NRF24_L1.o
- .debug_line    0x00000000      0x7ad ./Core/Src/NRF24_L1.o
+ .debug_line    0x00000000      0x7b0 ./Core/Src/NRF24_L1.o
  .debug_str     0x00000000    0xe4ad4 ./Core/Src/NRF24_L1.o
  .comment       0x00000000       0x44 ./Core/Src/NRF24_L1.o
  .debug_frame   0x00000000      0x178 ./Core/Src/NRF24_L1.o
