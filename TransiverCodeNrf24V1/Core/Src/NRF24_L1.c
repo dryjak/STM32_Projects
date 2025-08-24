@@ -116,7 +116,7 @@ void Nrf24_InitNRF24(NRF24_t *NRF24_Module, GPIO_TypeDef *NRF24CE_Port, uint16_t
 
 	//dissable the chip before cofiguring the device
 	CE_Disable(NRF24_Module);
-	CS_Unselect(NRF24_Module);
+	//CS_Unselect(NRF24_Module);
 
 	Nrf24_WriteRegister(NRF24_Module, CONFIG, 0);			//will be configured later
 	Nrf24_WriteRegister(NRF24_Module, EN_AA, 0);			//No auto ack
@@ -128,7 +128,25 @@ void Nrf24_InitNRF24(NRF24_t *NRF24_Module, GPIO_TypeDef *NRF24CE_Port, uint16_t
 
 	//enabling the chip after configuration
 	CE_Enable(NRF24_Module);
-	CS_Select(NRF24_Module);
+	//CS_Select(NRF24_Module);
 }
 
 //Set up the TX mode
+void Nrf24_TxMode(NRF24_t *NRF24_Module, uint8_t *Address, uint8_t channel)
+{
+	//disable the chip before configuring the device
+	CE_Disable(NRF24_Module);
+	CS_Unselect(NRF24_Module);
+
+	Nrf24_WriteRegister(NRF24_Module, RF_CH, channel);
+	Nrf24_WriteMultiRegister(NRF24_Module, TX_ADDR, Address, 5);	//write the transmit adress
+
+	uint8_t Config = Nrf24_ReadRegister(NRF24_Module, CONFIG);
+	Config = Config | (1<<1);
+	Nrf24_WriteRegister(NRF24_Module, CONFIG, Config);
+
+	//enabling the chip after configuration
+	CE_Enable(NRF24_Module);
+}
+
+
