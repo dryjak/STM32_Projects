@@ -165,11 +165,11 @@ uint8_t Nrf24_Transmit(NRF24_t *NRF24_Module, uint8_t *Data, uint8_t Address)
 	//Unselect the device
 	CS_Unselect(NRF24_Module);
 
-	HAL_DeInit(1);
+	HAL_DeInit();
 
 	uint8_t FifoStatus = Nrf24_ReadRegister(NRF24_Module, FIFO_STATUS);
 
-	if(FifoStatus & (1<<4)) && (!(FifoStatus & (1<<3)))
+	if((FifoStatus & (1<<4)) && (!(FifoStatus & (1<<3))))
 	{
 		CommandToSend = FLUSH_TX;
 		Nrf24_SendCommand(NRF24_Module, CommandToSend);
