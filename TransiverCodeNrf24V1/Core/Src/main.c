@@ -45,6 +45,10 @@ UART_HandleTypeDef hlpuart1;
 SPI_HandleTypeDef hspi2;
 
 /* USER CODE BEGIN PV */
+NRF24_t NRF24;
+uint8_t TxAddress[] = {0xEE, 0xDD, 0xCC, 0xBB, 0xAA};
+uint8_t Data[] = "Test!";
+//uint8_t Data[] = {1,2,3};
 
 /* USER CODE END PV */
 
@@ -95,12 +99,21 @@ int main(void)
   MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
 
+  Nrf24_InitNRF24(&NRF24, NRF24_CE_GPIO_Port, NRF24_CE_Pin, NRF24_CSN_GPIO_Port, NRF24_CSN_Pin, &hspi2);
+
+  Nrf24_TxMode(&NRF24, TxAddress, 10);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  if(Nrf24_Transmit(&NRF24, Data, 10))
+	  {
+		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	  }
+
+	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
