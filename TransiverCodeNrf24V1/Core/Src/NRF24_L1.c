@@ -165,7 +165,7 @@ uint8_t Nrf24_Transmit(NRF24_t *NRF24_Module, uint8_t *Data, uint8_t Address)
 	//Unselect the device
 	CS_Unselect(NRF24_Module);
 
-	HAL_DeInit();
+	HAL_Delay(1);
 
 	uint8_t FifoStatus = Nrf24_ReadRegister(NRF24_Module, FIFO_STATUS);
 
@@ -176,9 +176,8 @@ uint8_t Nrf24_Transmit(NRF24_t *NRF24_Module, uint8_t *Data, uint8_t Address)
 
 		return 1;
 	}
-	else
-	{
-		return 0;
-	}
+
+	return 0;
+
 
 }
