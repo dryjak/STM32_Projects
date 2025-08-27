@@ -21,14 +21,14 @@ void CS_Unselect(NRF24_t *NRF24_Module)
 }
 void CE_Enable(NRF24_t *NRF24_Module)
 {
-	HAL_GPIO_WritePin(NRF24_Module->NRF24CE_Port, NRF24_Module->NRF24CE_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(NRF24_Module->NRF24CE_Port, NRF24_Module->NRF24CE_Pin, GPIO_PIN_SET);
 }
 void CE_Disable(NRF24_t *NRF24_Module)
 {
-	HAL_GPIO_WritePin(NRF24_Module->NRF24CE_Port, NRF24_Module->NRF24CE_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(NRF24_Module->NRF24CE_Port, NRF24_Module->NRF24CE_Pin, GPIO_PIN_RESET);
 }
 
-
+/*
 //write a single byte to a particular register
 void Nrf24_WriteRegister(NRF24_t *NRF24_Module, uint8_t Register, uint8_t Data)
 {
@@ -45,7 +45,7 @@ void Nrf24_WriteRegister(NRF24_t *NRF24_Module, uint8_t Register, uint8_t Data)
 	CS_Unselect(NRF24_Module);
 
 }
-
+*/
 
 //write multiple bytes to a particular register
 void Nrf24_WriteMultiRegister(NRF24_t *NRF24_Module, uint8_t Register, uint8_t *Data, uint8_t Size)
@@ -65,6 +65,18 @@ void Nrf24_WriteMultiRegister(NRF24_t *NRF24_Module, uint8_t Register, uint8_t *
 
 }
 
+
+void Nrf24_WriteRegister(NRF24_t *NRF24_Module, uint8_t reg, uint8_t data)
+{
+	uint8_t buff[2];
+	buff[0] = W_REGISTER | (REGISTER_MASK & reg);
+	buff[1] = data;
+
+	CS_Select(NRF24_Module);
+	HAL_SPI_Transmit(NRF24_Module->NRF24_SPI, buff, 2, 1000);
+	CS_Unselect(NRF24_Module);
+}
+/*
 uint8_t Nrf24_ReadRegister(NRF24_t *NRF24_Module, uint8_t Register)
 {
 	uint8_t Data = 0;
@@ -78,6 +90,20 @@ uint8_t Nrf24_ReadRegister(NRF24_t *NRF24_Module, uint8_t Register)
 	CS_Unselect(NRF24_Module);
 
 	return Data;
+}
+*/
+
+uint8_t Nrf24_ReadRegister(NRF24_t *NRF24_Module, uint8_t reg)
+{
+	uint8_t data = 0;
+	uint8_t cmd = R_REGISTER | (REGISTER_MASK & reg);
+
+	CS_Select(NRF24_Module);
+	HAL_SPI_Transmit(NRF24_Module->NRF24_SPI, &cmd, 1, 1000);
+	HAL_SPI_Receive(NRF24_Module->NRF24_SPI, &data, 1, 1000);
+	CS_Unselect(NRF24_Module);
+
+	return data;
 }
 
 
@@ -136,20 +162,21 @@ void Nrf24_TxMode(NRF24_t *NRF24_Module, uint8_t *Address, uint8_t channel)
 {
 	//disable the chip before configuring the device
 	CE_Disable(NRF24_Module);
-	CS_Unselect(NRF24_Module);
+	//CS_Unselect(NRF24_Module);
 
 	Nrf24_WriteRegister(NRF24_Module, RF_CH, channel);
 	Nrf24_WriteMultiRegister(NRF24_Module, TX_ADDR, Address, 5);	//write the transmit adress
 
 	uint8_t Config = Nrf24_ReadRegister(NRF24_Module, CONFIG);
 	Config = Config | (1<<1);
+	//Config = Config & (0xF2);    // write 0 in the PRIM_RX, and 1 in the PWR_UP, and all other bits are masked
 	Nrf24_WriteRegister(NRF24_Module, CONFIG, Config);
 
 	//enabling the chip after configuration
 	CE_Enable(NRF24_Module);
 }
 
-uint8_t Nrf24_Transmit(NRF24_t *NRF24_Module, uint8_t *Data, uint8_t Address)
+uint8_t Nrf24_Transmit(NRF24_t *NRF24_Module, uint8_t *Data)
 {
 	uint8_t CommandToSend = 0;
 
@@ -173,6 +200,7 @@ uint8_t Nrf24_Transmit(NRF24_t *NRF24_Module, uint8_t *Data, uint8_t Address)
 	{
 		CommandToSend = FLUSH_TX;
 		Nrf24_SendCommand(NRF24_Module, CommandToSend);
+
 
 		return 1;
 	}

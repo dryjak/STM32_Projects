@@ -68,7 +68,7 @@ typedef struct{
 void Nrf24_InitNRF24(NRF24_t *NRF24_Module, GPIO_TypeDef *NRF24CE_Port, uint16_t NRF24CE_Pin, GPIO_TypeDef *NRF24CSN_Port, uint16_t NRF24CSN_Pin, SPI_HandleTypeDef *hspi);
 
 void Nrf24_TxMode(NRF24_t *NRF24_Module, uint8_t *Address, uint8_t channel);
-uint8_t Nrf24_Transmit(NRF24_t *NRF24_Module, uint8_t *Data, uint8_t Address);
+uint8_t Nrf24_Transmit(NRF24_t *NRF24_Module, uint8_t *Data);
 
 
 //void Nrf24_WriteRegister(NRF24_t *NRF24_Module, uint8_t Register, uint8_t Data);

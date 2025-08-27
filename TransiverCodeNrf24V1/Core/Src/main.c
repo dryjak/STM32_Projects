@@ -47,7 +47,7 @@ SPI_HandleTypeDef hspi2;
 /* USER CODE BEGIN PV */
 NRF24_t NRF24;
 uint8_t TxAddress[] = {0xEE, 0xDD, 0xCC, 0xBB, 0xAA};
-uint8_t Data[] = "Test!";
+uint8_t Data[] = "Hello World! Jestem Kuba i mam ";
 //uint8_t Data[] = {1,2,3};
 
 /* USER CODE END PV */
@@ -108,7 +108,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(Nrf24_Transmit(&NRF24, Data, 10))
+	  if(Nrf24_Transmit(&NRF24, Data) == 1)
 	  {
 		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 	  }
