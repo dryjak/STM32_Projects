@@ -15,15 +15,15 @@
 MotorStatus_t Motor_SetRideParameters(Motor_t *Motor, uint8_t PWM, uint8_t Dir)
 {
 	//making sure PWM is in range from 0 to 100
-	if (PWM < 0)
-	{
-		Motor->MotorPWM = -1 * PWM;
-	}
+
 	if (PWM > 100)
 	{
 		Motor->MotorPWM = 100;
 	}
+	else
+	{
 	Motor->MotorPWM = PWM;
+	}
 
 	//setting direction
 	if (Dir == 1) 	// Przód

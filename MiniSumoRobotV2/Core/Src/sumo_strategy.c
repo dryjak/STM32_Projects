@@ -9,8 +9,8 @@
 
 SumoState CurrentState = STATE_SEARCH;
 
-uint16_t DistanceFilteredValueL;
-uint16_t DistanceFilteredValueR;
+uint16_t DistanceFilteredVoltageL;
+uint16_t DistanceFilteredVoltageR;
 float alpha = 0.3;
 
 

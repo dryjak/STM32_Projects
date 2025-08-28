@@ -51,12 +51,13 @@
 /* USER CODE BEGIN PV */
 uint16_t AdcValues[3][2];
 uint8_t Mean = 3;
-uint16_t MeanL, MeanR;
+uint16_t MeanL = 0, MeanR = 0;
 
 uint16_t *SharpPointerL;
 uint16_t *SharpPointerR;
 //sensors
-volatile float SharpVoltageL;
+float SharpVoltageL;
+float FilteredVoltageL = 0;
 
 
 //MotorLVariablesR
@@ -76,6 +77,7 @@ SumoSensors_t SumoSensors;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
+void MeanValue(uint16_t Values[3][2], uint8_t Mean, uint16_t *MeanL, uint16_t *MeanR);
 
 /* USER CODE END PFP */
 
@@ -112,7 +114,7 @@ Motor_Init(&MotorL, &htim1, TIM_CHANNEL_2, MotorPwmR, MotorLDir1_GPIO_Port, Moto
 //initialize motors to streategy
 Sumo_InitMotors(&SumoMotors, &MotorL, &MotorR);
 //initialize sensors to sumo strategy
-Sumo_InitDistanceSensors(&SumoSensors, SharpPointerL , SharpPointerR);
+Sumo_InitDistanceSensors(&SumoSensors, &MeanL , &MeanR);
 
 
 
@@ -143,6 +145,8 @@ Sumo_InitDistanceSensors(&SumoSensors, SharpPointerL , SharpPointerR);
   {
 
 	  //mean value from adc values
+	    MeanValue(AdcValues, Mean, &MeanL, &MeanR);
+	  /*
 	  uint32_t MeanXtmp = 0;
 	  uint32_t MeanYtmp = 0;
 	  	  for(uint8_t i = 0; i < 3; i++)
@@ -152,12 +156,11 @@ Sumo_InitDistanceSensors(&SumoSensors, SharpPointerL , SharpPointerR);
 	  	  }
 	  MeanL = MeanXtmp / 3;
 	  MeanR = MeanYtmp / 3;
+	*/
 
-	  //MeanValue(AdcValues, Mean, &MeanL, &MeanR);
-
-
-
-	  //AdcToVoltage(SharpPointerL, &SharpVoltageL);
+	  //Calculating voltage from mean value from adc sensors
+	  AdcToVoltage(&MeanL, &SharpVoltageL);
+	  IIRFilter(0.3, SharpVoltageL, &FilteredVoltageL);
 
     /* USER CODE END WHILE */
 
@@ -208,7 +211,19 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void MeanValue(uint16_t Values[3][2], uint8_t Mean, uint16_t *MeanL, uint16_t *MeanR)
+{
+    uint32_t TmpL = 0, TmpR = 0; // używamy 32-bit aby uniknąć przepełnienia
+    uint8_t i;
 
+    for(i = 0; i < Mean; i++)
+    {
+        TmpL += Values[i][0];  // lewy czujnik
+        TmpR += Values[i][1];  // prawy czujnik
+    }
+    *MeanL = TmpL / Mean;
+    *MeanR = TmpR / Mean;
+}
 
 /* USER CODE END 4 */
 
