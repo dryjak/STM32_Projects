@@ -106,12 +106,15 @@ void UpdateState(SumoState *CurrentState, SumoMotors_t *SumoMotors, SumoSensors_
 		break;
 	case STATE_ATTACK:
 		SumoAtack(SumoMotors);
+        *CurrentState = STATE_SEARCH;
 		break;
 	case STATE_TURN_LEFT:
 		Sumo_SearchLeft(SumoMotors);
+        *CurrentState = STATE_SEARCH;
 		break;
 	case STATE_TURN_RIGHT:
 		Sumo_SearchRight(SumoMotors);
+        *CurrentState = STATE_SEARCH;
 		break;
 
 	}
