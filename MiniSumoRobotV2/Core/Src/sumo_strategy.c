@@ -82,14 +82,31 @@ void Sumo_Stop(SumoMotors_t *SumoMotors)
 	Motor_Ride(SumoMotors->MotorR);
 }
 
-//void UpdateState(SumoState CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t SumoSensors)
-//{
-//	if (SumoSensors->DistanceSensorL)
-//	{
-//		CurrentState = STATE_TURN_LEFT;
-//	}
-	//do zrobienia juz z wykorzystaniem sensorów więc najpierw trzeba poczekać na przesylkę i nauczyć się adc
-//}
+void UpdateState(SumoState *CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t *SumoSensors)
+{
+	//do ustalenia eksperymentalnie napięcie dla odpowiedniej odległości wykrycia
+	float VoltageTreshold = 1.0f;
+
+
+	switch (*CurrentState)
+	{
+	case STATE_SEARCH:
+		if((SumoSensors->DistanceSensorLVoltageFiltered > VoltageTreshold) && (SumoSensors->DistanceSensorRVoltageFiltered) > VoltageTreshold)
+		{
+			*CurrentState = STATE_ATTACK;
+		}
+		else if((SumoSensors->DistanceSensorLVoltageFiltered > VoltageTreshold))
+		{
+			*CurrentState = STATE_TURN_LEFT;
+		}
+		else if(SumoSensors->DistanceSensorRVoltageFiltered > VoltageTreshold)
+		{
+			*CurrentState = STATE_TURN_RIGHT;
+		}
+		break;
+	}
+//do zrobienia juz z wykorzystaniem sensorów więc najpierw trzeba poczekać na przesylkę i nauczyć się adc
+}
 
 
 

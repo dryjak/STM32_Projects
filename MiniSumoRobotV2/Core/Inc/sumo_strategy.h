@@ -61,7 +61,7 @@ void Sumo_Stop(SumoMotors_t *SumoMotors);
 void AdcToVoltage(uint16_t *AdcValue, float *Voltage);
 void IIRFilter(float alpha, float input, float *filtered_value);
 
-void UpdateState(SumoState CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t *SumoSensors);
+void UpdateState(SumoState *CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t *SumoSensors);
 
 
 #endif /* INC_SUMO_STRATEGY_H_ */
