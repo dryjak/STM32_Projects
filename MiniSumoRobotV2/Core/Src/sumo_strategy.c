@@ -109,21 +109,24 @@ void UpdateState(SumoState *CurrentState, SumoMotors_t *SumoMotors, SumoSensors_
 			Sumo_SearchRight(SumoMotors);
 		}
 		break;
+
 	case STATE_ATTACK:
 		SumoAtack(SumoMotors);
         *CurrentState = STATE_SEARCH;
 		break;
+
 	case STATE_TURN_LEFT:
 		Sumo_SearchLeft(SumoMotors);
         *CurrentState = STATE_SEARCH;
 		break;
+
 	case STATE_TURN_RIGHT:
 		Sumo_SearchRight(SumoMotors);
         *CurrentState = STATE_SEARCH;
 		break;
 
 	}
-//do zrobienia juz z wykorzystaniem sensorów więc najpierw trzeba poczekać na przesylkę i nauczyć się adc
+//TO DO1: obroty robota w stronę zależną gdzie zniknął przeciwnik
 }
 
 
