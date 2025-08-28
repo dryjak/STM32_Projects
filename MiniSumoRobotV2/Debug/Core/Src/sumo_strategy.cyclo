@@ -1,5 +1,6 @@
 ../Core/Src/sumo_strategy.c:18:6:AdcToVoltage	1
 ../Core/Src/sumo_strategy.c:23:6:IIRFilter	1
+../Core/Src/sumo_strategy.c:29:6:Sumo_UpdateSensors	1
 ../Core/Src/sumo_strategy.c:41:6:SumoAtack	1
 ../Core/Src/sumo_strategy.c:49:6:Sumo_SearchRight	1
 ../Core/Src/sumo_strategy.c:56:6:Sumo_SearchLeft	1

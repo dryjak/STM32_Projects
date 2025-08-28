@@ -25,19 +25,19 @@ void IIRFilter(float alpha, float input, float *filtered_value)
     *filtered_value = alpha * (input) + (1.0f - alpha) * (*filtered_value);
 }
 
-/*
+
 void Sumo_UpdateSensors(SumoSensors_t *SumoSensors)
 {
     // Przelicz na napięcie
-	AdcToVoltage(&SumoSensors->DistanceSensorL, &VoltageL);
-	AdcToVoltage(&SumoSensors->DistanceSensorR, &VoltageR);
+	AdcToVoltage(SumoSensors->DistanceSensorL, &SumoSensors->DistanceSensorLVoltage);
+	AdcToVoltage(SumoSensors->DistanceSensorR, &SumoSensors->DistanceSensorRVoltage);
 
 
     // Zastosuj filtr IIR
-    IIRFilter(alpha, VoltageL, &FilteredVoltageL);
-    IIRFilter(alpha, VoltageR, &FilteredVoltageR);
+	IIRFilter(alpha, SumoSensors->DistanceSensorLVoltage, &SumoSensors->DistanceSensorLVoltageFiltered);
+	IIRFilter(alpha, SumoSensors->DistanceSensorRVoltage, &SumoSensors->DistanceSensorRVoltageFiltered);
 }
-*/
+
 void SumoAtack(SumoMotors_t *SumoMotors)
 {
 	Motor_SetRideParameters(SumoMotors->MotorL, 100, 1);  // Przód
