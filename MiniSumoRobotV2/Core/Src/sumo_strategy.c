@@ -103,6 +103,11 @@ void UpdateState(SumoState *CurrentState, SumoMotors_t *SumoMotors, SumoSensors_
 		{
 			*CurrentState = STATE_TURN_RIGHT;
 		}
+		else
+		{
+			//jeśli nie znajdzie przeciwnika dalej się kręci
+			Sumo_SearchRight(SumoMotors);
+		}
 		break;
 	case STATE_ATTACK:
 		SumoAtack(SumoMotors);
