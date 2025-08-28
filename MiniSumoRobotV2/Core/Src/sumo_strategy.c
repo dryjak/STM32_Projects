@@ -127,6 +127,7 @@ void UpdateState(SumoState *CurrentState, SumoMotors_t *SumoMotors, SumoSensors_
 
 	}
 //TO DO1: obroty robota w stronę zależną gdzie zniknął przeciwnik
+//TO DO2: w ktorą stronę obracać się na początku rundy
 }
 
 
