@@ -104,6 +104,13 @@ void UpdateState(SumoState *CurrentState, SumoMotors_t *SumoMotors, SumoSensors_
 			*CurrentState = STATE_TURN_RIGHT;
 		}
 		break;
+	case STATE_ATTACK:
+		SumoAtack(SumoMotors);
+		break;
+	case STATE_TURN_LEFT:
+
+		break;
+
 	}
 //do zrobienia juz z wykorzystaniem sensorów więc najpierw trzeba poczekać na przesylkę i nauczyć się adc
 }
