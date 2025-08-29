@@ -145,7 +145,7 @@ Sumo_InitDistanceSensors(&SumoSensors, &MeanL , &MeanR);
   {
 
 	  //mean value from adc values
-	    MeanValue(AdcValues, Mean, &MeanL, &MeanR);
+	    //MeanValue(AdcValues, Mean, &MeanL, &MeanR);
 	  /*
 	  uint32_t MeanXtmp = 0;
 	  uint32_t MeanYtmp = 0;
@@ -159,9 +159,14 @@ Sumo_InitDistanceSensors(&SumoSensors, &MeanL , &MeanR);
 	*/
 
 	  //Calculating voltage from mean value from adc sensors
-	  AdcToVoltage(&MeanL, &SharpVoltageL);
-	  IIRFilter(0.3, SharpVoltageL, &FilteredVoltageL);
+	 // AdcToVoltage(&MeanL, &SharpVoltageL);
+	 // IIRFilter(0.3, SharpVoltageL, &FilteredVoltageL);
 
+	  //testing motors
+	  Motor_SetRideParameters(&MotorR, 50, 1);
+	  Motor_SetRideParameters(&MotorL, 50, 0);
+	  Motor_Ride(&MotorR);
+	  Motor_Ride(&MotorL);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
