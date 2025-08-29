@@ -19,7 +19,7 @@ typedef enum{
 	STATE_SEARCH,
 	STATE_TURN_LEFT,
 	STATE_TURN_RIGHT
-}SumoState;
+}SumoState_t;
 
 typedef struct{
 	Motor_t *MotorL;
@@ -58,10 +58,11 @@ void Sumo_TurnSlightLeft(SumoMotors_t *SumoMotors);
 void Sumo_Stop(SumoMotors_t *SumoMotors);
 
 //Sensors
+void Sumo_UpdateSensors(SumoSensors_t *SumoSensors);
 void AdcToVoltage(uint16_t *AdcValue, float *Voltage);
 void IIRFilter(float alpha, float input, float *filtered_value);
 
-void UpdateState(SumoState *CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t *SumoSensors);
+void Sumo_UpdateState(SumoState_t *CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t *SumoSensors);
 
 
 #endif /* INC_SUMO_STRATEGY_H_ */

@@ -72,6 +72,7 @@ uint16_t MotorPwmL;
 SumoMotors_t SumoMotors;
 SumoSensors_t SumoSensors;
 
+SumoState_t SumoState;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -145,7 +146,7 @@ Sumo_InitDistanceSensors(&SumoSensors, &MeanL , &MeanR);
   {
 
 	  //mean value from adc values
-	    //MeanValue(AdcValues, Mean, &MeanL, &MeanR);
+	  MeanValue(AdcValues, Mean, &MeanL, &MeanR);
 	  /*
 	  uint32_t MeanXtmp = 0;
 	  uint32_t MeanYtmp = 0;
@@ -158,15 +159,24 @@ Sumo_InitDistanceSensors(&SumoSensors, &MeanL , &MeanR);
 	  MeanR = MeanYtmp / 3;
 	*/
 
-	  //Calculating voltage from mean value from adc sensors
-	 // AdcToVoltage(&MeanL, &SharpVoltageL);
-	 // IIRFilter(0.3, SharpVoltageL, &FilteredVoltageL);
 
+	  //Calculating voltage from mean value from adc sensors
+	 //AdcToVoltage(&MeanL, &SharpVoltageL);
+	 //IIRFilter(0.3, SharpVoltageL, &FilteredVoltageL);
+
+	  //Updating sensors parameters
+	  Sumo_UpdateSensors(&SumoSensors);
+	  //Updating state of the sumo robot
+	  Sumo_UpdateState(&SumoState, &SumoMotors, &SumoSensors);
+
+	  /*
 	  //testing motors
 	  Motor_SetRideParameters(&MotorR, 50, 1);
 	  Motor_SetRideParameters(&MotorL, 50, 0);
 	  Motor_Ride(&MotorR);
 	  Motor_Ride(&MotorL);
+	  */
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

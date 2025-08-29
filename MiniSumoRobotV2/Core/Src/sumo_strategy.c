@@ -7,7 +7,7 @@
 #include "sumo_strategy.h"
 #include "main.h"
 
-SumoState CurrentState = STATE_SEARCH;
+SumoState_t CurrentState = STATE_SEARCH;
 
 uint16_t DistanceFilteredVoltageL;
 uint16_t DistanceFilteredVoltageR;
@@ -82,7 +82,7 @@ void Sumo_Stop(SumoMotors_t *SumoMotors)
 	Motor_Ride(SumoMotors->MotorR);
 }
 
-void UpdateState(SumoState *CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t *SumoSensors)
+void Sumo_UpdateState(SumoState_t *CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t *SumoSensors)
 {
 	//do ustalenia eksperymentalnie napięcie dla odpowiedniej odległości wykrycia
 	float VoltageTreshold = 1.0f;
