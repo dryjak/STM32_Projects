@@ -106,7 +106,8 @@ void Sumo_UpdateState(SumoState_t *CurrentState, SumoMotors_t *SumoMotors, SumoS
 		else
 		{
 			//jeśli nie znajdzie przeciwnika dalej się kręci
-			Sumo_SearchRight(SumoMotors);
+			//Sumo_SearchRight(SumoMotors);
+			Sumo_Stop(SumoMotors);
 		}
 		break;
 
