@@ -1789,26 +1789,29 @@ void SumoAtack(SumoMotors_t *SumoMotors)
  8000cec:	46bd      	mov	sp, r7
  8000cee:	bd80      	pop	{r7, pc}
 
-08000cf0 <Sumo_SearchRight>:
-
-void Sumo_SearchRight(SumoMotors_t *SumoMotors)
+08000cf0 <Sumo_Stop>:
+	Motor_SetRideParameters(SumoMotors->MotorR, 70, Forward);   // Prawy do przodu
+	Motor_Ride(SumoMotors->MotorL);
+	Motor_Ride(SumoMotors->MotorR);
+}
+void Sumo_Stop(SumoMotors_t *SumoMotors)
 {
  8000cf0:	b580      	push	{r7, lr}
  8000cf2:	b082      	sub	sp, #8
  8000cf4:	af00      	add	r7, sp, #0
  8000cf6:	6078      	str	r0, [r7, #4]
-	Motor_SetRideParameters(SumoMotors->MotorL, 60, Forward);   // Lewy do przodu
+	Motor_SetRideParameters(SumoMotors->MotorL, 0, Backward);   // stop
  8000cf8:	687b      	ldr	r3, [r7, #4]
  8000cfa:	681b      	ldr	r3, [r3, #0]
- 8000cfc:	2201      	movs	r2, #1
- 8000cfe:	213c      	movs	r1, #60	@ 0x3c
+ 8000cfc:	2200      	movs	r2, #0
+ 8000cfe:	2100      	movs	r1, #0
  8000d00:	4618      	mov	r0, r3
  8000d02:	f7ff fe61 	bl	80009c8 <Motor_SetRideParameters>
-	Motor_SetRideParameters(SumoMotors->MotorR, 60, Backward);   // Prawy do tyłu
+	Motor_SetRideParameters(SumoMotors->MotorR, 0, Backward);   // stop
  8000d06:	687b      	ldr	r3, [r7, #4]
  8000d08:	685b      	ldr	r3, [r3, #4]
  8000d0a:	2200      	movs	r2, #0
- 8000d0c:	213c      	movs	r1, #60	@ 0x3c
+ 8000d0c:	2100      	movs	r1, #0
  8000d0e:	4618      	mov	r0, r3
  8000d10:	f7ff fe5a 	bl	80009c8 <Motor_SetRideParameters>
 	Motor_Ride(SumoMotors->MotorL);
@@ -1827,25 +1830,25 @@ void Sumo_SearchRight(SumoMotors_t *SumoMotors)
  8000d2c:	46bd      	mov	sp, r7
  8000d2e:	bd80      	pop	{r7, pc}
 
-08000d30 <Sumo_SearchLeft>:
-void Sumo_SearchLeft(SumoMotors_t *SumoMotors)
+08000d30 <Sumo_LeftMotor>:
+void Sumo_LeftMotor(SumoMotors_t *SumoMotors)
 {
  8000d30:	b580      	push	{r7, lr}
  8000d32:	b082      	sub	sp, #8
  8000d34:	af00      	add	r7, sp, #0
  8000d36:	6078      	str	r0, [r7, #4]
-	Motor_SetRideParameters(SumoMotors->MotorL, 60, Backward);   // Lewy do przodu
+	Motor_SetRideParameters(SumoMotors->MotorL, 50, Backward);   // Lewy do przodu
  8000d38:	687b      	ldr	r3, [r7, #4]
  8000d3a:	681b      	ldr	r3, [r3, #0]
  8000d3c:	2200      	movs	r2, #0
- 8000d3e:	213c      	movs	r1, #60	@ 0x3c
+ 8000d3e:	2132      	movs	r1, #50	@ 0x32
  8000d40:	4618      	mov	r0, r3
  8000d42:	f7ff fe41 	bl	80009c8 <Motor_SetRideParameters>
-	Motor_SetRideParameters(SumoMotors->MotorR, 60, Forward);   // Prawy do tyłu
+	Motor_SetRideParameters(SumoMotors->MotorR, 0, Forward);   // Prawy stop
  8000d46:	687b      	ldr	r3, [r7, #4]
  8000d48:	685b      	ldr	r3, [r3, #4]
  8000d4a:	2201      	movs	r2, #1
- 8000d4c:	213c      	movs	r1, #60	@ 0x3c
+ 8000d4c:	2100      	movs	r1, #0
  8000d4e:	4618      	mov	r0, r3
  8000d50:	f7ff fe3a 	bl	80009c8 <Motor_SetRideParameters>
 	Motor_Ride(SumoMotors->MotorL);
@@ -1864,29 +1867,25 @@ void Sumo_SearchLeft(SumoMotors_t *SumoMotors)
  8000d6c:	46bd      	mov	sp, r7
  8000d6e:	bd80      	pop	{r7, pc}
 
-08000d70 <Sumo_Stop>:
-	Motor_SetRideParameters(SumoMotors->MotorR, 70, Forward);   // Prawy do przodu
-	Motor_Ride(SumoMotors->MotorL);
-	Motor_Ride(SumoMotors->MotorR);
-}
-void Sumo_Stop(SumoMotors_t *SumoMotors)
+08000d70 <Sumo_RightMotor>:
+void Sumo_RightMotor(SumoMotors_t *SumoMotors)
 {
  8000d70:	b580      	push	{r7, lr}
  8000d72:	b082      	sub	sp, #8
  8000d74:	af00      	add	r7, sp, #0
  8000d76:	6078      	str	r0, [r7, #4]
-	Motor_SetRideParameters(SumoMotors->MotorL, 0, Backward);   // stop
+	Motor_SetRideParameters(SumoMotors->MotorL, 0, Backward);   // Lewy stop
  8000d78:	687b      	ldr	r3, [r7, #4]
  8000d7a:	681b      	ldr	r3, [r3, #0]
  8000d7c:	2200      	movs	r2, #0
  8000d7e:	2100      	movs	r1, #0
  8000d80:	4618      	mov	r0, r3
  8000d82:	f7ff fe21 	bl	80009c8 <Motor_SetRideParameters>
-	Motor_SetRideParameters(SumoMotors->MotorR, 0, Backward);   // stop
+	Motor_SetRideParameters(SumoMotors->MotorR, 50, Forward);   // Prawy do przodu
  8000d86:	687b      	ldr	r3, [r7, #4]
  8000d88:	685b      	ldr	r3, [r3, #4]
- 8000d8a:	2200      	movs	r2, #0
- 8000d8c:	2100      	movs	r1, #0
+ 8000d8a:	2201      	movs	r2, #1
+ 8000d8c:	2132      	movs	r1, #50	@ 0x32
  8000d8e:	4618      	mov	r0, r3
  8000d90:	f7ff fe1a 	bl	80009c8 <Motor_SetRideParameters>
 	Motor_Ride(SumoMotors->MotorL);
@@ -1906,8 +1905,6 @@ void Sumo_Stop(SumoMotors_t *SumoMotors)
  8000dae:	bd80      	pop	{r7, pc}
 
 08000db0 <Sumo_UpdateState>:
-	Motor_Ride(SumoMotors->MotorR);
-}
 
 
 void Sumo_UpdateState(SumoState_t *CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t *SumoSensors)
@@ -1990,7 +1987,7 @@ void Sumo_UpdateState(SumoState_t *CurrentState, SumoMotors_t *SumoMotors, SumoS
  8000e46:	e018      	b.n	8000e7a <Sumo_UpdateState+0xca>
 			Sumo_Stop(SumoMotors);
  8000e48:	68b8      	ldr	r0, [r7, #8]
- 8000e4a:	f7ff ff91 	bl	8000d70 <Sumo_Stop>
+ 8000e4a:	f7ff ff51 	bl	8000cf0 <Sumo_Stop>
 		break;
  8000e4e:	e014      	b.n	8000e7a <Sumo_UpdateState+0xca>
 
@@ -2006,9 +2003,10 @@ void Sumo_UpdateState(SumoState_t *CurrentState, SumoMotors_t *SumoMotors, SumoS
  8000e5c:	e00d      	b.n	8000e7a <Sumo_UpdateState+0xca>
 
 	case STATE_TURN_LEFT:
-		Sumo_SearchLeft(SumoMotors);
+		Sumo_LeftMotor(SumoMotors);
  8000e5e:	68b8      	ldr	r0, [r7, #8]
- 8000e60:	f7ff ff66 	bl	8000d30 <Sumo_SearchLeft>
+ 8000e60:	f7ff ff66 	bl	8000d30 <Sumo_LeftMotor>
+		//Sumo_SearchLeft(SumoMotors);
         *CurrentState = STATE_SEARCH;
  8000e64:	68fb      	ldr	r3, [r7, #12]
  8000e66:	2201      	movs	r2, #1
@@ -2017,9 +2015,10 @@ void Sumo_UpdateState(SumoState_t *CurrentState, SumoMotors_t *SumoMotors, SumoS
  8000e6a:	e006      	b.n	8000e7a <Sumo_UpdateState+0xca>
 
 	case STATE_TURN_RIGHT:
-		Sumo_SearchRight(SumoMotors);
+		Sumo_RightMotor(SumoMotors);
  8000e6c:	68b8      	ldr	r0, [r7, #8]
- 8000e6e:	f7ff ff3f 	bl	8000cf0 <Sumo_SearchRight>
+ 8000e6e:	f7ff ff7f 	bl	8000d70 <Sumo_RightMotor>
+		//Sumo_SearchRight(SumoMotors);
         *CurrentState = STATE_SEARCH;
  8000e72:	68fb      	ldr	r3, [r7, #12]
  8000e74:	2201      	movs	r2, #1

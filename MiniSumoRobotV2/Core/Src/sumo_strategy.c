@@ -135,12 +135,14 @@ void Sumo_UpdateState(SumoState_t *CurrentState, SumoMotors_t *SumoMotors, SumoS
 		break;
 
 	case STATE_TURN_LEFT:
-		Sumo_SearchLeft(SumoMotors);
+		Sumo_LeftMotor(SumoMotors);
+		//Sumo_SearchLeft(SumoMotors);
         *CurrentState = STATE_SEARCH;
 		break;
 
 	case STATE_TURN_RIGHT:
-		Sumo_SearchRight(SumoMotors);
+		Sumo_RightMotor(SumoMotors);
+		//Sumo_SearchRight(SumoMotors);
         *CurrentState = STATE_SEARCH;
 		break;
 

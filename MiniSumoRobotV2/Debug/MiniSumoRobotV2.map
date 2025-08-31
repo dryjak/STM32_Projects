@@ -715,13 +715,13 @@ Discarded input sections
                 0x00000000        0x2 ./Core/Src/sumo_strategy.o
  .bss.DistanceFilteredVoltageR
                 0x00000000        0x2 ./Core/Src/sumo_strategy.o
+ .text.Sumo_SearchRight
+                0x00000000       0x40 ./Core/Src/sumo_strategy.o
+ .text.Sumo_SearchLeft
+                0x00000000       0x40 ./Core/Src/sumo_strategy.o
  .text.Sumo_TurnSlightRight
                 0x00000000       0x40 ./Core/Src/sumo_strategy.o
  .text.Sumo_TurnSlightLeft
-                0x00000000       0x40 ./Core/Src/sumo_strategy.o
- .text.Sumo_LeftMotor
-                0x00000000       0x40 ./Core/Src/sumo_strategy.o
- .text.Sumo_RightMotor
                 0x00000000       0x40 ./Core/Src/sumo_strategy.o
  .debug_macro   0x00000000      0xad8 ./Core/Src/sumo_strategy.o
  .debug_macro   0x00000000      0x2a1 ./Core/Src/sumo_strategy.o
@@ -4180,15 +4180,15 @@ LOAD /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.
  .text.SumoAtack
                 0x08000cb0       0x40 ./Core/Src/sumo_strategy.o
                 0x08000cb0                SumoAtack
- .text.Sumo_SearchRight
-                0x08000cf0       0x40 ./Core/Src/sumo_strategy.o
-                0x08000cf0                Sumo_SearchRight
- .text.Sumo_SearchLeft
-                0x08000d30       0x40 ./Core/Src/sumo_strategy.o
-                0x08000d30                Sumo_SearchLeft
  .text.Sumo_Stop
+                0x08000cf0       0x40 ./Core/Src/sumo_strategy.o
+                0x08000cf0                Sumo_Stop
+ .text.Sumo_LeftMotor
+                0x08000d30       0x40 ./Core/Src/sumo_strategy.o
+                0x08000d30                Sumo_LeftMotor
+ .text.Sumo_RightMotor
                 0x08000d70       0x40 ./Core/Src/sumo_strategy.o
-                0x08000d70                Sumo_Stop
+                0x08000d70                Sumo_RightMotor
  .text.Sumo_UpdateState
                 0x08000db0       0xd4 ./Core/Src/sumo_strategy.o
                 0x08000db0                Sumo_UpdateState

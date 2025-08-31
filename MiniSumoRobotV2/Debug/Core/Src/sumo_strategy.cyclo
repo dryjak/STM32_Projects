@@ -10,5 +10,5 @@
 ../Core/Src/sumo_strategy.c:87:6:Sumo_LeftMotor	1
 ../Core/Src/sumo_strategy.c:94:6:Sumo_RightMotor	1
 ../Core/Src/sumo_strategy.c:103:6:Sumo_UpdateState	9
-../Core/Src/sumo_strategy.c:155:6:Sumo_InitMotors	1
-../Core/Src/sumo_strategy.c:161:6:Sumo_InitDistanceSensors	1
+../Core/Src/sumo_strategy.c:157:6:Sumo_InitMotors	1
+../Core/Src/sumo_strategy.c:163:6:Sumo_InitDistanceSensors	1
