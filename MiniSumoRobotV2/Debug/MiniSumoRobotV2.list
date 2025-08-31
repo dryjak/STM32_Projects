@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00005014  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0001039d  00000000  00000000  00005044  2**0
+ 12 .debug_info   000103c0  00000000  00000000  00005044  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00002856  00000000  00000000  000153e1  2**0
+ 13 .debug_abbrev 00002856  00000000  00000000  00015404  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000e48  00000000  00000000  00017c38  2**3
+ 14 .debug_aranges 00000e50  00000000  00000000  00017c60  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00000b0d  00000000  00000000  00018a80  2**0
+ 15 .debug_rnglists 00000b13  00000000  00000000  00018ab0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00017ab4  00000000  00000000  0001958d  2**0
+ 16 .debug_macro  00017ab4  00000000  00000000  000195c3  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00011484  00000000  00000000  00031041  2**0
+ 17 .debug_line   0001149f  00000000  00000000  00031077  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00096ae2  00000000  00000000  000424c5  2**0
+ 18 .debug_str    00096aeb  00000000  00000000  00042516  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000d8fa7  2**0
+ 19 .comment      00000043  00000000  00000000  000d9001  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00003a90  00000000  00000000  000d8fec  2**2
+ 20 .debug_frame  00003ab4  00000000  00000000  000d9044  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000068  00000000  00000000  000dca7c  2**0
+ 21 .debug_line_str 00000068  00000000  00000000  000dcaf8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1865,7 +1865,7 @@ void Sumo_SearchLeft(SumoMotors_t *SumoMotors)
  8000d6e:	bd80      	pop	{r7, pc}
 
 08000d70 <Sumo_Stop>:
-	Motor_SetRideParameters(SumoMotors->MotorR, 70, 1);   // Prawy do tyłu
+	Motor_SetRideParameters(SumoMotors->MotorR, 70, 1);   // Prawy do przodu
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
@@ -1875,17 +1875,17 @@ void Sumo_Stop(SumoMotors_t *SumoMotors)
  8000d72:	b082      	sub	sp, #8
  8000d74:	af00      	add	r7, sp, #0
  8000d76:	6078      	str	r0, [r7, #4]
-	Motor_SetRideParameters(SumoMotors->MotorL, 0, 0);   // Lewy do przodu
+	Motor_SetRideParameters(SumoMotors->MotorL, 0, 0);   // stop
  8000d78:	687b      	ldr	r3, [r7, #4]
  8000d7a:	681b      	ldr	r3, [r3, #0]
  8000d7c:	2200      	movs	r2, #0
  8000d7e:	2100      	movs	r1, #0
  8000d80:	4618      	mov	r0, r3
  8000d82:	f7ff fe21 	bl	80009c8 <Motor_SetRideParameters>
-	Motor_SetRideParameters(SumoMotors->MotorR, 0, 1);   // Prawy do tyłu
+	Motor_SetRideParameters(SumoMotors->MotorR, 0, 0);   // stop
  8000d86:	687b      	ldr	r3, [r7, #4]
  8000d88:	685b      	ldr	r3, [r3, #4]
- 8000d8a:	2201      	movs	r2, #1
+ 8000d8a:	2200      	movs	r2, #0
  8000d8c:	2100      	movs	r1, #0
  8000d8e:	4618      	mov	r0, r3
  8000d90:	f7ff fe1a 	bl	80009c8 <Motor_SetRideParameters>
@@ -1906,6 +1906,9 @@ void Sumo_Stop(SumoMotors_t *SumoMotors)
  8000dae:	bd80      	pop	{r7, pc}
 
 08000db0 <Sumo_UpdateState>:
+	Motor_Ride(SumoMotors->MotorL);
+	Motor_Ride(SumoMotors->MotorR);
+}
 
 void Sumo_UpdateState(SumoState_t *CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t *SumoSensors)
 {

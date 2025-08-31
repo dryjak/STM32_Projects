@@ -7,6 +7,7 @@
 ../Core/Src/sumo_strategy.c:63:6:Sumo_TurnSlightRight	16	static
 ../Core/Src/sumo_strategy.c:70:6:Sumo_TurnSlightLeft	16	static
 ../Core/Src/sumo_strategy.c:77:6:Sumo_Stop	16	static
-../Core/Src/sumo_strategy.c:85:6:Sumo_UpdateState	32	static
-../Core/Src/sumo_strategy.c:137:6:Sumo_InitMotors	24	static
-../Core/Src/sumo_strategy.c:143:6:Sumo_InitDistanceSensors	24	static
+../Core/Src/sumo_strategy.c:84:6:Sumo_LeftMotor	16	static
+../Core/Src/sumo_strategy.c:92:6:Sumo_UpdateState	32	static
+../Core/Src/sumo_strategy.c:144:6:Sumo_InitMotors	24	static
+../Core/Src/sumo_strategy.c:150:6:Sumo_InitDistanceSensors	24	static

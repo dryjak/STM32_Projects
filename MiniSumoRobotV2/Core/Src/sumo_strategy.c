@@ -69,15 +69,22 @@ void Sumo_TurnSlightRight(SumoMotors_t *SumoMotors)
 }
 void Sumo_TurnSlightLeft(SumoMotors_t *SumoMotors)
 {
-	Motor_SetRideParameters(SumoMotors->MotorL, 40, 0);   // Lewy do przodu
-	Motor_SetRideParameters(SumoMotors->MotorR, 70, 1);   // Prawy do tyłu
+	Motor_SetRideParameters(SumoMotors->MotorL, 40, 0);   // Lewy do tylu
+	Motor_SetRideParameters(SumoMotors->MotorR, 70, 1);   // Prawy do przodu
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
 void Sumo_Stop(SumoMotors_t *SumoMotors)
 {
-	Motor_SetRideParameters(SumoMotors->MotorL, 0, 0);   // Lewy do przodu
-	Motor_SetRideParameters(SumoMotors->MotorR, 0, 1);   // Prawy do tyłu
+	Motor_SetRideParameters(SumoMotors->MotorL, 0, 0);   // stop
+	Motor_SetRideParameters(SumoMotors->MotorR, 0, 0);   // stop
+	Motor_Ride(SumoMotors->MotorL);
+	Motor_Ride(SumoMotors->MotorR);
+}
+void Sumo_LeftMotor(SumoMotors_t *SumoMotors)
+{
+	Motor_SetRideParameters(SumoMotors->MotorL, 50, 0);   // Lewy do przodu
+	Motor_SetRideParameters(SumoMotors->MotorR, 0, 1);   // Prawy stop
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
