@@ -88,6 +88,14 @@ void Sumo_LeftMotor(SumoMotors_t *SumoMotors)
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
+void Sumo_RightMotor(SumoMotors_t *SumoMotors)
+{
+	Motor_SetRideParameters(SumoMotors->MotorL, 0, 0);   // Lewy stop
+	Motor_SetRideParameters(SumoMotors->MotorR, 50, 1);   // Prawy do przodu
+	Motor_Ride(SumoMotors->MotorL);
+	Motor_Ride(SumoMotors->MotorR);
+}
+
 
 void Sumo_UpdateState(SumoState_t *CurrentState, SumoMotors_t *SumoMotors, SumoSensors_t *SumoSensors)
 {
