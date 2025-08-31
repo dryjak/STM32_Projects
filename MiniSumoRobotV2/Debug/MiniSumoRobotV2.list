@@ -35,17 +35,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  15 .debug_rnglists 00000b19  00000000  00000000  00018ad8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00017ab4  00000000  00000000  000195f1  2**0
+ 16 .debug_macro  00017ac0  00000000  00000000  000195f1  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   000114ba  00000000  00000000  000310a5  2**0
+ 17 .debug_line   000114bb  00000000  00000000  000310b1  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00096afb  00000000  00000000  0004255f  2**0
+ 18 .debug_str    00096b10  00000000  00000000  0004256c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000d905a  2**0
+ 19 .comment      00000043  00000000  00000000  000d907c  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00003ad8  00000000  00000000  000d90a0  2**2
+ 20 .debug_frame  00003ad8  00000000  00000000  000d90c0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000068  00000000  00000000  000dcb78  2**0
+ 21 .debug_line_str 00000068  00000000  00000000  000dcb98  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1759,14 +1759,14 @@ void SumoAtack(SumoMotors_t *SumoMotors)
  8000cb2:	b082      	sub	sp, #8
  8000cb4:	af00      	add	r7, sp, #0
  8000cb6:	6078      	str	r0, [r7, #4]
-	Motor_SetRideParameters(SumoMotors->MotorL, 100, 1);  // Przód
+	Motor_SetRideParameters(SumoMotors->MotorL, 100, Forward);  // Przód
  8000cb8:	687b      	ldr	r3, [r7, #4]
  8000cba:	681b      	ldr	r3, [r3, #0]
  8000cbc:	2201      	movs	r2, #1
  8000cbe:	2164      	movs	r1, #100	@ 0x64
  8000cc0:	4618      	mov	r0, r3
  8000cc2:	f7ff fe81 	bl	80009c8 <Motor_SetRideParameters>
-	Motor_SetRideParameters(SumoMotors->MotorR, 100, 1);
+	Motor_SetRideParameters(SumoMotors->MotorR, 100, Forward);
  8000cc6:	687b      	ldr	r3, [r7, #4]
  8000cc8:	685b      	ldr	r3, [r3, #4]
  8000cca:	2201      	movs	r2, #1
@@ -1797,14 +1797,14 @@ void Sumo_SearchRight(SumoMotors_t *SumoMotors)
  8000cf2:	b082      	sub	sp, #8
  8000cf4:	af00      	add	r7, sp, #0
  8000cf6:	6078      	str	r0, [r7, #4]
-	Motor_SetRideParameters(SumoMotors->MotorL, 60, 1);   // Lewy do przodu
+	Motor_SetRideParameters(SumoMotors->MotorL, 60, Forward);   // Lewy do przodu
  8000cf8:	687b      	ldr	r3, [r7, #4]
  8000cfa:	681b      	ldr	r3, [r3, #0]
  8000cfc:	2201      	movs	r2, #1
  8000cfe:	213c      	movs	r1, #60	@ 0x3c
  8000d00:	4618      	mov	r0, r3
  8000d02:	f7ff fe61 	bl	80009c8 <Motor_SetRideParameters>
-	Motor_SetRideParameters(SumoMotors->MotorR, 60, 0);   // Prawy do tyłu
+	Motor_SetRideParameters(SumoMotors->MotorR, 60, Backward);   // Prawy do tyłu
  8000d06:	687b      	ldr	r3, [r7, #4]
  8000d08:	685b      	ldr	r3, [r3, #4]
  8000d0a:	2200      	movs	r2, #0
@@ -1834,14 +1834,14 @@ void Sumo_SearchLeft(SumoMotors_t *SumoMotors)
  8000d32:	b082      	sub	sp, #8
  8000d34:	af00      	add	r7, sp, #0
  8000d36:	6078      	str	r0, [r7, #4]
-	Motor_SetRideParameters(SumoMotors->MotorL, 60, 0);   // Lewy do przodu
+	Motor_SetRideParameters(SumoMotors->MotorL, 60, Backward);   // Lewy do przodu
  8000d38:	687b      	ldr	r3, [r7, #4]
  8000d3a:	681b      	ldr	r3, [r3, #0]
  8000d3c:	2200      	movs	r2, #0
  8000d3e:	213c      	movs	r1, #60	@ 0x3c
  8000d40:	4618      	mov	r0, r3
  8000d42:	f7ff fe41 	bl	80009c8 <Motor_SetRideParameters>
-	Motor_SetRideParameters(SumoMotors->MotorR, 60, 1);   // Prawy do tyłu
+	Motor_SetRideParameters(SumoMotors->MotorR, 60, Forward);   // Prawy do tyłu
  8000d46:	687b      	ldr	r3, [r7, #4]
  8000d48:	685b      	ldr	r3, [r3, #4]
  8000d4a:	2201      	movs	r2, #1
@@ -1865,7 +1865,7 @@ void Sumo_SearchLeft(SumoMotors_t *SumoMotors)
  8000d6e:	bd80      	pop	{r7, pc}
 
 08000d70 <Sumo_Stop>:
-	Motor_SetRideParameters(SumoMotors->MotorR, 70, 1);   // Prawy do przodu
+	Motor_SetRideParameters(SumoMotors->MotorR, 70, Forward);   // Prawy do przodu
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
@@ -1875,14 +1875,14 @@ void Sumo_Stop(SumoMotors_t *SumoMotors)
  8000d72:	b082      	sub	sp, #8
  8000d74:	af00      	add	r7, sp, #0
  8000d76:	6078      	str	r0, [r7, #4]
-	Motor_SetRideParameters(SumoMotors->MotorL, 0, 0);   // stop
+	Motor_SetRideParameters(SumoMotors->MotorL, 0, Backward);   // stop
  8000d78:	687b      	ldr	r3, [r7, #4]
  8000d7a:	681b      	ldr	r3, [r3, #0]
  8000d7c:	2200      	movs	r2, #0
  8000d7e:	2100      	movs	r1, #0
  8000d80:	4618      	mov	r0, r3
  8000d82:	f7ff fe21 	bl	80009c8 <Motor_SetRideParameters>
-	Motor_SetRideParameters(SumoMotors->MotorR, 0, 0);   // stop
+	Motor_SetRideParameters(SumoMotors->MotorR, 0, Backward);   // stop
  8000d86:	687b      	ldr	r3, [r7, #4]
  8000d88:	685b      	ldr	r3, [r3, #4]
  8000d8a:	2200      	movs	r2, #0

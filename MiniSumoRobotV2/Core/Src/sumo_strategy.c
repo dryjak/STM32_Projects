@@ -7,6 +7,9 @@
 #include "sumo_strategy.h"
 #include "main.h"
 
+#define Forward 	1
+#define Backward	0
+
 SumoState_t CurrentState = STATE_SEARCH;
 
 uint16_t DistanceFilteredVoltageL;
@@ -40,58 +43,58 @@ void Sumo_UpdateSensors(SumoSensors_t *SumoSensors)
 
 void SumoAtack(SumoMotors_t *SumoMotors)
 {
-	Motor_SetRideParameters(SumoMotors->MotorL, 100, 1);  // Przód
-	Motor_SetRideParameters(SumoMotors->MotorR, 100, 1);
+	Motor_SetRideParameters(SumoMotors->MotorL, 100, Forward);  // Przód
+	Motor_SetRideParameters(SumoMotors->MotorR, 100, Forward);
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
 
 void Sumo_SearchRight(SumoMotors_t *SumoMotors)
 {
-	Motor_SetRideParameters(SumoMotors->MotorL, 60, 1);   // Lewy do przodu
-	Motor_SetRideParameters(SumoMotors->MotorR, 60, 0);   // Prawy do tyłu
+	Motor_SetRideParameters(SumoMotors->MotorL, 60, Forward);   // Lewy do przodu
+	Motor_SetRideParameters(SumoMotors->MotorR, 60, Backward);   // Prawy do tyłu
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
 void Sumo_SearchLeft(SumoMotors_t *SumoMotors)
 {
-	Motor_SetRideParameters(SumoMotors->MotorL, 60, 0);   // Lewy do przodu
-	Motor_SetRideParameters(SumoMotors->MotorR, 60, 1);   // Prawy do tyłu
+	Motor_SetRideParameters(SumoMotors->MotorL, 60, Backward);   // Lewy do przodu
+	Motor_SetRideParameters(SumoMotors->MotorR, 60, Forward);   // Prawy do tyłu
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
 void Sumo_TurnSlightRight(SumoMotors_t *SumoMotors)
 {
-	Motor_SetRideParameters(SumoMotors->MotorL, 70, 1);   // Lewy do przodu
-	Motor_SetRideParameters(SumoMotors->MotorR, 40, 0);   // Prawy do tyłu
+	Motor_SetRideParameters(SumoMotors->MotorL, 70, Forward);   // Lewy do przodu
+	Motor_SetRideParameters(SumoMotors->MotorR, 40, Backward);   // Prawy do tyłu
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
 void Sumo_TurnSlightLeft(SumoMotors_t *SumoMotors)
 {
-	Motor_SetRideParameters(SumoMotors->MotorL, 40, 0);   // Lewy do tylu
-	Motor_SetRideParameters(SumoMotors->MotorR, 70, 1);   // Prawy do przodu
+	Motor_SetRideParameters(SumoMotors->MotorL, 40, Backward);   // Lewy do tylu
+	Motor_SetRideParameters(SumoMotors->MotorR, 70, Forward);   // Prawy do przodu
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
 void Sumo_Stop(SumoMotors_t *SumoMotors)
 {
-	Motor_SetRideParameters(SumoMotors->MotorL, 0, 0);   // stop
-	Motor_SetRideParameters(SumoMotors->MotorR, 0, 0);   // stop
+	Motor_SetRideParameters(SumoMotors->MotorL, 0, Backward);   // stop
+	Motor_SetRideParameters(SumoMotors->MotorR, 0, Backward);   // stop
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
 void Sumo_LeftMotor(SumoMotors_t *SumoMotors)
 {
-	Motor_SetRideParameters(SumoMotors->MotorL, 50, 0);   // Lewy do przodu
-	Motor_SetRideParameters(SumoMotors->MotorR, 0, 1);   // Prawy stop
+	Motor_SetRideParameters(SumoMotors->MotorL, 50, Backward);   // Lewy do przodu
+	Motor_SetRideParameters(SumoMotors->MotorR, 0, Forward);   // Prawy stop
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
 void Sumo_RightMotor(SumoMotors_t *SumoMotors)
 {
-	Motor_SetRideParameters(SumoMotors->MotorL, 0, 0);   // Lewy stop
-	Motor_SetRideParameters(SumoMotors->MotorR, 50, 1);   // Prawy do przodu
+	Motor_SetRideParameters(SumoMotors->MotorL, 0, Backward);   // Lewy stop
+	Motor_SetRideParameters(SumoMotors->MotorR, 50, Forward);   // Prawy do przodu
 	Motor_Ride(SumoMotors->MotorL);
 	Motor_Ride(SumoMotors->MotorR);
 }
