@@ -16,9 +16,13 @@
 
 typedef struct{
 
-	I2C_HandleTypeDef *Hi2c;
-	uint16_t Address;
+	I2C_HandleTypeDef *hi2c;
+	uint16_t address;
 
 }MPU6050_t;
+
+HAL_StatusTypeDef MPU6050_WHO_AM_I (MPU6050_t *MPU6050, uint8_t *Who_am_I);
+HAL_StatusTypeDef MPU6050_MemRead(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data, uint16_t Size);
+
 
 #endif /* INC_MPU6050_H_ */
