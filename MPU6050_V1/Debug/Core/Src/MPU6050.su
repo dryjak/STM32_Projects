@@ -1,0 +1,2 @@
+../Core/Src/MPU6050.c:12:6:MPU6050_WHO_AM_I	4	static
+../Core/Src/MPU6050.c:17:6:MPU6050_Init	8	static
