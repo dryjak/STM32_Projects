@@ -106,7 +106,7 @@ Discarded input sections
  .text.MPU6050_WHO_AM_I
                 0x00000000       0x20 ./Core/Src/MPU6050.o
  .text.MPU6050_Init
-                0x00000000       0x1a ./Core/Src/MPU6050.o
+                0x00000000       0x26 ./Core/Src/MPU6050.o
  .text.MPU6050_MemRead
                 0x00000000       0x42 ./Core/Src/MPU6050.o
  .debug_info    0x00000000      0x829 ./Core/Src/MPU6050.o
@@ -157,7 +157,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x358 ./Core/Src/MPU6050.o
  .debug_macro   0x00000000       0x8e ./Core/Src/MPU6050.o
  .debug_macro   0x00000000       0x16 ./Core/Src/MPU6050.o
- .debug_line    0x00000000      0x6d7 ./Core/Src/MPU6050.o
+ .debug_line    0x00000000      0x6df ./Core/Src/MPU6050.o
  .debug_str     0x00000000    0xe4a2e ./Core/Src/MPU6050.o
  .comment       0x00000000       0x44 ./Core/Src/MPU6050.o
  .debug_frame   0x00000000       0x80 ./Core/Src/MPU6050.o
