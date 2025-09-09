@@ -13,6 +13,7 @@
 #define WHO_AM_I 0x75
 #define MPU6050_ADR0 0x68
 #define MPU6050_ADR1 0x69
+#define MPU6050_PWR_MGMT_1   0x6B
 
 typedef struct{
 
