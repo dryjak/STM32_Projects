@@ -23,3 +23,8 @@ HAL_StatusTypeDef MPU6050_MemRead(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data
 {
 	return HAL_I2C_Mem_Read(MPU6050->hi2c, (MPU6050->address << 1), I2C_MEMADD_SIZE_8BIT, Size, Data, Size, HAL_MAX_DELAY);
 }
+
+HAL_StatusTypeDef MPU6050_MenWrite(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data, uint16_t Size)
+{
+	return HAL_I2C_Mem_Read(MPU6050->hi2c, (MPU6050->address << 1), Reg, I2C_MEMADD_SIZE_8BIT, Data, Size, HAL_MAX_DELAY);
+}
