@@ -1,5 +1,5 @@
 ../Core/Src/MPU6050.c:12:19:MPU6050_WHO_AM_I	16	static
 ../Core/Src/MPU6050.c:17:6:MPU6050_Init	24	static
 ../Core/Src/MPU6050.c:22:19:MPU6050_MemRead	40	static
-../Core/Src/MPU6050.c:27:19:MPU6050_MenWrite	40	static
+../Core/Src/MPU6050.c:27:19:MPU6050_MemWrite	32	static
 ../Core/Src/MPU6050.c:32:19:MPU6050_WakeUp	24	static
