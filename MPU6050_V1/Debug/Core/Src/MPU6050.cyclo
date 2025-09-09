@@ -2,4 +2,4 @@
 ../Core/Src/MPU6050.c:17:6:MPU6050_Init	1
 ../Core/Src/MPU6050.c:22:19:MPU6050_MemRead	1
 ../Core/Src/MPU6050.c:27:19:MPU6050_MemWrite	1
-../Core/Src/MPU6050.c:32:19:MPU6050_WakeUp	1
+../Core/Src/MPU6050.c:32:19:MPU6050_WakeUp	2

@@ -31,7 +31,18 @@ HAL_StatusTypeDef MPU6050_MemWrite(MPU6050_t *MPU6050, uint8_t Reg, uint8_t Data
 
 HAL_StatusTypeDef MPU6050_WakeUp(MPU6050_t *MPU6050)
 {
-	//setting 6 bit (sleep_ to 0 to enable the device
-	uint8_t EnableDevice = MPU6050_PWR_MGMT_1 & (~(1 << 1)); 	//setting 6 bit of the register to 0
-	return MPU6050_MemWrite(MPU6050, MPU6050_PWR_MGMT_1, EnableDevice); //
+	//Firstly you need to read the register value
+	uint8_t Register;
+	if ((MPU6050_MemRead(MPU6050, MPU6050_PWR_MGMT_1, &Register, 1)) != HAL_OK)
+	{
+		return HAL_ERROR;
+	}
+
+	//Setting 6th bit to 0 to disable sleep mode
+	Register &= ~(1 << 6);		//wyzeruj bit 6
+	return MPU6050_MemWrite(MPU6050, MPU6050_PWR_MGMT_1, Register);
 }
+
+
+
+
