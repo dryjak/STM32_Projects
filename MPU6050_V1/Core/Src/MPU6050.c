@@ -43,6 +43,17 @@ HAL_StatusTypeDef MPU6050_WakeUp(MPU6050_t *MPU6050)
 	return MPU6050_MemWrite(MPU6050, MPU6050_PWR_MGMT_1, Register);
 }
 
+HAL_StatusTypeDef MPU6050_SetGyroRange(MPU6050_t *MPU6050)
+{
+	//Firstly you need to read the register value
+	uint8_t Register;
+	if ((MPU6050_MemRead(MPU6050, GYRO_CONFIG, &Register, 1)) != HAL_OK)
+	{
+		return HAL_ERROR;
+	}
 
-
+	//setting FS_SEL[1:0] in order to setfull scale range
+	Register &= (~((1 << 4) | (1 << 5)));		//setting 250 stopni na sekunde
+	return MPU6050_MemWrite(MPU6050, GYRO_CONFIG, Register);
+}
 

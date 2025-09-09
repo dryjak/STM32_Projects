@@ -14,6 +14,7 @@
 #define MPU6050_ADR0 0x68
 #define MPU6050_ADR1 0x69
 #define MPU6050_PWR_MGMT_1   0x6B
+#define GYRO_CONFIG 0x27
 
 typedef struct{
 
