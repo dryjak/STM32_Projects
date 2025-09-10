@@ -10,11 +10,12 @@
 
 #include "main.h"
 
-#define WHO_AM_I 0x75
-#define MPU6050_ADR0 0x68
-#define MPU6050_ADR1 0x69
-#define MPU6050_PWR_MGMT_1   0x6B
-#define GYRO_CONFIG 0x27
+#define WHO_AM_I 			0x75
+#define MPU6050_ADR0 		0x68
+#define MPU6050_ADR1 		0x69
+#define MPU6050_PWR_MGMT_1	0x6B
+#define GYRO_CONFIG 		0x27
+#define ACCEL_CONFIG 		0x28
 
 typedef struct{
 

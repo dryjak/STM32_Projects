@@ -4,3 +4,4 @@
 ../Core/Src/MPU6050.c:27:19:MPU6050_MemWrite	1
 ../Core/Src/MPU6050.c:32:19:MPU6050_WakeUp	2
 ../Core/Src/MPU6050.c:46:19:MPU6050_SetGyroRange	2
+../Core/Src/MPU6050.c:60:19:MPPU6050_SetAcceleration	2
