@@ -123,4 +123,4 @@ HAL_StatusTypeDef MPU6050_ReadGyro(MPU6050_t *MPU6050, int16_t *Gx, int16_t *Gy,
 
 	return HAL_OK;
 }
-
+//to do chesk coretness with mou6050
