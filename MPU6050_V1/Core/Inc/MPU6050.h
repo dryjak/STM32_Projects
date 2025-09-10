@@ -17,6 +17,13 @@
 #define GYRO_CONFIG 		0x27
 #define ACCEL_CONFIG 		0x28
 
+#define ACCEL_XOUT_H		0x3B
+#define ACCEL_XOUT_L		0x3C
+#define ACCEL_YOUT_H		0x3D
+#define ACCEL_YOUT_L		0x3E
+#define ACCEL_ZOUT_H		0x3F
+#define ACCEL_ZOUT_L		0x40
+
 typedef struct{
 
 	I2C_HandleTypeDef *hi2c;
