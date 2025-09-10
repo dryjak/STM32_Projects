@@ -1,7 +1,8 @@
-../Core/Src/MPU6050.c:12:19:MPU6050_WHO_AM_I	1
-../Core/Src/MPU6050.c:17:6:MPU6050_Init	1
-../Core/Src/MPU6050.c:22:19:MPU6050_MemRead	1
-../Core/Src/MPU6050.c:27:19:MPU6050_MemWrite	1
-../Core/Src/MPU6050.c:32:19:MPU6050_WakeUp	2
-../Core/Src/MPU6050.c:46:19:MPU6050_SetGyroRange	2
-../Core/Src/MPU6050.c:60:19:MPPU6050_SetAcceleration	2
+../Core/Src/MPU6050.c:21:19:MPU6050_WHO_AM_I	1
+../Core/Src/MPU6050.c:26:6:MPU6050_Init	1
+../Core/Src/MPU6050.c:31:19:MPU6050_MemRead	1
+../Core/Src/MPU6050.c:36:19:MPU6050_MemWrite	1
+../Core/Src/MPU6050.c:41:19:MPU6050_WakeUp	2
+../Core/Src/MPU6050.c:55:19:MPU6050_SetGyroRange	2
+../Core/Src/MPU6050.c:69:19:MPPU6050_SetAcceleration	2
+../Core/Src/MPU6050.c:82:19:MPU6050_ReadAcceleration	2
