@@ -24,6 +24,8 @@
 #define ACCEL_ZOUT_H		0x3F
 #define ACCEL_ZOUT_L		0x40
 
+#define GYRO_XOUT_H			0x43
+
 typedef struct{
 
 	I2C_HandleTypeDef *hi2c;
