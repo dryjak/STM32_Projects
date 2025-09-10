@@ -118,10 +118,10 @@ Discarded input sections
  .text.MPPU6050_SetAcceleration
                 0x00000000       0x40 ./Core/Src/MPU6050.o
  .text.MPU6050_ReadAcceleration
-                0x00000000       0x62 ./Core/Src/MPU6050.o
+                0x00000000       0x68 ./Core/Src/MPU6050.o
  .text.MPU6050_ReadGyro
-                0x00000000       0x60 ./Core/Src/MPU6050.o
- .debug_info    0x00000000      0xaad ./Core/Src/MPU6050.o
+                0x00000000       0x6c ./Core/Src/MPU6050.o
+ .debug_info    0x00000000      0xa9b ./Core/Src/MPU6050.o
  .debug_abbrev  0x00000000      0x1d9 ./Core/Src/MPU6050.o
  .debug_aranges
                 0x00000000       0x60 ./Core/Src/MPU6050.o

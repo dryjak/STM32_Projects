@@ -14,7 +14,7 @@ typedef union{
 		uint8_t ByteHigh;
 	}Byte;
 
-	uint16_t Var16u;
+	int16_t Var16u;
 }ConvTo16_t;
 
 
@@ -79,14 +79,14 @@ HAL_StatusTypeDef MPPU6050_SetAcceleration(MPU6050_t *MPU6050)
 	return MPU6050_MemWrite(MPU6050, ACCEL_CONFIG, Register);
 }
 
-HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, uint16_t *Gx, uint16_t *Gy, uint16_t *Gz)
+HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, int16_t *Gx, int16_t *Gy, int16_t *Gz)
 {
 	ConvTo16_t AccelX, AccelY, AccelZ;
 
 	uint8_t AccelData[6];
 
 	//Read Acceleration value
-	if ((MPU6050_MemRead(MPU6050, ACCEL_XOUT_L, AccelData, 6)) == HAL_ERROR)
+	if ((MPU6050_MemRead(MPU6050, ACCEL_XOUT_H, AccelData, 6)) == HAL_ERROR)
 	{
 		return HAL_ERROR;
 	}
@@ -106,10 +106,8 @@ HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, uint16_t *Gx, uin
 	return HAL_OK;
 }
 
-HAL_StatusTypeDef MPU6050_ReadGyro(MPU6050_t *MPU6050, uint16_t *Gx, uint16_t *Gy, uint16_t *Gz)
+HAL_StatusTypeDef MPU6050_ReadGyro(MPU6050_t *MPU6050, int16_t *Gx, int16_t *Gy, int16_t *Gz)
 {
-	ConvTo16_t GyroX, GyroY, GyroZ;
-
 	uint8_t GyroData[6];
 
 	//Read Acceleration value
@@ -119,9 +117,9 @@ HAL_StatusTypeDef MPU6050_ReadGyro(MPU6050_t *MPU6050, uint16_t *Gx, uint16_t *G
 	}
 
 
-	*Gx = (uint16_t) (GyroData[0] << 8) | (GyroData[1]);
-	*Gy = (uint16_t) (GyroData[2] << 8) | (GyroData[3]);
-	*Gz = (uint16_t) (GyroData[4] << 8) | (GyroData[5]);
+	*Gx = (int16_t) (GyroData[0] << 8) | (GyroData[1]);
+	*Gy = (int16_t) (GyroData[2] << 8) | (GyroData[3]);
+	*Gz = (int16_t) (GyroData[4] << 8) | (GyroData[5]);
 
 	return HAL_OK;
 }
