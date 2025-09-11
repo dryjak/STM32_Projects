@@ -43,6 +43,7 @@ void MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Address)
 	MPU6050->hi2c 		= 	Hi2c;
 	MPU6050->address 	= 	Address;
 }
+
 HAL_StatusTypeDef MPU6050_MemRead(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data, uint16_t Size)
 {
 	return HAL_I2C_Mem_Read(MPU6050->hi2c, (MPU6050->address << 1), Reg, I2C_MEMADD_SIZE_8BIT, Data, Size, HAL_MAX_DELAY);
@@ -131,7 +132,7 @@ HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelera
 	return HAL_OK;
 }
 
-HAL_StatusTypeDef MPU6050_ReadGyro(MPU6050_t *MPU6050, int16_t *Gx, int16_t *Gy, int16_t *Gz)
+HAL_StatusTypeDef MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *Gyro)
 {
 	uint8_t GyroData[6];
 
@@ -142,9 +143,9 @@ HAL_StatusTypeDef MPU6050_ReadGyro(MPU6050_t *MPU6050, int16_t *Gx, int16_t *Gy,
 	}
 
 
-	*Gx = ((int16_t) (GyroData[0] << 8) | (GyroData[1]));
-	*Gy = ((int16_t) (GyroData[2] << 8) | (GyroData[3]));
-	*Gz = ((int16_t) (GyroData[4] << 8) | (GyroData[5]));
+	Gyro->GyroX = ((int16_t) (GyroData[0] << 8) | (GyroData[1])) / 131.0;
+	Gyro->GyroY = ((int16_t) (GyroData[2] << 8) | (GyroData[3])) / 131.0;
+	Gyro->GyroZ = ((int16_t) (GyroData[4] << 8) | (GyroData[5])) / 131.0;
 
 	return HAL_OK;
 }
@@ -155,6 +156,14 @@ HAL_StatusTypeDef MPU6050_AccelToDeg(MPU6050_t *MPU6050, Accel_t *Accelerations,
 
 	*Pitch = atan2f(Accelerations->AccelY, Accelerations->AccelZ) * 180.0 / M_PI;
 	*Roll = atan2f(-(Accelerations->AccelX), sqrtf(Accelerations->AccelY * Accelerations->AccelY + Accelerations->AccelZ * Accelerations->AccelZ)) * 180.0 / M_PI;
+
+	return HAL_OK;
+}
+
+HAL_StatusTypeDef MPU6050_AngularVelocity(MPU6050_t *MPU6050, Gyro_t *Gyro)
+{
+	MPU6050_ReadGyro(MPU6050, Gyro);
+
 
 	return HAL_OK;
 }
