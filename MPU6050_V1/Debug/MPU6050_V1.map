@@ -118,15 +118,17 @@ Discarded input sections
  .text.MPPU6050_SetAcceleration
                 0x00000000       0x40 ./Core/Src/MPU6050.o
  .text.MPU6050_ReadAcceleration
-                0x00000000       0x6c ./Core/Src/MPU6050.o
+                0x00000000       0x68 ./Core/Src/MPU6050.o
  .text.MPU6050_ReadGyro
                 0x00000000       0x6c ./Core/Src/MPU6050.o
- .debug_info    0x00000000      0xa19 ./Core/Src/MPU6050.o
- .debug_abbrev  0x00000000      0x1bc ./Core/Src/MPU6050.o
+ .text.MPU6050_AccelToDeg
+                0x00000000       0x1e ./Core/Src/MPU6050.o
+ .debug_info    0x00000000      0xa92 ./Core/Src/MPU6050.o
+ .debug_abbrev  0x00000000      0x1d9 ./Core/Src/MPU6050.o
  .debug_aranges
-                0x00000000       0x60 ./Core/Src/MPU6050.o
+                0x00000000       0x68 ./Core/Src/MPU6050.o
  .debug_rnglists
-                0x00000000       0x43 ./Core/Src/MPU6050.o
+                0x00000000       0x49 ./Core/Src/MPU6050.o
  .debug_macro   0x00000000      0x1f5 ./Core/Src/MPU6050.o
  .debug_macro   0x00000000      0xad8 ./Core/Src/MPU6050.o
  .debug_macro   0x00000000      0x15b ./Core/Src/MPU6050.o
@@ -169,10 +171,10 @@ Discarded input sections
  .debug_macro   0x00000000      0x358 ./Core/Src/MPU6050.o
  .debug_macro   0x00000000       0x8e ./Core/Src/MPU6050.o
  .debug_macro   0x00000000       0x52 ./Core/Src/MPU6050.o
- .debug_line    0x00000000      0x819 ./Core/Src/MPU6050.o
- .debug_str     0x00000000    0xe4b9e ./Core/Src/MPU6050.o
+ .debug_line    0x00000000      0x82c ./Core/Src/MPU6050.o
+ .debug_str     0x00000000    0xe4bed ./Core/Src/MPU6050.o
  .comment       0x00000000       0x44 ./Core/Src/MPU6050.o
- .debug_frame   0x00000000      0x158 ./Core/Src/MPU6050.o
+ .debug_frame   0x00000000      0x180 ./Core/Src/MPU6050.o
  .ARM.attributes
                 0x00000000       0x34 ./Core/Src/MPU6050.o
  .group         0x00000000        0xc ./Core/Src/main.o

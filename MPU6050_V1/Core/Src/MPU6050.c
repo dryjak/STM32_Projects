@@ -93,7 +93,7 @@ HAL_StatusTypeDef MPPU6050_SetAcceleration(MPU6050_t *MPU6050)
 	return MPU6050_MemWrite(MPU6050, ACCEL_CONFIG, Register);
 }
 
-HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, int16_t *Gx, int16_t *Gy, int16_t *Gz)
+HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations)
 {
 
 
@@ -122,9 +122,9 @@ HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, int16_t *Gx, int1
 	*Gz = AccelZ.Var16u;
 	*/
 
-	*Gx = (int16_t) (AccelData[0] << 8) | (AccelData[1]);
-	*Gy = (int16_t) (AccelData[2] << 8) | (AccelData[3]);
-	*Gz = (int16_t) (AccelData[4] << 8) | (AccelData[5]);
+	Accelerations->AccelX= (int16_t) (AccelData[0] << 8) | (AccelData[1]);
+	Accelerations->AccelY = (int16_t) (AccelData[2] << 8) | (AccelData[3]);
+	Accelerations->AccelZ = (int16_t) (AccelData[4] << 8) | (AccelData[5]);
 
 	return HAL_OK;
 }
@@ -145,6 +145,11 @@ HAL_StatusTypeDef MPU6050_ReadGyro(MPU6050_t *MPU6050, int16_t *Gx, int16_t *Gy,
 	*Gz = (int16_t) (GyroData[4] << 8) | (GyroData[5]);
 
 	return HAL_OK;
+}
+
+HAL_StatusTypeDef MPU6050_AccelToDeg(MPU6050_t MPU6050, float *Roll, float *Pitch)
+{
+
 }
 
 

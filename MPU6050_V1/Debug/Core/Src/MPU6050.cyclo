@@ -7,3 +7,4 @@
 ../Core/Src/MPU6050.c:83:19:MPPU6050_SetAcceleration	2
 ../Core/Src/MPU6050.c:96:19:MPU6050_ReadAcceleration	2
 ../Core/Src/MPU6050.c:132:19:MPU6050_ReadGyro	2
+../Core/Src/MPU6050.c:150:19:MPU6050_AccelToDeg	1
