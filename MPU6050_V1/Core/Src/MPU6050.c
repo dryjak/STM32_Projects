@@ -81,7 +81,7 @@ HAL_StatusTypeDef MPPU6050_SetAcceleration(MPU6050_t *MPU6050)
 
 HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, int16_t *Gx, int16_t *Gy, int16_t *Gz)
 {
-	ConvTo16_t AccelX, AccelY, AccelZ;
+
 
 	uint8_t AccelData[6];
 
@@ -93,6 +93,8 @@ HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, int16_t *Gx, int1
 
 	/*
 	//practising union
+	ConvTo16_t AccelX, AccelY, AccelZ;
+
 	AccelX.Byte.ByteHigh 	= AccelData[0];
 	AccelX.Byte.ByteLow 	= AccelData[1];
 	AccelY.Byte.ByteHigh 	= AccelData[2];

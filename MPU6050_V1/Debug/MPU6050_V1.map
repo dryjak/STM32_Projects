@@ -121,8 +121,8 @@ Discarded input sections
                 0x00000000       0x6c ./Core/Src/MPU6050.o
  .text.MPU6050_ReadGyro
                 0x00000000       0x6c ./Core/Src/MPU6050.o
- .debug_info    0x00000000      0xa9b ./Core/Src/MPU6050.o
- .debug_abbrev  0x00000000      0x1d9 ./Core/Src/MPU6050.o
+ .debug_info    0x00000000      0xa19 ./Core/Src/MPU6050.o
+ .debug_abbrev  0x00000000      0x1bc ./Core/Src/MPU6050.o
  .debug_aranges
                 0x00000000       0x60 ./Core/Src/MPU6050.o
  .debug_rnglists
@@ -170,7 +170,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x8e ./Core/Src/MPU6050.o
  .debug_macro   0x00000000       0x52 ./Core/Src/MPU6050.o
  .debug_line    0x00000000      0x818 ./Core/Src/MPU6050.o
- .debug_str     0x00000000    0xe4bdb ./Core/Src/MPU6050.o
+ .debug_str     0x00000000    0xe4b9e ./Core/Src/MPU6050.o
  .comment       0x00000000       0x44 ./Core/Src/MPU6050.o
  .debug_frame   0x00000000      0x158 ./Core/Src/MPU6050.o
  .ARM.attributes
