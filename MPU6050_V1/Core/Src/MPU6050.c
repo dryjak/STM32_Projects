@@ -123,9 +123,10 @@ HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelera
 	*Gz = AccelZ.Var16u;
 	*/
 
-	Accelerations->AccelX= (int16_t) (AccelData[0] << 8) | (AccelData[1]);
-	Accelerations->AccelY = (int16_t) (AccelData[2] << 8) | (AccelData[3]);
-	Accelerations->AccelZ = (int16_t) (AccelData[4] << 8) | (AccelData[5]);
+	Accelerations->AccelX = ((int16_t) (AccelData[0] << 8) | (AccelData[1])) / 16384.0f;
+	Accelerations->AccelY = ((int16_t) (AccelData[2] << 8) | (AccelData[3])) / 16384.0f;
+	Accelerations->AccelZ = ((int16_t) (AccelData[4] << 8) | (AccelData[5])) / 16384.0f;
+
 
 	return HAL_OK;
 }
@@ -141,22 +142,21 @@ HAL_StatusTypeDef MPU6050_ReadGyro(MPU6050_t *MPU6050, int16_t *Gx, int16_t *Gy,
 	}
 
 
-	*Gx = (int16_t) (GyroData[0] << 8) | (GyroData[1]);
-	*Gy = (int16_t) (GyroData[2] << 8) | (GyroData[3]);
-	*Gz = (int16_t) (GyroData[4] << 8) | (GyroData[5]);
+	*Gx = ((int16_t) (GyroData[0] << 8) | (GyroData[1]));
+	*Gy = ((int16_t) (GyroData[2] << 8) | (GyroData[3]));
+	*Gz = ((int16_t) (GyroData[4] << 8) | (GyroData[5]));
 
 	return HAL_OK;
 }
 
-HAL_StatusTypeDef MPU6050_AccelToDeg(MPU6050_t MPU6050, Accel_t *Accelerations, float *Roll, float *Pitch)
+HAL_StatusTypeDef MPU6050_AccelToDeg(MPU6050_t *MPU6050, Accel_t *Accelerations, float *Roll, float *Pitch)
 {
-	int16_t ax,ay,az;
-	ax = Accelerations->AccelX / 16384.0f;
-	ay = Accelerations->AccelY / 16384.0f;
-	az = Accelerations->AccelZ / 16384.0f;
+	MPU6050_ReadAcceleration(MPU6050, Accelerations);
 
-	*Pitch = atan2f(ay,az) * 180.0 / M_PI;
-	*Roll = atan2f(-ax, sqrtf(ay*ay + az*az)) * 180.0 / 	M_PI;
+	*Pitch = atan2f(Accelerations->AccelY, Accelerations->AccelZ) * 180.0 / M_PI;
+	*Roll = atan2f(-(Accelerations->AccelX), sqrtf(Accelerations->AccelY * Accelerations->AccelY + Accelerations->AccelZ * Accelerations->AccelZ)) * 180.0 / M_PI;
+
+	return HAL_OK;
 }
 
 
