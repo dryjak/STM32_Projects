@@ -17,6 +17,20 @@ typedef union{
 	int16_t Var16u;
 }ConvTo16_t;
 
+typedef struct
+{
+	int16_t AccelX;
+	int16_t AccelY;
+	int16_t AccelZ;
+}Accel_t;
+
+typedef struct
+{
+	int16_t GyroX;
+	int16_t GyroY;
+	int16_t GyroZ;
+}Gyro_t;
+
 
 HAL_StatusTypeDef MPU6050_WHO_AM_I (MPU6050_t *MPU6050, uint8_t *Who_am_I)
 {
@@ -132,4 +146,6 @@ HAL_StatusTypeDef MPU6050_ReadGyro(MPU6050_t *MPU6050, int16_t *Gx, int16_t *Gy,
 
 	return HAL_OK;
 }
+
+
 //to do chesk coretness with mou6050

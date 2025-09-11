@@ -169,7 +169,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x358 ./Core/Src/MPU6050.o
  .debug_macro   0x00000000       0x8e ./Core/Src/MPU6050.o
  .debug_macro   0x00000000       0x52 ./Core/Src/MPU6050.o
- .debug_line    0x00000000      0x818 ./Core/Src/MPU6050.o
+ .debug_line    0x00000000      0x819 ./Core/Src/MPU6050.o
  .debug_str     0x00000000    0xe4b9e ./Core/Src/MPU6050.o
  .comment       0x00000000       0x44 ./Core/Src/MPU6050.o
  .debug_frame   0x00000000      0x158 ./Core/Src/MPU6050.o
