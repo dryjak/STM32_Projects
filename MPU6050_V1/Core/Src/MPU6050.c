@@ -6,6 +6,7 @@
  */
 #include "MPU6050.h"
 #include "main.h"
+#include "math.h"
 
 typedef union{
 	struct
@@ -147,9 +148,15 @@ HAL_StatusTypeDef MPU6050_ReadGyro(MPU6050_t *MPU6050, int16_t *Gx, int16_t *Gy,
 	return HAL_OK;
 }
 
-HAL_StatusTypeDef MPU6050_AccelToDeg(MPU6050_t MPU6050, float *Roll, float *Pitch)
+HAL_StatusTypeDef MPU6050_AccelToDeg(MPU6050_t MPU6050, Accel_t *Accelerations, float *Roll, float *Pitch)
 {
+	int16_t ax,ay,az;
+	ax = Accelerations->AccelX / 16384.0f;
+	ay = Accelerations->AccelY / 16384.0f;
+	az = Accelerations->AccelZ / 16384.0f;
 
+	*Pitch = atan2f(ay,az) * 180.0 / M_PI;
+	*Roll = atan2f(-ax, sqrtf(ay*ay + az*az)) * 180.0 / 	M_PI;
 }
 
 
