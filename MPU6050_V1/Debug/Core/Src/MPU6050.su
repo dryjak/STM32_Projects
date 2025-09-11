@@ -6,4 +6,4 @@
 ../Core/Src/MPU6050.c:55:19:MPU6050_SetGyroRange	24	static
 ../Core/Src/MPU6050.c:69:19:MPPU6050_SetAcceleration	24	static
 ../Core/Src/MPU6050.c:82:19:MPU6050_ReadAcceleration	48	static
-../Core/Src/MPU6050.c:109:19:MPU6050_ReadGyro	32	static
+../Core/Src/MPU6050.c:116:19:MPU6050_ReadGyro	32	static

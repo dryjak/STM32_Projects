@@ -91,6 +91,7 @@ HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, int16_t *Gx, int1
 		return HAL_ERROR;
 	}
 
+	/*
 	//practising union
 	AccelX.Byte.ByteHigh 	= AccelData[0];
 	AccelX.Byte.ByteLow 	= AccelData[1];
@@ -99,9 +100,15 @@ HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, int16_t *Gx, int1
 	AccelZ.Byte.ByteHigh 	= AccelData[4];
 	AccelZ.Byte.ByteLow 	= AccelData[5];
 
+
 	*Gx = AccelX.Var16u;
 	*Gy = AccelY.Var16u;
 	*Gz = AccelZ.Var16u;
+	*/
+
+	*Gx = (int16_t) (AccelData[0] << 8) | (AccelData[1]);
+	*Gy = (int16_t) (AccelData[2] << 8) | (AccelData[3]);
+	*Gz = (int16_t) (AccelData[4] << 8) | (AccelData[5]);
 
 	return HAL_OK;
 }
