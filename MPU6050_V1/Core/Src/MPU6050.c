@@ -150,6 +150,29 @@ HAL_StatusTypeDef MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *Gyro)
 	return HAL_OK;
 }
 
+HAL_StatusTypeDef MPU6050_MeanAccelerations(MPU6050_t *MPU6050, Accel_t *Accelerations, Accel_t *AccelerationsMean)
+{
+	uint8_t i = 0;
+	uint8_t Sample = 50;
+	int32_t AccelSumX, AccelSumY, AccelSumZ;
+
+	MPU6050_ReadAcceleration(MPU6050, Accelerations);
+
+	for(i = 0; i < Sample; i++)
+	{
+		AccelSumX += Accelerations->AccelX;
+		AccelSumY += Accelerations->AccelY;
+		AccelSumZ += Accelerations->AccelZ;
+	}
+
+	AccelerationsMean->AccelX = AccelSumX / Sample;
+	AccelerationsMean->AccelY = AccelSumY / Sample;
+	AccelerationsMean->AccelZ = AccelSumZ / Sample;
+
+	return HAL_OK;
+
+}
+
 HAL_StatusTypeDef MPU6050_AccelToDeg(MPU6050_t *MPU6050, Accel_t *Accelerations, float *Roll, float *Pitch)
 {
 	MPU6050_ReadAcceleration(MPU6050, Accelerations);
