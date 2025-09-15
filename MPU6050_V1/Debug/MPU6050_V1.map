@@ -172,9 +172,13 @@ Discarded input sections
  .text.MPU6050_GyroToDps
                 0x00000000       0xac ./Core/Src/MPU6050.o
  .text.MPU6050_ComputeAngles
-                0x00000000       0xe4 ./Core/Src/MPU6050.o
- .debug_info    0x00000000      0xd9a ./Core/Src/MPU6050.o
- .debug_abbrev  0x00000000      0x1f4 ./Core/Src/MPU6050.o
+                0x00000000      0x140 ./Core/Src/MPU6050.o
+ .bss.GyroRoll.1
+                0x00000000        0x4 ./Core/Src/MPU6050.o
+ .bss.GyroPitch.0
+                0x00000000        0x4 ./Core/Src/MPU6050.o
+ .debug_info    0x00000000      0xda3 ./Core/Src/MPU6050.o
+ .debug_abbrev  0x00000000      0x1f3 ./Core/Src/MPU6050.o
  .debug_aranges
                 0x00000000       0x88 ./Core/Src/MPU6050.o
  .debug_rnglists
@@ -235,7 +239,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x1c ./Core/Src/MPU6050.o
  .debug_macro   0x00000000      0x185 ./Core/Src/MPU6050.o
  .debug_macro   0x00000000      0x19b ./Core/Src/MPU6050.o
- .debug_line    0x00000000      0xb45 ./Core/Src/MPU6050.o
+ .debug_line    0x00000000      0xb59 ./Core/Src/MPU6050.o
  .debug_str     0x00000000    0xe86e4 ./Core/Src/MPU6050.o
  .comment       0x00000000       0x44 ./Core/Src/MPU6050.o
  .debug_frame   0x00000000      0x220 ./Core/Src/MPU6050.o

@@ -11,4 +11,4 @@
 ../Core/Src/MPU6050.c:182:19:MPU6050_MeanGyro	48	static
 ../Core/Src/MPU6050.c:205:19:MPU6050_AccelToDeg	32	static
 ../Core/Src/MPU6050.c:218:19:MPU6050_GyroToDps	24	static
-../Core/Src/MPU6050.c:234:19:MPU6050_ComputeAngles	72	static
+../Core/Src/MPU6050.c:234:19:MPU6050_ComputeAngles	64	static
