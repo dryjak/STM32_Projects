@@ -10,4 +10,4 @@
 ../Core/Src/MPU6050.c:153:19:MPU6050_MeanAccelerations	2
 ../Core/Src/MPU6050.c:176:19:MPU6050_MeanGyro	2
 ../Core/Src/MPU6050.c:199:19:MPU6050_AccelToDeg	1
-../Core/Src/MPU6050.c:209:19:MPU6050_AngularVelocity	1
+../Core/Src/MPU6050.c:209:19:MPU6050_GyroToDps	1

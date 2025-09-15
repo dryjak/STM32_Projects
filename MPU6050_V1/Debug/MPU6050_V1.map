@@ -163,9 +163,9 @@ Discarded input sections
                 0x00000000       0x98 ./Core/Src/MPU6050.o
  .text.MPU6050_AccelToDeg
                 0x00000000      0x124 ./Core/Src/MPU6050.o
- .text.MPU6050_AngularVelocity
+ .text.MPU6050_GyroToDps
                 0x00000000       0x1c ./Core/Src/MPU6050.o
- .debug_info    0x00000000      0xc64 ./Core/Src/MPU6050.o
+ .debug_info    0x00000000      0xc72 ./Core/Src/MPU6050.o
  .debug_abbrev  0x00000000      0x1cc ./Core/Src/MPU6050.o
  .debug_aranges
                 0x00000000       0x80 ./Core/Src/MPU6050.o
@@ -227,8 +227,8 @@ Discarded input sections
  .debug_macro   0x00000000       0x1c ./Core/Src/MPU6050.o
  .debug_macro   0x00000000      0x185 ./Core/Src/MPU6050.o
  .debug_macro   0x00000000      0x19b ./Core/Src/MPU6050.o
- .debug_line    0x00000000      0xaa5 ./Core/Src/MPU6050.o
- .debug_str     0x00000000    0xe8650 ./Core/Src/MPU6050.o
+ .debug_line    0x00000000      0xaa6 ./Core/Src/MPU6050.o
+ .debug_str     0x00000000    0xe864a ./Core/Src/MPU6050.o
  .comment       0x00000000       0x44 ./Core/Src/MPU6050.o
  .debug_frame   0x00000000      0x1f8 ./Core/Src/MPU6050.o
  .ARM.attributes

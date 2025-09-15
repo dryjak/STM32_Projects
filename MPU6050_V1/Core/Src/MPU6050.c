@@ -196,17 +196,17 @@ HAL_StatusTypeDef MPU6050_MeanGyro(MPU6050_t *MPU6050, Gyro_t *Gyro,  Gyro_t *Gy
 
 }
 
-HAL_StatusTypeDef MPU6050_AccelToDeg(MPU6050_t *MPU6050, Accel_t *Accelerations, float *Roll, float *Pitch)
+HAL_StatusTypeDef MPU6050_AccelToDeg(MPU6050_t *MPU6050, Accel_t *Accelerations, Accel_t *AccelerationsMean, float *Roll, float *Pitch)
 {
-	MPU6050_ReadAcceleration(MPU6050, Accelerations);
+	MPU6050_MeanAccelerations(MPU6050, Accelerations,AccelerationsMean);
 
-	*Pitch = atan2f(Accelerations->AccelY, Accelerations->AccelZ) * 180.0 / M_PI;
-	*Roll = atan2f(-(Accelerations->AccelX), sqrtf(Accelerations->AccelY * Accelerations->AccelY + Accelerations->AccelZ * Accelerations->AccelZ)) * 180.0 / M_PI;
+	*Pitch = atan2f(AccelerationsMean->AccelY, AccelerationsMean->AccelZ) * 180.0 / M_PI;
+	*Roll = atan2f(-(AccelerationsMean->AccelX), sqrtf(AccelerationsMean->AccelY * AccelerationsMean->AccelY + AccelerationsMean->AccelZ * AccelerationsMean->AccelZ)) * 180.0 / M_PI;
 
 	return HAL_OK;
 }
 
-HAL_StatusTypeDef MPU6050_AngularVelocity(MPU6050_t *MPU6050, Gyro_t *Gyro)
+HAL_StatusTypeDef MPU6050_GyroToDps	(MPU6050_t *MPU6050, Gyro_t *Gyro)
 {
 	MPU6050_ReadGyro(MPU6050, Gyro);
 
