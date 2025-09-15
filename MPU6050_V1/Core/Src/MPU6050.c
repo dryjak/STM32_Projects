@@ -231,5 +231,36 @@ HAL_StatusTypeDef MPU6050_GyroToDps	(MPU6050_t *MPU6050, Gyro_t *Gyro, float *Dp
 	return HAL_OK;
 }
 
+HAL_StatusTypeDef MPU6050_ComputeAngles(MPU6050_t *MPU6050, Accel_t *Accelerations, Gyro_t *Gyro, float *Roll, float *Pitch, float dt)
+{
+	//Read data
+	if (MPU6050_ReadGyro(MPU6050, Gyro) != HAL_OK)
+	{
+		return HAL_ERROR;
+	}
 
+	if (MPU6050_ReadAcceleration(MPU6050, Accelerations) != HAL_OK)
+	{
+		return HAL_ERROR;
+	}
+
+	float AccelerationRoll, AccelerationPitch;
+	float GyroDpsX, GyroDpsY, GyroDpsZ;
+	//change to degrees
+	//acceleration to degrees
+	MPU6050_AccelToDeg(MPU6050, Accelerations,  &AccelerationRoll, &AccelerationPitch);
+	//dps to degrees
+	MPU6050_GyroToDps(MPU6050, Gyro, &GyroDpsX, &GyroDpsY, &GyroDpsZ);
+
+	//calculating roll and pitch from gyro
+	float GyroRoll = GyroDpsX * dt;
+	float GyroPitch = GyroDpsY * dt;
+
+	//complementary filtr
+	float alpha = 0.98;
+	*Roll = (alpha * GyroRoll) + ((1 - alpha) * AccelerationRoll);
+	*Pitch = (alpha * GyroPitch) + ((1-alpha) * AccelerationPitch);
+
+	return HAL_OK;
+}
 

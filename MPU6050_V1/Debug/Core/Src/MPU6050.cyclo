@@ -11,3 +11,4 @@
 ../Core/Src/MPU6050.c:182:19:MPU6050_MeanGyro	2
 ../Core/Src/MPU6050.c:205:19:MPU6050_AccelToDeg	2
 ../Core/Src/MPU6050.c:218:19:MPU6050_GyroToDps	2
+../Core/Src/MPU6050.c:234:19:MPU6050_ComputeAngles	3
