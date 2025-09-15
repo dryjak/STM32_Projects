@@ -202,36 +202,34 @@ HAL_StatusTypeDef MPU6050_MeanGyro(MPU6050_t *MPU6050, Gyro_t *Gyro,  Gyro_t *Gy
 
 }
 
-HAL_StatusTypeDef MPU6050_AccelToDeg(MPU6050_t *MPU6050, Accel_t *Accelerations, Accel_t *AccelerationsMean, float *Roll, float *Pitch)
+HAL_StatusTypeDef MPU6050_AccelToDeg(MPU6050_t *MPU6050, Accel_t *Accelerations, float *Roll, float *Pitch)
 {
-	if (MPU6050_MeanAccelerations(MPU6050, Accelerations,AccelerationsMean) != HAL_OK)
+	if (MPU6050_ReadAcceleration(MPU6050, Accelerations) != HAL_OK)
 	{
 		return HAL_ERROR;
 	}
 
-	*Pitch = atan2f(AccelerationsMean->AccelY, AccelerationsMean->AccelZ) * 180.0 / M_PI;
-	*Roll = atan2f(-(AccelerationsMean->AccelX), sqrtf(AccelerationsMean->AccelY * AccelerationsMean->AccelY + AccelerationsMean->AccelZ * AccelerationsMean->AccelZ)) * 180.0 / M_PI;
+	*Pitch = atan2f(Accelerations->AccelY, Accelerations->AccelZ) * 180.0 / M_PI;
+	*Roll = atan2f(-(Accelerations->AccelX), sqrtf(Accelerations->AccelY * Accelerations->AccelY + Accelerations->AccelZ * Accelerations->AccelZ)) * 180.0 / M_PI;
 
 	return HAL_OK;
 }
 
-HAL_StatusTypeDef MPU6050_GyroToDps	(MPU6050_t *MPU6050, Gyro_t *Gyro, Gyro_t *GyroMean, float *DpsX, float *DpsY, float *DpsZ)
+HAL_StatusTypeDef MPU6050_GyroToDps	(MPU6050_t *MPU6050, Gyro_t *Gyro, float *DpsX, float *DpsY, float *DpsZ)
 {
-	MPU6050_MeanGyro(MPU6050, Gyro, GyroMean);
-
 	// najpierw policz średnie wartości gyro
-    if (MPU6050_MeanGyro(MPU6050, Gyro, GyroMean) != HAL_OK)
+    if (MPU6050_ReadGyro(MPU6050, Gyro) != HAL_OK)
     {
         return HAL_ERROR;
     }
 
     // konwersja na dps (±250°/s)
-    *DpsX = ((float)GyroMean->GyroX - gx_offset) / 131.0f;
-    *DpsY = ((float)GyroMean->GyroY - gy_offset) / 131.0f;
-    *DpsZ = ((float)GyroMean->GyroZ - gz_offset) / 131.0f;
+    *DpsX = ((float)Gyro->GyroX - gx_offset) / 131.0f;
+    *DpsY = ((float)Gyro->GyroY - gy_offset) / 131.0f;
+    *DpsZ = ((float)Gyro->GyroZ - gz_offset) / 131.0f;
 
 	return HAL_OK;
 }
 
 
-//to do chesk coretness with mou6050
+
