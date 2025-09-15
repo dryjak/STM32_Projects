@@ -26,6 +26,7 @@
 
 #define GYRO_XOUT_H			0x43
 
+
 typedef struct{
 
 	I2C_HandleTypeDef *hi2c;

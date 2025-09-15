@@ -139,6 +139,12 @@ Discarded input sections
  .text          0x00000000        0x0 ./Core/Src/MPU6050.o
  .data          0x00000000        0x0 ./Core/Src/MPU6050.o
  .bss           0x00000000        0x0 ./Core/Src/MPU6050.o
+ .bss.gx_offset
+                0x00000000        0x4 ./Core/Src/MPU6050.o
+ .bss.gy_offset
+                0x00000000        0x4 ./Core/Src/MPU6050.o
+ .bss.gz_offset
+                0x00000000        0x4 ./Core/Src/MPU6050.o
  .text.MPU6050_WHO_AM_I
                 0x00000000       0x20 ./Core/Src/MPU6050.o
  .text.MPU6050_Init
@@ -162,15 +168,15 @@ Discarded input sections
  .text.MPU6050_MeanGyro
                 0x00000000       0x98 ./Core/Src/MPU6050.o
  .text.MPU6050_AccelToDeg
-                0x00000000      0x124 ./Core/Src/MPU6050.o
+                0x00000000      0x134 ./Core/Src/MPU6050.o
  .text.MPU6050_GyroToDps
-                0x00000000       0x1c ./Core/Src/MPU6050.o
- .debug_info    0x00000000      0xc72 ./Core/Src/MPU6050.o
- .debug_abbrev  0x00000000      0x1cc ./Core/Src/MPU6050.o
+                0x00000000       0xb8 ./Core/Src/MPU6050.o
+ .debug_info    0x00000000      0xcda ./Core/Src/MPU6050.o
+ .debug_abbrev  0x00000000      0x1e1 ./Core/Src/MPU6050.o
  .debug_aranges
                 0x00000000       0x80 ./Core/Src/MPU6050.o
  .debug_rnglists
-                0x00000000       0x60 ./Core/Src/MPU6050.o
+                0x00000000       0x61 ./Core/Src/MPU6050.o
  .debug_macro   0x00000000      0x2a0 ./Core/Src/MPU6050.o
  .debug_macro   0x00000000      0xad8 ./Core/Src/MPU6050.o
  .debug_macro   0x00000000      0x15b ./Core/Src/MPU6050.o
@@ -227,8 +233,8 @@ Discarded input sections
  .debug_macro   0x00000000       0x1c ./Core/Src/MPU6050.o
  .debug_macro   0x00000000      0x185 ./Core/Src/MPU6050.o
  .debug_macro   0x00000000      0x19b ./Core/Src/MPU6050.o
- .debug_line    0x00000000      0xaa6 ./Core/Src/MPU6050.o
- .debug_str     0x00000000    0xe864a ./Core/Src/MPU6050.o
+ .debug_line    0x00000000      0xaea ./Core/Src/MPU6050.o
+ .debug_str     0x00000000    0xe8677 ./Core/Src/MPU6050.o
  .comment       0x00000000       0x44 ./Core/Src/MPU6050.o
  .debug_frame   0x00000000      0x1f8 ./Core/Src/MPU6050.o
  .ARM.attributes

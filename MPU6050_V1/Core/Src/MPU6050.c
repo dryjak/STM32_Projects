@@ -32,6 +32,12 @@ typedef struct
 	int16_t GyroZ;
 }Gyro_t;
 
+//to calculate degrees from gyro
+float gx_offset = 0.0f;
+float gy_offset = 0.0f;
+float gz_offset = 0.0f;
+
+
 
 HAL_StatusTypeDef MPU6050_WHO_AM_I (MPU6050_t *MPU6050, uint8_t *Who_am_I)
 {
@@ -198,7 +204,10 @@ HAL_StatusTypeDef MPU6050_MeanGyro(MPU6050_t *MPU6050, Gyro_t *Gyro,  Gyro_t *Gy
 
 HAL_StatusTypeDef MPU6050_AccelToDeg(MPU6050_t *MPU6050, Accel_t *Accelerations, Accel_t *AccelerationsMean, float *Roll, float *Pitch)
 {
-	MPU6050_MeanAccelerations(MPU6050, Accelerations,AccelerationsMean);
+	if (MPU6050_MeanAccelerations(MPU6050, Accelerations,AccelerationsMean) != HAL_OK)
+	{
+		return HAL_ERROR;
+	}
 
 	*Pitch = atan2f(AccelerationsMean->AccelY, AccelerationsMean->AccelZ) * 180.0 / M_PI;
 	*Roll = atan2f(-(AccelerationsMean->AccelX), sqrtf(AccelerationsMean->AccelY * AccelerationsMean->AccelY + AccelerationsMean->AccelZ * AccelerationsMean->AccelZ)) * 180.0 / M_PI;
@@ -206,10 +215,20 @@ HAL_StatusTypeDef MPU6050_AccelToDeg(MPU6050_t *MPU6050, Accel_t *Accelerations,
 	return HAL_OK;
 }
 
-HAL_StatusTypeDef MPU6050_GyroToDps	(MPU6050_t *MPU6050, Gyro_t *Gyro)
+HAL_StatusTypeDef MPU6050_GyroToDps	(MPU6050_t *MPU6050, Gyro_t *Gyro, Gyro_t *GyroMean, float *DpsX, float *DpsY, float *DpsZ)
 {
-	MPU6050_ReadGyro(MPU6050, Gyro);
+	MPU6050_MeanGyro(MPU6050, Gyro, GyroMean);
 
+	// najpierw policz średnie wartości gyro
+    if (MPU6050_MeanGyro(MPU6050, Gyro, GyroMean) != HAL_OK)
+    {
+        return HAL_ERROR;
+    }
+
+    // konwersja na dps (±250°/s)
+    *DpsX = ((float)GyroMean->GyroX - gx_offset) / 131.0f;
+    *DpsY = ((float)GyroMean->GyroY - gy_offset) / 131.0f;
+    *DpsZ = ((float)GyroMean->GyroZ - gz_offset) / 131.0f;
 
 	return HAL_OK;
 }
