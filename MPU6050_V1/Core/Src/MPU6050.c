@@ -233,7 +233,6 @@ HAL_StatusTypeDef MPU6050_GyroToDps	(MPU6050_t *MPU6050, Gyro_t *Gyro, float *Dp
 
 HAL_StatusTypeDef MPU6050_ComputeAngles(MPU6050_t *MPU6050, Accel_t *Accelerations, Gyro_t *Gyro, float *Roll, float *Pitch, float dt)
 {
-	//Read data
 	if (MPU6050_ReadGyro(MPU6050, Gyro) != HAL_OK)
 	{
 		return HAL_ERROR;
