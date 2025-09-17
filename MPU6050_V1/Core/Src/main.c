@@ -47,6 +47,8 @@
 /* USER CODE BEGIN PV */
 MPU6050_t MPU6050;
 uint8_t DeviceAddress;
+
+Accel_t Accelerations;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -97,13 +99,20 @@ int main(void)
 
   //check adress correctness
   MPU6050_WHO_AM_I(&MPU6050, &DeviceAddress);
+
   HAL_UART_Transmit(&hlpuart1, &DeviceAddress, sizeof(uint8_t), HAL_MAX_DELAY);
+
+  MPU6050_WakeUp(&MPU6050);
+  MPU6050_SetGyroRange(&MPU6050);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  MPU6050_ReadAcceleration(&MPU6050, &Accelerations);
+
+	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
