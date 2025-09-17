@@ -118,6 +118,8 @@ int main(void)
 	  sprintf(Message, "X: %d\n\r", Accelerations.AccelX);
 	  HAL_UART_Transmit(&hlpuart1, Message, sizeof(Message), HAL_MAX_DELAY);
 	  HAL_Delay(1000);
+	  //todo: check transmit corectness
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
