@@ -25,6 +25,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "MPU6050.h"
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -49,6 +50,8 @@ MPU6050_t MPU6050;
 uint8_t DeviceAddress;
 
 Accel_t Accelerations;
+
+char Message[128];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -112,6 +115,8 @@ int main(void)
   {
 	  MPU6050_ReadAcceleration(&MPU6050, &Accelerations);
 
+	  sprintf(Message, "X: %d\n\r", Accelerations.AccelX);
+	  HAL_UART_Transmit(&hlpuart1, Message, sizeof(Message), HAL_MAX_DELAY);
 	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
