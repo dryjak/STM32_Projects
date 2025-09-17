@@ -14,8 +14,8 @@
 #define MPU6050_ADR0 		0x68
 #define MPU6050_ADR1 		0x69
 #define MPU6050_PWR_MGMT_1	0x6B
-#define GYRO_CONFIG 		0x27
-#define ACCEL_CONFIG 		0x28
+#define GYRO_CONFIG 		0x1B
+#define ACCEL_CONFIG 		0x1C
 
 #define ACCEL_XOUT_H		0x3B
 #define ACCEL_XOUT_L		0x3C
