@@ -1,5 +1,5 @@
-../Core/Src/MPU6050.c:42:19:MPU6050_WHO_AM_I	1
-../Core/Src/MPU6050.c:47:6:MPU6050_Init	1
+../Core/Src/MPU6050.c:41:6:MPU6050_Init	1
+../Core/Src/MPU6050.c:46:19:MPU6050_WHO_AM_I	1
 ../Core/Src/MPU6050.c:53:19:MPU6050_MemRead	1
 ../Core/Src/MPU6050.c:58:19:MPU6050_MemWrite	1
 ../Core/Src/MPU6050.c:63:19:MPU6050_WakeUp	2

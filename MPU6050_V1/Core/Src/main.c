@@ -45,7 +45,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+MPU6050_t MPU6050;
+uint8_t DeviceAddress;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -91,7 +92,12 @@ int main(void)
   MX_I2C1_Init();
   MX_LPUART1_UART_Init();
   /* USER CODE BEGIN 2 */
+  //initialize MPU6050
+  MPU6050_Init(&MPU6050, &hi2c1, 0x68);
 
+  //check adress correctness
+  MPU6050_WHO_AM_I(&MPU6050, &DeviceAddress);
+  HAL_UART_Transmit(&hlpuart1, &DeviceAddress, sizeof(uint8_t), HAL_MAX_DELAY);
   /* USER CODE END 2 */
 
   /* Infinite loop */

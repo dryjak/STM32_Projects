@@ -38,17 +38,17 @@ float gy_offset = 0.0f;
 float gz_offset = 0.0f;
 
 
-
-HAL_StatusTypeDef MPU6050_WHO_AM_I (MPU6050_t *MPU6050, uint8_t *Who_am_I)
-{
-	return MPU6050_MemRead(MPU6050, WHO_AM_I, Who_am_I, 1);
-}
-
 void MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Address)
 {
 	MPU6050->hi2c 		= 	Hi2c;
 	MPU6050->address 	= 	Address;
 }
+HAL_StatusTypeDef MPU6050_WHO_AM_I (MPU6050_t *MPU6050, uint8_t *Who_am_I)
+{
+	return MPU6050_MemRead(MPU6050, WHO_AM_I, Who_am_I, 1);
+}
+
+
 
 HAL_StatusTypeDef MPU6050_MemRead(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data, uint16_t Size)
 {
