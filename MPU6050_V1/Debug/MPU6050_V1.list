@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000500c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00010eee  00000000  00000000  0000503c  2**0
+ 12 .debug_info   00010ef3  00000000  00000000  0000503c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 000024d6  00000000  00000000  00015f2a  2**0
+ 13 .debug_abbrev 000024d6  00000000  00000000  00015f2f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000d40  00000000  00000000  00018400  2**3
+ 14 .debug_aranges 00000d40  00000000  00000000  00018408  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00000a3f  00000000  00000000  00019140  2**0
+ 15 .debug_rnglists 00000a3f  00000000  00000000  00019148  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00025d87  00000000  00000000  00019b7f  2**0
+ 16 .debug_macro  00025d87  00000000  00000000  00019b87  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00010e28  00000000  00000000  0003f906  2**0
+ 17 .debug_line   00010e2c  00000000  00000000  0003f90e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000ecea5  00000000  00000000  0005072e  2**0
+ 18 .debug_str    000ecea5  00000000  00000000  0005073a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  0013d5d3  2**0
+ 19 .comment      00000043  00000000  00000000  0013d5df  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000035c8  00000000  00000000  0013d618  2**2
+ 20 .debug_frame  000035c8  00000000  00000000  0013d624  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000063  00000000  00000000  00140be0  2**0
+ 21 .debug_line_str 00000063  00000000  00000000  00140bec  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -429,51 +429,48 @@ uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register)
  8000588:	70fb      	strb	r3, [r7, #3]
 	uint8_t Value;
 
-	HAL_I2C_Mem_Read(MPU6050->hi2c, MPU6050->address, Register, 1, &Value, 1, MPU6050_TIMEOUT);
+	HAL_I2C_Mem_Read(MPU6050->hi2c, (MPU6050->address << 1), Register, 1, &Value, 1, MPU6050_TIMEOUT);
  800058a:	687b      	ldr	r3, [r7, #4]
  800058c:	6818      	ldr	r0, [r3, #0]
  800058e:	687b      	ldr	r3, [r7, #4]
- 8000590:	8899      	ldrh	r1, [r3, #4]
- 8000592:	78fb      	ldrb	r3, [r7, #3]
- 8000594:	b29a      	uxth	r2, r3
- 8000596:	f44f 73fa 	mov.w	r3, #500	@ 0x1f4
- 800059a:	9302      	str	r3, [sp, #8]
- 800059c:	2301      	movs	r3, #1
- 800059e:	9301      	str	r3, [sp, #4]
- 80005a0:	f107 030f 	add.w	r3, r7, #15
- 80005a4:	9300      	str	r3, [sp, #0]
- 80005a6:	2301      	movs	r3, #1
- 80005a8:	f000 feac 	bl	8001304 <HAL_I2C_Mem_Read>
+ 8000590:	889b      	ldrh	r3, [r3, #4]
+ 8000592:	005b      	lsls	r3, r3, #1
+ 8000594:	b299      	uxth	r1, r3
+ 8000596:	78fb      	ldrb	r3, [r7, #3]
+ 8000598:	b29a      	uxth	r2, r3
+ 800059a:	f44f 73fa 	mov.w	r3, #500	@ 0x1f4
+ 800059e:	9302      	str	r3, [sp, #8]
+ 80005a0:	2301      	movs	r3, #1
+ 80005a2:	9301      	str	r3, [sp, #4]
+ 80005a4:	f107 030f 	add.w	r3, r7, #15
+ 80005a8:	9300      	str	r3, [sp, #0]
+ 80005aa:	2301      	movs	r3, #1
+ 80005ac:	f000 feaa 	bl	8001304 <HAL_I2C_Mem_Read>
 
 	return Value;
- 80005ac:	7bfb      	ldrb	r3, [r7, #15]
+ 80005b0:	7bfb      	ldrb	r3, [r7, #15]
 }
- 80005ae:	4618      	mov	r0, r3
- 80005b0:	3710      	adds	r7, #16
- 80005b2:	46bd      	mov	sp, r7
- 80005b4:	bd80      	pop	{r7, pc}
+ 80005b2:	4618      	mov	r0, r3
+ 80005b4:	3710      	adds	r7, #16
+ 80005b6:	46bd      	mov	sp, r7
+ 80005b8:	bd80      	pop	{r7, pc}
 
-080005b6 <MPU6050_WHO_AM_I>:
-	return MPU6050_MemWrite(MPU6050, MPU6050_PWR_MGMT_1, Register);
-
-}
+080005ba <MPU6050_WHO_AM_I>:
 
 uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050)
 {
- 80005b6:	b580      	push	{r7, lr}
- 80005b8:	b084      	sub	sp, #16
- 80005ba:	af00      	add	r7, sp, #0
- 80005bc:	6078      	str	r0, [r7, #4]
+ 80005ba:	b580      	push	{r7, lr}
+ 80005bc:	b084      	sub	sp, #16
+ 80005be:	af00      	add	r7, sp, #0
+ 80005c0:	6078      	str	r0, [r7, #4]
 	uint8_t DeviceAdress = Read8(MPU6050, 0x75);
- 80005be:	2175      	movs	r1, #117	@ 0x75
- 80005c0:	6878      	ldr	r0, [r7, #4]
- 80005c2:	f7ff ffdc 	bl	800057e <Read8>
- 80005c6:	4603      	mov	r3, r0
- 80005c8:	73fb      	strb	r3, [r7, #15]
-	return (DeviceAdress << 1);
- 80005ca:	7bfb      	ldrb	r3, [r7, #15]
- 80005cc:	005b      	lsls	r3, r3, #1
- 80005ce:	b2db      	uxtb	r3, r3
+ 80005c2:	2175      	movs	r1, #117	@ 0x75
+ 80005c4:	6878      	ldr	r0, [r7, #4]
+ 80005c6:	f7ff ffda 	bl	800057e <Read8>
+ 80005ca:	4603      	mov	r3, r0
+ 80005cc:	73fb      	strb	r3, [r7, #15]
+	return DeviceAdress;
+ 80005ce:	7bfb      	ldrb	r3, [r7, #15]
 }
  80005d0:	4618      	mov	r0, r3
  80005d2:	3710      	adds	r7, #16
@@ -862,7 +859,7 @@ int main(void)
  8000806:	f7ff fe9d 	bl	8000544 <MPU6050_Init>
   DeviceAddress = MPU6050_WHO_AM_I(&MPU6050);
  800080a:	4809      	ldr	r0, [pc, #36]	@ (8000830 <main+0x48>)
- 800080c:	f7ff fed3 	bl	80005b6 <MPU6050_WHO_AM_I>
+ 800080c:	f7ff fed5 	bl	80005ba <MPU6050_WHO_AM_I>
  8000810:	4603      	mov	r3, r0
  8000812:	461a      	mov	r2, r3
  8000814:	4b07      	ldr	r3, [pc, #28]	@ (8000834 <main+0x4c>)

@@ -43,9 +43,15 @@ uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register)
 {
 	uint8_t Value;
 
-	HAL_I2C_Mem_Read(MPU6050->hi2c, MPU6050->address, Register, 1, &Value, 1, MPU6050_TIMEOUT);
+	HAL_I2C_Mem_Read(MPU6050->hi2c, (MPU6050->address << 1), Register, 1, &Value, 1, MPU6050_TIMEOUT);
 
 	return Value;
+}
+
+uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050)
+{
+	uint8_t DeviceAdress = Read8(MPU6050, 0x75);
+	return DeviceAdress;
 }
 
 HAL_StatusTypeDef MPU6050_WakeUp(MPU6050_t *MPU6050)
@@ -64,11 +70,7 @@ HAL_StatusTypeDef MPU6050_WakeUp(MPU6050_t *MPU6050)
 
 }
 
-uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050)
-{
-	uint8_t DeviceAdress = Read8(MPU6050, 0x75);
-	return (DeviceAdress << 1);
-}
+
 
 
 
