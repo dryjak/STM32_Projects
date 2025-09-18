@@ -50,11 +50,19 @@ typedef struct
 	int16_t GyroZ;
 }Gyro_t;
 
+typedef enum
+{
+	MPU6050_OK,
+	MPU6050_ERROR
+}MPU6050_STATE_t;
 
-HAL_StatusTypeDef MPU6050_WHO_AM_I (MPU6050_t *MPU6050, uint8_t *Who_am_I);
+
+
+
+uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050, uint8_t *Who_am_I);
 HAL_StatusTypeDef MPU6050_MemRead(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data, uint16_t Size);
 HAL_StatusTypeDef MPU6050_MemWrite(MPU6050_t *MPU6050, uint8_t Reg, uint8_t Data);
-uint8_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Address);
+MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Address);
 HAL_StatusTypeDef MPU6050_WakeUp(MPU6050_t *MPU6050);
 HAL_StatusTypeDef MPPU6050_SetAcceleration(MPU6050_t *MPU6050);
 HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations);

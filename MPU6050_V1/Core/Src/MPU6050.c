@@ -18,14 +18,13 @@ typedef union{
 	int16_t Var16u;
 }ConvTo16_t;
 
-
 //to calculate degrees from gyro
 float gx_offset = 0.0f;
 float gy_offset = 0.0f;
 float gz_offset = 0.0f;
 
 
-uint8_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Address)
+MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Address)
 {
 	uint8_t CheckID;
 
@@ -35,9 +34,9 @@ uint8_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Addre
 	CheckID = Read8(MPU6050, 0x75);
 	if (CheckID != 0x68)
 	{
-		return 1;
+		return MPU6050_ERROR;
 	}
-	return 0;
+	return MPU6050_OK;
 }
 
 uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register)
@@ -52,20 +51,23 @@ uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register)
 HAL_StatusTypeDef MPU6050_WakeUp(MPU6050_t *MPU6050)
 {
 	//Firstly you need to read the register value
-	uint8_t Register;
-	if ((MPU6050_MemRead(MPU6050, MPU6050_PWR_MGMT_1, &Register, 1)) != HAL_OK)
-	{
-		return HAL_ERROR;
-	}
+	uint8_t Register = Read8(MPU6050, MPU6050_PWR_MGMT_1);
 
-	//Setting 6th bit to 0 to disable sleep mode
-	Register &= ~(1 << 6);		//wyzeruj bit 6
+	//Disable sleep mode by setting 6th bit to 0
+	Register &= ~(1 << 6);
+	//Setting cycle bit to 0
+	Register &= ~(1 << 5);
+	//Disabling the temperature sensor
+	Register |= (1 << 3);
+
 	return MPU6050_MemWrite(MPU6050, MPU6050_PWR_MGMT_1, Register);
+
 }
 
-HAL_StatusTypeDef MPU6050_WHO_AM_I (MPU6050_t *MPU6050, uint8_t *Who_am_I)
+uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050, uint8_t *Who_am_I)
 {
-	return Read8(MPU6050, 0x75);
+	uint8_t DeviceAdress = Read8(MPU6050, 0x75);
+	return (DeviceAdress << 1);
 }
 
 
