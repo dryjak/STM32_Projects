@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000500c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00010ef3  00000000  00000000  0000503c  2**0
+ 12 .debug_info   00010f47  00000000  00000000  0000503c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 000024d6  00000000  00000000  00015f2f  2**0
+ 13 .debug_abbrev 000024d6  00000000  00000000  00015f83  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000d40  00000000  00000000  00018408  2**3
+ 14 .debug_aranges 00000d48  00000000  00000000  00018460  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00000a3f  00000000  00000000  00019148  2**0
+ 15 .debug_rnglists 00000a45  00000000  00000000  000191a8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00025d87  00000000  00000000  00019b87  2**0
+ 16 .debug_macro  00025d87  00000000  00000000  00019bed  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00010e2c  00000000  00000000  0003f90e  2**0
+ 17 .debug_line   00010e56  00000000  00000000  0003f974  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000ecea5  00000000  00000000  0005073a  2**0
+ 18 .debug_str    000eceac  00000000  00000000  000507ca  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  0013d5df  2**0
+ 19 .comment      00000043  00000000  00000000  0013d676  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000035c8  00000000  00000000  0013d624  2**2
+ 20 .debug_frame  000035ec  00000000  00000000  0013d6bc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000063  00000000  00000000  00140bec  2**0
+ 21 .debug_line_str 00000063  00000000  00000000  00140ca8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -456,6 +456,9 @@ uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register)
  80005b8:	bd80      	pop	{r7, pc}
 
 080005ba <MPU6050_WHO_AM_I>:
+
+	return ((Value[1] << 8) | (Value[0]));
+}
 
 uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050)
 {

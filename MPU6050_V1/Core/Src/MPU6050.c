@@ -48,6 +48,15 @@ uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register)
 	return Value;
 }
 
+uint16_t Read16(MPU6050_t *MPU6050, uint8_t Register)
+{
+	uint8_t Value[2];
+
+	HAL_I2C_Mem_Read(MPU6050->hi2c, (MPU6050->address) << 1, Register, 1, Value, 2, MPU6050_TIMEOUT);
+
+	return ((Value[1] << 8) | (Value[0]));
+}
+
 uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050)
 {
 	uint8_t DeviceAdress = Read8(MPU6050, 0x75);
