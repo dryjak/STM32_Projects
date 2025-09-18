@@ -25,13 +25,22 @@ float gy_offset = 0.0f;
 float gz_offset = 0.0f;
 
 
-void MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Address)
+uint8_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Address)
 {
+	uint8_t CheckID;
+
 	MPU6050->hi2c 		= 	Hi2c;
 	MPU6050->address 	= 	Address;
+
+	CheckID = Read8(MPU6050, 0x75);
+	if (CheckID != 0x68)
+	{
+		return 1;
+	}
+	return 0;
 }
 
-uint8_t MPU6050_Read8(MPU6050_t *MPU6050, uint8_t Register)
+uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register)
 {
 	uint8_t Value;
 
@@ -56,7 +65,7 @@ HAL_StatusTypeDef MPU6050_WakeUp(MPU6050_t *MPU6050)
 
 HAL_StatusTypeDef MPU6050_WHO_AM_I (MPU6050_t *MPU6050, uint8_t *Who_am_I)
 {
-	return MPU6050_MemRead(MPU6050, WHO_AM_I, Who_am_I, 1);
+	return Read8(MPU6050, 0x75);
 }
 
 
