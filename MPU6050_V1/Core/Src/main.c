@@ -98,6 +98,9 @@ int main(void)
   MX_LPUART1_UART_Init();
   /* USER CODE BEGIN 2 */
   MPU6050_Init(&MPU6050, &hi2c1, 0x68);
+  DeviceAddress = MPU6050_WHO_AM_I(&MPU6050);
+  HAL_UART_Transmit(&hlpuart1, &DeviceAddress, sizeof(DeviceAddress), HAL_MAX_DELAY);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */

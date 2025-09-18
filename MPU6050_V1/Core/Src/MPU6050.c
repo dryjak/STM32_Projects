@@ -64,7 +64,7 @@ HAL_StatusTypeDef MPU6050_WakeUp(MPU6050_t *MPU6050)
 
 }
 
-uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050, uint8_t *Who_am_I)
+uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050)
 {
 	uint8_t DeviceAdress = Read8(MPU6050, 0x75);
 	return (DeviceAdress << 1);
