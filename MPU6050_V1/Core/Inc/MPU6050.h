@@ -27,6 +27,8 @@
 #define GYRO_XOUT_H			0x43
 
 
+#define MPU6050_TIMEOUT 	500
+
 typedef struct{
 
 	I2C_HandleTypeDef *hi2c;

@@ -98,26 +98,26 @@ int main(void)
   MX_LPUART1_UART_Init();
   /* USER CODE BEGIN 2 */
   //initialize MPU6050
-  MPU6050_Init(&MPU6050, &hi2c1, 0x68);
+  //MPU6050_Init(&MPU6050, &hi2c1, 0x68);
 
   //check adress correctness
-  MPU6050_WHO_AM_I(&MPU6050, &DeviceAddress);
+  //MPU6050_WHO_AM_I(&MPU6050, &DeviceAddress);
 
-  HAL_UART_Transmit(&hlpuart1, &DeviceAddress, sizeof(uint8_t), HAL_MAX_DELAY);
+  //HAL_UART_Transmit(&hlpuart1, &DeviceAddress, sizeof(uint8_t), HAL_MAX_DELAY);
 
-  MPU6050_WakeUp(&MPU6050);
-  MPU6050_SetGyroRange(&MPU6050);
+  //MPU6050_WakeUp(&MPU6050);
+  //MPU6050_SetGyroRange(&MPU6050);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  MPU6050_ReadAcceleration(&MPU6050, &Accelerations);
+	  //MPU6050_ReadAcceleration(&MPU6050, &Accelerations);
 
-	  sprintf(Message, "X: %d\n\r", Accelerations.AccelX);
-	  HAL_UART_Transmit(&hlpuart1, Message, sizeof(Message), HAL_MAX_DELAY);
-	  HAL_Delay(1000);
+	  //sprintf(Message, "X: %d\n\r", Accelerations.AccelX);
+	  //HAL_UART_Transmit(&hlpuart1, Message, sizeof(Message), HAL_MAX_DELAY);
+	  //HAL_Delay(1000);
 	  //todo: check transmit corectness
 
     /* USER CODE END WHILE */

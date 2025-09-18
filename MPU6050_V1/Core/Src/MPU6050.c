@@ -31,6 +31,15 @@ void MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Address)
 	MPU6050->address 	= 	Address;
 }
 
+uint8_t MPU6050_Read8(MPU6050_t *MPU6050, uint8_t Register)
+{
+	uint8_t Value;
+
+	HAL_I2C_Mem_Read(MPU6050->hi2c, MPU6050->address, Register, 1, &Value, 1, MPU6050_TIMEOUT);
+
+	return Value;
+}
+
 HAL_StatusTypeDef MPU6050_WakeUp(MPU6050_t *MPU6050)
 {
 	//Firstly you need to read the register value
