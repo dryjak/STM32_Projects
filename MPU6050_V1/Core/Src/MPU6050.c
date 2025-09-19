@@ -8,6 +8,8 @@
 #include "main.h"
 #include "math.h"
 
+
+//TO DO: odczyt z accelerometru
 typedef union{
 	struct
 	{
