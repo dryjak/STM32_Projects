@@ -83,7 +83,10 @@ HAL_StatusTypeDef MPU6050_WakeUp(MPU6050_t *MPU6050)
 
 }
 
-
+HAL_StatusTypeDef Write8(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data)
+{
+	return HAL_I2C_Mem_Write(MPU6050->hi2c, (MPU6050->address << 1), Reg, I2C_MEMADD_SIZE_8BIT, Data, 1, MPU6050_TIMEOUT);
+}
 
 
 
