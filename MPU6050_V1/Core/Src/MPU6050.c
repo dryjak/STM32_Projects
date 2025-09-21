@@ -38,6 +38,13 @@ MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16
 	{
 		return MPU6050_ERROR;
 	}
+
+	if (MPU6050_WakeUp(MPU6050) != MPU6050_OK)
+	{
+		return MPU6050_ERROR;
+	}
+
+
 	return MPU6050_OK;
 }
 
@@ -45,21 +52,21 @@ uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register)
 {
 	uint8_t Value;
 
-	HAL_I2C_Mem_Read(MPU6050->hi2c, (MPU6050->address << 1), Register, 1, &Value, 1, MPU6050_TIMEOUT);
+	HAL_I2C_Mem_Read(MPU6050->hi2c, ((MPU6050->address) << 1), Register, 1, &Value, 1, MPU6050_TIMEOUT);
 
 	return Value;
 }
 
-void Write8(MPU6050_t *MPU6050, uint8_t Register, uint8_t Value)
+MPU6050_STATE_t Write8(MPU6050_t *MPU6050, uint8_t Register, uint8_t Value)
 {
-	HAL_I2C_Mem_Write(MPU6050->hi2c, (MPU6050->address) << 1, Register, 1, &Value, 1, MPU6050_TIMEOUT);
+	return HAL_I2C_Mem_Write(MPU6050->hi2c, (MPU6050->address) << 1, Register, 1, &Value, 1, MPU6050_TIMEOUT);
 }
 
 uint16_t Read16(MPU6050_t *MPU6050, uint8_t Register)
 {
 	uint8_t Value[2];
 
-	HAL_I2C_Mem_Read(MPU6050->hi2c, (MPU6050->address) << 1, Register, 1, Value, 2, MPU6050_TIMEOUT);
+	HAL_I2C_Mem_Read(MPU6050->hi2c, ((MPU6050->address) << 1), Register, 1, Value, 2, MPU6050_TIMEOUT);
 
 	return ((Value[1] << 8) | (Value[0]));
 }
@@ -70,20 +77,19 @@ uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050)
 	return DeviceAdress;
 }
 
-HAL_StatusTypeDef MPU6050_WakeUp(MPU6050_t *MPU6050)
+MPU6050_STATE_t MPU6050_WakeUp(MPU6050_t *MPU6050)
 {
 	//Firstly you need to read the register value
-	uint8_t Register = Read8(MPU6050, MPU6050_PWR_MGMT_1);
+	uint8_t Value = Read8(MPU6050, PWR_MGMT_1);
 
 	//Disable sleep mode by setting 6th bit to 0
-	Register &= ~(1 << 6);
+	Value &= ~(1 << 6);
 	//Setting cycle bit to 0
-	Register &= ~(1 << 5);
+	Value &= ~(1 << 5);
 	//Disabling the temperature sensor
-	Register |= (1 << 3);
+	Value |= (1 << 3);
 
-	return MPU6050_MemWrite(MPU6050, MPU6050_PWR_MGMT_1, Register);
-
+	return Write8(MPU6050, PWR_MGMT_1, Value);
 }
 
 HAL_StatusTypeDef MPU6050_MemRead(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data, uint16_t Size)

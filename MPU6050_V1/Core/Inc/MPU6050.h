@@ -11,9 +11,9 @@
 #include "main.h"
 
 #define WHO_AM_I 			0x75
-#define MPU6050_ADR0 		0x68
-#define MPU6050_ADR1 		0x69
-#define MPU6050_PWR_MGMT_1	0x6B
+#define ADR0		 		0x68
+#define ADR1 				0x69
+#define PWR_MGMT_1			0x6B
 #define GYRO_CONFIG 		0x1B
 #define ACCEL_CONFIG 		0x1C
 
@@ -63,7 +63,7 @@ uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050);
 HAL_StatusTypeDef MPU6050_MemRead(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data, uint16_t Size);
 HAL_StatusTypeDef MPU6050_MemWrite(MPU6050_t *MPU6050, uint8_t Reg, uint8_t Data);
 MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Address);
-HAL_StatusTypeDef MPU6050_WakeUp(MPU6050_t *MPU6050);
+MPU6050_STATE_t MPU6050_WakeUp(MPU6050_t *MPU6050);
 HAL_StatusTypeDef MPPU6050_SetAcceleration(MPU6050_t *MPU6050);
 HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations);
 
