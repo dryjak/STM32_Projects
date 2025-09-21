@@ -50,6 +50,13 @@ typedef struct
 
 typedef struct
 {
+	float OffsetX;
+	float OffsetY;
+	float OffsetZ;
+}AccelOffset_t;
+
+typedef struct
+{
 	int16_t GyroX;
 	int16_t GyroY;
 	int16_t GyroZ;
@@ -71,10 +78,11 @@ MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16
 MPU6050_STATE_t MPU6050_WakeUp(MPU6050_t *MPU6050);
 MPU6050_STATE_t MPU6050_SetAccelerationRange(MPU6050_t *MPU6050);
 MPU6050_STATE_t MPU6050_SetGyroRange(MPU6050_t *MPU6050);
-MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations);
+MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations, AccelOffset_t AccelOffset);
 
 
 uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register);
+MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelOffset);
 
 
 

@@ -9,6 +9,9 @@
 #include "math.h"
 
 
+#define ACCEL_SCALE_FACTOR 16384.0f		//scale factor for acceleration range +/- 2g
+
+
 //TO DO: odczyt z accelerometru
 typedef union{
 	struct
@@ -121,7 +124,7 @@ MPU6050_STATE_t MPU6050_SetAccelerationRange(MPU6050_t *MPU6050)
 	return Write8(MPU6050, ACCEL_CONFIG, RegisterValue);
 }
 
-MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations)
+MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations, AccelOffset_t AccelOffset)
 {
 
 	//read acceleration data
@@ -129,11 +132,9 @@ MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerati
 	int16_t AccelRawY = Read16(MPU6050, ACCEL_YOUT_H);
 	int16_t AccelRawZ = Read16(MPU6050, ACCEL_ZOUT_H);
 
-	float ScaleFactor = 16384.0f;		//scale factor for acceleration range +/- 2g
-
-	Accelerations->AccelX = (AccelRawX / ScaleFactor);
-	Accelerations->AccelY = (AccelRawY / ScaleFactor);
-	Accelerations->AccelZ = (AccelRawZ / ScaleFactor);
+	Accelerations->AccelX = (AccelRawX / ACCEL_SCALE_FACTOR) - AccelOffset.OffsetX;
+	Accelerations->AccelY = (AccelRawY / ACCEL_SCALE_FACTOR) - AccelOffset.OffsetY;
+	Accelerations->AccelZ = (AccelRawZ / ACCEL_SCALE_FACTOR) - AccelOffset.OffsetZ;
 
 	return MPU6050_OK;
 
@@ -155,6 +156,29 @@ MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerati
 	*/
 }
 
+//accelerometr calibration
+MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelOffset)
+{
+	Accel_t Accelerations;
+	int32_t SumX, SumY, SumZ;
+
+	uint8_t SamplesNumber = 100;
+	uint8_t i = 0;
+
+	for(i = 0; i < SamplesNumber; i++)
+	{
+		MPU6050_ReadAcceleration(MPU6050, &Accelerations, *AccelOffset);
+
+		SumX += Accelerations.AccelX * ACCEL_SCALE_FACTOR;
+		SumY += Accelerations.AccelY * ACCEL_SCALE_FACTOR;
+		SumZ += Accelerations.AccelZ * ACCEL_SCALE_FACTOR;
+	}
+	AccelOffset->OffsetX = SumX / (SamplesNumber * ACCEL_SCALE_FACTOR);
+	AccelOffset->OffsetY = SumY / (SamplesNumber * ACCEL_SCALE_FACTOR);
+	AccelOffset->OffsetZ = (SumZ / (SamplesNumber * ACCEL_SCALE_FACTOR)) - 1;
+
+	return MPU6050_OK;
+}
 
 
 
@@ -165,6 +189,7 @@ MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerati
 
 
 
+/*
 
 HAL_StatusTypeDef MPU6050_MemRead(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data, uint16_t Size)
 {
@@ -204,7 +229,7 @@ HAL_StatusTypeDef MPU6050_MeanAccelerations(MPU6050_t *MPU6050, Accel_t *Acceler
 	uint8_t Sample = 50;
 	int32_t AccelSumX, AccelSumY, AccelSumZ;
 
-	MPU6050_ReadAcceleration(MPU6050, Accelerations);
+	MPU6050_ReadAcceleration(MPU6050, Accelerations, );
 
 	for(i = 0; i < Sample; i++)
 	{
@@ -310,5 +335,8 @@ HAL_StatusTypeDef MPU6050_ComputeAngles(MPU6050_t *MPU6050, Accel_t *Acceleratio
 	*Pitch = (alpha * GyroPitch) + ((1-alpha) * AccelerationPitch);
 
 	return HAL_OK;
-}
 
+
+
+}
+*/
