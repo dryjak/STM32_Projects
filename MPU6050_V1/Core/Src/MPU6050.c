@@ -43,7 +43,14 @@ MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16
 	{
 		return MPU6050_ERROR;
 	}
-
+	if (MPU6050_SetAccelerationRange(MPU6050) != MPU6050_OK)
+	{
+		return MPU6050_ERROR;
+	}
+	if (MPU6050_SetGyroRange(MPU6050) != MPU6050_OK)
+	{
+		return MPU6050_ERROR;
+	}
 
 	return MPU6050_OK;
 }
@@ -104,14 +111,14 @@ MPU6050_STATE_t MPU6050_SetGyroRange(MPU6050_t *MPU6050)
 	return Write8(MPU6050, GYRO_CONFIG, RegisterValue);
 }
 
-HAL_StatusTypeDef MPPU6050_SetAcceleration(MPU6050_t *MPU6050)
+MPU6050_STATE_t MPU6050_SetAccelerationRange(MPU6050_t *MPU6050)
 {
 	//Firstly you need to read the register value
 	uint8_t RegisterValue;
 	RegisterValue = Read8(MPU6050, ACCEL_CONFIG);
 
 	RegisterValue &= (~((1 << 4)|(1 << 5)));		//setting acceleration to -/+ 2g
-	return Write8(MPU6050, RegisterValue, RegisterValue);
+	return Write8(MPU6050, ACCEL_CONFIG, RegisterValue);
 }
 
 

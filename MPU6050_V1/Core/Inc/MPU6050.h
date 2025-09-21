@@ -64,7 +64,8 @@ HAL_StatusTypeDef MPU6050_MemRead(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data
 HAL_StatusTypeDef MPU6050_MemWrite(MPU6050_t *MPU6050, uint8_t Reg, uint8_t Data);
 MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Address);
 MPU6050_STATE_t MPU6050_WakeUp(MPU6050_t *MPU6050);
-HAL_StatusTypeDef MPPU6050_SetAcceleration(MPU6050_t *MPU6050);
+MPU6050_STATE_t MPU6050_SetAccelerationRange(MPU6050_t *MPU6050);
+MPU6050_STATE_t MPU6050_SetGyroRange(MPU6050_t *MPU6050);
 HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations);
 
 

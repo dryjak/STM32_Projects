@@ -26,6 +26,7 @@
 /* USER CODE BEGIN Includes */
 #include "MPU6050.h"
 #include <stdio.h>
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,6 +51,8 @@ MPU6050_t MPU6050;
 uint8_t DeviceAddress;
 uint8_t Status;
 Accel_t Accelerations;
+
+uint8_t GyroRange, AccelRange;
 
 char Message[128];
 /* USER CODE END PV */
@@ -98,8 +101,19 @@ int main(void)
   MX_LPUART1_UART_Init();
   /* USER CODE BEGIN 2 */
   Status = MPU6050_Init(&MPU6050, &hi2c1, 0x68);
+  sprintf(Message, "Status = %d\n", Status);
+  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+
   DeviceAddress = MPU6050_WHO_AM_I(&MPU6050);
-  HAL_UART_Transmit(&hlpuart1, &DeviceAddress, sizeof(DeviceAddress), HAL_MAX_DELAY);
+  sprintf(Message, "Who am I = %d\n", DeviceAddress);
+  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+
+  GyroRange = Read8(&MPU6050, GYRO_CONFIG);
+  AccelRange = Read8(&MPU6050, ACCEL_CONFIG);
+  sprintf(Message, "GyroRange = %d\n", GyroRange);
+  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+  sprintf(Message, "AccelRange = %d\n", AccelRange);
+  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
 
   /* USER CODE END 2 */
 
