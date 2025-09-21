@@ -92,28 +92,16 @@ MPU6050_STATE_t MPU6050_WakeUp(MPU6050_t *MPU6050)
 	return Write8(MPU6050, PWR_MGMT_1, Value);
 }
 
-HAL_StatusTypeDef MPU6050_MemRead(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data, uint16_t Size)
-{
-	return HAL_I2C_Mem_Read(MPU6050->hi2c, (MPU6050->address << 1), Reg, I2C_MEMADD_SIZE_8BIT, Data, Size, HAL_MAX_DELAY);
-}
-
-HAL_StatusTypeDef MPU6050_MemWrite(MPU6050_t *MPU6050, uint8_t Reg, uint8_t Data)
-{
-	return HAL_I2C_Mem_Write(MPU6050->hi2c, (MPU6050->address << 1), Reg, I2C_MEMADD_SIZE_8BIT, &Data, 1, HAL_MAX_DELAY);
-}
-
-HAL_StatusTypeDef MPU6050_SetGyroRange(MPU6050_t *MPU6050)
+MPU6050_STATE_t MPU6050_SetGyroRange(MPU6050_t *MPU6050)
 {
 	//Firstly you need to read the register value
-	uint8_t Register;
-	if ((MPU6050_MemRead(MPU6050, GYRO_CONFIG, &Register, 1)) != HAL_OK)
-	{
-		return HAL_ERROR;
-	}
+	uint8_t RegisterValue;
+	RegisterValue = Read8(MPU6050, GYRO_CONFIG);
+
 
 	//setting FS_SEL[1:0] in order to setfull scale range
-	Register &= (~((1 << 4) | (1 << 5)));		//setting 250 stopni na sekunde
-	return MPU6050_MemWrite(MPU6050, GYRO_CONFIG, Register);
+	RegisterValue &= (~((1 << 4) | (1 << 5)));		//setting 250 degrees per second
+	return Write8(MPU6050, GYRO_CONFIG, RegisterValue);
 }
 
 HAL_StatusTypeDef MPPU6050_SetAcceleration(MPU6050_t *MPU6050)
@@ -128,6 +116,22 @@ HAL_StatusTypeDef MPPU6050_SetAcceleration(MPU6050_t *MPU6050)
 	Register &= (~((1 << 4)|(1 << 5)));		//setting acceleration to -/+ 2g
 	return MPU6050_MemWrite(MPU6050, ACCEL_CONFIG, Register);
 }
+
+
+
+
+
+HAL_StatusTypeDef MPU6050_MemRead(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data, uint16_t Size)
+{
+	return HAL_I2C_Mem_Read(MPU6050->hi2c, (MPU6050->address << 1), Reg, I2C_MEMADD_SIZE_8BIT, Data, Size, HAL_MAX_DELAY);
+}
+
+HAL_StatusTypeDef MPU6050_MemWrite(MPU6050_t *MPU6050, uint8_t Reg, uint8_t Data)
+{
+	return HAL_I2C_Mem_Write(MPU6050->hi2c, (MPU6050->address << 1), Reg, I2C_MEMADD_SIZE_8BIT, &Data, 1, HAL_MAX_DELAY);
+}
+
+
 
 HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations)
 {
