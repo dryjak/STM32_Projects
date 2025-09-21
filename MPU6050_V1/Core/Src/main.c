@@ -48,7 +48,7 @@
 /* USER CODE BEGIN PV */
 MPU6050_t MPU6050;
 uint8_t DeviceAddress;
-
+uint8_t Status;
 Accel_t Accelerations;
 
 char Message[128];
@@ -97,7 +97,7 @@ int main(void)
   MX_I2C1_Init();
   MX_LPUART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  MPU6050_Init(&MPU6050, &hi2c1, 0x68);
+  Status = MPU6050_Init(&MPU6050, &hi2c1, 0x68);
   DeviceAddress = MPU6050_WHO_AM_I(&MPU6050);
   HAL_UART_Transmit(&hlpuart1, &DeviceAddress, sizeof(DeviceAddress), HAL_MAX_DELAY);
 
