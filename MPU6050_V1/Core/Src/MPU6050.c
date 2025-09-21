@@ -75,7 +75,7 @@ uint16_t Read16(MPU6050_t *MPU6050, uint8_t Register)
 
 	HAL_I2C_Mem_Read(MPU6050->hi2c, ((MPU6050->address) << 1), Register, 1, Value, 2, MPU6050_TIMEOUT);
 
-	return ((Value[1] << 8) | (Value[0]));
+	return ((Value[0] << 8) | (Value[1]));
 }
 
 uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050)
@@ -121,33 +121,21 @@ MPU6050_STATE_t MPU6050_SetAccelerationRange(MPU6050_t *MPU6050)
 	return Write8(MPU6050, ACCEL_CONFIG, RegisterValue);
 }
 
-
-
-
-
-HAL_StatusTypeDef MPU6050_MemRead(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data, uint16_t Size)
-{
-	return HAL_I2C_Mem_Read(MPU6050->hi2c, (MPU6050->address << 1), Reg, I2C_MEMADD_SIZE_8BIT, Data, Size, HAL_MAX_DELAY);
-}
-
-HAL_StatusTypeDef MPU6050_MemWrite(MPU6050_t *MPU6050, uint8_t Reg, uint8_t Data)
-{
-	return HAL_I2C_Mem_Write(MPU6050->hi2c, (MPU6050->address << 1), Reg, I2C_MEMADD_SIZE_8BIT, &Data, 1, HAL_MAX_DELAY);
-}
-
-
-
-HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations)
+MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations)
 {
 
+	//read acceleration data
+	int16_t AccelRawX = Read16(MPU6050, ACCEL_XOUT_H);
+	int16_t AccelRawY = Read16(MPU6050, ACCEL_YOUT_H);
+	int16_t AccelRawZ = Read16(MPU6050, ACCEL_ZOUT_H);
 
-	uint8_t AccelData[6];
+	float ScaleFactor = 16384.0f;		//scale factor for acceleration range +/- 2g
 
-	//Read Acceleration value
-	if ((MPU6050_MemRead(MPU6050, ACCEL_XOUT_H, AccelData, 6)) == HAL_ERROR)
-	{
-		return HAL_ERROR;
-	}
+	Accelerations->AccelX = (AccelRawX / ScaleFactor);
+	Accelerations->AccelY = (AccelRawY / ScaleFactor);
+	Accelerations->AccelZ = (AccelRawZ / ScaleFactor);
+
+	return MPU6050_OK;
 
 	/*
 	//practising union
@@ -165,14 +153,32 @@ HAL_StatusTypeDef MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelera
 	*Gy = AccelY.Var16u;
 	*Gz = AccelZ.Var16u;
 	*/
-
-	Accelerations->AccelX = ((int16_t) (AccelData[0] << 8) | (AccelData[1])) / 16384.0f;
-	Accelerations->AccelY = ((int16_t) (AccelData[2] << 8) | (AccelData[3])) / 16384.0f;
-	Accelerations->AccelZ = ((int16_t) (AccelData[4] << 8) | (AccelData[5])) / 16384.0f;
-
-
-	return HAL_OK;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+HAL_StatusTypeDef MPU6050_MemRead(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data, uint16_t Size)
+{
+	return HAL_I2C_Mem_Read(MPU6050->hi2c, (MPU6050->address << 1), Reg, I2C_MEMADD_SIZE_8BIT, Data, Size, HAL_MAX_DELAY);
+}
+
+HAL_StatusTypeDef MPU6050_MemWrite(MPU6050_t *MPU6050, uint8_t Reg, uint8_t Data)
+{
+	return HAL_I2C_Mem_Write(MPU6050->hi2c, (MPU6050->address << 1), Reg, I2C_MEMADD_SIZE_8BIT, &Data, 1, HAL_MAX_DELAY);
+}
+
+
+
+
 
 HAL_StatusTypeDef MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *Gyro)
 {

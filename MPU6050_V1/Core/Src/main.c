@@ -121,7 +121,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
+	  HAL_Delay(1000);
+	  MPU6050_ReadAcceleration(&MPU6050, &Accelerations);
+	  sprintf(Message, "Accel X: %f\n", Accelerations.AccelX);
+	  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
