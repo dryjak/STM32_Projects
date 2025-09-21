@@ -107,14 +107,11 @@ MPU6050_STATE_t MPU6050_SetGyroRange(MPU6050_t *MPU6050)
 HAL_StatusTypeDef MPPU6050_SetAcceleration(MPU6050_t *MPU6050)
 {
 	//Firstly you need to read the register value
-	uint8_t Register;
-	if ((MPU6050_MemRead(MPU6050, ACCEL_CONFIG, &Register, 1)) != HAL_OK)
-	{
-		return HAL_ERROR;
-	}
+	uint8_t RegisterValue;
+	RegisterValue = Read8(MPU6050, ACCEL_CONFIG);
 
-	Register &= (~((1 << 4)|(1 << 5)));		//setting acceleration to -/+ 2g
-	return MPU6050_MemWrite(MPU6050, ACCEL_CONFIG, Register);
+	RegisterValue &= (~((1 << 4)|(1 << 5)));		//setting acceleration to -/+ 2g
+	return Write8(MPU6050, RegisterValue, RegisterValue);
 }
 
 
