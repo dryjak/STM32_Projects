@@ -160,7 +160,9 @@ MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerati
 MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelOffset)
 {
 	Accel_t Accelerations;
-	int32_t SumX, SumY, SumZ;
+	int32_t SumX = 0;
+	int32_t SumY = 0;
+	int32_t SumZ = 0;
 
 	uint8_t SamplesNumber = 100;
 	uint8_t i = 0;
@@ -172,6 +174,8 @@ MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelO
 		SumX += Accelerations.AccelX * ACCEL_SCALE_FACTOR;
 		SumY += Accelerations.AccelY * ACCEL_SCALE_FACTOR;
 		SumZ += Accelerations.AccelZ * ACCEL_SCALE_FACTOR;
+
+		HAL_Delay(2);
 	}
 	AccelOffset->OffsetX = SumX / (SamplesNumber * ACCEL_SCALE_FACTOR);
 	AccelOffset->OffsetY = SumY / (SamplesNumber * ACCEL_SCALE_FACTOR);
