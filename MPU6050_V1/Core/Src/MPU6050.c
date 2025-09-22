@@ -135,6 +135,13 @@ MPU6050_STATE_t MPU6050_ReadAccelerationRaw(MPU6050_t *MPU6050, AccelRaw_t *Acce
 }
 MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations, AccelOffset_t AccelOffset)
 {
+	AccelRaw_t AccelRaw;
+	MPU6050_ReadAccelerationRaw(MPU6050, &AccelRaw);
+
+	Accelerations->AccelX = (AccelRaw.GyroX / GYRO_SCALE_FACTOR) - AccelOffset.OffsetX;
+	Accelerations->AccelY = (AccelRaw.GyroY / GYRO_SCALE_FACTOR) - AccelOffset.OffsetY;
+	Accelerations->AccelZ = (AccelRaw.GyroZ / GYRO_SCALE_FACTOR) - AccelOffset.OffsetZ;
+
 
 	return MPU6050_OK;
 
