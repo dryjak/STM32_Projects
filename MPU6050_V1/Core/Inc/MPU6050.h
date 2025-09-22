@@ -50,6 +50,13 @@ typedef struct
 
 typedef struct
 {
+	int16_t GyroX;
+	int16_t GyroY;
+	int16_t GyroZ;
+}AccelRaw_t;
+
+typedef struct
+{
 	float OffsetX;
 	float OffsetY;
 	float OffsetZ;

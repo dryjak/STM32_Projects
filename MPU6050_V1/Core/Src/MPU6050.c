@@ -124,18 +124,17 @@ MPU6050_STATE_t MPU6050_SetAccelerationRange(MPU6050_t *MPU6050)
 	RegisterValue &= (~((1 << 4)|(1 << 5)));		//setting acceleration to -/+ 2g
 	return Write8(MPU6050, ACCEL_CONFIG, RegisterValue);
 }
+//ACCELEROMETR DATA
+MPU6050_STATE_t MPU6050_ReadAccelerationRaw(MPU6050_t *MPU6050, AccelRaw_t *AccelRaw)
+{
+	AccelRaw->GyroX = Read16(MPU6050, ACCEL_XOUT_H);
+	AccelRaw->GyroY = Read16(MPU6050, ACCEL_YOUT_H);
+	AccelRaw->GyroZ = Read16(MPU6050, ACCEL_ZOUT_H);
 
+	return MPU6050_OK;
+}
 MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations, AccelOffset_t AccelOffset)
 {
-
-	//read acceleration data
-	int16_t AccelRawX = Read16(MPU6050, ACCEL_XOUT_H);
-	int16_t AccelRawY = Read16(MPU6050, ACCEL_YOUT_H);
-	int16_t AccelRawZ = Read16(MPU6050, ACCEL_ZOUT_H);
-
-	Accelerations->AccelX = (AccelRawX / ACCEL_SCALE_FACTOR) - AccelOffset.OffsetX;
-	Accelerations->AccelY = (AccelRawY / ACCEL_SCALE_FACTOR) - AccelOffset.OffsetY;
-	Accelerations->AccelZ = (AccelRawZ / ACCEL_SCALE_FACTOR) - AccelOffset.OffsetZ;
 
 	return MPU6050_OK;
 
