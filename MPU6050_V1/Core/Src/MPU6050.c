@@ -165,16 +165,17 @@ MPU6050_STATE_t MPU6050_ReadGyroRaw(MPU6050_t *MPU6050, Gyro_t *GyroRaw)
 
 	return MPU6050_OK;
 }
-MPU6050_STATE_t MPU6050_CalculateGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated, GyroOffset_t GyroOffset)
+
+MPU6050_STATE_t MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated, GyroOffset_t GyroOffset)
 {
 	Gyro_t GyroRaw;
 	MPU6050_ReadGyroRaw(MPU6050, &GyroRaw);
+
 	GyroCalculated->GyroX = (GyroRaw.GyroX / GYRO_SCALE_FACTOR) - GyroOffset.OffsetX;
 	GyroCalculated->GyroY = (GyroRaw.GyroY / GYRO_SCALE_FACTOR) - GyroOffset.OffsetY;
 	GyroCalculated->GyroZ = (GyroRaw.GyroZ / GYRO_SCALE_FACTOR) - GyroOffset.OffsetZ;
 
 	return MPU6050_OK;
-
 }
 
 //accelerometr calibration
@@ -205,7 +206,7 @@ MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelO
 	return MPU6050_OK;
 }
 
-/*
+
 MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050, GyroOffset_t *GyroOffset)
 {
 	Gyro_t Gyro;
@@ -218,13 +219,23 @@ MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050, GyroOffset_t *GyroOffs
 
 	for(i = 0; i < SamplesNumber; i++)
 	{
-		MPU6050ReadGyro(MPU6050, &Gyro, *GyroOffset);
+		MPU6050_ReadGyroRaw(MPU6050, &Gyro);
 
-		SumX = Gyro.GyroX * Accel
+		SumX += Gyro.GyroX;
+		SumY += Gyro.GyroY;
+		SumZ += Gyro.GyroZ;
+
+		HAL_Delay(2);
 	}
+
+	GyroOffset->OffsetX = SumX / (SamplesNumber * GYRO_SCALE_FACTOR);
+	GyroOffset->OffsetY = SumY / (SamplesNumber * GYRO_SCALE_FACTOR);
+	GyroOffset->OffsetZ = SumZ / (SamplesNumber * GYRO_SCALE_FACTOR);
+
+	return MPU6050_OK;
 }
 
-*/
+
 
 
 

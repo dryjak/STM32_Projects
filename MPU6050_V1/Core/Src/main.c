@@ -54,6 +54,7 @@ Accel_t Accelerations;
 
 uint8_t GyroRange, AccelRange;
 AccelOffset_t AccelOffset;
+GyroOffset_t GyroOffset;
 
 char Message[128];
 /* USER CODE END PV */
@@ -118,6 +119,7 @@ int main(void)
 
 
   MPU6050_CalibrateAccel(&MPU6050, &AccelOffset);
+  MPU6050_CalibrateGyro(&MPU6050, &GyroOffset);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -128,6 +130,8 @@ int main(void)
 	  MPU6050_ReadAcceleration(&MPU6050, &Accelerations, AccelOffset);
 	  sprintf(Message, "Accel X: %f\n", Accelerations.AccelX);
 	  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

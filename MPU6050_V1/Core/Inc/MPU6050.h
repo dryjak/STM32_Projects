@@ -92,6 +92,13 @@ uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register);
 MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelOffset);
 
 
+//functions for gyro
+MPU6050_STATE_t MPU6050_ReadGyroRaw(MPU6050_t *MPU6050, Gyro_t *GyroRaw);
+MPU6050_STATE_t MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated, GyroOffset_t GyroOffset);
+MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050, GyroOffset_t *GyroOffset);
+
+
+
 
 
 
