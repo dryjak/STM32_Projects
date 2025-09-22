@@ -3569,20 +3569,21 @@ LOAD /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.
                 0x08000f8e                Read8
  .text.Write8   0x08000fca       0x3e ./Core/Src/MPU6050.o
                 0x08000fca                Write8
- .text.Read16   0x08001008       0x4c ./Core/Src/MPU6050.o
+ .text.Read16   0x08001008       0x4a ./Core/Src/MPU6050.o
                 0x08001008                Read16
  .text.MPU6050_WHO_AM_I
-                0x08001054       0x1e ./Core/Src/MPU6050.o
-                0x08001054                MPU6050_WHO_AM_I
+                0x08001052       0x1e ./Core/Src/MPU6050.o
+                0x08001052                MPU6050_WHO_AM_I
  .text.MPU6050_WakeUp
-                0x08001072       0x42 ./Core/Src/MPU6050.o
-                0x08001072                MPU6050_WakeUp
+                0x08001070       0x42 ./Core/Src/MPU6050.o
+                0x08001070                MPU6050_WakeUp
  .text.MPU6050_SetGyroRange
-                0x080010b4       0x32 ./Core/Src/MPU6050.o
-                0x080010b4                MPU6050_SetGyroRange
+                0x080010b2       0x32 ./Core/Src/MPU6050.o
+                0x080010b2                MPU6050_SetGyroRange
  .text.MPU6050_SetAccelerationRange
-                0x080010e6       0x32 ./Core/Src/MPU6050.o
-                0x080010e6                MPU6050_SetAccelerationRange
+                0x080010e4       0x32 ./Core/Src/MPU6050.o
+                0x080010e4                MPU6050_SetAccelerationRange
+ *fill*         0x08001116        0x2 
  .text.MPU6050_ReadAcceleration
                 0x08001118       0xbc ./Core/Src/MPU6050.o
                 0x08001118                MPU6050_ReadAcceleration
@@ -4804,28 +4805,28 @@ LOAD /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.
  .debug_macro   0x00026a5c      0x1fe ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.o
  .debug_macro   0x00026c5a      0x1df ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.o
 
-.debug_line     0x00000000    0x11aaf
- .debug_line    0x00000000      0xacf ./Core/Src/MPU6050.o
- .debug_line    0x00000acf      0x6c2 ./Core/Src/gpio.o
- .debug_line    0x00001191      0x747 ./Core/Src/i2c.o
- .debug_line    0x000018d8      0x92d ./Core/Src/main.o
- .debug_line    0x00002205      0x6a7 ./Core/Src/stm32g4xx_hal_msp.o
- .debug_line    0x000028ac      0x76d ./Core/Src/stm32g4xx_it.o
- .debug_line    0x00003019      0x7e1 ./Core/Src/syscalls.o
- .debug_line    0x000037fa      0x4bd ./Core/Src/sysmem.o
- .debug_line    0x00003cb7      0x713 ./Core/Src/system_stm32g4xx.o
- .debug_line    0x000043ca      0x758 ./Core/Src/usart.o
- .debug_line    0x00004b22       0x7b ./Core/Startup/startup_stm32g474retx.o
- .debug_line    0x00004b9d      0xadf ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o
- .debug_line    0x0000567c      0xc44 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o
- .debug_line    0x000062c0      0xab8 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o
- .debug_line    0x00006d78     0x3673 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c.o
- .debug_line    0x0000a3eb      0x80c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c_ex.o
- .debug_line    0x0000abf7      0xc3e ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o
- .debug_line    0x0000b835      0xf62 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o
- .debug_line    0x0000c797     0x11d7 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o
- .debug_line    0x0000d96e     0x352d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.o
- .debug_line    0x00010e9b      0xc14 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.o
+.debug_line     0x00000000    0x11a81
+ .debug_line    0x00000000      0xaa1 ./Core/Src/MPU6050.o
+ .debug_line    0x00000aa1      0x6c2 ./Core/Src/gpio.o
+ .debug_line    0x00001163      0x747 ./Core/Src/i2c.o
+ .debug_line    0x000018aa      0x92d ./Core/Src/main.o
+ .debug_line    0x000021d7      0x6a7 ./Core/Src/stm32g4xx_hal_msp.o
+ .debug_line    0x0000287e      0x76d ./Core/Src/stm32g4xx_it.o
+ .debug_line    0x00002feb      0x7e1 ./Core/Src/syscalls.o
+ .debug_line    0x000037cc      0x4bd ./Core/Src/sysmem.o
+ .debug_line    0x00003c89      0x713 ./Core/Src/system_stm32g4xx.o
+ .debug_line    0x0000439c      0x758 ./Core/Src/usart.o
+ .debug_line    0x00004af4       0x7b ./Core/Startup/startup_stm32g474retx.o
+ .debug_line    0x00004b6f      0xadf ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o
+ .debug_line    0x0000564e      0xc44 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o
+ .debug_line    0x00006292      0xab8 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o
+ .debug_line    0x00006d4a     0x3673 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c.o
+ .debug_line    0x0000a3bd      0x80c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c_ex.o
+ .debug_line    0x0000abc9      0xc3e ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o
+ .debug_line    0x0000b807      0xf62 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o
+ .debug_line    0x0000c769     0x11d7 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o
+ .debug_line    0x0000d940     0x352d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.o
+ .debug_line    0x00010e6d      0xc14 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.o
 
 .debug_str      0x00000000    0xef066
  .debug_str     0x00000000    0xef066 ./Core/Src/MPU6050.o

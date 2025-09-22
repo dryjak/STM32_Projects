@@ -1,7 +1,7 @@
 ../Core/Src/MPU6050.c:33:17:MPU6050_Init	5
 ../Core/Src/MPU6050.c:62:9:Read8	1
 ../Core/Src/MPU6050.c:71:17:Write8	1
-../Core/Src/MPU6050.c:76:10:Read16	1
+../Core/Src/MPU6050.c:76:9:Read16	1
 ../Core/Src/MPU6050.c:85:9:MPU6050_WHO_AM_I	1
 ../Core/Src/MPU6050.c:91:17:MPU6050_WakeUp	1
 ../Core/Src/MPU6050.c:106:17:MPU6050_SetGyroRange	1

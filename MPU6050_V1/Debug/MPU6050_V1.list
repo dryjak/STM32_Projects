@@ -37,15 +37,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  00026e39  00000000  00000000  0001ea7d  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00011aaf  00000000  00000000  000458b6  2**0
+ 17 .debug_line   00011a81  00000000  00000000  000458b6  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000ef066  00000000  00000000  00057365  2**0
+ 18 .debug_str    000ef066  00000000  00000000  00057337  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  001463cb  2**0
+ 19 .comment      00000043  00000000  00000000  0014639d  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000049b8  00000000  00000000  00146410  2**2
+ 20 .debug_frame  000049b8  00000000  00000000  001463e0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000063  00000000  00000000  0014adc8  2**0
+ 21 .debug_line_str 00000063  00000000  00000000  0014ad98  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1268,7 +1268,7 @@ MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16
 
 	if (MPU6050_WakeUp(MPU6050) != MPU6050_OK)
  8000f54:	68f8      	ldr	r0, [r7, #12]
- 8000f56:	f000 f88c 	bl	8001072 <MPU6050_WakeUp>
+ 8000f56:	f000 f88b 	bl	8001070 <MPU6050_WakeUp>
  8000f5a:	4603      	mov	r3, r0
  8000f5c:	2b00      	cmp	r3, #0
  8000f5e:	d001      	beq.n	8000f64 <MPU6050_Init+0x40>
@@ -1279,7 +1279,7 @@ MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16
 	}
 	if (MPU6050_SetAccelerationRange(MPU6050) != MPU6050_OK)
  8000f64:	68f8      	ldr	r0, [r7, #12]
- 8000f66:	f000 f8be 	bl	80010e6 <MPU6050_SetAccelerationRange>
+ 8000f66:	f000 f8bd 	bl	80010e4 <MPU6050_SetAccelerationRange>
  8000f6a:	4603      	mov	r3, r0
  8000f6c:	2b00      	cmp	r3, #0
  8000f6e:	d001      	beq.n	8000f74 <MPU6050_Init+0x50>
@@ -1290,7 +1290,7 @@ MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16
 	}
 	if (MPU6050_SetGyroRange(MPU6050) != MPU6050_OK)
  8000f74:	68f8      	ldr	r0, [r7, #12]
- 8000f76:	f000 f89d 	bl	80010b4 <MPU6050_SetGyroRange>
+ 8000f76:	f000 f89c 	bl	80010b2 <MPU6050_SetGyroRange>
  8000f7a:	4603      	mov	r3, r0
  8000f7c:	2b00      	cmp	r3, #0
  8000f7e:	d001      	beq.n	8000f84 <MPU6050_Init+0x60>
@@ -1384,7 +1384,7 @@ MPU6050_STATE_t Write8(MPU6050_t *MPU6050, uint8_t Register, uint8_t Value)
 
 08001008 <Read16>:
 
-uint16_t Read16(MPU6050_t *MPU6050, uint8_t Register)
+int16_t Read16(MPU6050_t *MPU6050, uint8_t Register)
 {
  8001008:	b580      	push	{r7, lr}
  800100a:	b088      	sub	sp, #32
@@ -1421,149 +1421,149 @@ uint16_t Read16(MPU6050_t *MPU6050, uint8_t Register)
  8001044:	b21b      	sxth	r3, r3
  8001046:	4313      	orrs	r3, r2
  8001048:	b21b      	sxth	r3, r3
- 800104a:	b29b      	uxth	r3, r3
 }
- 800104c:	4618      	mov	r0, r3
- 800104e:	3710      	adds	r7, #16
- 8001050:	46bd      	mov	sp, r7
- 8001052:	bd80      	pop	{r7, pc}
+ 800104a:	4618      	mov	r0, r3
+ 800104c:	3710      	adds	r7, #16
+ 800104e:	46bd      	mov	sp, r7
+ 8001050:	bd80      	pop	{r7, pc}
 
-08001054 <MPU6050_WHO_AM_I>:
+08001052 <MPU6050_WHO_AM_I>:
 
 uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050)
 {
- 8001054:	b580      	push	{r7, lr}
- 8001056:	b084      	sub	sp, #16
- 8001058:	af00      	add	r7, sp, #0
- 800105a:	6078      	str	r0, [r7, #4]
+ 8001052:	b580      	push	{r7, lr}
+ 8001054:	b084      	sub	sp, #16
+ 8001056:	af00      	add	r7, sp, #0
+ 8001058:	6078      	str	r0, [r7, #4]
 	uint8_t DeviceAdress = Read8(MPU6050, 0x75);
- 800105c:	2175      	movs	r1, #117	@ 0x75
- 800105e:	6878      	ldr	r0, [r7, #4]
- 8001060:	f7ff ff95 	bl	8000f8e <Read8>
- 8001064:	4603      	mov	r3, r0
- 8001066:	73fb      	strb	r3, [r7, #15]
+ 800105a:	2175      	movs	r1, #117	@ 0x75
+ 800105c:	6878      	ldr	r0, [r7, #4]
+ 800105e:	f7ff ff96 	bl	8000f8e <Read8>
+ 8001062:	4603      	mov	r3, r0
+ 8001064:	73fb      	strb	r3, [r7, #15]
 	return DeviceAdress;
- 8001068:	7bfb      	ldrb	r3, [r7, #15]
+ 8001066:	7bfb      	ldrb	r3, [r7, #15]
 }
- 800106a:	4618      	mov	r0, r3
- 800106c:	3710      	adds	r7, #16
- 800106e:	46bd      	mov	sp, r7
- 8001070:	bd80      	pop	{r7, pc}
+ 8001068:	4618      	mov	r0, r3
+ 800106a:	3710      	adds	r7, #16
+ 800106c:	46bd      	mov	sp, r7
+ 800106e:	bd80      	pop	{r7, pc}
 
-08001072 <MPU6050_WakeUp>:
+08001070 <MPU6050_WakeUp>:
 
 MPU6050_STATE_t MPU6050_WakeUp(MPU6050_t *MPU6050)
 {
- 8001072:	b580      	push	{r7, lr}
- 8001074:	b084      	sub	sp, #16
- 8001076:	af00      	add	r7, sp, #0
- 8001078:	6078      	str	r0, [r7, #4]
+ 8001070:	b580      	push	{r7, lr}
+ 8001072:	b084      	sub	sp, #16
+ 8001074:	af00      	add	r7, sp, #0
+ 8001076:	6078      	str	r0, [r7, #4]
 	//Firstly you need to read the register value
 	uint8_t Value = Read8(MPU6050, PWR_MGMT_1);
- 800107a:	216b      	movs	r1, #107	@ 0x6b
- 800107c:	6878      	ldr	r0, [r7, #4]
- 800107e:	f7ff ff86 	bl	8000f8e <Read8>
- 8001082:	4603      	mov	r3, r0
- 8001084:	73fb      	strb	r3, [r7, #15]
+ 8001078:	216b      	movs	r1, #107	@ 0x6b
+ 800107a:	6878      	ldr	r0, [r7, #4]
+ 800107c:	f7ff ff87 	bl	8000f8e <Read8>
+ 8001080:	4603      	mov	r3, r0
+ 8001082:	73fb      	strb	r3, [r7, #15]
 
 	//Disable sleep mode by setting 6th bit to 0
 	Value &= ~(1 << 6);
- 8001086:	7bfb      	ldrb	r3, [r7, #15]
- 8001088:	f023 0340 	bic.w	r3, r3, #64	@ 0x40
- 800108c:	73fb      	strb	r3, [r7, #15]
+ 8001084:	7bfb      	ldrb	r3, [r7, #15]
+ 8001086:	f023 0340 	bic.w	r3, r3, #64	@ 0x40
+ 800108a:	73fb      	strb	r3, [r7, #15]
 	//Setting cycle bit to 0
 	Value &= ~(1 << 5);
- 800108e:	7bfb      	ldrb	r3, [r7, #15]
- 8001090:	f023 0320 	bic.w	r3, r3, #32
- 8001094:	73fb      	strb	r3, [r7, #15]
+ 800108c:	7bfb      	ldrb	r3, [r7, #15]
+ 800108e:	f023 0320 	bic.w	r3, r3, #32
+ 8001092:	73fb      	strb	r3, [r7, #15]
 	//Disabling the temperature sensor
 	Value |= (1 << 3);
- 8001096:	7bfb      	ldrb	r3, [r7, #15]
- 8001098:	f043 0308 	orr.w	r3, r3, #8
- 800109c:	73fb      	strb	r3, [r7, #15]
+ 8001094:	7bfb      	ldrb	r3, [r7, #15]
+ 8001096:	f043 0308 	orr.w	r3, r3, #8
+ 800109a:	73fb      	strb	r3, [r7, #15]
 
 	return Write8(MPU6050, PWR_MGMT_1, Value);
- 800109e:	7bfb      	ldrb	r3, [r7, #15]
- 80010a0:	461a      	mov	r2, r3
- 80010a2:	216b      	movs	r1, #107	@ 0x6b
- 80010a4:	6878      	ldr	r0, [r7, #4]
- 80010a6:	f7ff ff90 	bl	8000fca <Write8>
- 80010aa:	4603      	mov	r3, r0
+ 800109c:	7bfb      	ldrb	r3, [r7, #15]
+ 800109e:	461a      	mov	r2, r3
+ 80010a0:	216b      	movs	r1, #107	@ 0x6b
+ 80010a2:	6878      	ldr	r0, [r7, #4]
+ 80010a4:	f7ff ff91 	bl	8000fca <Write8>
+ 80010a8:	4603      	mov	r3, r0
 }
- 80010ac:	4618      	mov	r0, r3
- 80010ae:	3710      	adds	r7, #16
- 80010b0:	46bd      	mov	sp, r7
- 80010b2:	bd80      	pop	{r7, pc}
+ 80010aa:	4618      	mov	r0, r3
+ 80010ac:	3710      	adds	r7, #16
+ 80010ae:	46bd      	mov	sp, r7
+ 80010b0:	bd80      	pop	{r7, pc}
 
-080010b4 <MPU6050_SetGyroRange>:
+080010b2 <MPU6050_SetGyroRange>:
 
 MPU6050_STATE_t MPU6050_SetGyroRange(MPU6050_t *MPU6050)
 {
- 80010b4:	b580      	push	{r7, lr}
- 80010b6:	b084      	sub	sp, #16
- 80010b8:	af00      	add	r7, sp, #0
- 80010ba:	6078      	str	r0, [r7, #4]
+ 80010b2:	b580      	push	{r7, lr}
+ 80010b4:	b084      	sub	sp, #16
+ 80010b6:	af00      	add	r7, sp, #0
+ 80010b8:	6078      	str	r0, [r7, #4]
 	//Firstly you need to read the register value
 	uint8_t RegisterValue;
 	RegisterValue = Read8(MPU6050, GYRO_CONFIG);
- 80010bc:	211b      	movs	r1, #27
- 80010be:	6878      	ldr	r0, [r7, #4]
- 80010c0:	f7ff ff65 	bl	8000f8e <Read8>
- 80010c4:	4603      	mov	r3, r0
- 80010c6:	73fb      	strb	r3, [r7, #15]
+ 80010ba:	211b      	movs	r1, #27
+ 80010bc:	6878      	ldr	r0, [r7, #4]
+ 80010be:	f7ff ff66 	bl	8000f8e <Read8>
+ 80010c2:	4603      	mov	r3, r0
+ 80010c4:	73fb      	strb	r3, [r7, #15]
 
 
 	//setting FS_SEL[1:0] in order to setfull scale range
 	RegisterValue &= (~((1 << 4) | (1 << 5)));		//setting 250 degrees per second
- 80010c8:	7bfb      	ldrb	r3, [r7, #15]
- 80010ca:	f023 0330 	bic.w	r3, r3, #48	@ 0x30
- 80010ce:	73fb      	strb	r3, [r7, #15]
+ 80010c6:	7bfb      	ldrb	r3, [r7, #15]
+ 80010c8:	f023 0330 	bic.w	r3, r3, #48	@ 0x30
+ 80010cc:	73fb      	strb	r3, [r7, #15]
 	return Write8(MPU6050, GYRO_CONFIG, RegisterValue);
- 80010d0:	7bfb      	ldrb	r3, [r7, #15]
- 80010d2:	461a      	mov	r2, r3
- 80010d4:	211b      	movs	r1, #27
- 80010d6:	6878      	ldr	r0, [r7, #4]
- 80010d8:	f7ff ff77 	bl	8000fca <Write8>
- 80010dc:	4603      	mov	r3, r0
+ 80010ce:	7bfb      	ldrb	r3, [r7, #15]
+ 80010d0:	461a      	mov	r2, r3
+ 80010d2:	211b      	movs	r1, #27
+ 80010d4:	6878      	ldr	r0, [r7, #4]
+ 80010d6:	f7ff ff78 	bl	8000fca <Write8>
+ 80010da:	4603      	mov	r3, r0
 }
- 80010de:	4618      	mov	r0, r3
- 80010e0:	3710      	adds	r7, #16
- 80010e2:	46bd      	mov	sp, r7
- 80010e4:	bd80      	pop	{r7, pc}
+ 80010dc:	4618      	mov	r0, r3
+ 80010de:	3710      	adds	r7, #16
+ 80010e0:	46bd      	mov	sp, r7
+ 80010e2:	bd80      	pop	{r7, pc}
 
-080010e6 <MPU6050_SetAccelerationRange>:
+080010e4 <MPU6050_SetAccelerationRange>:
 
 MPU6050_STATE_t MPU6050_SetAccelerationRange(MPU6050_t *MPU6050)
 {
- 80010e6:	b580      	push	{r7, lr}
- 80010e8:	b084      	sub	sp, #16
- 80010ea:	af00      	add	r7, sp, #0
- 80010ec:	6078      	str	r0, [r7, #4]
+ 80010e4:	b580      	push	{r7, lr}
+ 80010e6:	b084      	sub	sp, #16
+ 80010e8:	af00      	add	r7, sp, #0
+ 80010ea:	6078      	str	r0, [r7, #4]
 	//Firstly you need to read the register value
 	uint8_t RegisterValue;
 	RegisterValue = Read8(MPU6050, ACCEL_CONFIG);
- 80010ee:	211c      	movs	r1, #28
- 80010f0:	6878      	ldr	r0, [r7, #4]
- 80010f2:	f7ff ff4c 	bl	8000f8e <Read8>
- 80010f6:	4603      	mov	r3, r0
- 80010f8:	73fb      	strb	r3, [r7, #15]
+ 80010ec:	211c      	movs	r1, #28
+ 80010ee:	6878      	ldr	r0, [r7, #4]
+ 80010f0:	f7ff ff4d 	bl	8000f8e <Read8>
+ 80010f4:	4603      	mov	r3, r0
+ 80010f6:	73fb      	strb	r3, [r7, #15]
 
 	RegisterValue &= (~((1 << 4)|(1 << 5)));		//setting acceleration to -/+ 2g
- 80010fa:	7bfb      	ldrb	r3, [r7, #15]
- 80010fc:	f023 0330 	bic.w	r3, r3, #48	@ 0x30
- 8001100:	73fb      	strb	r3, [r7, #15]
+ 80010f8:	7bfb      	ldrb	r3, [r7, #15]
+ 80010fa:	f023 0330 	bic.w	r3, r3, #48	@ 0x30
+ 80010fe:	73fb      	strb	r3, [r7, #15]
 	return Write8(MPU6050, ACCEL_CONFIG, RegisterValue);
- 8001102:	7bfb      	ldrb	r3, [r7, #15]
- 8001104:	461a      	mov	r2, r3
- 8001106:	211c      	movs	r1, #28
- 8001108:	6878      	ldr	r0, [r7, #4]
- 800110a:	f7ff ff5e 	bl	8000fca <Write8>
- 800110e:	4603      	mov	r3, r0
+ 8001100:	7bfb      	ldrb	r3, [r7, #15]
+ 8001102:	461a      	mov	r2, r3
+ 8001104:	211c      	movs	r1, #28
+ 8001106:	6878      	ldr	r0, [r7, #4]
+ 8001108:	f7ff ff5f 	bl	8000fca <Write8>
+ 800110c:	4603      	mov	r3, r0
 }
- 8001110:	4618      	mov	r0, r3
- 8001112:	3710      	adds	r7, #16
- 8001114:	46bd      	mov	sp, r7
- 8001116:	bd80      	pop	{r7, pc}
+ 800110e:	4618      	mov	r0, r3
+ 8001110:	3710      	adds	r7, #16
+ 8001112:	46bd      	mov	sp, r7
+ 8001114:	bd80      	pop	{r7, pc}
+	...
 
 08001118 <MPU6050_ReadAcceleration>:
 
@@ -1802,7 +1802,7 @@ MPU6050_STATE_t MPU6050_ReadGyroRaw(MPU6050_t *MPU6050, GyroRaw_t *GyroRaw)
  8001334:	6878      	ldr	r0, [r7, #4]
  8001336:	f7ff fe67 	bl	8001008 <Read16>
  800133a:	4603      	mov	r3, r0
- 800133c:	b21a      	sxth	r2, r3
+ 800133c:	461a      	mov	r2, r3
  800133e:	683b      	ldr	r3, [r7, #0]
  8001340:	801a      	strh	r2, [r3, #0]
 	GyroRaw->GyroY = Read16(MPU6050, GYRO_YOUT_H);
@@ -1810,7 +1810,7 @@ MPU6050_STATE_t MPU6050_ReadGyroRaw(MPU6050_t *MPU6050, GyroRaw_t *GyroRaw)
  8001344:	6878      	ldr	r0, [r7, #4]
  8001346:	f7ff fe5f 	bl	8001008 <Read16>
  800134a:	4603      	mov	r3, r0
- 800134c:	b21a      	sxth	r2, r3
+ 800134c:	461a      	mov	r2, r3
  800134e:	683b      	ldr	r3, [r7, #0]
  8001350:	805a      	strh	r2, [r3, #2]
 	GyroRaw->GyroZ = Read16(MPU6050, GYRO_ZOUT_H);
@@ -1818,7 +1818,7 @@ MPU6050_STATE_t MPU6050_ReadGyroRaw(MPU6050_t *MPU6050, GyroRaw_t *GyroRaw)
  8001354:	6878      	ldr	r0, [r7, #4]
  8001356:	f7ff fe57 	bl	8001008 <Read16>
  800135a:	4603      	mov	r3, r0
- 800135c:	b21a      	sxth	r2, r3
+ 800135c:	461a      	mov	r2, r3
  800135e:	683b      	ldr	r3, [r7, #0]
  8001360:	809a      	strh	r2, [r3, #4]
 
@@ -2412,7 +2412,7 @@ int main(void)
 
   DeviceAddress = MPU6050_WHO_AM_I(&MPU6050);
  8001756:	484a      	ldr	r0, [pc, #296]	@ (8001880 <main+0x178>)
- 8001758:	f7ff fc7c 	bl	8001054 <MPU6050_WHO_AM_I>
+ 8001758:	f7ff fc7b 	bl	8001052 <MPU6050_WHO_AM_I>
  800175c:	4603      	mov	r3, r0
  800175e:	461a      	mov	r2, r3
  8001760:	4b4c      	ldr	r3, [pc, #304]	@ (8001894 <main+0x18c>)

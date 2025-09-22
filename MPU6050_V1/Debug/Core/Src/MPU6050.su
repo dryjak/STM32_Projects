@@ -1,7 +1,7 @@
 ../Core/Src/MPU6050.c:33:17:MPU6050_Init	32	static
 ../Core/Src/MPU6050.c:62:9:Read8	40	static
 ../Core/Src/MPU6050.c:71:17:Write8	32	static
-../Core/Src/MPU6050.c:76:10:Read16	40	static
+../Core/Src/MPU6050.c:76:9:Read16	40	static
 ../Core/Src/MPU6050.c:85:9:MPU6050_WHO_AM_I	24	static
 ../Core/Src/MPU6050.c:91:17:MPU6050_WakeUp	24	static
 ../Core/Src/MPU6050.c:106:17:MPU6050_SetGyroRange	24	static

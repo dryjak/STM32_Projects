@@ -73,7 +73,7 @@ MPU6050_STATE_t Write8(MPU6050_t *MPU6050, uint8_t Register, uint8_t Value)
 	return HAL_I2C_Mem_Write(MPU6050->hi2c, (MPU6050->address) << 1, Register, 1, &Value, 1, MPU6050_TIMEOUT);
 }
 
-uint16_t Read16(MPU6050_t *MPU6050, uint8_t Register)
+int16_t Read16(MPU6050_t *MPU6050, uint8_t Register)
 {
 	uint8_t Value[2];
 
