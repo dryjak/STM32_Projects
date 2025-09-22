@@ -124,12 +124,14 @@ MPU6050_STATE_t MPU6050_SetAccelerationRange(MPU6050_t *MPU6050)
 	RegisterValue &= (~((1 << 4)|(1 << 5)));		//setting acceleration to -/+ 2g
 	return Write8(MPU6050, ACCEL_CONFIG, RegisterValue);
 }
+
+
 //ACCELEROMETR DATA
 MPU6050_STATE_t MPU6050_ReadAccelerationRaw(MPU6050_t *MPU6050, AccelRaw_t *AccelRaw)
 {
-	AccelRaw->GyroX = Read16(MPU6050, ACCEL_XOUT_H);
-	AccelRaw->GyroY = Read16(MPU6050, ACCEL_YOUT_H);
-	AccelRaw->GyroZ = Read16(MPU6050, ACCEL_ZOUT_H);
+	AccelRaw->AccelX = Read16(MPU6050, ACCEL_XOUT_H);
+	AccelRaw->AccelY = Read16(MPU6050, ACCEL_YOUT_H);
+	AccelRaw->AccelZ = Read16(MPU6050, ACCEL_ZOUT_H);
 
 	return MPU6050_OK;
 }
@@ -138,9 +140,9 @@ MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerati
 	AccelRaw_t AccelRaw;
 	MPU6050_ReadAccelerationRaw(MPU6050, &AccelRaw);
 
-	Accelerations->AccelX = (AccelRaw.GyroX / GYRO_SCALE_FACTOR) - AccelOffset.OffsetX;
-	Accelerations->AccelY = (AccelRaw.GyroY / GYRO_SCALE_FACTOR) - AccelOffset.OffsetY;
-	Accelerations->AccelZ = (AccelRaw.GyroZ / GYRO_SCALE_FACTOR) - AccelOffset.OffsetZ;
+	Accelerations->AccelX = (AccelRaw.AccelX / ACCEL_SCALE_FACTOR) - AccelOffset.OffsetX;
+	Accelerations->AccelY = (AccelRaw.AccelY / ACCEL_SCALE_FACTOR) - AccelOffset.OffsetY;
+	Accelerations->AccelZ = (AccelRaw.AccelZ / ACCEL_SCALE_FACTOR) - AccelOffset.OffsetZ - 1;
 
 
 	return MPU6050_OK;
@@ -162,7 +164,7 @@ MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerati
 	*Gz = AccelZ.Var16u;
 	*/
 }
-//accelerometr calibration
+
 MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelOffset)
 {
 	Accel_t Accelerations;

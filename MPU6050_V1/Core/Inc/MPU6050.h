@@ -50,9 +50,9 @@ typedef struct
 
 typedef struct
 {
-	int16_t GyroX;
-	int16_t GyroY;
-	int16_t GyroZ;
+	int16_t AccelX;
+	int16_t AccelY;
+	int16_t AccelZ;
 }AccelRaw_t;
 
 typedef struct
