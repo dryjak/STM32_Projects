@@ -62,6 +62,13 @@ typedef struct
 	int16_t GyroZ;
 }Gyro_t;
 
+typedef struct
+{
+	float OffsetX;
+	float OffsetY;
+	float OffsetZ;
+}GyroOffset_t;
+
 typedef enum
 {
 	MPU6050_OK,

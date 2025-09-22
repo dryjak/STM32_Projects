@@ -10,6 +10,7 @@
 
 
 #define ACCEL_SCALE_FACTOR 16384.0f		//scale factor for acceleration range +/- 2g
+#define GYRO_SCALE_FACTOR 131.0f		//scale factor for gyro range +/- 250 deg/s
 
 
 //TO DO: odczyt z accelerometru
@@ -156,6 +157,26 @@ MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerati
 	*/
 }
 
+MPU6050_STATE_t MPU6050_ReadGyroRaw(MPU6050_t *MPU6050, Gyro_t *GyroRaw)
+{
+	GyroRaw->GyroX = Read16(MPU6050, GYRO_XOUT_H);
+	GyroRaw->GyroY = Read16(MPU6050, GYRO_YOUT_H);
+	GyroRaw->GyroZ = Read16(MPU6050, GYRO_ZOUT_H);
+
+	return MPU6050_OK;
+}
+MPU6050_STATE_t MPU6050_CalculateGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated, GyroOffset_t GyroOffset)
+{
+	Gyro_t GyroRaw;
+	MPU6050_ReadGyroRaw(MPU6050, &GyroRaw);
+	GyroCalculated->GyroX = (GyroRaw.GyroX / GYRO_SCALE_FACTOR) - GyroOffset.OffsetX;
+	GyroCalculated->GyroY = (GyroRaw.GyroY / GYRO_SCALE_FACTOR) - GyroOffset.OffsetY;
+	GyroCalculated->GyroZ = (GyroRaw.GyroZ / GYRO_SCALE_FACTOR) - GyroOffset.OffsetZ;
+
+	return MPU6050_OK;
+
+}
+
 //accelerometr calibration
 MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelOffset)
 {
@@ -184,7 +205,26 @@ MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelO
 	return MPU6050_OK;
 }
 
+/*
+MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050, GyroOffset_t *GyroOffset)
+{
+	Gyro_t Gyro;
+	int32_t SumX = 0;
+	int32_t SumY = 0;
+	int32_t SumZ = 0;
 
+	uint8_t SamplesNumber = 100;
+	uint8_t i = 0;
+
+	for(i = 0; i < SamplesNumber; i++)
+	{
+		MPU6050ReadGyro(MPU6050, &Gyro, *GyroOffset);
+
+		SumX = Gyro.GyroX * Accel
+	}
+}
+
+*/
 
 
 
