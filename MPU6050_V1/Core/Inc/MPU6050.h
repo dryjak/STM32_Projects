@@ -57,10 +57,17 @@ typedef struct
 
 typedef struct
 {
+	float GyroX;
+	float GyroY;
+	float GyroZ;
+}Gyro_t;
+
+typedef struct
+{
 	int16_t GyroX;
 	int16_t GyroY;
 	int16_t GyroZ;
-}Gyro_t;
+}GyroRaw_t;
 
 typedef struct
 {
@@ -93,7 +100,7 @@ MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelO
 
 
 //functions for gyro
-MPU6050_STATE_t MPU6050_ReadGyroRaw(MPU6050_t *MPU6050, Gyro_t *GyroRaw);
+MPU6050_STATE_t MPU6050_ReadGyroRaw(MPU6050_t *MPU6050, GyroRaw_t *GyroRaw);
 MPU6050_STATE_t MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated, GyroOffset_t GyroOffset);
 MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050, GyroOffset_t *GyroOffset);
 
