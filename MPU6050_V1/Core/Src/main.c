@@ -20,6 +20,7 @@
 #include "main.h"
 #include "i2c.h"
 #include "usart.h"
+#include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -60,10 +61,15 @@ GyroOffset_t GyroOffset;
 float Roll, Pitch;
 
 char Message[128];
+
+uint32_t LastTick, NowTick;;
+float dt;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -104,6 +110,10 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C1_Init();
   MX_LPUART1_UART_Init();
+  MX_TIM1_Init();
+
+  /* Initialize interrupts */
+  MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
   Status = MPU6050_Init(&MPU6050, &hi2c1, 0x68);
   sprintf(Message, "Status = %d\n", Status);
@@ -123,6 +133,9 @@ int main(void)
 
   MPU6050_CalibrateAccel(&MPU6050, &AccelOffset);
   MPU6050_CalibrateGyro(&MPU6050, &GyroOffset);
+
+
+  HAL_TIM_Base_Start_IT(&htim1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -130,14 +143,24 @@ int main(void)
   while (1)
   {
 	  HAL_Delay(1000);
+	  NowTick = HAL_GetTick();
+	  dt = (NowTick - LastTick) / 1000; 	//sescoonds
+	  LastTick = NowTick;
+
+	  MPU6050_ReadGyro(&MPU6050, &Gyro, GyroOffset);
+	  MPU6050_DegFromGyro(&Gyro, &Roll, &Pitch, &dt, dt);
+
+
 	  MPU6050_ReadAcceleration(&MPU6050, &Accelerations, AccelOffset);
 	  sprintf(Message, "Accel X: %f\n", Accelerations.AccelX);
 	  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
 
-	  MPU6050_ReadGyro(&MPU6050, &Gyro, GyroOffset);
+
 	  MPU6050_DegFromAccel(&MPU6050, &Roll, &Pitch);
 	  sprintf(Message, "Roll: %f.3, Pitch: %f.3", Roll, Pitch);
 	  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -189,6 +212,17 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief NVIC Configuration.
+  * @retval None
+  */
+static void MX_NVIC_Init(void)
+{
+  /* TIM1_UP_TIM16_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(TIM1_UP_TIM16_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(TIM1_UP_TIM16_IRQn);
 }
 
 /* USER CODE BEGIN 4 */
