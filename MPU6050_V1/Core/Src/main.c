@@ -58,12 +58,9 @@ uint8_t GyroRange, AccelRange;
 AccelOffset_t AccelOffset;
 GyroOffset_t GyroOffset;
 
-float Roll, Pitch;
+float Roll, Pitch, Yaw;
 
 char Message[128];
-
-uint32_t LastTick, NowTick;;
-float dt;
 
 /* USER CODE END PV */
 
@@ -142,23 +139,23 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_Delay(1000);
-	  NowTick = HAL_GetTick();
-	  dt = (NowTick - LastTick) / 1000; 	//sescoonds
-	  LastTick = NowTick;
+	  //HAL_Delay(1000);
+	  //NowTick = HAL_GetTick();
+	  //dt = (NowTick - LastTick) / 1000; 	//sescoonds
+	  //LastTick = NowTick;
 
-	  MPU6050_ReadGyro(&MPU6050, &Gyro, GyroOffset);
-	  MPU6050_DegFromGyro(&Gyro, &Roll, &Pitch, &dt, dt);
-
-
-	  MPU6050_ReadAcceleration(&MPU6050, &Accelerations, AccelOffset);
-	  sprintf(Message, "Accel X: %f\n", Accelerations.AccelX);
-	  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+	  //MPU6050_ReadGyro(&MPU6050, &Gyro, GyroOffset);
+	  //MPU6050_DegFromGyro(&Gyro, &Roll, &Pitch, &dt, dt);
 
 
-	  MPU6050_DegFromAccel(&MPU6050, &Roll, &Pitch);
-	  sprintf(Message, "Roll: %f.3, Pitch: %f.3", Roll, Pitch);
-	  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+	  //MPU6050_ReadAcceleration(&MPU6050, &Accelerations, AccelOffset);
+	  //sprintf(Message, "Accel X: %f\n", Accelerations.AccelX);
+	  //HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+
+
+	  //MPU6050_DegFromAccel(&MPU6050, &Roll, &Pitch);
+	  //sprintf(Message, "Roll: %f.3, Pitch: %f.3", Roll, Pitch);
+	  //HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
 
 
     /* USER CODE END WHILE */
@@ -226,7 +223,20 @@ static void MX_NVIC_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if(htim->Instance == TIM2)
+	{
+		MPU6050_ReadGyro(&MPU6050, &Gyro, GyroOffset);
 
+		float dt = 0.001f;
+
+		 MPU6050_DegFromGyro(&Gyro, &Roll, &Pitch, &Yaw, dt);
+		 sprintf(Message, "Gyro Angle Roll %f.3, Pitch: %f.3, Yaw: %f.3\n", Roll, Pitch, Yaw);
+		 HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+
+	}
+}
 /* USER CODE END 4 */
 
 /**
