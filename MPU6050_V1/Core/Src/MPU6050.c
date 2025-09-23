@@ -9,6 +9,7 @@
 #include "math.h"
 
 
+
 #define ACCEL_SCALE_FACTOR 16384.0f		//scale factor for acceleration range +/- 2g
 #define GYRO_SCALE_FACTOR 131.0f		//scale factor for gyro range +/- 250 deg/s
 
@@ -190,6 +191,23 @@ MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelO
 	AccelOffset->OffsetZ = (SumZ / (SamplesNumber * ACCEL_SCALE_FACTOR)) - 1;
 
 	return MPU6050_OK;
+}
+
+MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pitch)
+{
+	Accel_t Accelerations;
+	AccelOffset_t AccelOffset;
+
+	MPU6050_CalibrateAccel(MPU6050, &AccelOffset);
+	MPU6050_ReadAcceleration(MPU6050, &Accelerations, AccelOffset);
+
+	float Ax = Accelerations.AccelX;
+	float Ay = Accelerations.AccelY;
+	float Az = Accelerations.AccelZ;
+
+	*Roll  = atan2f(Ay, Az) * 180.0f / M_PI;
+	*Pitch = atan2f(-Ax, sqrtf(Ay*Ay + Az*Az)) * 180.0f / M_PI;
+
 }
 
 //GYRO DATA
