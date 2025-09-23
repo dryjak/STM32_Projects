@@ -208,6 +208,7 @@ MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pit
 	*Roll  = atan2f(Ay, Az) * 180.0f / M_PI;
 	*Pitch = atan2f(-Ax, sqrtf(Ay*Ay + Az*Az)) * 180.0f / M_PI;
 
+	return MPU6050_OK;
 }
 
 //GYRO DATA

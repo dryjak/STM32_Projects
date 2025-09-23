@@ -57,6 +57,8 @@ uint8_t GyroRange, AccelRange;
 AccelOffset_t AccelOffset;
 GyroOffset_t GyroOffset;
 
+float Roll, Pitch;
+
 char Message[128];
 /* USER CODE END PV */
 
@@ -133,6 +135,9 @@ int main(void)
 	  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
 
 	  MPU6050_ReadGyro(&MPU6050, &Gyro, GyroOffset);
+	  MPU6050_DegFromAccel(&MPU6050, &Roll, &Pitch);
+	  sprintf(Message, "Roll: %f.3, Pitch: %f.3", Roll, Pitch);
+	  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
