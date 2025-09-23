@@ -225,7 +225,7 @@ static void MX_NVIC_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	if(htim->Instance == TIM2)
+	if(htim->Instance == TIM2) ///dp poprawki i to juz
 	{
 		MPU6050_ReadGyro(&MPU6050, &Gyro, GyroOffset);
 

@@ -2759,7 +2759,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
  80019b4:	b088      	sub	sp, #32
  80019b6:	af04      	add	r7, sp, #16
  80019b8:	6078      	str	r0, [r7, #4]
-	if(htim->Instance == TIM2)
+	if(htim->Instance == TIM2) ///dp poprawki i to juz
  80019ba:	687b      	ldr	r3, [r7, #4]
  80019bc:	681b      	ldr	r3, [r3, #0]
  80019be:	f1b3 4f80 	cmp.w	r3, #1073741824	@ 0x40000000
