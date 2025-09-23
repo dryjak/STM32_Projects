@@ -261,7 +261,14 @@ MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050, GyroOffset_t *GyroOffs
 	return MPU6050_OK;
 }
 
+MPU6050_STATE_t MPU6050_DegFromGyro(Gyro_t *Gyro, float *Roll, float *Pitch, float *Yaw, float dt)
+{
+	*Roll += Gyro->GyroX * dt;
+	*Pitch += Gyro->GyroY * dt;
+	*Yaw += Gyro->GyroZ * dt;
 
+	return MPU6050_OK;
+}
 
 
 

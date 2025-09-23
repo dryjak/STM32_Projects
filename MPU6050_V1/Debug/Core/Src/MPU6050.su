@@ -13,3 +13,4 @@
 ../Core/Src/MPU6050.c:215:17:MPU6050_ReadGyroRaw	16	static
 ../Core/Src/MPU6050.c:224:17:MPU6050_ReadGyro	40	static
 ../Core/Src/MPU6050.c:236:17:MPU6050_CalibrateGyro	40	static
+../Core/Src/MPU6050.c:264:17:MPU6050_DegFromGyro	32	static
