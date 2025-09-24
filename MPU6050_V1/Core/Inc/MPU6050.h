@@ -34,12 +34,7 @@
 
 #define MPU6050_TIMEOUT 	500
 
-typedef struct{
 
-	I2C_HandleTypeDef *hi2c;
-	uint16_t address;
-
-}MPU6050_t;
 
 typedef struct
 {
@@ -89,7 +84,14 @@ typedef enum
 	MPU6050_ERROR
 }MPU6050_STATE_t;
 
+typedef struct{
 
+	I2C_HandleTypeDef *hi2c;
+	uint16_t address;
+	float AccelOffset_t;
+	float GyroOffset_t;
+
+}MPU6050_t;
 
 
 uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050);

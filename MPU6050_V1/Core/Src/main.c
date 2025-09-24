@@ -147,11 +147,6 @@ int main(void)
 	  //sprintf(Message, "Accel X: %f\n", Accelerations.AccelX);
 	  //HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
 
-
-	  MPU6050_DegFromAccel(&MPU6050, &Roll, &Pitch);
-	  sprintf(Message, "Roll: %f.3, Pitch: %f.3", Roll, Pitch);
-	  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
-
 	  if(InterruptFlag)
 		{
 		  InterruptFlag = 0;
