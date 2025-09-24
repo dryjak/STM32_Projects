@@ -58,9 +58,11 @@ uint8_t GyroRange, AccelRange;
 AccelOffset_t AccelOffset;
 GyroOffset_t GyroOffset;
 
-float Roll, Pitch, Yaw;
-
+float Roll = 0.0f, Pitch = 0.0f, Yaw = 0.0f;
 char Message[128];
+
+volatile uint8_t InterruptFlag;
+float dt = 0.001f;
 
 /* USER CODE END PV */
 
@@ -157,7 +159,15 @@ int main(void)
 	  //sprintf(Message, "Roll: %f.3, Pitch: %f.3", Roll, Pitch);
 	  //HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
 
+	  if(InterruptFlag)
+		{
+		  InterruptFlag = 0;
+		  MPU6050_ReadGyro(&MPU6050, &Gyro, GyroOffset);
 
+		  MPU6050_DegFromGyro(&Gyro, &Roll, &Pitch, &Yaw, dt);
+		  sprintf(Message, "Gyro Angle Roll %.3f, Pitch: %.3f, Yaw: %.3f\n", Roll, Pitch, Yaw);
+		  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+		}
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -225,16 +235,9 @@ static void MX_NVIC_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	if(htim->Instance == TIM2) ///dp poprawki i to juz
+	if(htim->Instance == TIM1)
 	{
-		MPU6050_ReadGyro(&MPU6050, &Gyro, GyroOffset);
-
-		float dt = 0.001f;
-
-		 MPU6050_DegFromGyro(&Gyro, &Roll, &Pitch, &Yaw, dt);
-		 sprintf(Message, "Gyro Angle Roll %f.3, Pitch: %f.3, Yaw: %f.3\n", Roll, Pitch, Yaw);
-		 HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
-
+		 InterruptFlag = 1;
 	}
 }
 /* USER CODE END 4 */
