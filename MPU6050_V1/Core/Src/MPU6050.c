@@ -290,6 +290,10 @@ MPU6050_STATE_t MPU6050_GyroAngle(MPU6050_t *MPU6050, float *Roll, float *Pitch,
 	MPU6050_DegFromAccel(MPU6050, &AccelRoll, &AccelPitch);
 
 	//place for complementary filter
+    float alpha = 0.98f;
+    *Roll  = alpha * (Gyro.GyroX)  + (1.0f - alpha) * AccelRoll;
+    *Pitch = alpha * (Gyro.GyroY) + (1.0f - alpha) * AccelPitch;
+    //*Yaw   = Gyro.GyroZ; // brak sensownej referencji z akcelerometru, więc tylko gyro
 
 	return MPU6050_OK;
 }

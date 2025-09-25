@@ -14,4 +14,4 @@
 ../Core/Src/MPU6050.c:228:17:MPU6050_ReadGyro	40	static
 ../Core/Src/MPU6050.c:240:17:MPU6050_CalibrateGyro	40	static
 ../Core/Src/MPU6050.c:268:17:MPU6050_DegFromGyro	32	static
-../Core/Src/MPU6050.c:277:17:MPU6050_GyroAngle	72	static
+../Core/Src/MPU6050.c:277:17:MPU6050_GyroAngle	80	static
