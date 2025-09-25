@@ -202,7 +202,7 @@ MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pit
 	Accel_t Accelerations;
 	AccelOffset_t AccelOffset;
 
-	MPU6050_CalibrateAccel(MPU6050, &AccelOffset);
+	//MPU6050_CalibrateAccel(MPU6050, &AccelOffset);
 	MPU6050_ReadAcceleration(MPU6050, &Accelerations, AccelOffset);
 
 	float Ax = Accelerations.AccelX;
@@ -276,12 +276,7 @@ MPU6050_STATE_t MPU6050_DegFromGyro(Gyro_t *Gyro, float *Roll, float *Pitch, flo
 
 MPU6050_STATE_t MPU6050_GyroAngle(MPU6050_t *MPU6050, float *Roll, float *Pitch, float *Yaw, float dt)
 {
-	Accel_t Accelerations;
 	Gyro_t Gyro;
-
-	static float GyroRoll 	= 0.0f;
-	static float GyroPitch 	= 0.0f;
-	static float GyroYaw 	= 0.0f;
 
 	float AccelRoll 	= 0;
 	float AccelPitch 	= 0;
