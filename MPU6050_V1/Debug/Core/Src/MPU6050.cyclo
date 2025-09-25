@@ -1,0 +1,17 @@
+../Core/Src/MPU6050.c:35:17:MPU6050_Init	5
+../Core/Src/MPU6050.c:67:9:Read8	1
+../Core/Src/MPU6050.c:76:17:Write8	1
+../Core/Src/MPU6050.c:81:9:Read16	1
+../Core/Src/MPU6050.c:90:9:MPU6050_WHO_AM_I	1
+../Core/Src/MPU6050.c:96:17:MPU6050_WakeUp	1
+../Core/Src/MPU6050.c:111:17:MPU6050_SetGyroRange	1
+../Core/Src/MPU6050.c:123:17:MPU6050_SetAccelerationRange	1
+../Core/Src/MPU6050.c:135:17:MPU6050_ReadAccelerationRaw	1
+../Core/Src/MPU6050.c:143:17:MPU6050_ReadAcceleration	1
+../Core/Src/MPU6050.c:173:17:MPU6050_CalibrateAccel	2
+../Core/Src/MPU6050.c:200:17:MPU6050_DegFromAccel	1
+../Core/Src/MPU6050.c:219:17:MPU6050_ReadGyroRaw	1
+../Core/Src/MPU6050.c:228:17:MPU6050_ReadGyro	1
+../Core/Src/MPU6050.c:240:17:MPU6050_CalibrateGyro	2
+../Core/Src/MPU6050.c:268:17:MPU6050_DegFromGyro	1
+../Core/Src/MPU6050.c:277:17:MPU6050_GyroAngle	1

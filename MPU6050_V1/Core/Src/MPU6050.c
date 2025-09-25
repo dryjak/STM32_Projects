@@ -58,11 +58,8 @@ MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16
 		return MPU6050_ERROR;
 	}
 
-	float GyroOffset = 0;
-	float AccelOffset = 0;
-
-	MPU6050->AccelOffset_t 	= MPU6050_CalibrateAccel(MPU6050, &AccelOffset);
-	MPU6050->GyroOffset_t 	= MPU6050_CalibrateGyro(MPU6050, &GyroOffset);
+	MPU6050_CalibrateAccel(MPU6050, &MPU6050->AccelOffset);
+	MPU6050_CalibrateGyro(MPU6050, &MPU6050->GyroOffset);
 
 	return MPU6050_OK;
 }
@@ -291,8 +288,8 @@ MPU6050_STATE_t MPU6050_GyroAngle(MPU6050_t *MPU6050, float *Roll, float *Pitch,
 
 	//Read gyro data
 	Gyro_t GyroCalculated;
-	MPU6050_ReadGyro(MPU6050, &GyroCalculated, MPU6050->GyroOffset_t);
-	MPU6050_DegFromGyro(&Gyro, &Gyro->GyroX, &Gyro->GyroY, &Gyro->GyroZ, dt);
+	MPU6050_ReadGyro(MPU6050, &GyroCalculated, MPU6050->GyroOffset);
+	MPU6050_DegFromGyro(&Gyro, &Gyro.GyroX, &Gyro.GyroY, &Gyro.GyroZ, dt);
 
 	//Read accel data
 	MPU6050_DegFromAccel(MPU6050, &AccelRoll, &AccelPitch);

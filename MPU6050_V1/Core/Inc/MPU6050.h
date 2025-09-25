@@ -88,8 +88,8 @@ typedef struct{
 
 	I2C_HandleTypeDef *hi2c;
 	uint16_t address;
-	float AccelOffset_t;
-	float GyroOffset_t;
+	AccelOffset_t AccelOffset;
+	GyroOffset_t GyroOffset;
 
 }MPU6050_t;
 
