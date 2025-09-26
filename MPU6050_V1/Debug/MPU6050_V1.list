@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000b1d8  2**0
                   CONTENTS, READONLY
- 12 .debug_info   000181aa  00000000  00000000  0000b208  2**0
+ 12 .debug_info   00018198  00000000  00000000  0000b208  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00003104  00000000  00000000  000233b2  2**0
+ 13 .debug_abbrev 00003104  00000000  00000000  000233a0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00001488  00000000  00000000  000264b8  2**3
+ 14 .debug_aranges 00001488  00000000  00000000  000264a8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00001004  00000000  00000000  00027940  2**0
+ 15 .debug_rnglists 00001004  00000000  00000000  00027930  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  000288b0  00000000  00000000  00028944  2**0
+ 16 .debug_macro  000288b0  00000000  00000000  00028934  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00018662  00000000  00000000  000511f4  2**0
+ 17 .debug_line   00018662  00000000  00000000  000511e4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00101514  00000000  00000000  00069856  2**0
+ 18 .debug_str    00101514  00000000  00000000  00069846  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  0016ad6a  2**0
+ 19 .comment      00000043  00000000  00000000  0016ad5a  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000690c  00000000  00000000  0016adb0  2**2
+ 20 .debug_frame  0000690c  00000000  00000000  0016ada0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000063  00000000  00000000  001716bc  2**0
+ 21 .debug_line_str 00000063  00000000  00000000  001716ac  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2242,7 +2242,7 @@ MPU6050_STATE_t MPU6050_DegFromGyro(Gyro_t *Gyro, float *Roll, float *Pitch, flo
 MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, float *Yaw, float dt)
 {
  8001740:	b590      	push	{r4, r7, lr}
- 8001742:	b091      	sub	sp, #68	@ 0x44
+ 8001742:	b08d      	sub	sp, #52	@ 0x34
  8001744:	af00      	add	r7, sp, #0
  8001746:	6178      	str	r0, [r7, #20]
  8001748:	6139      	str	r1, [r7, #16]
@@ -2253,19 +2253,19 @@ MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, flo
 
 	float AccelRoll 	= 0;
  8001752:	f04f 0300 	mov.w	r3, #0
- 8001756:	62fb      	str	r3, [r7, #44]	@ 0x2c
+ 8001756:	61fb      	str	r3, [r7, #28]
 	float AccelPitch 	= 0;
  8001758:	f04f 0300 	mov.w	r3, #0
- 800175c:	62bb      	str	r3, [r7, #40]	@ 0x28
+ 800175c:	61bb      	str	r3, [r7, #24]
 
 	//Read gyro data
-	Gyro_t GyroCalculated;
-	MPU6050_ReadGyro(MPU6050, &GyroCalculated, MPU6050->GyroOffset);
+	//Gyro_t GyroCalculated;
+	MPU6050_ReadGyro(MPU6050, &Gyro, MPU6050->GyroOffset);
  800175e:	697b      	ldr	r3, [r7, #20]
  8001760:	edd3 6a05 	vldr	s13, [r3, #20]
  8001764:	ed93 7a06 	vldr	s14, [r3, #24]
  8001768:	edd3 7a07 	vldr	s15, [r3, #28]
- 800176c:	f107 031c 	add.w	r3, r7, #28
+ 800176c:	f107 0320 	add.w	r3, r7, #32
  8001770:	eeb0 0a66 	vmov.f32	s0, s13
  8001774:	eef0 0a47 	vmov.f32	s1, s14
  8001778:	eeb0 1a67 	vmov.f32	s2, s15
@@ -2273,20 +2273,20 @@ MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, flo
  800177e:	6978      	ldr	r0, [r7, #20]
  8001780:	f7ff feda 	bl	8001538 <MPU6050_ReadGyro>
 	MPU6050_DegFromGyro(&Gyro, &Gyro.GyroX, &Gyro.GyroY, &Gyro.GyroZ, dt);
- 8001784:	f107 0330 	add.w	r3, r7, #48	@ 0x30
+ 8001784:	f107 0320 	add.w	r3, r7, #32
  8001788:	f103 0408 	add.w	r4, r3, #8
- 800178c:	f107 0330 	add.w	r3, r7, #48	@ 0x30
+ 800178c:	f107 0320 	add.w	r3, r7, #32
  8001790:	1d1a      	adds	r2, r3, #4
- 8001792:	f107 0130 	add.w	r1, r7, #48	@ 0x30
- 8001796:	f107 0030 	add.w	r0, r7, #48	@ 0x30
+ 8001792:	f107 0120 	add.w	r1, r7, #32
+ 8001796:	f107 0020 	add.w	r0, r7, #32
  800179a:	ed97 0a01 	vldr	s0, [r7, #4]
  800179e:	4623      	mov	r3, r4
  80017a0:	f7ff ff90 	bl	80016c4 <MPU6050_DegFromGyro>
 
 	//Read accel data
 	MPU6050_DegFromAccel(MPU6050, &AccelRoll, &AccelPitch);
- 80017a4:	f107 0228 	add.w	r2, r7, #40	@ 0x28
- 80017a8:	f107 032c 	add.w	r3, r7, #44	@ 0x2c
+ 80017a4:	f107 0218 	add.w	r2, r7, #24
+ 80017a8:	f107 031c 	add.w	r3, r7, #28
  80017ac:	4619      	mov	r1, r3
  80017ae:	6978      	ldr	r0, [r7, #20]
  80017b0:	f7ff fe22 	bl	80013f8 <MPU6050_DegFromAccel>
@@ -2294,27 +2294,27 @@ MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, flo
 	//place for complementary filter
     float alpha = 0.98f;
  80017b4:	4b18      	ldr	r3, [pc, #96]	@ (8001818 <MPU6050_Angle+0xd8>)
- 80017b6:	63fb      	str	r3, [r7, #60]	@ 0x3c
+ 80017b6:	62fb      	str	r3, [r7, #44]	@ 0x2c
     *Roll  = alpha * (Gyro.GyroX)  + (1.0f - alpha) * AccelRoll;
- 80017b8:	ed97 7a0c 	vldr	s14, [r7, #48]	@ 0x30
- 80017bc:	edd7 7a0f 	vldr	s15, [r7, #60]	@ 0x3c
+ 80017b8:	ed97 7a08 	vldr	s14, [r7, #32]
+ 80017bc:	edd7 7a0b 	vldr	s15, [r7, #44]	@ 0x2c
  80017c0:	ee27 7a27 	vmul.f32	s14, s14, s15
  80017c4:	eef7 6a00 	vmov.f32	s13, #112	@ 0x3f800000  1.0
- 80017c8:	edd7 7a0f 	vldr	s15, [r7, #60]	@ 0x3c
+ 80017c8:	edd7 7a0b 	vldr	s15, [r7, #44]	@ 0x2c
  80017cc:	ee76 6ae7 	vsub.f32	s13, s13, s15
- 80017d0:	edd7 7a0b 	vldr	s15, [r7, #44]	@ 0x2c
+ 80017d0:	edd7 7a07 	vldr	s15, [r7, #28]
  80017d4:	ee66 7aa7 	vmul.f32	s15, s13, s15
  80017d8:	ee77 7a27 	vadd.f32	s15, s14, s15
  80017dc:	693b      	ldr	r3, [r7, #16]
  80017de:	edc3 7a00 	vstr	s15, [r3]
     *Pitch = alpha * (Gyro.GyroY) + (1.0f - alpha) * AccelPitch;
- 80017e2:	ed97 7a0d 	vldr	s14, [r7, #52]	@ 0x34
- 80017e6:	edd7 7a0f 	vldr	s15, [r7, #60]	@ 0x3c
+ 80017e2:	ed97 7a09 	vldr	s14, [r7, #36]	@ 0x24
+ 80017e6:	edd7 7a0b 	vldr	s15, [r7, #44]	@ 0x2c
  80017ea:	ee27 7a27 	vmul.f32	s14, s14, s15
  80017ee:	eef7 6a00 	vmov.f32	s13, #112	@ 0x3f800000  1.0
- 80017f2:	edd7 7a0f 	vldr	s15, [r7, #60]	@ 0x3c
+ 80017f2:	edd7 7a0b 	vldr	s15, [r7, #44]	@ 0x2c
  80017f6:	ee76 6ae7 	vsub.f32	s13, s13, s15
- 80017fa:	edd7 7a0a 	vldr	s15, [r7, #40]	@ 0x28
+ 80017fa:	edd7 7a06 	vldr	s15, [r7, #24]
  80017fe:	ee66 7aa7 	vmul.f32	s15, s13, s15
  8001802:	ee77 7a27 	vadd.f32	s15, s14, s15
  8001806:	68fb      	ldr	r3, [r7, #12]
@@ -2325,7 +2325,7 @@ MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, flo
  800180c:	2300      	movs	r3, #0
 }
  800180e:	4618      	mov	r0, r3
- 8001810:	3744      	adds	r7, #68	@ 0x44
+ 8001810:	3734      	adds	r7, #52	@ 0x34
  8001812:	46bd      	mov	sp, r7
  8001814:	bd90      	pop	{r4, r7, pc}
  8001816:	bf00      	nop

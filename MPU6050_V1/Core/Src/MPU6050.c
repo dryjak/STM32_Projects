@@ -281,8 +281,8 @@ MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, flo
 	float AccelPitch 	= 0;
 
 	//Read gyro data
-	Gyro_t GyroCalculated;
-	MPU6050_ReadGyro(MPU6050, &GyroCalculated, MPU6050->GyroOffset);
+	//Gyro_t GyroCalculated;
+	MPU6050_ReadGyro(MPU6050, &Gyro, MPU6050->GyroOffset);
 	MPU6050_DegFromGyro(&Gyro, &Gyro.GyroX, &Gyro.GyroY, &Gyro.GyroZ, dt);
 
 	//Read accel data
