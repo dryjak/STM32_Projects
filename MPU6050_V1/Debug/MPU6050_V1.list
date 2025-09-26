@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000b1d8  2**0
                   CONTENTS, READONLY
- 12 .debug_info   000181b9  00000000  00000000  0000b208  2**0
+ 12 .debug_info   000181aa  00000000  00000000  0000b208  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00003104  00000000  00000000  000233c1  2**0
+ 13 .debug_abbrev 00003104  00000000  00000000  000233b2  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00001488  00000000  00000000  000264c8  2**3
+ 14 .debug_aranges 00001488  00000000  00000000  000264b8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00001004  00000000  00000000  00027950  2**0
+ 15 .debug_rnglists 00001004  00000000  00000000  00027940  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  000288b0  00000000  00000000  00028954  2**0
+ 16 .debug_macro  000288b0  00000000  00000000  00028944  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00018662  00000000  00000000  00051204  2**0
+ 17 .debug_line   00018662  00000000  00000000  000511f4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00101514  00000000  00000000  00069866  2**0
+ 18 .debug_str    00101514  00000000  00000000  00069856  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  0016ad7a  2**0
+ 19 .comment      00000043  00000000  00000000  0016ad6a  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000690c  00000000  00000000  0016adc0  2**2
+ 20 .debug_frame  0000690c  00000000  00000000  0016adb0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000063  00000000  00000000  001716cc  2**0
+ 21 .debug_line_str 00000063  00000000  00000000  001716bc  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1474,7 +1474,7 @@ int16_t Read16(MPU6050_t *MPU6050, uint8_t Register)
  80010ec:	2301      	movs	r3, #1
  80010ee:	f001 fd35 	bl	8002b5c <HAL_I2C_Mem_Read>
 
-	return ((Value[0] << 8) | (Value[1]));
+	return (int16_t)((Value[0] << 8) | (Value[1]));
  80010f2:	7b3b      	ldrb	r3, [r7, #12]
  80010f4:	b21b      	sxth	r3, r3
  80010f6:	021b      	lsls	r3, r3, #8
@@ -1868,97 +1868,96 @@ MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pit
 {
  80013f8:	b580      	push	{r7, lr}
  80013fa:	ed2d 8b02 	vpush	{d8}
- 80013fe:	b08e      	sub	sp, #56	@ 0x38
+ 80013fe:	b08a      	sub	sp, #40	@ 0x28
  8001400:	af00      	add	r7, sp, #0
  8001402:	60f8      	str	r0, [r7, #12]
  8001404:	60b9      	str	r1, [r7, #8]
  8001406:	607a      	str	r2, [r7, #4]
 	Accel_t Accelerations;
-	AccelOffset_t AccelOffset;
 
 	//MPU6050_CalibrateAccel(MPU6050, &AccelOffset);
-	MPU6050_ReadAcceleration(MPU6050, &Accelerations, AccelOffset);
- 8001408:	edd7 6a05 	vldr	s13, [r7, #20]
- 800140c:	ed97 7a06 	vldr	s14, [r7, #24]
- 8001410:	edd7 7a07 	vldr	s15, [r7, #28]
- 8001414:	f107 0320 	add.w	r3, r7, #32
- 8001418:	eeb0 0a66 	vmov.f32	s0, s13
- 800141c:	eef0 0a47 	vmov.f32	s1, s14
- 8001420:	eeb0 1a67 	vmov.f32	s2, s15
- 8001424:	4619      	mov	r1, r3
- 8001426:	68f8      	ldr	r0, [r7, #12]
- 8001428:	f7ff fee4 	bl	80011f4 <MPU6050_ReadAcceleration>
+	MPU6050_ReadAcceleration(MPU6050, &Accelerations, MPU6050->AccelOffset);
+ 8001408:	68fb      	ldr	r3, [r7, #12]
+ 800140a:	edd3 6a02 	vldr	s13, [r3, #8]
+ 800140e:	ed93 7a03 	vldr	s14, [r3, #12]
+ 8001412:	edd3 7a04 	vldr	s15, [r3, #16]
+ 8001416:	f107 0310 	add.w	r3, r7, #16
+ 800141a:	eeb0 0a66 	vmov.f32	s0, s13
+ 800141e:	eef0 0a47 	vmov.f32	s1, s14
+ 8001422:	eeb0 1a67 	vmov.f32	s2, s15
+ 8001426:	4619      	mov	r1, r3
+ 8001428:	68f8      	ldr	r0, [r7, #12]
+ 800142a:	f7ff fee3 	bl	80011f4 <MPU6050_ReadAcceleration>
 
 	float Ax = Accelerations.AccelX;
- 800142c:	6a3b      	ldr	r3, [r7, #32]
- 800142e:	637b      	str	r3, [r7, #52]	@ 0x34
+ 800142e:	693b      	ldr	r3, [r7, #16]
+ 8001430:	627b      	str	r3, [r7, #36]	@ 0x24
 	float Ay = Accelerations.AccelY;
- 8001430:	6a7b      	ldr	r3, [r7, #36]	@ 0x24
- 8001432:	633b      	str	r3, [r7, #48]	@ 0x30
+ 8001432:	697b      	ldr	r3, [r7, #20]
+ 8001434:	623b      	str	r3, [r7, #32]
 	float Az = Accelerations.AccelZ;
- 8001434:	6abb      	ldr	r3, [r7, #40]	@ 0x28
- 8001436:	62fb      	str	r3, [r7, #44]	@ 0x2c
+ 8001436:	69bb      	ldr	r3, [r7, #24]
+ 8001438:	61fb      	str	r3, [r7, #28]
 
 	*Roll  = atan2f(Ay, Az) * 180.0f / M_PI;
- 8001438:	edd7 0a0b 	vldr	s1, [r7, #44]	@ 0x2c
- 800143c:	ed97 0a0c 	vldr	s0, [r7, #48]	@ 0x30
- 8001440:	f007 fb02 	bl	8008a48 <atan2f>
- 8001444:	eef0 7a40 	vmov.f32	s15, s0
- 8001448:	ed9f 7a29 	vldr	s14, [pc, #164]	@ 80014f0 <MPU6050_DegFromAccel+0xf8>
- 800144c:	ee67 7a87 	vmul.f32	s15, s15, s14
- 8001450:	ee17 0a90 	vmov	r0, s15
- 8001454:	f7ff f8a0 	bl	8000598 <__aeabi_f2d>
- 8001458:	a323      	add	r3, pc, #140	@ (adr r3, 80014e8 <MPU6050_DegFromAccel+0xf0>)
- 800145a:	e9d3 2300 	ldrd	r2, r3, [r3]
- 800145e:	f7ff fa1d 	bl	800089c <__aeabi_ddiv>
- 8001462:	4602      	mov	r2, r0
- 8001464:	460b      	mov	r3, r1
- 8001466:	4610      	mov	r0, r2
- 8001468:	4619      	mov	r1, r3
- 800146a:	f7ff fbc5 	bl	8000bf8 <__aeabi_d2f>
- 800146e:	4602      	mov	r2, r0
- 8001470:	68bb      	ldr	r3, [r7, #8]
- 8001472:	601a      	str	r2, [r3, #0]
+ 800143a:	edd7 0a07 	vldr	s1, [r7, #28]
+ 800143e:	ed97 0a08 	vldr	s0, [r7, #32]
+ 8001442:	f007 fb01 	bl	8008a48 <atan2f>
+ 8001446:	eef0 7a40 	vmov.f32	s15, s0
+ 800144a:	ed9f 7a29 	vldr	s14, [pc, #164]	@ 80014f0 <MPU6050_DegFromAccel+0xf8>
+ 800144e:	ee67 7a87 	vmul.f32	s15, s15, s14
+ 8001452:	ee17 0a90 	vmov	r0, s15
+ 8001456:	f7ff f89f 	bl	8000598 <__aeabi_f2d>
+ 800145a:	a323      	add	r3, pc, #140	@ (adr r3, 80014e8 <MPU6050_DegFromAccel+0xf0>)
+ 800145c:	e9d3 2300 	ldrd	r2, r3, [r3]
+ 8001460:	f7ff fa1c 	bl	800089c <__aeabi_ddiv>
+ 8001464:	4602      	mov	r2, r0
+ 8001466:	460b      	mov	r3, r1
+ 8001468:	4610      	mov	r0, r2
+ 800146a:	4619      	mov	r1, r3
+ 800146c:	f7ff fbc4 	bl	8000bf8 <__aeabi_d2f>
+ 8001470:	4602      	mov	r2, r0
+ 8001472:	68bb      	ldr	r3, [r7, #8]
+ 8001474:	601a      	str	r2, [r3, #0]
 	*Pitch = atan2f(-Ax, sqrtf(Ay*Ay + Az*Az)) * 180.0f / M_PI;
- 8001474:	edd7 7a0d 	vldr	s15, [r7, #52]	@ 0x34
- 8001478:	eeb1 8a67 	vneg.f32	s16, s15
- 800147c:	edd7 7a0c 	vldr	s15, [r7, #48]	@ 0x30
- 8001480:	ee27 7aa7 	vmul.f32	s14, s15, s15
- 8001484:	edd7 7a0b 	vldr	s15, [r7, #44]	@ 0x2c
- 8001488:	ee67 7aa7 	vmul.f32	s15, s15, s15
- 800148c:	ee77 7a27 	vadd.f32	s15, s14, s15
- 8001490:	eeb0 0a67 	vmov.f32	s0, s15
- 8001494:	f007 fada 	bl	8008a4c <sqrtf>
- 8001498:	eef0 7a40 	vmov.f32	s15, s0
- 800149c:	eef0 0a67 	vmov.f32	s1, s15
- 80014a0:	eeb0 0a48 	vmov.f32	s0, s16
- 80014a4:	f007 fad0 	bl	8008a48 <atan2f>
- 80014a8:	eef0 7a40 	vmov.f32	s15, s0
- 80014ac:	ed9f 7a10 	vldr	s14, [pc, #64]	@ 80014f0 <MPU6050_DegFromAccel+0xf8>
- 80014b0:	ee67 7a87 	vmul.f32	s15, s15, s14
- 80014b4:	ee17 0a90 	vmov	r0, s15
- 80014b8:	f7ff f86e 	bl	8000598 <__aeabi_f2d>
- 80014bc:	a30a      	add	r3, pc, #40	@ (adr r3, 80014e8 <MPU6050_DegFromAccel+0xf0>)
- 80014be:	e9d3 2300 	ldrd	r2, r3, [r3]
- 80014c2:	f7ff f9eb 	bl	800089c <__aeabi_ddiv>
- 80014c6:	4602      	mov	r2, r0
- 80014c8:	460b      	mov	r3, r1
- 80014ca:	4610      	mov	r0, r2
- 80014cc:	4619      	mov	r1, r3
- 80014ce:	f7ff fb93 	bl	8000bf8 <__aeabi_d2f>
- 80014d2:	4602      	mov	r2, r0
- 80014d4:	687b      	ldr	r3, [r7, #4]
- 80014d6:	601a      	str	r2, [r3, #0]
+ 8001476:	edd7 7a09 	vldr	s15, [r7, #36]	@ 0x24
+ 800147a:	eeb1 8a67 	vneg.f32	s16, s15
+ 800147e:	edd7 7a08 	vldr	s15, [r7, #32]
+ 8001482:	ee27 7aa7 	vmul.f32	s14, s15, s15
+ 8001486:	edd7 7a07 	vldr	s15, [r7, #28]
+ 800148a:	ee67 7aa7 	vmul.f32	s15, s15, s15
+ 800148e:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 8001492:	eeb0 0a67 	vmov.f32	s0, s15
+ 8001496:	f007 fad9 	bl	8008a4c <sqrtf>
+ 800149a:	eef0 7a40 	vmov.f32	s15, s0
+ 800149e:	eef0 0a67 	vmov.f32	s1, s15
+ 80014a2:	eeb0 0a48 	vmov.f32	s0, s16
+ 80014a6:	f007 facf 	bl	8008a48 <atan2f>
+ 80014aa:	eef0 7a40 	vmov.f32	s15, s0
+ 80014ae:	ed9f 7a10 	vldr	s14, [pc, #64]	@ 80014f0 <MPU6050_DegFromAccel+0xf8>
+ 80014b2:	ee67 7a87 	vmul.f32	s15, s15, s14
+ 80014b6:	ee17 0a90 	vmov	r0, s15
+ 80014ba:	f7ff f86d 	bl	8000598 <__aeabi_f2d>
+ 80014be:	a30a      	add	r3, pc, #40	@ (adr r3, 80014e8 <MPU6050_DegFromAccel+0xf0>)
+ 80014c0:	e9d3 2300 	ldrd	r2, r3, [r3]
+ 80014c4:	f7ff f9ea 	bl	800089c <__aeabi_ddiv>
+ 80014c8:	4602      	mov	r2, r0
+ 80014ca:	460b      	mov	r3, r1
+ 80014cc:	4610      	mov	r0, r2
+ 80014ce:	4619      	mov	r1, r3
+ 80014d0:	f7ff fb92 	bl	8000bf8 <__aeabi_d2f>
+ 80014d4:	4602      	mov	r2, r0
+ 80014d6:	687b      	ldr	r3, [r7, #4]
+ 80014d8:	601a      	str	r2, [r3, #0]
 
 	return MPU6050_OK;
- 80014d8:	2300      	movs	r3, #0
+ 80014da:	2300      	movs	r3, #0
 }
- 80014da:	4618      	mov	r0, r3
- 80014dc:	3738      	adds	r7, #56	@ 0x38
- 80014de:	46bd      	mov	sp, r7
- 80014e0:	ecbd 8b02 	vpop	{d8}
- 80014e4:	bd80      	pop	{r7, pc}
- 80014e6:	bf00      	nop
+ 80014dc:	4618      	mov	r0, r3
+ 80014de:	3728      	adds	r7, #40	@ 0x28
+ 80014e0:	46bd      	mov	sp, r7
+ 80014e2:	ecbd 8b02 	vpop	{d8}
+ 80014e6:	bd80      	pop	{r7, pc}
  80014e8:	54442d18 	.word	0x54442d18
  80014ec:	400921fb 	.word	0x400921fb
  80014f0:	43340000 	.word	0x43340000

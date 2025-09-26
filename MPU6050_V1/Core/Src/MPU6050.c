@@ -84,7 +84,7 @@ int16_t Read16(MPU6050_t *MPU6050, uint8_t Register)
 
 	HAL_I2C_Mem_Read(MPU6050->hi2c, ((MPU6050->address) << 1), Register, 1, Value, 2, MPU6050_TIMEOUT);
 
-	return ((Value[0] << 8) | (Value[1]));
+	return (int16_t)((Value[0] << 8) | (Value[1]));
 }
 
 uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050)
@@ -200,10 +200,9 @@ MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelO
 MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pitch)
 {
 	Accel_t Accelerations;
-	AccelOffset_t AccelOffset;
 
 	//MPU6050_CalibrateAccel(MPU6050, &AccelOffset);
-	MPU6050_ReadAcceleration(MPU6050, &Accelerations, AccelOffset);
+	MPU6050_ReadAcceleration(MPU6050, &Accelerations, MPU6050->AccelOffset);
 
 	float Ax = Accelerations.AccelX;
 	float Ay = Accelerations.AccelY;
