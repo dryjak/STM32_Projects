@@ -61,6 +61,9 @@ GyroOffset_t GyroOffset;
 float Roll = 0.0f, Pitch = 0.0f, Yaw = 0.0f;
 char Message[128];
 
+
+float RollAccel = 0.00f, PitchAccel = 0.00f;
+float RollGyro = 0.00f, PitchGyro = 0.00f, YawGyro = 0.00f;
 volatile uint8_t InterruptFlag;
 float dt = 0.001f;
 
@@ -137,6 +140,8 @@ int main(void)
 		  MPU6050_Angle(&MPU6050, &Roll, &Pitch, &Yaw, dt);
 		  sprintf(Message, "Roll: %.3f, Pitch: %.3f, Yaw: %.3f", Roll, Pitch, Yaw);
 		  HAL_UART_Transmit(&hlpuart1,(uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+		  MPU6050_DegFromAccel(&MPU6050, &RollAccel, &PitchAccel);
+		  MPU6050_DegFromGyro(&Gyro, &RollGyro, &PitchGyro, &YawGyro, dt);
 		}
     /* USER CODE END WHILE */
 
