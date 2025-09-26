@@ -118,22 +118,6 @@ int main(void)
   sprintf(Message, "Status = %d\n", Status);
   HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
 
-  DeviceAddress = MPU6050_WHO_AM_I(&MPU6050);
-  sprintf(Message, "Who am I = %d\n", DeviceAddress);
-  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
-
-  GyroRange = Read8(&MPU6050, GYRO_CONFIG);
-  AccelRange = Read8(&MPU6050, ACCEL_CONFIG);
-  sprintf(Message, "GyroRange = %d\n", GyroRange);
-  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
-  sprintf(Message, "AccelRange = %d\n", AccelRange);
-  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
-
-
-  MPU6050_CalibrateAccel(&MPU6050, &AccelOffset);
-  MPU6050_CalibrateGyro(&MPU6050, &GyroOffset);
-
-
   HAL_TIM_Base_Start_IT(&htim1);
   /* USER CODE END 2 */
 
@@ -150,15 +134,9 @@ int main(void)
 	  if(InterruptFlag)
 		{
 		  InterruptFlag = 0;
-		  MPU6050_ReadGyro(&MPU6050, &Gyro, GyroOffset);
-
-		  MPU6050_DegFromGyro(&Gyro, &Roll, &Pitch, &Yaw, dt);
-		  sprintf(Message, "Gyro Angle Roll %.3f, Pitch: %.3f, Yaw: %.3f\n", Roll, Pitch, Yaw);
-		  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
-
-		  MPU6050_DegFromAccel(&MPU6050, &Roll, &Pitch);
-		  sprintf(Message, "Roll: %f.3, Pitch: %f.3\n\n", Roll, Pitch);
-		  HAL_UART_Transmit(&hlpuart1, (uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+		  MPU6050_Angle(&MPU6050, &Roll, &Pitch, &Yaw, dt);
+		  sprintf(Message, "Roll: %.3f, Pitch: %.3f, Yaw: %.3f", Roll, Pitch, Yaw);
+		  HAL_UART_Transmit(&hlpuart1,(uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
 		}
     /* USER CODE END WHILE */
 

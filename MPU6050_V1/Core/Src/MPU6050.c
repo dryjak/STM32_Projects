@@ -274,7 +274,7 @@ MPU6050_STATE_t MPU6050_DegFromGyro(Gyro_t *Gyro, float *Roll, float *Pitch, flo
 	return MPU6050_OK;
 }
 
-MPU6050_STATE_t MPU6050_GyroAngle(MPU6050_t *MPU6050, float *Roll, float *Pitch, float *Yaw, float dt)
+MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, float *Yaw, float dt)
 {
 	Gyro_t Gyro;
 

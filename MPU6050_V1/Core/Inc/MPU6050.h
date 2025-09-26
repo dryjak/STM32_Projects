@@ -116,6 +116,9 @@ MPU6050_STATE_t MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated, Gyr
 MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050, GyroOffset_t *GyroOffset);
 MPU6050_STATE_t MPU6050_DegFromGyro(Gyro_t *Gyro, float *Roll, float *Pitch, float *Yaw, float dt);
 
+//Function to read final angle values
+MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, float *Yaw, float dt);
+
 
 
 
