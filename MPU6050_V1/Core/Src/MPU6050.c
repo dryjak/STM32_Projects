@@ -172,7 +172,6 @@ MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pit
 {
 	Accel_t Accelerations;
 
-	//MPU6050_CalibrateAccel(MPU6050, &AccelOffset);
 	MPU6050_ReadAcceleration(MPU6050, &Accelerations, MPU6050->AccelOffset);
 
 	float Ax = Accelerations.AccelX;
