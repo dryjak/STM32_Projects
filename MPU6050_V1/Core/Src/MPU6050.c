@@ -13,19 +13,6 @@
 #define ACCEL_SCALE_FACTOR 16384.0f		//scale factor for acceleration range +/- 2g
 #define GYRO_SCALE_FACTOR 131.0f		//scale factor for gyro range +/- 250 deg/s
 
-
-
-//TO DO: odczyt z accelerometru
-typedef union{
-	struct
-	{
-		uint8_t ByteLow;
-		uint8_t ByteHigh;
-	}Byte;
-
-	int16_t Var16u;
-}ConvTo16_t;
-
 //to calculate degrees from gyro
 float gx_offset = 0.0f;
 float gy_offset = 0.0f;
@@ -152,22 +139,6 @@ MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerati
 
 	return MPU6050_OK;
 
-	/*
-	//practising union
-	ConvTo16_t AccelX, AccelY, AccelZ;
-
-	AccelX.Byte.ByteHigh 	= AccelData[0];
-	AccelX.Byte.ByteLow 	= AccelData[1];
-	AccelY.Byte.ByteHigh 	= AccelData[2];
-	AccelY.Byte.ByteLow 	= AccelData[3];
-	AccelZ.Byte.ByteHigh 	= AccelData[4];
-	AccelZ.Byte.ByteLow 	= AccelData[5];
-
-
-	*Gx = AccelX.Var16u;
-	*Gy = AccelY.Var16u;
-	*Gz = AccelZ.Var16u;
-	*/
 }
 
 MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelOffset)
@@ -272,7 +243,14 @@ MPU6050_STATE_t MPU6050_DegFromGyro(Gyro_t *Gyro, float *Roll, float *Pitch, flo
 
 	return MPU6050_OK;
 }
+MPU6050_STATE_t MPU6050_FinalDegGyro(MPU6050_t *MPU6050, float *RollG, float *PitchG, float *YawG, float dt)
+{
+	Gyro_t Gyro;
+	MPU6050_ReadGyro(MPU6050, &Gyro, MPU6050->GyroOffset);
+	MPU6050_DegFromGyro(&Gyro, RollG, PitchG, YawG, dt);
 
+	return MPU6050_OK;
+}
 MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, float *Yaw, float dt)
 {
 	Gyro_t Gyro;
@@ -298,161 +276,3 @@ MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, flo
 
 	return MPU6050_OK;
 }
-
-
-
-
-
-
-
-/*
-
-HAL_StatusTypeDef MPU6050_MemRead(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data, uint16_t Size)
-{
-	return HAL_I2C_Mem_Read(MPU6050->hi2c, (MPU6050->address << 1), Reg, I2C_MEMADD_SIZE_8BIT, Data, Size, HAL_MAX_DELAY);
-}
-
-HAL_StatusTypeDef MPU6050_MemWrite(MPU6050_t *MPU6050, uint8_t Reg, uint8_t Data)
-{
-	return HAL_I2C_Mem_Write(MPU6050->hi2c, (MPU6050->address << 1), Reg, I2C_MEMADD_SIZE_8BIT, &Data, 1, HAL_MAX_DELAY);
-}
-
-
-
-
-
-HAL_StatusTypeDef MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *Gyro)
-{
-	uint8_t GyroData[6];
-
-	//Read Acceleration value
-	if ((MPU6050_MemRead(MPU6050, GYRO_XOUT_H, GyroData, 6)) == HAL_ERROR)
-	{
-		return HAL_ERROR;
-	}
-
-
-	Gyro->GyroX = ((int16_t) (GyroData[0] << 8) | (GyroData[1])) / 131.0;
-	Gyro->GyroY = ((int16_t) (GyroData[2] << 8) | (GyroData[3])) / 131.0;
-	Gyro->GyroZ = ((int16_t) (GyroData[4] << 8) | (GyroData[5])) / 131.0;
-
-	return HAL_OK;
-}
-
-HAL_StatusTypeDef MPU6050_MeanAccelerations(MPU6050_t *MPU6050, Accel_t *Accelerations, Accel_t *AccelerationsMean)
-{
-	uint8_t i = 0;
-	uint8_t Sample = 50;
-	int32_t AccelSumX, AccelSumY, AccelSumZ;
-
-	MPU6050_ReadAcceleration(MPU6050, Accelerations, );
-
-	for(i = 0; i < Sample; i++)
-	{
-		AccelSumX += Accelerations->AccelX;
-		AccelSumY += Accelerations->AccelY;
-		AccelSumZ += Accelerations->AccelZ;
-	}
-
-	AccelerationsMean->AccelX = AccelSumX / Sample;
-	AccelerationsMean->AccelY = AccelSumY / Sample;
-	AccelerationsMean->AccelZ = AccelSumZ / Sample;
-
-	return HAL_OK;
-
-}
-
-HAL_StatusTypeDef MPU6050_MeanGyro(MPU6050_t *MPU6050, Gyro_t *Gyro,  Gyro_t *GyroMean)
-{
-	uint8_t i = 0;
-	uint8_t Sample = 50;
-	int32_t GyroSumX, GyroSumY, GyroSumZ;
-
-	MPU6050_ReadGyro(MPU6050, Gyro);
-
-	for(i = 0; i < Sample; i++)
-	{
-		GyroSumX += Gyro->GyroX;
-		GyroSumY += Gyro->GyroY;
-		GyroSumZ += Gyro->GyroZ;
-	}
-
-	GyroMean->GyroX = GyroSumX / Sample;
-	GyroMean->GyroY = GyroSumY / Sample;
-	GyroMean->GyroZ = GyroSumZ / Sample;
-
-	return HAL_OK;
-
-}
-
-HAL_StatusTypeDef MPU6050_AccelToDeg(MPU6050_t *MPU6050, Accel_t *Accelerations, float *Roll, float *Pitch)
-{
-	if (MPU6050_ReadAcceleration(MPU6050, Accelerations) != HAL_OK)
-	{
-		return HAL_ERROR;
-	}
-
-	*Pitch = atan2f(Accelerations->AccelY, Accelerations->AccelZ) * 180.0 / M_PI;
-	*Roll = atan2f(-(Accelerations->AccelX), sqrtf(Accelerations->AccelY * Accelerations->AccelY + Accelerations->AccelZ * Accelerations->AccelZ)) * 180.0 / M_PI;
-
-	return HAL_OK;
-}
-
-HAL_StatusTypeDef MPU6050_GyroToDps	(MPU6050_t *MPU6050, Gyro_t *Gyro, float *DpsX, float *DpsY, float *DpsZ)
-{
-	// najpierw policz średnie wartości gyro
-    if (MPU6050_ReadGyro(MPU6050, Gyro) != HAL_OK)
-    {
-        return HAL_ERROR;
-    }
-
-    // konwersja na dps (±250°/s)
-    *DpsX = ((float)Gyro->GyroX - gx_offset) / 131.0f;
-    *DpsY = ((float)Gyro->GyroY - gy_offset) / 131.0f;
-    *DpsZ = ((float)Gyro->GyroZ - gz_offset) / 131.0f;
-
-	return HAL_OK;
-}
-
-HAL_StatusTypeDef MPU6050_ComputeAngles(MPU6050_t *MPU6050, Accel_t *Accelerations, Gyro_t *Gyro, float *Roll, float *Pitch, float dt)
-{
-	if (MPU6050_ReadGyro(MPU6050, Gyro) != HAL_OK)
-	{
-		return HAL_ERROR;
-	}
-
-	if (MPU6050_ReadAcceleration(MPU6050, Accelerations) != HAL_OK)
-	{
-		return HAL_ERROR;
-	}
-
-	float AccelerationRoll, AccelerationPitch;
-	float GyroDpsX, GyroDpsY, GyroDpsZ;
-	GyroDpsX = Gyro->GyroX;
-	GyroDpsY = Gyro->GyroY;
-	GyroDpsZ = Gyro->GyroZ;
-
-	//change to degrees
-	//acceleration to degrees
-	MPU6050_AccelToDeg(MPU6050, Accelerations,  &AccelerationRoll, &AccelerationPitch);
-	//dps to degrees
-	MPU6050_GyroToDps(MPU6050, Gyro, &GyroDpsX, &GyroDpsY, &GyroDpsZ);
-
-	//calculating roll and pitch from gyro
-	static float GyroRoll = 0;
-	static float GyroPitch = 0;
-
-	GyroRoll  += GyroDpsX * dt;
-	GyroPitch += GyroDpsY * dt;
-
-	//complementary filtr
-	float alpha = 0.98;
-	*Roll = (alpha * GyroRoll) + ((1 - alpha) * AccelerationRoll);
-	*Pitch = (alpha * GyroPitch) + ((1-alpha) * AccelerationPitch);
-
-	return HAL_OK;
-
-
-
-}
-*/

@@ -141,7 +141,11 @@ int main(void)
 		  sprintf(Message, "Roll: %.3f, Pitch: %.3f, Yaw: %.3f", Roll, Pitch, Yaw);
 		  HAL_UART_Transmit(&hlpuart1,(uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
 		  MPU6050_DegFromAccel(&MPU6050, &RollAccel, &PitchAccel);
-		  MPU6050_DegFromGyro(&Gyro, &RollGyro, &PitchGyro, &YawGyro, dt);
+		  //MPU6050_DegFromGyro(&Gyro, &RollGyro, &PitchGyro, &YawGyro, dt);
+		  MPU6050_FinalDegGyro(&MPU6050, &RollGyro, &PitchGyro, &YawGyro, dt);
+		  sprintf(Message, "RollG: %.3f, PitchG: %.3f, YawG: %.3f", RollGyro, PitchGyro, YawGyro);
+		  HAL_UART_Transmit(&hlpuart1,(uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+
 		}
     /* USER CODE END WHILE */
 
