@@ -138,20 +138,19 @@ int main(void)
 		{
 		  InterruptFlag = 0;
 		  MPU6050_Angle(&MPU6050, &Roll, &Pitch, &Yaw, dt);
-		  sprintf(Message, "Roll: %.3f, Pitch: %.3f, Yaw: %.3f\n", Roll, Pitch, Yaw);
-		  HAL_UART_Transmit(&hlpuart1,(uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+		  //sprintf(Message, "Roll: %.3f, Pitch: %.3f, Yaw: %.3f\n", Roll, Pitch, Yaw);
+		  //HAL_UART_Transmit(&hlpuart1,(uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+
+		  //HAL_Delay(10);
+		  //MPU6050_DegFromAccel(&MPU6050, &RollAccel, &PitchAccel);
+		  //sprintf(Message, "RollA: %.3f, PitchA: %.3f\n", RollAccel, PitchAccel);
+		  //HAL_UART_Transmit(&hlpuart1,(uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
 
 		  HAL_Delay(10);
-		  MPU6050_DegFromAccel(&MPU6050, &RollAccel, &PitchAccel);
-		  sprintf(Message, "RollA: %.3f, PitchA: %.3f\n", RollAccel, PitchAccel);
-		  HAL_UART_Transmit(&hlpuart1,(uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
-
-		  //MPU6050_DegFromGyro(&Gyro, &RollGyro, &PitchGyro, &YawGyro, dt);
-		  /*
 		  MPU6050_FinalDegGyro(&MPU6050, &RollGyro, &PitchGyro, &YawGyro, dt);
-		  sprintf(Message, "RollG: %.3f, PitchG: %.3f, YawG: %.3f\n", RollGyro, PitchGyro, YawGyro);
-		  HAL_UART_Transmit(&hlpuart1,(uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
-		  */
+		  //sprintf(Message, "RollG: %.3f, PitchG: %.3f, YawG: %.3f\n", RollGyro, PitchGyro, YawGyro);
+		  //HAL_UART_Transmit(&hlpuart1,(uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
+
 
 		}
     /* USER CODE END WHILE */

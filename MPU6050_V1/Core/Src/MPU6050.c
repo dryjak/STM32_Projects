@@ -245,10 +245,29 @@ MPU6050_STATE_t MPU6050_DegFromGyro(Gyro_t *Gyro, float *Roll, float *Pitch, flo
 MPU6050_STATE_t MPU6050_FinalDegGyro(MPU6050_t *MPU6050, float *RollG, float *PitchG, float *YawG, float dt)
 {
 	Gyro_t Gyro;
+	uint32_t TimeNow = HAL_GetTick();
+	static uint32_t LastTick = 0;
+
+	if (LastTick == 0)
+	{
+        LastTick = TimeNow;
+        *RollG = 0.0f;
+        *PitchG = 0.0f;
+        *YawG = 0.0f;
+        // odczytaj i zwróć 0 (albo początkowe wartości)
+        MPU6050_ReadGyro(MPU6050, &Gyro, MPU6050->GyroOffset);
+        return MPU6050_OK;
+	}
+
+	uint32_t TimeElapsedMs = TimeNow - LastTick;
+	LastTick = TimeNow;
+
+
 	MPU6050_ReadGyro(MPU6050, &Gyro, MPU6050->GyroOffset);
-	MPU6050_DegFromGyro(&Gyro, RollG, PitchG, YawG, dt);
+	MPU6050_DegFromGyro(&Gyro, RollG, PitchG, YawG, (float)(TimeElapsedMs / 1000.0f));
 
 	return MPU6050_OK;
+
 }
 MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, float *Yaw, float dt)
 {
