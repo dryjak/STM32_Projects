@@ -234,15 +234,7 @@ MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050, GyroOffset_t *GyroOffs
 	return MPU6050_OK;
 }
 
-MPU6050_STATE_t MPU6050_DegFromGyro(Gyro_t *Gyro, float *Roll, float *Pitch, float *Yaw, float dt)
-{
-	*Roll += Gyro->GyroX * dt;
-	*Pitch += Gyro->GyroY * dt;
-	*Yaw += Gyro->GyroZ * dt;
-
-	return MPU6050_OK;
-}
-MPU6050_STATE_t MPU6050_FinalDegGyro(MPU6050_t *MPU6050, float *RollG, float *PitchG, float *YawG, float dt)
+MPU6050_STATE_t MPU6050_DegFromGyro(MPU6050_t *MPU6050, float *RollG, float *PitchG, float *YawG, float dt)
 {
 	Gyro_t Gyro;
 	uint32_t TimeNow = HAL_GetTick();
@@ -259,35 +251,30 @@ MPU6050_STATE_t MPU6050_FinalDegGyro(MPU6050_t *MPU6050, float *RollG, float *Pi
         return MPU6050_OK;
 	}
 
-	uint32_t TimeElapsedMs = TimeNow - LastTick;
+	float TimeElapsedMs = (float) (TimeNow - LastTick) / 1000;
 	LastTick = TimeNow;
 
 
 	MPU6050_ReadGyro(MPU6050, &Gyro, MPU6050->GyroOffset);
-	MPU6050_DegFromGyro(&Gyro, RollG, PitchG, YawG, (float)(TimeElapsedMs / 1000.0f));
+
+	*RollG 	+= Gyro.GyroX * TimeElapsedMs;
+	*PitchG += Gyro.GyroY * TimeElapsedMs;
+	*YawG 	+= Gyro.GyroZ * TimeElapsedMs;
 
 	return MPU6050_OK;
 
 }
 MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, float *Yaw, float dt)
 {
-	Gyro_t Gyro;
-
-	float AccelRoll 	= 0;
-	float AccelPitch 	= 0;
-
-	//Read gyro data
-	//Gyro_t GyroCalculated;
-	MPU6050_ReadGyro(MPU6050, &Gyro, MPU6050->GyroOffset);
-
-	static float RollGyro = 0, PitchGyro = 0, YawGyro = 0;
-	MPU6050_DegFromGyro(&Gyro, &RollGyro, &PitchGyro, &YawGyro, dt);
+	float RollGyro = 0, PitchGyro = 0, YawGyro = 0;
+	MPU6050_DegFromGyro(MPU6050, &RollGyro, &PitchGyro, &YawGyro, dt);
 
 	//Read accel data
+	float AccelRoll = 0, AccelPitch = 0;
 	MPU6050_DegFromAccel(MPU6050, &AccelRoll, &AccelPitch);
 
 	//place for complementary filter
-    float alpha = 0.98f;
+    const float alpha = 0.98f;
     *Roll  = alpha * RollGyro  + (1.0f - alpha) * AccelRoll;
     *Pitch = alpha * PitchGyro + (1.0f - alpha) * AccelPitch;
     //*Yaw   = Gyro.GyroZ; // brak sensownej referencji z akcelerometru, więc tylko gyro

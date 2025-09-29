@@ -13,6 +13,5 @@
 ../Core/Src/MPU6050.c:188:17:MPU6050_ReadGyroRaw	1
 ../Core/Src/MPU6050.c:197:17:MPU6050_ReadGyro	1
 ../Core/Src/MPU6050.c:209:17:MPU6050_CalibrateGyro	2
-../Core/Src/MPU6050.c:237:17:MPU6050_DegFromGyro	1
-../Core/Src/MPU6050.c:245:17:MPU6050_FinalDegGyro	2
-../Core/Src/MPU6050.c:272:17:MPU6050_Angle	1
+../Core/Src/MPU6050.c:237:17:MPU6050_DegFromGyro	2
+../Core/Src/MPU6050.c:267:17:MPU6050_Angle	1
