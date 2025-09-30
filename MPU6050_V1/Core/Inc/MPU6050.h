@@ -94,36 +94,18 @@ typedef struct{
 }MPU6050_t;
 
 
-uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050);
-HAL_StatusTypeDef MPU6050_MemRead(MPU6050_t *MPU6050, uint8_t Reg, uint8_t *Data, uint16_t Size);
-HAL_StatusTypeDef MPU6050_MemWrite(MPU6050_t *MPU6050, uint8_t Reg, uint8_t Data);
 MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Address);
 MPU6050_STATE_t MPU6050_WakeUp(MPU6050_t *MPU6050);
-MPU6050_STATE_t MPU6050_SetAccelerationRange(MPU6050_t *MPU6050);
-MPU6050_STATE_t MPU6050_SetGyroRange(MPU6050_t *MPU6050);
-MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations, AccelOffset_t AccelOffset);
-
-
-uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register);
-MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelOffset);
+uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050);
 
 //functions for accel
 MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pitch);
 
 //functions for gyro
-MPU6050_STATE_t MPU6050_ReadGyroRaw(MPU6050_t *MPU6050, GyroRaw_t *GyroRaw);
-MPU6050_STATE_t MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated, GyroOffset_t GyroOffset);
-MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050, GyroOffset_t *GyroOffset);
 MPU6050_STATE_t MPU6050_DegFromGyro(MPU6050_t *MPU6050, float *RollG, float *PitchG, float *YawG, float dt);
-
 
 //Function to read final angle values
 MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, float *Yaw, float dt);
-
-
-
-
-
 
 
 #endif /* INC_MPU6050_H_ */

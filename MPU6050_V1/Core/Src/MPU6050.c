@@ -51,7 +51,7 @@ MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16
 	return MPU6050_OK;
 }
 
-uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register)
+static uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register)
 {
 	uint8_t Value;
 
@@ -60,7 +60,7 @@ uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register)
 	return Value;
 }
 
-MPU6050_STATE_t Write8(MPU6050_t *MPU6050, uint8_t Register, uint8_t Value)
+static MPU6050_STATE_t Write8(MPU6050_t *MPU6050, uint8_t Register, uint8_t Value)
 {
 	return HAL_I2C_Mem_Write(MPU6050->hi2c, (MPU6050->address) << 1, Register, 1, &Value, 1, MPU6050_TIMEOUT);
 }
@@ -95,7 +95,7 @@ MPU6050_STATE_t MPU6050_WakeUp(MPU6050_t *MPU6050)
 	return Write8(MPU6050, PWR_MGMT_1, Value);
 }
 
-MPU6050_STATE_t MPU6050_SetGyroRange(MPU6050_t *MPU6050)
+static MPU6050_STATE_t MPU6050_SetGyroRange(MPU6050_t *MPU6050)
 {
 	//Firstly you need to read the register value
 	uint8_t RegisterValue;
@@ -107,7 +107,7 @@ MPU6050_STATE_t MPU6050_SetGyroRange(MPU6050_t *MPU6050)
 	return Write8(MPU6050, GYRO_CONFIG, RegisterValue);
 }
 
-MPU6050_STATE_t MPU6050_SetAccelerationRange(MPU6050_t *MPU6050)
+static MPU6050_STATE_t MPU6050_SetAccelerationRange(MPU6050_t *MPU6050)
 {
 	//Firstly you need to read the register value
 	uint8_t RegisterValue;
@@ -119,7 +119,7 @@ MPU6050_STATE_t MPU6050_SetAccelerationRange(MPU6050_t *MPU6050)
 
 
 //ACCELEROMETR DATA
-MPU6050_STATE_t MPU6050_ReadAccelerationRaw(MPU6050_t *MPU6050, AccelRaw_t *AccelRaw)
+static MPU6050_STATE_t MPU6050_ReadAccelerationRaw(MPU6050_t *MPU6050, AccelRaw_t *AccelRaw)
 {
 	AccelRaw->AccelX = Read16(MPU6050, ACCEL_XOUT_H);
 	AccelRaw->AccelY = Read16(MPU6050, ACCEL_YOUT_H);
@@ -127,7 +127,7 @@ MPU6050_STATE_t MPU6050_ReadAccelerationRaw(MPU6050_t *MPU6050, AccelRaw_t *Acce
 
 	return MPU6050_OK;
 }
-MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations, AccelOffset_t AccelOffset)
+static MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations, AccelOffset_t AccelOffset)
 {
 	AccelRaw_t AccelRaw;
 	MPU6050_ReadAccelerationRaw(MPU6050, &AccelRaw);
@@ -141,7 +141,7 @@ MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerati
 
 }
 
-MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelOffset)
+static MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelOffset)
 {
 	Accel_t Accelerations;
 	int32_t SumX = 0;
@@ -185,7 +185,7 @@ MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pit
 }
 
 //GYRO DATA
-MPU6050_STATE_t MPU6050_ReadGyroRaw(MPU6050_t *MPU6050, GyroRaw_t *GyroRaw)
+static MPU6050_STATE_t MPU6050_ReadGyroRaw(MPU6050_t *MPU6050, GyroRaw_t *GyroRaw)
 {
 	GyroRaw->GyroX = Read16(MPU6050, GYRO_XOUT_H);
 	GyroRaw->GyroY = Read16(MPU6050, GYRO_YOUT_H);
@@ -194,7 +194,7 @@ MPU6050_STATE_t MPU6050_ReadGyroRaw(MPU6050_t *MPU6050, GyroRaw_t *GyroRaw)
 	return MPU6050_OK;
 }
 
-MPU6050_STATE_t MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated, GyroOffset_t GyroOffset)
+static MPU6050_STATE_t MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated, GyroOffset_t GyroOffset)
 {
 	GyroRaw_t GyroRaw;
 	MPU6050_ReadGyroRaw(MPU6050, &GyroRaw);
@@ -206,7 +206,7 @@ MPU6050_STATE_t MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated, Gyr
 	return MPU6050_OK;
 }
 
-MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050, GyroOffset_t *GyroOffset)
+static MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050, GyroOffset_t *GyroOffset)
 {
 	GyroRaw_t Gyro;
 	int32_t SumX = 0;
