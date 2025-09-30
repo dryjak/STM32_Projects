@@ -35,17 +35,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  15 .debug_rnglists 00001003  00000000  00000000  00026850  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  000288a4  00000000  00000000  00027853  2**0
+ 16 .debug_macro  000288b0  00000000  00000000  00027853  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   000185b0  00000000  00000000  000500f7  2**0
+ 17 .debug_line   000185b0  00000000  00000000  00050103  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    001014db  00000000  00000000  000686a7  2**0
+ 18 .debug_str    00101510  00000000  00000000  000686b3  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  00169b82  2**0
+ 19 .comment      00000043  00000000  00000000  00169bc3  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00006900  00000000  00000000  00169bc8  2**2
+ 20 .debug_frame  00006900  00000000  00000000  00169c08  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000063  00000000  00000000  001704c8  2**0
+ 21 .debug_line_str 00000063  00000000  00000000  00170508  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1275,10 +1275,10 @@ Disassembly of section .text:
  8000fc2:	bf00      	nop
 
 08000fc4 <MPU6050_Init>:
+static MPU6050_STATE_t MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated, GyroOffset_t GyroOffset);
 static MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050, GyroOffset_t *GyroOffset);
 
-// --- Funkcje publiczne (API) ---
-
+//Initialize MPU6050
 MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Address)
 {
  8000fc4:	b580      	push	{r7, lr}
@@ -1305,53 +1305,57 @@ MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16
  8000fe2:	f000 f96d 	bl	80012c0 <Read8>
  8000fe6:	4603      	mov	r3, r0
  8000fe8:	75fb      	strb	r3, [r7, #23]
-    if (CheckID != 0x68) {
+    if (CheckID != 0x68) 										//Checking IMU ID
  8000fea:	7dfb      	ldrb	r3, [r7, #23]
  8000fec:	2b68      	cmp	r3, #104	@ 0x68
  8000fee:	d001      	beq.n	8000ff4 <MPU6050_Init+0x30>
+    {
         return MPU6050_ERROR;
  8000ff0:	2301      	movs	r3, #1
  8000ff2:	e024      	b.n	800103e <MPU6050_Init+0x7a>
     }
 
-    if (MPU6050_WakeUp(MPU6050) != MPU6050_OK) {
+    if (MPU6050_WakeUp(MPU6050) != MPU6050_OK) 					//Waking up the IMU
  8000ff4:	68f8      	ldr	r0, [r7, #12]
  8000ff6:	f000 f826 	bl	8001046 <MPU6050_WakeUp>
  8000ffa:	4603      	mov	r3, r0
  8000ffc:	2b00      	cmp	r3, #0
  8000ffe:	d001      	beq.n	8001004 <MPU6050_Init+0x40>
+    {
         return MPU6050_ERROR;
  8001000:	2301      	movs	r3, #1
  8001002:	e01c      	b.n	800103e <MPU6050_Init+0x7a>
     }
-    if (MPU6050_SetAccelerationRange(MPU6050) != MPU6050_OK) {
+    if (MPU6050_SetAccelerationRange(MPU6050) != MPU6050_OK) 	//Setting acceleration range
  8001004:	68f8      	ldr	r0, [r7, #12]
  8001006:	f000 f9d6 	bl	80013b6 <MPU6050_SetAccelerationRange>
  800100a:	4603      	mov	r3, r0
  800100c:	2b00      	cmp	r3, #0
  800100e:	d001      	beq.n	8001014 <MPU6050_Init+0x50>
+    {
         return MPU6050_ERROR;
  8001010:	2301      	movs	r3, #1
  8001012:	e014      	b.n	800103e <MPU6050_Init+0x7a>
     }
-    if (MPU6050_SetGyroRange(MPU6050) != MPU6050_OK) {
+    if (MPU6050_SetGyroRange(MPU6050) != MPU6050_OK) 			//Setting gyro range
  8001014:	68f8      	ldr	r0, [r7, #12]
  8001016:	f000 f9b5 	bl	8001384 <MPU6050_SetGyroRange>
  800101a:	4603      	mov	r3, r0
  800101c:	2b00      	cmp	r3, #0
  800101e:	d001      	beq.n	8001024 <MPU6050_Init+0x60>
+    {
         return MPU6050_ERROR;
  8001020:	2301      	movs	r3, #1
  8001022:	e00c      	b.n	800103e <MPU6050_Init+0x7a>
     }
 
-    MPU6050_CalibrateAccel(MPU6050, &MPU6050->AccelOffset);
+    MPU6050_CalibrateAccel(MPU6050, &MPU6050->AccelOffset);		//Getting data to calibrate accel
  8001024:	68fb      	ldr	r3, [r7, #12]
  8001026:	3308      	adds	r3, #8
  8001028:	4619      	mov	r1, r3
  800102a:	68f8      	ldr	r0, [r7, #12]
  800102c:	f000 fa50 	bl	80014d0 <MPU6050_CalibrateAccel>
-    MPU6050_CalibrateGyro(MPU6050, &MPU6050->GyroOffset);
+    MPU6050_CalibrateGyro(MPU6050, &MPU6050->GyroOffset);		//Getting data to calibrate gyro
  8001030:	68fb      	ldr	r3, [r7, #12]
  8001032:	3314      	adds	r3, #20
  8001034:	4619      	mov	r1, r3
@@ -1413,8 +1417,7 @@ MPU6050_STATE_t MPU6050_WakeUp(MPU6050_t *MPU6050)
 
 08001088 <MPU6050_DegFromAccel>:
 
-// --- Obliczanie kątów ---
-
+//Calculating angles from accelerometr data
 MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pitch)
 {
  8001088:	b580      	push	{r7, lr}
@@ -1507,7 +1510,7 @@ MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pit
  8001188:	43340000 	.word	0x43340000
 
 0800118c <MPU6050_DegFromGyro>:
-
+//Calculating angles from gyro data
 MPU6050_STATE_t MPU6050_DegFromGyro(MPU6050_t *MPU6050, float *RollG, float *PitchG, float *YawG, float dt)
 {
  800118c:	b580      	push	{r7, lr}
@@ -1571,6 +1574,7 @@ MPU6050_STATE_t MPU6050_DegFromGyro(MPU6050_t *MPU6050, float *RollG, float *Pit
 
 08001224 <MPU6050_Angle>:
 
+//Calculating and combining data form accelerometr and gyro
 MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, float *Yaw, float dt)
 {
  8001224:	b580      	push	{r7, lr}
@@ -1583,7 +1587,7 @@ MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, flo
  8001232:	ed87 0a01 	vstr	s0, [r7, #4]
     float RollAccel, PitchAccel;
 
-    // Accel
+    //Accel
     MPU6050_DegFromAccel(MPU6050, &RollAccel, &PitchAccel);
  8001236:	f107 021c 	add.w	r2, r7, #28
  800123a:	f107 0320 	add.w	r3, r7, #32
@@ -1591,7 +1595,7 @@ MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, flo
  8001240:	6978      	ldr	r0, [r7, #20]
  8001242:	f7ff ff21 	bl	8001088 <MPU6050_DegFromAccel>
 
-    // Gyro
+    //Gyro
     MPU6050_DegFromGyro(MPU6050, Roll, Pitch, Yaw, dt);
  8001246:	ed97 0a01 	vldr	s0, [r7, #4]
  800124a:	68bb      	ldr	r3, [r7, #8]
@@ -1600,7 +1604,7 @@ MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, flo
  8001250:	6978      	ldr	r0, [r7, #20]
  8001252:	f7ff ff9b 	bl	800118c <MPU6050_DegFromGyro>
 
-    // Komplementarny filtr
+    //Filter
     const float alpha = 0.98f;
  8001256:	4b19      	ldr	r3, [pc, #100]	@ (80012bc <MPU6050_Angle+0x98>)
  8001258:	627b      	str	r3, [r7, #36]	@ 0x24
@@ -1642,8 +1646,7 @@ MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, flo
 
 080012c0 <Read8>:
 
-// --- Implementacja funkcji pomocniczych ---
-
+//Help functions
 static uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register)
 {
  80012c0:	b580      	push	{r7, lr}

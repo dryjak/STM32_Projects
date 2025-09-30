@@ -9,6 +9,11 @@
 #include "main.h"
 #include "math.h"
 
+
+#define ACCEL_SCALE_FACTOR 16384.0f		//scale factor for acceleration range +/- 2g
+#define GYRO_SCALE_FACTOR 131.0f		//scale factor for gyro range +/- 250 deg/s
+
+
 // TO DO: odczyt z accelerometru
 typedef union {
     struct {
@@ -18,7 +23,7 @@ typedef union {
     int16_t Var16u;
 } ConvTo16_t;
 
-// --- Funkcje pomocnicze (tylko w tym pliku .c) ---
+// Functions used to read angles
 static uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register);
 static MPU6050_STATE_t Write8(MPU6050_t *MPU6050, uint8_t Register, uint8_t Value);
 static int16_t Read16(MPU6050_t *MPU6050, uint8_t Register);
@@ -34,8 +39,7 @@ static MPU6050_STATE_t MPU6050_ReadGyroRaw(MPU6050_t *MPU6050, GyroRaw_t *GyroRa
 static MPU6050_STATE_t MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated, GyroOffset_t GyroOffset);
 static MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050, GyroOffset_t *GyroOffset);
 
-// --- Funkcje publiczne (API) ---
-
+//Initialize MPU6050
 MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Address)
 {
     uint8_t CheckID;
@@ -44,28 +48,32 @@ MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16
     MPU6050->address  = Address;
 
     CheckID = Read8(MPU6050, 0x75);
-    if (CheckID != 0x68) {
+    if (CheckID != 0x68) 										//Checking IMU ID
+    {
         return MPU6050_ERROR;
     }
 
-    if (MPU6050_WakeUp(MPU6050) != MPU6050_OK) {
+    if (MPU6050_WakeUp(MPU6050) != MPU6050_OK) 					//Waking up the IMU
+    {
         return MPU6050_ERROR;
     }
-    if (MPU6050_SetAccelerationRange(MPU6050) != MPU6050_OK) {
+    if (MPU6050_SetAccelerationRange(MPU6050) != MPU6050_OK) 	//Setting acceleration range
+    {
         return MPU6050_ERROR;
     }
-    if (MPU6050_SetGyroRange(MPU6050) != MPU6050_OK) {
+    if (MPU6050_SetGyroRange(MPU6050) != MPU6050_OK) 			//Setting gyro range
+    {
         return MPU6050_ERROR;
     }
 
-    MPU6050_CalibrateAccel(MPU6050, &MPU6050->AccelOffset);
-    MPU6050_CalibrateGyro(MPU6050, &MPU6050->GyroOffset);
+    MPU6050_CalibrateAccel(MPU6050, &MPU6050->AccelOffset);		//Getting data to calibrate accel
+    MPU6050_CalibrateGyro(MPU6050, &MPU6050->GyroOffset);		//Getting data to calibrate gyro
 
 
     return MPU6050_OK;
 }
 
-uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050)
+uint8_t MPU6050_WHO_AM_I (MPU6050_t *MPU6050) 	//Checking ID before working with IMU
 {
     return Read8(MPU6050, 0x75);
 }
@@ -81,8 +89,7 @@ MPU6050_STATE_t MPU6050_WakeUp(MPU6050_t *MPU6050)
     return Write8(MPU6050, PWR_MGMT_1, Value);
 }
 
-// --- Obliczanie kątów ---
-
+//Calculating angles from accelerometr data
 MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pitch)
 {
     Accel_t Accel;
@@ -93,7 +100,7 @@ MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pit
 
     return MPU6050_OK;
 }
-
+//Calculating angles from gyro data
 MPU6050_STATE_t MPU6050_DegFromGyro(MPU6050_t *MPU6050, float *RollG, float *PitchG, float *YawG, float dt)
 {
     Gyro_t Gyro;
@@ -106,17 +113,18 @@ MPU6050_STATE_t MPU6050_DegFromGyro(MPU6050_t *MPU6050, float *RollG, float *Pit
     return MPU6050_OK;
 }
 
+//Calculating and combining data form accelerometr and gyro
 MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, float *Yaw, float dt)
 {
     float RollAccel, PitchAccel;
 
-    // Accel
+    //Accel
     MPU6050_DegFromAccel(MPU6050, &RollAccel, &PitchAccel);
 
-    // Gyro
+    //Gyro
     MPU6050_DegFromGyro(MPU6050, Roll, Pitch, Yaw, dt);
 
-    // Komplementarny filtr
+    //Filter
     const float alpha = 0.98f;
     *Roll  = alpha * (*Roll)  + (1.0f - alpha) * RollAccel;
     *Pitch = alpha * (*Pitch) + (1.0f - alpha) * PitchAccel;
@@ -124,8 +132,7 @@ MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, flo
     return MPU6050_OK;
 }
 
-// --- Implementacja funkcji pomocniczych ---
-
+//Help functions
 static uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register)
 {
     uint8_t Value;
