@@ -9,11 +9,6 @@
 #include "main.h"
 #include "math.h"
 
-
-#define ACCEL_SCALE_FACTOR 16384.0f		//scale factor for acceleration range +/- 2g
-#define GYRO_SCALE_FACTOR 131.0f		//scale factor for gyro range +/- 250 deg/s
-
-
 // TO DO: odczyt z accelerometru
 typedef union {
     struct {
@@ -32,12 +27,12 @@ static MPU6050_STATE_t MPU6050_SetGyroRange(MPU6050_t *MPU6050);
 static MPU6050_STATE_t MPU6050_SetAccelerationRange(MPU6050_t *MPU6050);
 
 static MPU6050_STATE_t MPU6050_ReadAccelerationRaw(MPU6050_t *MPU6050, AccelRaw_t *AccelRaw);
-static MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations, AccelOffset_t AccelOffset);
-static MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelOffset);
+static MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations);
+static MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050);
 
 static MPU6050_STATE_t MPU6050_ReadGyroRaw(MPU6050_t *MPU6050, GyroRaw_t *GyroRaw);
-static MPU6050_STATE_t MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated, GyroOffset_t GyroOffset);
-static MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050, GyroOffset_t *GyroOffset);
+static MPU6050_STATE_t MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated);
+static MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050);
 
 //Initialize MPU6050
 MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16_t Address)
@@ -66,8 +61,8 @@ MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16
         return MPU6050_ERROR;
     }
 
-    MPU6050_CalibrateAccel(MPU6050, &MPU6050->AccelOffset);		//Getting data to calibrate accel
-    MPU6050_CalibrateGyro(MPU6050, &MPU6050->GyroOffset);		//Getting data to calibrate gyro
+    MPU6050_CalibrateAccel(MPU6050);		//Getting data to calibrate accel
+    MPU6050_CalibrateGyro(MPU6050);			//Getting data to calibrate gyro
 
 
     return MPU6050_OK;
@@ -93,7 +88,7 @@ MPU6050_STATE_t MPU6050_WakeUp(MPU6050_t *MPU6050)
 MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pitch)
 {
     Accel_t Accel;
-    MPU6050_ReadAcceleration(MPU6050, &Accel, MPU6050->AccelOffset);
+    MPU6050_ReadAcceleration(MPU6050, &Accel);
 
     *Roll  = atan2f(Accel.AccelY, Accel.AccelZ) * 180.0f / M_PI;
     *Pitch = atan2f(-Accel.AccelX, sqrtf(Accel.AccelY*Accel.AccelY + Accel.AccelZ*Accel.AccelZ)) * 180.0f / M_PI;
@@ -104,7 +99,7 @@ MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pit
 MPU6050_STATE_t MPU6050_DegFromGyro(MPU6050_t *MPU6050, float *RollG, float *PitchG, float *YawG, float dt)
 {
     Gyro_t Gyro;
-    MPU6050_ReadGyro(MPU6050, &Gyro, MPU6050->GyroOffset);
+    MPU6050_ReadGyro(MPU6050, &Gyro);
 
     *RollG  += Gyro.GyroX * dt;
     *PitchG += Gyro.GyroY * dt;
@@ -176,26 +171,36 @@ static MPU6050_STATE_t MPU6050_ReadAccelerationRaw(MPU6050_t *MPU6050, AccelRaw_
     return MPU6050_OK;
 }
 
-static MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations, AccelOffset_t AccelOffset)
+static MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Accelerations)
 {
     AccelRaw_t Raw;
     MPU6050_ReadAccelerationRaw(MPU6050, &Raw);
 
     const float ScaleFactor = 16384.0f; // ±2g
 
-    Accelerations->AccelX = ((float)Raw.AccelX - AccelOffset.OffsetX) / ScaleFactor;
-    Accelerations->AccelY = ((float)Raw.AccelY - AccelOffset.OffsetY) / ScaleFactor;
-    Accelerations->AccelZ = ((float)Raw.AccelZ - AccelOffset.OffsetZ) / ScaleFactor;
+    Accelerations->AccelX = ((float)Raw.AccelX - MPU6050->AccelOffset.OffsetX) / ScaleFactor;
+    Accelerations->AccelY = ((float)Raw.AccelY - MPU6050->AccelOffset.OffsetY) / ScaleFactor;
+    Accelerations->AccelZ = ((float)Raw.AccelZ - MPU6050->AccelOffset.OffsetZ) / ScaleFactor;
 
     return MPU6050_OK;
 }
 
-static MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050, AccelOffset_t *AccelOffset)
+static MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050)
 {
-    // TODO: implementacja kalibracji
-    AccelOffset->OffsetX = 0;
-    AccelOffset->OffsetY = 0;
-    AccelOffset->OffsetZ = 0;
+    Accel_t Accelerations;
+    uint32_t SumX = 0, SumY = 0, SumZ = 0;
+    uint8_t i;
+    for(i = 0; i < 100; i++)
+    {
+    	MPU6050_ReadAcceleration(MPU6050, &Accelerations);
+    	SumX += Accelerations.AccelX;
+    	SumY += Accelerations.AccelY;
+    	SumZ += Accelerations.AccelZ;
+    }
+    MPU6050->AccelOffset.OffsetX = SumX / i;
+    MPU6050->AccelOffset.OffsetY = SumY / i;
+    MPU6050->AccelOffset.OffsetZ = SumZ / i;
+
     return MPU6050_OK;
 }
 
@@ -207,25 +212,35 @@ static MPU6050_STATE_t MPU6050_ReadGyroRaw(MPU6050_t *MPU6050, GyroRaw_t *GyroRa
     return MPU6050_OK;
 }
 
-static MPU6050_STATE_t MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated, GyroOffset_t GyroOffset)
+static MPU6050_STATE_t MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculated)
 {
     GyroRaw_t Raw;
     MPU6050_ReadGyroRaw(MPU6050, &Raw);
 
     const float ScaleFactor = 131.0f; // ±250°/s
 
-    GyroCalculated->GyroX = ((float)Raw.GyroX - GyroOffset.OffsetX) / ScaleFactor;
-    GyroCalculated->GyroY = ((float)Raw.GyroY - GyroOffset.OffsetY) / ScaleFactor;
-    GyroCalculated->GyroZ = ((float)Raw.GyroZ - GyroOffset.OffsetZ) / ScaleFactor;
+    GyroCalculated->GyroX = (float)((Raw.GyroX - MPU6050->GyroOffset.OffsetX) / ScaleFactor);
+    GyroCalculated->GyroY = (float)((Raw.GyroY - MPU6050->GyroOffset.OffsetY) / ScaleFactor);
+    GyroCalculated->GyroZ = (float)((Raw.GyroZ - MPU6050->GyroOffset.OffsetZ) / ScaleFactor);
 
     return MPU6050_OK;
 }
 
-static MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050, GyroOffset_t *GyroOffset)
+static MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050)
 {
-    // TODO: implementacja kalibracji
-    GyroOffset->OffsetX = 0;
-    GyroOffset->OffsetY = 0;
-    GyroOffset->OffsetZ = 0;
+    Gyro_t Gyro;
+    uint32_t SumX = 0, SumY = 0, SumZ = 0;
+    uint8_t i;
+    for(i = 0; i < 100; i++)
+    {
+    	MPU6050_ReadGyro(MPU6050, &Gyro);
+    	SumX += Gyro.GyroX;
+    	SumY += Gyro.GyroY;
+    	SumZ += Gyro.GyroZ;
+    }
+    MPU6050->GyroOffset.OffsetX = SumX / i;
+    MPU6050->GyroOffset.OffsetY = SumY / i;
+    MPU6050->GyroOffset.OffsetZ = SumZ / i;
+
     return MPU6050_OK;
 }
