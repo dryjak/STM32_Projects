@@ -147,7 +147,7 @@ int main(void)
 		  //HAL_UART_Transmit(&hlpuart1,(uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
 
 		  HAL_Delay(10);
-		  MPU6050_DegFromGyro(&MPU6050, &RollGyro, &PitchGyro, &YawGyro, dt);
+		  MPU6050_DegFromGyro(&MPU6050, &RollGyro, &PitchGyro, &YawGyro);
 		  //sprintf(Message, "RollG: %.3f, PitchG: %.3f, YawG: %.3f\n", RollGyro, PitchGyro, YawGyro);
 		  //HAL_UART_Transmit(&hlpuart1,(uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
 

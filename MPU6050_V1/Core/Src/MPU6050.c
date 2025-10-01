@@ -96,10 +96,23 @@ MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pit
     return MPU6050_OK;
 }
 //Calculating angles from gyro data
-MPU6050_STATE_t MPU6050_DegFromGyro(MPU6050_t *MPU6050, float *RollG, float *PitchG, float *YawG, float dt)
+MPU6050_STATE_t MPU6050_DegFromGyro(MPU6050_t *MPU6050, float *RollG, float *PitchG, float *YawG)
 {
     Gyro_t Gyro;
     MPU6050_ReadGyro(MPU6050, &Gyro);
+
+    static uint32_t LastTick = 0;
+    uint32_t TimeNow = HAL_GetTick();
+
+    if(LastTick == 0)
+    {
+    	//init
+    	LastTick = TimeNow;
+    	return MPU6050_OK;
+    }
+
+    float dt = (float)(TimeNow - LastTick) / 1000;	//ms -> s
+    LastTick = TimeNow;
 
     *RollG  += Gyro.GyroX * dt;
     *PitchG += Gyro.GyroY * dt;
@@ -117,7 +130,7 @@ MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, flo
     MPU6050_DegFromAccel(MPU6050, &RollAccel, &PitchAccel);
 
     //Gyro
-    MPU6050_DegFromGyro(MPU6050, Roll, Pitch, Yaw, dt);
+    MPU6050_DegFromGyro(MPU6050, Roll, Pitch, Yaw);
 
     //Filter
     const float alpha = 0.98f;
