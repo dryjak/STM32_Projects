@@ -122,7 +122,7 @@ MPU6050_STATE_t MPU6050_DegFromGyro(MPU6050_t *MPU6050, float *RollG, float *Pit
 }
 
 //Calculating and combining data form accelerometr and gyro
-MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, float *Yaw, float dt)
+MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, float *Yaw)
 {
     float RollAccel, PitchAccel;
 

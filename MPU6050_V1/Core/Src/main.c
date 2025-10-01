@@ -137,7 +137,7 @@ int main(void)
 	  if(InterruptFlag)
 		{
 		  InterruptFlag = 0;
-		  MPU6050_Angle(&MPU6050, &Roll, &Pitch, &Yaw, dt);
+		  MPU6050_Angle(&MPU6050, &Roll, &Pitch, &Yaw);
 		  //sprintf(Message, "Roll: %.3f, Pitch: %.3f, Yaw: %.3f\n", Roll, Pitch, Yaw);
 		  //HAL_UART_Transmit(&hlpuart1,(uint8_t*) Message, strlen(Message), HAL_MAX_DELAY);
 
