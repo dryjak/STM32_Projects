@@ -9,15 +9,6 @@
 #include "main.h"
 #include "math.h"
 
-// TO DO: odczyt z accelerometru
-typedef union {
-    struct {
-        uint8_t ByteLow;
-        uint8_t ByteHigh;
-    } Byte;
-    int16_t Var16u;
-} ConvTo16_t;
-
 // Functions used to read angles
 static uint8_t Read8(MPU6050_t *MPU6050, uint8_t Register);
 static MPU6050_STATE_t Write8(MPU6050_t *MPU6050, uint8_t Register, uint8_t Value);
@@ -71,6 +62,8 @@ MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16
     MPU6050_CalibrateAccel(MPU6050);		//Getting data to calibrate accel
     MPU6050_CalibrateGyro(MPU6050);			//Getting data to calibrate gyro
 
+    //level device and take first measurement
+    MPU6050_DegFromAccel(MPU6050, &MPU6050->FirstMeasure.Roll, &MPU6050->FirstMeasure.Pitch);
 
     return MPU6050_OK;
 }
@@ -97,8 +90,8 @@ MPU6050_STATE_t MPU6050_DegFromAccel(MPU6050_t *MPU6050, float *Roll, float *Pit
     Accel_t Accel;
     MPU6050_ReadAcceleration(MPU6050, &Accel);
 
-    *Roll  = atan2f(Accel.AccelY, Accel.AccelZ) * 180.0f / M_PI;
-    *Pitch = atan2f(-Accel.AccelX, sqrtf(Accel.AccelY*Accel.AccelY + Accel.AccelZ*Accel.AccelZ)) * 180.0f / M_PI;
+    *Roll  = atan2f(Accel.AccelY, Accel.AccelZ) * 180.0f / M_PI - MPU6050->FirstMeasure.Roll;
+    *Pitch = atan2f(-Accel.AccelX, sqrtf(Accel.AccelY*Accel.AccelY + Accel.AccelZ*Accel.AccelZ)) * 180.0f / M_PI - MPU6050->FirstMeasure.Pitch;
 
     return MPU6050_OK;
 }
@@ -141,7 +134,7 @@ MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, flo
     {
         *Roll = RollAccel;
         *Pitch = PitchAccel;
-        *Yaw = 0.0f; // albo pozostaw aktualne
+        *Yaw = 0.0f;
         initialized = 1;
         return MPU6050_OK;
     }
@@ -210,22 +203,22 @@ static MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Acc
 
     const float ScaleFactor = 16384.0f; // ±2g
 
-    Accelerations->AccelX = ((float)Raw.AccelX - MPU6050->AccelOffset.OffsetX) / ScaleFactor;
-    Accelerations->AccelY = ((float)Raw.AccelY - MPU6050->AccelOffset.OffsetY) / ScaleFactor;
-    Accelerations->AccelZ = ((float)Raw.AccelZ - MPU6050->AccelOffset.OffsetZ) / ScaleFactor;
+    Accelerations->AccelX = (float)(Raw.AccelX - MPU6050->AccelOffset.OffsetX) / ScaleFactor;
+    Accelerations->AccelY = (float)(Raw.AccelY - MPU6050->AccelOffset.OffsetY) / ScaleFactor;
+    Accelerations->AccelZ = (float)(Raw.AccelZ - MPU6050->AccelOffset.OffsetZ) / ScaleFactor;
 
     return MPU6050_OK;
 }
 
 static MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050)
 {
-    Accel_t Accelerations;
+    AccelRaw_t Accelerations;
     int32_t SumX = 0, SumY = 0, SumZ = 0;
     uint8_t i;
     const int8_t Samples = 200;
     for(i = 0; i < Samples; i++)
     {
-    	MPU6050_ReadAcceleration(MPU6050, &Accelerations);
+    	MPU6050_ReadAccelerationRaw(MPU6050, &Accelerations);
     	SumX += Accelerations.AccelX;
     	SumY += Accelerations.AccelY;
     	SumZ += Accelerations.AccelZ;
@@ -233,7 +226,7 @@ static MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050)
     }
     MPU6050->AccelOffset.OffsetX = (float) SumX / Samples;
     MPU6050->AccelOffset.OffsetY = (float) SumY / Samples;
-    MPU6050->AccelOffset.OffsetZ = (float) SumZ / Samples + 1;
+    MPU6050->AccelOffset.OffsetZ = (float) SumZ / Samples;
 
     return MPU6050_OK;
 }

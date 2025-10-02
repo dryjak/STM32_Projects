@@ -84,12 +84,21 @@ typedef enum
 	MPU6050_ERROR
 }MPU6050_STATE_t;
 
+typedef struct
+{
+	float Roll;
+	float Pitch;
+	float Yaw;
+}FirstMeasure_t;
+
 typedef struct{
 
 	I2C_HandleTypeDef *hi2c;
 	uint16_t address;
 	AccelOffset_t AccelOffset;
 	GyroOffset_t GyroOffset;
+
+	FirstMeasure_t FirstMeasure;
 
 }MPU6050_t;
 
