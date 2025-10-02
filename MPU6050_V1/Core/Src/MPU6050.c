@@ -61,6 +61,13 @@ MPU6050_STATE_t MPU6050_Init(MPU6050_t *MPU6050, I2C_HandleTypeDef *Hi2c, uint16
         return MPU6050_ERROR;
     }
 
+    MPU6050->AccelOffset.OffsetX = 0.0f;
+    MPU6050->AccelOffset.OffsetY = 0.0f;
+    MPU6050->AccelOffset.OffsetZ = 0.0f;
+    MPU6050->GyroOffset.OffsetX  = 0.0f;
+    MPU6050->GyroOffset.OffsetY  = 0.0f;
+    MPU6050->GyroOffset.OffsetZ  = 0.0f;
+
     MPU6050_CalibrateAccel(MPU6050);		//Getting data to calibrate accel
     MPU6050_CalibrateGyro(MPU6050);			//Getting data to calibrate gyro
 
@@ -114,9 +121,9 @@ MPU6050_STATE_t MPU6050_DegFromGyro(MPU6050_t *MPU6050, float *RollG, float *Pit
     float dt = (float)(TimeNow - LastTick) / 1000;	//ms -> s
     LastTick = TimeNow;
 
-    *RollG  += Gyro.GyroX * dt;
-    *PitchG += Gyro.GyroY * dt;
-    *YawG   += Gyro.GyroZ * dt;
+    *RollG  += (Gyro.GyroX) * dt;
+    *PitchG += (Gyro.GyroY) * dt;
+    *YawG   += (Gyro.GyroZ) * dt;
 
     return MPU6050_OK;
 }
@@ -129,11 +136,23 @@ MPU6050_STATE_t MPU6050_Angle(MPU6050_t *MPU6050, float *Roll, float *Pitch, flo
     //Accel
     MPU6050_DegFromAccel(MPU6050, &RollAccel, &PitchAccel);
 
+    static uint8_t initialized = 0;
+    if (!initialized)
+    {
+        *Roll = RollAccel;
+        *Pitch = PitchAccel;
+        *Yaw = 0.0f; // albo pozostaw aktualne
+        initialized = 1;
+        return MPU6050_OK;
+    }
+
+
+
     //Gyro
     MPU6050_DegFromGyro(MPU6050, Roll, Pitch, Yaw);
 
     //Filter
-    const float alpha = 0.98f;
+    const float alpha = 0.9f;
     *Roll  = alpha * (*Roll)  + (1.0f - alpha) * RollAccel;
     *Pitch = alpha * (*Pitch) + (1.0f - alpha) * PitchAccel;
 
@@ -201,18 +220,20 @@ static MPU6050_STATE_t MPU6050_ReadAcceleration(MPU6050_t *MPU6050, Accel_t *Acc
 static MPU6050_STATE_t MPU6050_CalibrateAccel(MPU6050_t *MPU6050)
 {
     Accel_t Accelerations;
-    uint32_t SumX = 0, SumY = 0, SumZ = 0;
+    int32_t SumX = 0, SumY = 0, SumZ = 0;
     uint8_t i;
-    for(i = 0; i < 100; i++)
+    const int8_t Samples = 200;
+    for(i = 0; i < Samples; i++)
     {
     	MPU6050_ReadAcceleration(MPU6050, &Accelerations);
     	SumX += Accelerations.AccelX;
     	SumY += Accelerations.AccelY;
     	SumZ += Accelerations.AccelZ;
+    	HAL_Delay(1);
     }
-    MPU6050->AccelOffset.OffsetX = SumX / i;
-    MPU6050->AccelOffset.OffsetY = SumY / i;
-    MPU6050->AccelOffset.OffsetZ = SumZ / i;
+    MPU6050->AccelOffset.OffsetX = (float) SumX / Samples;
+    MPU6050->AccelOffset.OffsetY = (float) SumY / Samples;
+    MPU6050->AccelOffset.OffsetZ = (float) SumZ / Samples + 1;
 
     return MPU6050_OK;
 }
@@ -241,19 +262,21 @@ static MPU6050_STATE_t MPU6050_ReadGyro(MPU6050_t *MPU6050, Gyro_t *GyroCalculat
 
 static MPU6050_STATE_t MPU6050_CalibrateGyro(MPU6050_t *MPU6050)
 {
-    Gyro_t Gyro;
-    uint32_t SumX = 0, SumY = 0, SumZ = 0;
+    GyroRaw_t Gyro;
+    int32_t SumX = 0, SumY = 0, SumZ = 0;
     uint8_t i;
-    for(i = 0; i < 100; i++)
+    int8_t Samples = 200;
+    for(i = 0; i < Samples; i++)
     {
-    	MPU6050_ReadGyro(MPU6050, &Gyro);
+    	MPU6050_ReadGyroRaw(MPU6050, &Gyro);
     	SumX += Gyro.GyroX;
     	SumY += Gyro.GyroY;
     	SumZ += Gyro.GyroZ;
+    	HAL_Delay(1);
     }
-    MPU6050->GyroOffset.OffsetX = SumX / i;
-    MPU6050->GyroOffset.OffsetY = SumY / i;
-    MPU6050->GyroOffset.OffsetZ = SumZ / i;
+    MPU6050->GyroOffset.OffsetX = (float)SumX / Samples;
+    MPU6050->GyroOffset.OffsetY = (float)SumY / Samples;
+    MPU6050->GyroOffset.OffsetZ = (float)SumZ / Samples;
 
     return MPU6050_OK;
 }
