@@ -1208,8 +1208,8 @@ void MX_TIM8_Init(void)
   sClockSourceConfig.ClockPrescaler = TIM_CLOCKPRESCALER_DIV1;
  800098c:	2300      	movs	r3, #0
  800098e:	61bb      	str	r3, [r7, #24]
-  sClockSourceConfig.ClockFilter = 0;
- 8000990:	2300      	movs	r3, #0
+  sClockSourceConfig.ClockFilter = 15;
+ 8000990:	230f      	movs	r3, #15
  8000992:	61fb      	str	r3, [r7, #28]
   if (HAL_TIM_ConfigClockSource(&htim8, &sClockSourceConfig) != HAL_OK)
  8000994:	f107 0310 	add.w	r3, r7, #16
