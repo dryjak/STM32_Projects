@@ -48,6 +48,7 @@
 /* USER CODE BEGIN PV */
 char Message[128];
 uint32_t Value;
+uint32_t LastValue;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -101,8 +102,13 @@ int main(void)
   while (1)
   {
 	  Value = __HAL_TIM_GET_COUNTER(&htim8);
-	  sprintf(Message, "Value = %ld\n", Value);
+	  if (LastValue != Value)
+	  {
+	  sprintf(Message, "Value = %lu\n", Value);
 	  HAL_UART_Transmit(&hlpuart1, (uint8_t *) Message, strlen(Message), HAL_MAX_DELAY);
+	  }
+
+	  LastValue = Value;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
