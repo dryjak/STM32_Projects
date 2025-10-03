@@ -47,8 +47,8 @@
 
 /* USER CODE BEGIN PV */
 char Message[128];
-uint32_t Value;
-uint32_t LastValue;
+int16_t Value;
+int16_t LastValue;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -92,19 +92,19 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_LPUART1_UART_Init();
-  MX_TIM8_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start(&htim8);
+  HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  Value = __HAL_TIM_GET_COUNTER(&htim8);
+	  Value = __HAL_TIM_GET_COUNTER(&htim3);
 	  if (LastValue != Value)
 	  {
-	  sprintf(Message, "Value = %lu\n", Value);
+	  sprintf(Message, "Value = %d\n", Value);
 	  HAL_UART_Transmit(&hlpuart1, (uint8_t *) Message, strlen(Message), HAL_MAX_DELAY);
 	  }
 
