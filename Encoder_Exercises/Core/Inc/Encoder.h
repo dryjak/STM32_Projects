@@ -8,6 +8,8 @@
 #ifndef INC_ENCODER_H_
 #define INC_ENCODER_H_
 
+#include "main.h"
+
 typedef struct
 {
 	TIM_HandleTypeDef *Tim;
