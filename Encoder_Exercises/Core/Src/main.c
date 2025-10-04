@@ -49,8 +49,10 @@
 char Message[128];
 int16_t Value;
 int16_t LastValue;
-int16_t EncoderResolution;
-float SampleTime = 0.01f;
+int16_t EncoderResolution = 80;
+float SampleTime = 1.0f;
+
+int16_t Delta;
 
 volatile float AngularVelocity;
 uint8_t FlagCallback;
@@ -60,7 +62,7 @@ uint8_t FlagCallback;
 void SystemClock_Config(void);
 static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
-float Encoder_Angular_Velocity(void);
+float Encoder_Angular_Velocity(int16_t *DELTA);
 
 /* USER CODE END PFP */
 
@@ -126,7 +128,7 @@ int main(void)
 	  {
 		  FlagCallback = 0;
 
-		  sprintf(Message, "Predkosc = %d\n", (int16_t)AngularVelocity);
+		  sprintf(Message, "Delta = %d\n", Delta);
 		  HAL_UART_Transmit(&hlpuart1, (uint8_t *) Message, strlen(Message), HAL_MAX_DELAY);
 	  }
 	  /*
@@ -201,19 +203,19 @@ static void MX_NVIC_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	FlagCallback = 1;
-	AngularVelocity = Encoder_Angular_Velocity();
+	AngularVelocity = Encoder_Angular_Velocity(&Delta);
 }
-float Encoder_Angular_Velocity(void)
+float Encoder_Angular_Velocity(int16_t *DELTA)
 {
 	int16_t CurrentValue =  __HAL_TIM_GetCounter(&htim3);
 	static int16_t LastValue = 0;
 
 	int16_t Delta = CurrentValue - LastValue;
-	if(Delta >= EncoderResolution/2)
+	if(Delta > EncoderResolution/2)
 	{
 		Delta -=  EncoderResolution;
 	}
-	else if(Delta <= EncoderResolution/2)
+	else if(Delta < -EncoderResolution/2)
 	{
 		Delta += EncoderResolution;
 	}
@@ -221,6 +223,8 @@ float Encoder_Angular_Velocity(void)
 	float Angle = (360.0 * Delta)/EncoderResolution;
 	float AngularVelocity = Angle / SampleTime;
 	LastValue = CurrentValue;
+
+	*DELTA = Delta;
 
 	return AngularVelocity;
 }
