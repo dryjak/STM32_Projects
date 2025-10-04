@@ -13,26 +13,27 @@ void Encoder_Init(Encoder_t *Encoder, TIM_HandleTypeDef *Tim, uint16_t EncoderRe
 	Encoder->Resolution = EncoderResolution;
 	Encoder->SampleTime = SampleTime;
 
+	Encoder->Delta = 0;
+	Encoder->LastValue = 0;
+
 	HAL_TIM_Encoder_Start(Encoder->Tim, TIM_CHANNEL_ALL);
 }
 
 void Encoder_AngularVelocity(Encoder_t *Encoder, float *EncoderAngle, float *EncoderAngularVelocity)
 {
 	int16_t CurrentValue =  __HAL_TIM_GetCounter(Encoder->Tim);
-	static int16_t LastValue = 0;
 
-	int16_t Delta = CurrentValue - LastValue;
-	if(Delta > (Encoder->Resolution) / 2)
+	(Encoder->Delta) = CurrentValue - (Encoder->LastValue);
+	if((Encoder->Delta) > (Encoder->Resolution) / 2)
 	{
-		Delta -=  (Encoder->Resolution);
+		(Encoder->Delta) -=  (Encoder->Resolution);
 	}
-	else if(Delta < -(Encoder->Resolution) / 2)
+	else if((Encoder->Delta) < -(Encoder->Resolution) / 2)
 	{
-		Delta += (Encoder->Resolution);
+		(Encoder->Delta) += (Encoder->Resolution);
 	}
 
-	*EncoderAngle = (360.0 * Delta) / (Encoder->Resolution);
+	*EncoderAngle = (360.0 * (Encoder->Delta)) / (Encoder->Resolution);
 	*EncoderAngularVelocity = (*EncoderAngle) / (float)(Encoder->SampleTime);
-	LastValue = CurrentValue;
-
+	(Encoder->LastValue) = CurrentValue;
 }

@@ -26,6 +26,8 @@
 /* USER CODE BEGIN Includes */
 #include "string.h"
 #include "stdio.h"
+
+#include "Encoder.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,8 +56,11 @@ float SampleTime = 1.0f;
 
 int16_t Delta;
 
-volatile float AngularVelocity;
+float Angle;
+float AngularVelocity;
 uint8_t FlagCallback;
+
+Encoder_t Encoder;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -107,8 +112,12 @@ int main(void)
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
+
+  Encoder_Init(&Encoder, &htim3, EncoderResolution, SampleTime);
+
+  //HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
   HAL_TIM_Base_Start_IT(&htim1);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -203,7 +212,7 @@ static void MX_NVIC_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	FlagCallback = 1;
-	AngularVelocity = Encoder_Angular_Velocity(&Delta);
+	Encoder_AngularVelocity(&Encoder, &Angle, &AngularVelocity);
 }
 float Encoder_Angular_Velocity(int16_t *DELTA)
 {
