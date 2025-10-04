@@ -53,6 +53,7 @@ int16_t EncoderResolution;
 float SampleTime = 0.01f;
 
 volatile float AngularVelocity;
+uint8_t FlagCallback;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -112,14 +113,25 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  /*
 	  Value = __HAL_TIM_GET_COUNTER(&htim3);
 	  if (LastValue != Value)
 	  {
 	  sprintf(Message, "Value = %d\n", Value);
 	  HAL_UART_Transmit(&hlpuart1, (uint8_t *) Message, strlen(Message), HAL_MAX_DELAY);
 	  }
+	  */
 
+	  if(FlagCallback == 1)
+	  {
+		  FlagCallback = 0;
+
+		  sprintf(Message, "Predkosc = %d\n", (int16_t)AngularVelocity);
+		  HAL_UART_Transmit(&hlpuart1, (uint8_t *) Message, strlen(Message), HAL_MAX_DELAY);
+	  }
+	  /*
 	  LastValue = Value;
+	  */
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -188,6 +200,7 @@ static void MX_NVIC_Init(void)
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
+	FlagCallback = 1;
 	AngularVelocity = Encoder_Angular_Velocity();
 }
 float Encoder_Angular_Velocity(void)
