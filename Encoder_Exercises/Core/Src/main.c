@@ -51,11 +51,15 @@ int16_t Value;
 int16_t LastValue;
 int16_t EncoderResolution;
 float SampleTime = 0.01f;
+
+volatile float AngularVelocity;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
+float Encoder_Angular_Velocity(void);
 
 /* USER CODE END PFP */
 
@@ -95,8 +99,13 @@ int main(void)
   MX_GPIO_Init();
   MX_LPUART1_UART_Init();
   MX_TIM3_Init();
+  MX_TIM1_Init();
+
+  /* Initialize interrupts */
+  MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
+  HAL_TIM_Base_Start_IT(&htim1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -164,7 +173,23 @@ void SystemClock_Config(void)
   }
 }
 
+/**
+  * @brief NVIC Configuration.
+  * @retval None
+  */
+static void MX_NVIC_Init(void)
+{
+  /* TIM1_UP_TIM16_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(TIM1_UP_TIM16_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(TIM1_UP_TIM16_IRQn);
+}
+
 /* USER CODE BEGIN 4 */
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	AngularVelocity = Encoder_Angular_Velocity();
+}
 float Encoder_Angular_Velocity(void)
 {
 	int16_t CurrentValue =  __HAL_TIM_GetCounter(&htim3);
@@ -182,10 +207,9 @@ float Encoder_Angular_Velocity(void)
 
 	float Angle = (360.0 * Delta)/EncoderResolution;
 	float AngularVelocity = Angle / SampleTime;
+	LastValue = CurrentValue;
 
 	return AngularVelocity;
-
-	LastValue = CurrentValue;
 }
 /* USER CODE END 4 */
 
