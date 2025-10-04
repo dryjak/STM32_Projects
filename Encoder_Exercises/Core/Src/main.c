@@ -49,6 +49,8 @@
 char Message[128];
 int16_t Value;
 int16_t LastValue;
+int16_t EncoderResolution;
+float SampleTime = 0.01f;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -163,7 +165,28 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+float Encoder_Angular_Velocity(void)
+{
+	int16_t CurrentValue =  __HAL_TIM_GetCounter(&htim3);
+	static int16_t LastValue = 0;
 
+	int16_t Delta = CurrentValue - LastValue;
+	if(Delta >= EncoderResolution/2)
+	{
+		Delta -=  EncoderResolution;
+	}
+	else if(Delta <= EncoderResolution/2)
+	{
+		Delta += EncoderResolution;
+	}
+
+	float Angle = (360.0 * Delta)/EncoderResolution;
+	float AngularVelocity = Angle / SampleTime;
+
+	return AngularVelocity;
+
+	LastValue = CurrentValue;
+}
 /* USER CODE END 4 */
 
 /**
