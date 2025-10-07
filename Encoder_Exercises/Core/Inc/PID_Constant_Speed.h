@@ -23,6 +23,6 @@ typedef struct
 
 }PID_Speed_t;
 
-void Pid_Speed_Init(PID_Speed_t *Pid_Speed, float Kp, float Ki, float Kd, float dt, float OutputMax, float OutputMin);
+void Pid_Speed_Init(PID_Speed_t *Pid, float Kp, float Ki, float Kd, float dt, float OutputMax, float OutputMin);
 
 #endif /* INC_PID_CONSTANT_SPEED_H_ */

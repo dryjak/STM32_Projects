@@ -1,1 +1,2 @@
 ../Core/Src/PID_Constant_Speed.c:9:6:Pid_Speed_Init	40	static
+../Core/Src/PID_Constant_Speed.c:20:7:Pid_Speed_Compute	40	static
