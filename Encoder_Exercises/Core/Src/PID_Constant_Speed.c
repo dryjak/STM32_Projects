@@ -51,3 +51,9 @@ float Pid_Speed_Compute(PID_Speed_t *Pid, float Measurement, float ValueSet)
 	return Output;
 
 }
+
+void PidSpeed_Reset(PID_Speed_t *Pid)
+{
+	Pid->LastError = 0;
+	Pid->IntegralValue = 0;
+}
