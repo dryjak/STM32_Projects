@@ -29,6 +29,8 @@
 
 #include "Encoder.h"
 #include "PID_Constant_Speed.h"
+
+#include "motor_simple.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -217,8 +219,7 @@ static void MX_NVIC_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	FlagCallback = 1;
-	Encoder_AngularVelocity(&Encoder, &Angle, &AngularVelocity, &Sum);
-	//Velocity = Encoder_Angular_Velocity(&Sum, &Val);
+	Encoder_AngularVelocity(&Encoder, &Angle, &AngularVelocity);
 
 }
 float Encoder_Angular_Velocity(int32_t *DELTA, int16_t *Val)
