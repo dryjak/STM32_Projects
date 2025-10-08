@@ -52,7 +52,7 @@
 char Message[128];
 int16_t Value;
 int16_t LastValue;
-int16_t EncoderResolution = 80;
+int16_t EncoderResolution = 960;
 float SampleTime = 1.0f;
 
 int16_t Delta;
@@ -62,13 +62,17 @@ float AngularVelocity;
 uint8_t FlagCallback;
 
 Encoder_t Encoder;
+
+int32_t Sum;
+float Velocity;
+int16_t Val;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
-float Encoder_Angular_Velocity(int16_t *DELTA);
+float Encoder_Angular_Velocity(int32_t *DELTA, int16_t *Val);
 
 /* USER CODE END PFP */
 
@@ -213,11 +217,14 @@ static void MX_NVIC_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	FlagCallback = 1;
-	Encoder_AngularVelocity(&Encoder, &Angle, &AngularVelocity);
+	//Encoder_AngularVelocity(&Encoder, &Angle, &AngularVelocity,&Sum);
+	Velocity = Encoder_Angular_Velocity(&Sum, &Val);
+
 }
-float Encoder_Angular_Velocity(int16_t *DELTA)
+float Encoder_Angular_Velocity(int32_t *DELTA, int16_t *Val)
 {
 	int16_t CurrentValue =  __HAL_TIM_GetCounter(&htim3);
+	*Val = CurrentValue;
 	static int16_t LastValue = 0;
 
 	int16_t Delta = CurrentValue - LastValue;
