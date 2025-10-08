@@ -124,11 +124,19 @@ int main(void)
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
-  //Motor_Init(&Motor, TIM_HandleTypeDef *Timer, uint32_t TimerChannel, uint16_t PWM, GPIO_TypeDef *Dir1Port, uint16_t Dir1Pin, GPIO_TypeDef *Dir2Port, uint16_t Dir2Pin);
-  Encoder_Init(&Encoder, &htim3, EncoderResolution, SampleTime);
+
+
 
   //HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
-  HAL_TIM_Base_Start_IT(&htim1);
+    HAL_TIM_Base_Start_IT(&htim1);
+    HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
+
+
+  Motor_Init(&Motor, &htim4, TIM_CHANNEL_1, PWM, MOTOR_A_DIR1_GPIO_Port	, MOTOR_A_DIR1_Pin, MOTOR_A_DIR2_GPIO_Port, MOTOR_A_DIR2_Pin);
+  Encoder_Init(&Encoder, &htim3, EncoderResolution, SampleTime);
+
+
+
 
   /* USER CODE END 2 */
 
@@ -152,6 +160,13 @@ int main(void)
 		  sprintf(Message, "Delta = %d\n", Delta);
 		  HAL_UART_Transmit(&hlpuart1, (uint8_t *) Message, strlen(Message), HAL_MAX_DELAY);
 	  }
+
+  	  PWM = 50;
+
+  	  Motor_SetRideParameters(&Motor, 40, 1);
+  	  Motor_Ride(&Motor);
+
+
 	  /*
 	  LastValue = Value;
 	  */
