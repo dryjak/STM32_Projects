@@ -68,6 +68,10 @@ Encoder_t Encoder;
 uint32_t Sum;
 float Velocity;
 int16_t Val;
+
+//Motors variable
+Motor_t Motor;
+uint16_t PWM;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -115,11 +119,12 @@ int main(void)
   MX_LPUART1_UART_Init();
   MX_TIM3_Init();
   MX_TIM1_Init();
+  MX_TIM4_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
-
+  //Motor_Init(&Motor, TIM_HandleTypeDef *Timer, uint32_t TimerChannel, uint16_t PWM, GPIO_TypeDef *Dir1Port, uint16_t Dir1Pin, GPIO_TypeDef *Dir2Port, uint16_t Dir2Pin);
   Encoder_Init(&Encoder, &htim3, EncoderResolution, SampleTime);
 
   //HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
