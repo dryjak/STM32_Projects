@@ -52,7 +52,7 @@
 char Message[128];
 int16_t Value;
 int16_t LastValue;
-int16_t EncoderResolution = 960;
+int16_t EncoderResolution = 3840;
 float SampleTime = 1.0f;
 
 int16_t Delta;
@@ -63,7 +63,7 @@ uint8_t FlagCallback;
 
 Encoder_t Encoder;
 
-int32_t Sum;
+uint32_t Sum;
 float Velocity;
 int16_t Val;
 /* USER CODE END PV */
@@ -217,8 +217,8 @@ static void MX_NVIC_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	FlagCallback = 1;
-	//Encoder_AngularVelocity(&Encoder, &Angle, &AngularVelocity,&Sum);
-	Velocity = Encoder_Angular_Velocity(&Sum, &Val);
+	Encoder_AngularVelocity(&Encoder, &Angle, &AngularVelocity, &Sum);
+	//Velocity = Encoder_Angular_Velocity(&Sum, &Val);
 
 }
 float Encoder_Angular_Velocity(int32_t *DELTA, int16_t *Val)
