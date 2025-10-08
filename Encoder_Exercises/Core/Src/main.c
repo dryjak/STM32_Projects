@@ -71,7 +71,7 @@ int16_t Val;
 
 //Motors variable
 Motor_t Motor;
-uint16_t PWM;
+uint16_t PWM = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -128,15 +128,21 @@ int main(void)
 
 
   //HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
-    HAL_TIM_Base_Start_IT(&htim1);
-    HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
+
+  //HAL_TIM_Base_Start_IT(&htim1);
+  //HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
+  //HAL_Delay(100);
 
 
   Motor_Init(&Motor, &htim4, TIM_CHANNEL_1, PWM, MOTOR_A_DIR1_GPIO_Port	, MOTOR_A_DIR1_Pin, MOTOR_A_DIR2_GPIO_Port, MOTOR_A_DIR2_Pin);
-  Encoder_Init(&Encoder, &htim3, EncoderResolution, SampleTime);
+  //Encoder_Init(&Encoder, &htim3, EncoderResolution, SampleTime);
 
 
 
+
+  Motor_SetRideParameters(&Motor, 40, 1);
+  Motor_Ride(&Motor);
 
   /* USER CODE END 2 */
 
@@ -153,6 +159,7 @@ int main(void)
 	  }
 	  */
 
+	  /*
 	  if(FlagCallback == 1)
 	  {
 		  FlagCallback = 0;
@@ -160,11 +167,9 @@ int main(void)
 		  sprintf(Message, "Delta = %d\n", Delta);
 		  HAL_UART_Transmit(&hlpuart1, (uint8_t *) Message, strlen(Message), HAL_MAX_DELAY);
 	  }
+		*/
 
-  	  PWM = 50;
 
-  	  Motor_SetRideParameters(&Motor, 40, 1);
-  	  Motor_Ride(&Motor);
 
 
 	  /*
