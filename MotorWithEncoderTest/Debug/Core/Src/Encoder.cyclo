@@ -1,0 +1,2 @@
+../Core/Src/Encoder.c:10:6:Encoder_Init	1
+../Core/Src/Encoder.c:22:6:Encoder_AngularVelocity	3

@@ -1,0 +1,2 @@
+../Core/Src/Encoder.c:10:6:Encoder_Init	24	static
+../Core/Src/Encoder.c:22:6:Encoder_AngularVelocity	40	static
