@@ -46,12 +46,21 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+//Motor Variables
 Motor_t Motor;
 int16_t PWM = 10;
+
+//Encoder Variables
+Encoder_t Encoder;
+uint16_t EncoderResolution = 3840;
+float EncoderSampleTime = 0.1;
+float EncoderAngle = 0;
+float EncoderAngularVelocity = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -95,10 +104,15 @@ int main(void)
   MX_LPUART1_UART_Init();
   MX_TIM4_Init();
   MX_TIM3_Init();
+  MX_TIM1_Init();
+
+  /* Initialize interrupts */
+  MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 
   Motor_Init(&Motor, &htim4, TIM_CHANNEL_1, PWM, MOTOR_DIR1_GPIO_Port,  MOTOR_DIR1_Pin, MOTOR_DIR2_GPIO_Port,  MOTOR_DIR2_Pin);
-
+  Encoder_Init(&Encoder, &htim3, EncoderResolution, EncoderSampleTime);
+  HAL_TIM_Base_Start_IT(&htim1);
 
   /* USER CODE END 2 */
 
@@ -119,11 +133,11 @@ int main(void)
 	  HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
 	  HAL_Delay(3000);
 	  */
-	  Motor_SetRideParameters(&Motor, 70, 1);
+	  Motor_SetRideParameters(&Motor, 50, 1);
 	  Motor_Ride(&Motor);
 	  HAL_Delay(3000);
 
-	  Motor_SetRideParameters(&Motor, 80, 0);
+	  Motor_SetRideParameters(&Motor, 50, 0);
 	  Motor_Ride(&Motor);
 	  HAL_Delay(3000);
 
@@ -180,8 +194,27 @@ void SystemClock_Config(void)
   }
 }
 
-/* USER CODE BEGIN 4 */
+/**
+  * @brief NVIC Configuration.
+  * @retval None
+  */
+static void MX_NVIC_Init(void)
+{
+  /* TIM1_UP_TIM16_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(TIM1_UP_TIM16_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(TIM1_UP_TIM16_IRQn);
+}
 
+/* USER CODE BEGIN 4 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if(htim->Instance == TIM1)
+	{
+		EncoderAngle = 0;
+		EncoderAngularVelocity = 0;
+		Encoder_AngularVelocity(&Encoder, &EncoderAngle, &EncoderAngularVelocity);
+	}
+}
 /* USER CODE END 4 */
 
 /**
