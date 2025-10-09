@@ -72,6 +72,8 @@ int16_t Val;
 //Motors variable
 Motor_t Motor;
 uint16_t PWM = 0;
+
+uint8_t Blad;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -124,25 +126,21 @@ int main(void)
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
-
-
-
-  //HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
-  HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
-
-  //HAL_TIM_Base_Start_IT(&htim1);
-  //HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
-  //HAL_Delay(100);
-
-
   Motor_Init(&Motor, &htim4, TIM_CHANNEL_1, PWM, MOTOR_A_DIR1_GPIO_Port	, MOTOR_A_DIR1_Pin, MOTOR_A_DIR2_GPIO_Port, MOTOR_A_DIR2_Pin);
-  //Encoder_Init(&Encoder, &htim3, EncoderResolution, SampleTime);
 
 
 
+  HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
+  HAL_Delay(100);
+  if (HAL_TIM_Base_Start_IT(&htim1) != HAL_OK) {
+	  Blad = 1;
+  }
+  HAL_Delay(100);
+  //HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
 
-  Motor_SetRideParameters(&Motor, 40, 1);
-  Motor_Ride(&Motor);
+
+  Encoder_Init(&Encoder, &htim3, EncoderResolution, SampleTime);
+  HAL_Delay(100);
 
   /* USER CODE END 2 */
 
@@ -168,7 +166,12 @@ int main(void)
 		  HAL_UART_Transmit(&hlpuart1, (uint8_t *) Message, strlen(Message), HAL_MAX_DELAY);
 	  }
 		*/
-
+	  Motor_SetRideParameters(&Motor, 70, 1);
+	  Motor_Ride(&Motor);
+	  HAL_Delay(3000);
+  	  Motor_SetRideParameters(&Motor, 80, 0);
+  	  Motor_Ride(&Motor);
+  	  HAL_Delay(3000);
 
 
 

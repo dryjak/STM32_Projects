@@ -10,8 +10,6 @@
 #include "motor_simple.h"
 
 
-
-
 MotorStatus_t Motor_SetRideParameters(Motor_t *Motor, uint8_t PWM, uint8_t Dir)
 {
 	//making sure PWM is in range from 0 to 100
@@ -38,9 +36,10 @@ MotorStatus_t Motor_SetRideParameters(Motor_t *Motor, uint8_t PWM, uint8_t Dir)
 	}
 	Motor->Direction = Dir;
 
-
 	//setting PWM
 	//__HAL_TIM_SET_COMPARE(Motor->htim, Motor->Channel, Motor->MotorPWM);
+
+	HAL_TIM_PWM_Start(Motor->htim, Motor->Channel);
 
 	return MOTOR_OK;
 }
@@ -64,5 +63,6 @@ MotorStatus_t Motor_Init(Motor_t *Motor, TIM_HandleTypeDef *Timer, uint32_t Time
 	Motor->MotorDir2Port = Dir2Port;
 	Motor->MotorDir2Pin = Dir2Pin;
 
+	//HAL_TIM_PWM_Start(Motor->htim, Motor->Channel);
 	return MOTOR_OK;
 }
