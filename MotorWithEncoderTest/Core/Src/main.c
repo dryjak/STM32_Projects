@@ -26,6 +26,7 @@
 /* USER CODE BEGIN Includes */
 #include "motor_simple.h"
 #include "Encoder.h"
+#include "PID_Constant_Speed.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -135,11 +136,11 @@ int main(void)
 	  */
 	  Motor_SetRideParameters(&Motor, 50, 1);
 	  Motor_Ride(&Motor);
-	  HAL_Delay(3000);
+	  HAL_Delay(5000);
 
-	  Motor_SetRideParameters(&Motor, 50, 0);
+	  Motor_SetRideParameters(&Motor, 70, 1);
 	  Motor_Ride(&Motor);
-	  HAL_Delay(3000);
+	  HAL_Delay(5000);
 
     /* USER CODE END WHILE */
 
