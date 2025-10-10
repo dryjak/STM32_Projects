@@ -6,15 +6,13 @@
  */
 #include "PID_Constant_Speed.h"
 
-void Pid_Speed_Init(PID_Speed_t *Pid, float Kp, float Ki, float Kd, float dt, float OutputMax, float OutputMin)
+void Pid_Speed_Init(PID_Speed_t *Pid, float Kp, float Ki, float Kd, float dt)
 {
 	Pid->Kp = Kp;
 	Pid->Ki = Ki;
 	Pid->Kd = Kd;
 
 	Pid->dt = dt;
-	Pid->OutputMin = OutputMin;
-	Pid->OutputMax = OutputMax;
 }
 
 float Pid_Speed_Compute(PID_Speed_t *Pid, float Measurement, float ValueSet)
@@ -26,26 +24,26 @@ float Pid_Speed_Compute(PID_Speed_t *Pid, float Measurement, float ValueSet)
 	Pid->IntegralValue += Error * Pid->Ki * Pid->dt;
 
 	//Anti windup
-	if(Pid->IntegralValue > Pid->OutputMax)
+	if(Pid->IntegralValue > OUTPUT_MAX)
 	{
-		Pid->IntegralValue = Pid->OutputMax;
+		Pid->IntegralValue = OUTPUT_MAX;
 	}
-	else if(Pid->IntegralValue < Pid->OutputMin)
+	else if(Pid->IntegralValue < OUTPUT_MIN)
 	{
-		Pid->IntegralValue = Pid->OutputMin;
+		Pid->IntegralValue = OUTPUT_MIN;
 	}
 
 	float D = ((Error - Pid->LastError) / Pid->dt ) * Pid->Kd;
 
 	float Output = P + Pid->IntegralValue + D;
 
-	if(Output < Pid->OutputMin)
+	if(Output < OUTPUT_MIN)
 	{
-		Output = Pid->OutputMin;
+		Output = OUTPUT_MIN;
 	}
-	else if (Output > Pid->OutputMax)
+	else if (Output > OUTPUT_MAX)
 	{
-		Output = Pid->OutputMax;
+		Output = OUTPUT_MIN;
 	}
 
 	return Output;

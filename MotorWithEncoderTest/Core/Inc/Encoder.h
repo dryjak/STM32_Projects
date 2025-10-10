@@ -21,7 +21,6 @@ typedef struct
 
 	float Angle;
 	float AngularVelocity;
-
 }Encoder_t;
 
 void Encoder_Init(Encoder_t *Encoder, TIM_HandleTypeDef *Tim, uint16_t EncoderResolution, float SampleTime);

@@ -37,3 +37,5 @@ void Encoder_AngularVelocity(Encoder_t *Encoder, float *EncoderAngle, float *Enc
 	*EncoderAngularVelocity = (*EncoderAngle) / (float)(Encoder->SampleTime);
 	(Encoder->LastValue) = CurrentValue;
 }
+
+

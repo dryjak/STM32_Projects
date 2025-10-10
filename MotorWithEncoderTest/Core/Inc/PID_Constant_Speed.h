@@ -8,6 +8,9 @@
 #ifndef INC_PID_CONSTANT_SPEED_H_
 #define INC_PID_CONSTANT_SPEED_H_
 
+#define OUTPUT_MAX 100.0
+#define OUTPUT_MIN -100.0
+
 typedef struct
 {
 	float Kp;
@@ -18,13 +21,12 @@ typedef struct
 	float IntegralValue;
 	float LastError;
 
-	float OutputMax;
-	float OutputMin;
-
 }PID_Speed_t;
 
 
-void Pid_Speed_Init(PID_Speed_t *Pid, float Kp, float Ki, float Kd, float dt, float OutputMax, float OutputMin);
+
+
+void Pid_Speed_Init(PID_Speed_t *Pid, float Kp, float Ki, float Kd, float dt);
 
 float Pid_Speed_Compute(PID_Speed_t *Pid, float Measurement, float ValueSet);
 
