@@ -20,3 +20,47 @@ void PID_Init(PID_t *Pid, float P, float I, float D, float SampleTime, float Max
 	Pid->LastError = 0;
 }
 
+void PID_Compute(PID_t *Pid, float MeasuredValue, float SetValue)
+{
+	float Error = SetValue - MeasuredValue;
+
+	//proportional value
+	float P = Pid->P * Error;
+
+	//Integrator value
+	Pid->Integrator += Pid->SampleTime * Pid->I * Error;
+
+	//Deriative value
+	float D = ((Error - Pid->LastError) / Pid->SampleTime) * Pid->D;
+
+	float Output = P + Pid->Integrator + D;
+	float OutputLast = Output;
+
+	//checking limits
+	uint8_t ClampigSaturationCheck = 0;
+	if (Output > Pid->MaxValue)
+	{
+		Output = Pid->MaxValue;
+	}
+	else if (Output < Pid->MinValue)
+	{
+		Output = Pid->MinValue;
+	}
+
+	uint8_t ClampigSaturationCheck = (Output != OutputLast) ? 1 : 0;
+
+	uint8_t ErrorSign = Signum(Error);
+	uint8_t OutputSign = Signum(Output);
+
+
+
+}
+
+uint8_t Signum(float Value)
+{
+	if (Value > 0) return 1;
+	if (Value < 0) return -1;
+	return 0;
+}
+
+
