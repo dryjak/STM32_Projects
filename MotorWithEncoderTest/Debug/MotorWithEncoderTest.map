@@ -148,18 +148,35 @@ Discarded input sections
  .group         0x00000000        0xc ./Core/Src/PID.o
  .group         0x00000000        0xc ./Core/Src/PID.o
  .group         0x00000000        0xc ./Core/Src/PID.o
+ .group         0x00000000        0xc ./Core/Src/PID.o
+ .group         0x00000000        0xc ./Core/Src/PID.o
+ .group         0x00000000        0xc ./Core/Src/PID.o
+ .group         0x00000000        0xc ./Core/Src/PID.o
+ .group         0x00000000        0xc ./Core/Src/PID.o
+ .group         0x00000000        0xc ./Core/Src/PID.o
+ .group         0x00000000        0xc ./Core/Src/PID.o
+ .group         0x00000000        0xc ./Core/Src/PID.o
+ .group         0x00000000        0xc ./Core/Src/PID.o
+ .group         0x00000000        0xc ./Core/Src/PID.o
+ .group         0x00000000        0xc ./Core/Src/PID.o
+ .group         0x00000000        0xc ./Core/Src/PID.o
+ .group         0x00000000        0xc ./Core/Src/PID.o
+ .group         0x00000000        0xc ./Core/Src/PID.o
  .text          0x00000000        0x0 ./Core/Src/PID.o
  .data          0x00000000        0x0 ./Core/Src/PID.o
  .bss           0x00000000        0x0 ./Core/Src/PID.o
  .text.PID_Init
-                0x00000000       0x60 ./Core/Src/PID.o
- .debug_info    0x00000000      0x159 ./Core/Src/PID.o
- .debug_abbrev  0x00000000       0xba ./Core/Src/PID.o
+                0x00000000       0x68 ./Core/Src/PID.o
+ .text.PID_Compute
+                0x00000000      0x146 ./Core/Src/PID.o
+ .text.Signum   0x00000000       0x3e ./Core/Src/PID.o
+ .debug_info    0x00000000      0x27f ./Core/Src/PID.o
+ .debug_abbrev  0x00000000      0x112 ./Core/Src/PID.o
  .debug_aranges
-                0x00000000       0x20 ./Core/Src/PID.o
+                0x00000000       0x30 ./Core/Src/PID.o
  .debug_rnglists
-                0x00000000       0x13 ./Core/Src/PID.o
- .debug_macro   0x00000000      0x1e7 ./Core/Src/PID.o
+                0x00000000       0x20 ./Core/Src/PID.o
+ .debug_macro   0x00000000      0x292 ./Core/Src/PID.o
  .debug_macro   0x00000000      0xad8 ./Core/Src/PID.o
  .debug_macro   0x00000000      0x15b ./Core/Src/PID.o
  .debug_macro   0x00000000       0x2e ./Core/Src/PID.o
@@ -199,10 +216,24 @@ Discarded input sections
  .debug_macro   0x00000000       0xa6 ./Core/Src/PID.o
  .debug_macro   0x00000000      0x358 ./Core/Src/PID.o
  .debug_macro   0x00000000       0xa6 ./Core/Src/PID.o
- .debug_line    0x00000000      0x6af ./Core/Src/PID.o
- .debug_str     0x00000000    0xf2de4 ./Core/Src/PID.o
+ .debug_macro   0x00000000       0x61 ./Core/Src/PID.o
+ .debug_macro   0x00000000       0x2a ./Core/Src/PID.o
+ .debug_macro   0x00000000       0x43 ./Core/Src/PID.o
+ .debug_macro   0x00000000       0x34 ./Core/Src/PID.o
+ .debug_macro   0x00000000      0x370 ./Core/Src/PID.o
+ .debug_macro   0x00000000       0x16 ./Core/Src/PID.o
+ .debug_macro   0x00000000       0x4a ./Core/Src/PID.o
+ .debug_macro   0x00000000       0x34 ./Core/Src/PID.o
+ .debug_macro   0x00000000       0x10 ./Core/Src/PID.o
+ .debug_macro   0x00000000       0x58 ./Core/Src/PID.o
+ .debug_macro   0x00000000       0x8e ./Core/Src/PID.o
+ .debug_macro   0x00000000       0x1c ./Core/Src/PID.o
+ .debug_macro   0x00000000      0x185 ./Core/Src/PID.o
+ .debug_macro   0x00000000      0x19b ./Core/Src/PID.o
+ .debug_line    0x00000000      0x889 ./Core/Src/PID.o
+ .debug_str     0x00000000    0xf6808 ./Core/Src/PID.o
  .comment       0x00000000       0x44 ./Core/Src/PID.o
- .debug_frame   0x00000000       0x38 ./Core/Src/PID.o
+ .debug_frame   0x00000000       0x84 ./Core/Src/PID.o
  .ARM.attributes
                 0x00000000       0x34 ./Core/Src/PID.o
  .group         0x00000000        0xc ./Core/Src/PID_Constant_Speed.o

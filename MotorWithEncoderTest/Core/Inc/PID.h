@@ -23,9 +23,13 @@ typedef struct
 	float MinValue;
 
 	float LastError;
+
+	uint8_t Clamp;
 }PID_t;
 
 void PID_Init(PID_t *Pid, float P, float I, float D, float SampleTime, float MaxValue, float MinValue);
 void PID_Compute(PID_t *Pid, float MeasuredValue, float SetValue);
+int8_t Signum(float Value);
+
 
 #endif /* INC_PID_H_ */

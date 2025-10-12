@@ -18,6 +18,7 @@ void PID_Init(PID_t *Pid, float P, float I, float D, float SampleTime, float Max
 
 	Pid->Integrator = 0;
 	Pid->LastError = 0;
+	Pid->Clamp = 0;
 }
 
 void PID_Compute(PID_t *Pid, float MeasuredValue, float SetValue)
@@ -28,7 +29,12 @@ void PID_Compute(PID_t *Pid, float MeasuredValue, float SetValue)
 	float P = Pid->P * Error;
 
 	//Integrator value
+	if(Pid->Clamp == 0)
+	{
 	Pid->Integrator += Pid->SampleTime * Pid->I * Error;
+	Pid->Clamp = 1;
+	}
+
 
 	//Deriative value
 	float D = ((Error - Pid->LastError) / Pid->SampleTime) * Pid->D;
@@ -37,7 +43,6 @@ void PID_Compute(PID_t *Pid, float MeasuredValue, float SetValue)
 	float OutputLast = Output;
 
 	//checking limits
-	uint8_t ClampigSaturationCheck = 0;
 	if (Output > Pid->MaxValue)
 	{
 		Output = Pid->MaxValue;
@@ -49,17 +54,24 @@ void PID_Compute(PID_t *Pid, float MeasuredValue, float SetValue)
 
 	uint8_t ClampigSaturationCheck = (Output != OutputLast) ? 1 : 0;
 
-	uint8_t ErrorSign = Signum(Error);
-	uint8_t OutputSign = Signum(Output);
+	int8_t ErrorSign = Signum(Error);
+	int8_t OutputSign = Signum(Output);
 
-
+	if ((ErrorSign == OutputSign) && (ClampigSaturationCheck == 1))
+	{
+		Pid->Clamp = 1;
+	}
+	else
+	{
+		Pid->Clamp = 0;
+	}
 
 }
 
-uint8_t Signum(float Value)
+int8_t Signum(float Value)
 {
-	if (Value > 0) return 1;
-	if (Value < 0) return -1;
+	if (Value > 0.0) return 1;
+	if (Value < 0.0) return -1;
 	return 0;
 }
 
