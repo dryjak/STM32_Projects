@@ -21,7 +21,7 @@ void PID_Init(PID_t *Pid, float P, float I, float D, float SampleTime, float Max
 	Pid->Clamp = 0;
 }
 
-void PID_Compute(PID_t *Pid, float MeasuredValue, float SetValue)
+float PID_Compute(PID_t *Pid, float MeasuredValue, float SetValue)
 {
 	float Error = SetValue - MeasuredValue;
 
@@ -65,6 +65,7 @@ void PID_Compute(PID_t *Pid, float MeasuredValue, float SetValue)
 	{
 		Pid->Clamp = 0;
 	}
+	return Output;
 
 }
 
