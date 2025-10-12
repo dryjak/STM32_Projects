@@ -8,6 +8,8 @@
 #ifndef INC_PID_H_
 #define INC_PID_H_
 
+#include "main.h"
+
 typedef struct
 {
 	float P;
@@ -22,6 +24,8 @@ typedef struct
 
 	float LastError;
 }PID_t;
+
+void PID_Init(PID_t Pid, float P, float I, float D, float SampleTime, float MaxValue, float MinValue);
 
 
 #endif /* INC_PID_H_ */
