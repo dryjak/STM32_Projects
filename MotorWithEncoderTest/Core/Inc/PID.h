@@ -25,7 +25,7 @@ typedef struct
 	float LastError;
 }PID_t;
 
-void PID_Init(PID_t Pid, float P, float I, float D, float SampleTime, float MaxValue, float MinValue);
-
+void PID_Init(PID_t *Pid, float P, float I, float D, float SampleTime, float MaxValue, float MinValue);
+void PID_Compute(PID_t Pid, float MeasuredValue, float SetValue);
 
 #endif /* INC_PID_H_ */
