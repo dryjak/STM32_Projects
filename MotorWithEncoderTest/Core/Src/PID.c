@@ -32,7 +32,6 @@ float PID_Compute(PID_t *Pid, float MeasuredValue, float SetValue)
 	if(Pid->Clamp == 0)
 	{
 	Pid->Integrator += Pid->SampleTime * Pid->I * Error;
-	Pid->Clamp = 1;
 	}
 
 
@@ -65,6 +64,10 @@ float PID_Compute(PID_t *Pid, float MeasuredValue, float SetValue)
 	{
 		Pid->Clamp = 0;
 	}
+
+	//Update LastError
+	Pid->LastError = Error;
+
 	return Output;
 
 }

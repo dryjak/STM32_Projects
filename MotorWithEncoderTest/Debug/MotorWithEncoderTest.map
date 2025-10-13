@@ -168,7 +168,7 @@ Discarded input sections
  .text.PID_Init
                 0x00000000       0x68 ./Core/Src/PID.o
  .text.PID_Compute
-                0x00000000      0x14c ./Core/Src/PID.o
+                0x00000000      0x14a ./Core/Src/PID.o
  .text.Signum   0x00000000       0x3e ./Core/Src/PID.o
  .debug_info    0x00000000      0x283 ./Core/Src/PID.o
  .debug_abbrev  0x00000000      0x114 ./Core/Src/PID.o
