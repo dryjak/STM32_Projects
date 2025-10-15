@@ -1,3 +1,4 @@
+"./Core/Src/AverageFilter.o"
 "./Core/Src/Encoder.o"
 "./Core/Src/PID.o"
 "./Core/Src/PID_Constant_Speed.o"

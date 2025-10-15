@@ -67,6 +67,97 @@ Discarded input sections
  .ARM.exidx     0x00000000       0x10 /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
  .ARM.attributes
                 0x00000000       0x20 /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .group         0x00000000        0xc ./Core/Src/AverageFilter.o
+ .text          0x00000000        0x0 ./Core/Src/AverageFilter.o
+ .data          0x00000000        0x0 ./Core/Src/AverageFilter.o
+ .bss           0x00000000        0x0 ./Core/Src/AverageFilter.o
+ .debug_info    0x00000000       0x70 ./Core/Src/AverageFilter.o
+ .debug_abbrev  0x00000000       0x28 ./Core/Src/AverageFilter.o
+ .debug_aranges
+                0x00000000       0x18 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x1e7 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0xad8 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x15b ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000       0x2e ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000       0x28 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000       0x22 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000       0x8e ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000       0x51 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x103 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000       0x6a ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x1df ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000       0x1c ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000       0x22 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000       0xfb ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000     0x1011 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x11f ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000    0x18b8c ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000       0x6d ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000     0x3558 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x190 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000       0x5c ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000     0x171f ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x600 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x1b6 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x34a ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x53c ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x18b ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000       0x43 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x23d ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x211 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x45c ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x11c ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x122 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x3d1 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0xc0b ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x718 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x693 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000       0xa6 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000      0x358 ./Core/Src/AverageFilter.o
+ .debug_macro   0x00000000       0xa6 ./Core/Src/AverageFilter.o
+ .debug_line    0x00000000      0x69d ./Core/Src/AverageFilter.o
+ .debug_str     0x00000000    0xf2db1 ./Core/Src/AverageFilter.o
+ .comment       0x00000000       0x44 ./Core/Src/AverageFilter.o
+ .ARM.attributes
+                0x00000000       0x34 ./Core/Src/AverageFilter.o
  .group         0x00000000        0xc ./Core/Src/Encoder.o
  .group         0x00000000        0xc ./Core/Src/Encoder.o
  .group         0x00000000        0xc ./Core/Src/Encoder.o
@@ -109,6 +200,45 @@ Discarded input sections
  .text          0x00000000        0x0 ./Core/Src/Encoder.o
  .data          0x00000000        0x0 ./Core/Src/Encoder.o
  .bss           0x00000000        0x0 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0xad8 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x15b ./Core/Src/Encoder.o
+ .debug_macro   0x00000000       0x2e ./Core/Src/Encoder.o
+ .debug_macro   0x00000000       0x28 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000       0x22 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000       0x8e ./Core/Src/Encoder.o
+ .debug_macro   0x00000000       0x51 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x103 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000       0x6a ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x1df ./Core/Src/Encoder.o
+ .debug_macro   0x00000000       0x1c ./Core/Src/Encoder.o
+ .debug_macro   0x00000000       0x22 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000       0xfb ./Core/Src/Encoder.o
+ .debug_macro   0x00000000     0x1011 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x11f ./Core/Src/Encoder.o
+ .debug_macro   0x00000000    0x18b8c ./Core/Src/Encoder.o
+ .debug_macro   0x00000000       0x6d ./Core/Src/Encoder.o
+ .debug_macro   0x00000000     0x3558 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x190 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000       0x5c ./Core/Src/Encoder.o
+ .debug_macro   0x00000000     0x171f ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x600 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x1b6 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x34a ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x53c ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x18b ./Core/Src/Encoder.o
+ .debug_macro   0x00000000       0x43 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x23d ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x211 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x45c ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x11c ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x122 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x3d1 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0xc0b ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x718 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x693 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000       0xa6 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000      0x358 ./Core/Src/Encoder.o
+ .debug_macro   0x00000000       0xa6 ./Core/Src/Encoder.o
  .group         0x00000000        0xc ./Core/Src/PID.o
  .group         0x00000000        0xc ./Core/Src/PID.o
  .group         0x00000000        0xc ./Core/Src/PID.o
@@ -3688,6 +3818,7 @@ Linker script and memory map
 LOAD /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o
 LOAD /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 LOAD /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+LOAD ./Core/Src/AverageFilter.o
 LOAD ./Core/Src/Encoder.o
 LOAD ./Core/Src/PID.o
 LOAD ./Core/Src/PID_Constant_Speed.o
@@ -4569,65 +4700,26 @@ LOAD /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.
  .debug_rnglists
                 0x00000c57       0x7f ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.o
 
-.debug_macro    0x00000000    0x26133
+.debug_macro    0x00000000     0x247b
  .debug_macro   0x00000000      0x1e7 ./Core/Src/Encoder.o
- .debug_macro   0x000001e7      0xad8 ./Core/Src/Encoder.o
- .debug_macro   0x00000cbf      0x15b ./Core/Src/Encoder.o
- .debug_macro   0x00000e1a       0x2e ./Core/Src/Encoder.o
- .debug_macro   0x00000e48       0x28 ./Core/Src/Encoder.o
- .debug_macro   0x00000e70       0x22 ./Core/Src/Encoder.o
- .debug_macro   0x00000e92       0x8e ./Core/Src/Encoder.o
- .debug_macro   0x00000f20       0x51 ./Core/Src/Encoder.o
- .debug_macro   0x00000f71      0x103 ./Core/Src/Encoder.o
- .debug_macro   0x00001074       0x6a ./Core/Src/Encoder.o
- .debug_macro   0x000010de      0x1df ./Core/Src/Encoder.o
- .debug_macro   0x000012bd       0x1c ./Core/Src/Encoder.o
- .debug_macro   0x000012d9       0x22 ./Core/Src/Encoder.o
- .debug_macro   0x000012fb       0xfb ./Core/Src/Encoder.o
- .debug_macro   0x000013f6     0x1011 ./Core/Src/Encoder.o
- .debug_macro   0x00002407      0x11f ./Core/Src/Encoder.o
- .debug_macro   0x00002526    0x18b8c ./Core/Src/Encoder.o
- .debug_macro   0x0001b0b2       0x6d ./Core/Src/Encoder.o
- .debug_macro   0x0001b11f     0x3558 ./Core/Src/Encoder.o
- .debug_macro   0x0001e677      0x190 ./Core/Src/Encoder.o
- .debug_macro   0x0001e807       0x5c ./Core/Src/Encoder.o
- .debug_macro   0x0001e863     0x171f ./Core/Src/Encoder.o
- .debug_macro   0x0001ff82      0x600 ./Core/Src/Encoder.o
- .debug_macro   0x00020582      0x1b6 ./Core/Src/Encoder.o
- .debug_macro   0x00020738      0x34a ./Core/Src/Encoder.o
- .debug_macro   0x00020a82      0x53c ./Core/Src/Encoder.o
- .debug_macro   0x00020fbe      0x18b ./Core/Src/Encoder.o
- .debug_macro   0x00021149       0x43 ./Core/Src/Encoder.o
- .debug_macro   0x0002118c      0x23d ./Core/Src/Encoder.o
- .debug_macro   0x000213c9      0x211 ./Core/Src/Encoder.o
- .debug_macro   0x000215da      0x45c ./Core/Src/Encoder.o
- .debug_macro   0x00021a36      0x11c ./Core/Src/Encoder.o
- .debug_macro   0x00021b52      0x122 ./Core/Src/Encoder.o
- .debug_macro   0x00021c74      0x3d1 ./Core/Src/Encoder.o
- .debug_macro   0x00022045      0xc0b ./Core/Src/Encoder.o
- .debug_macro   0x00022c50      0x718 ./Core/Src/Encoder.o
- .debug_macro   0x00023368      0x693 ./Core/Src/Encoder.o
- .debug_macro   0x000239fb       0xa6 ./Core/Src/Encoder.o
- .debug_macro   0x00023aa1      0x358 ./Core/Src/Encoder.o
- .debug_macro   0x00023df9       0xa6 ./Core/Src/Encoder.o
- .debug_macro   0x00023e9f      0x1e7 ./Core/Src/gpio.o
- .debug_macro   0x00024086      0x21c ./Core/Src/main.o
- .debug_macro   0x000242a2      0x1f5 ./Core/Src/motor_simple.o
- .debug_macro   0x00024497      0x1dd ./Core/Src/stm32g4xx_hal_msp.o
- .debug_macro   0x00024674      0x1e7 ./Core/Src/stm32g4xx_it.o
- .debug_macro   0x0002485b      0x1ce ./Core/Src/system_stm32g4xx.o
- .debug_macro   0x00024a29      0x1e7 ./Core/Src/tim.o
- .debug_macro   0x00024c10      0x1e7 ./Core/Src/usart.o
- .debug_macro   0x00024df7      0x21c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o
- .debug_macro   0x00025013      0x1ce ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o
- .debug_macro   0x000251e1      0x1d5 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o
- .debug_macro   0x000253b6      0x1f8 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o
- .debug_macro   0x000255ae      0x210 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o
- .debug_macro   0x000257be      0x1f8 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o
- .debug_macro   0x000259b6      0x1d6 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.o
- .debug_macro   0x00025b8c      0x1d4 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.o
- .debug_macro   0x00025d60      0x1f9 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.o
- .debug_macro   0x00025f59      0x1da ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.o
+ .debug_macro   0x000001e7      0x1e7 ./Core/Src/gpio.o
+ .debug_macro   0x000003ce      0x21c ./Core/Src/main.o
+ .debug_macro   0x000005ea      0x1f5 ./Core/Src/motor_simple.o
+ .debug_macro   0x000007df      0x1dd ./Core/Src/stm32g4xx_hal_msp.o
+ .debug_macro   0x000009bc      0x1e7 ./Core/Src/stm32g4xx_it.o
+ .debug_macro   0x00000ba3      0x1ce ./Core/Src/system_stm32g4xx.o
+ .debug_macro   0x00000d71      0x1e7 ./Core/Src/tim.o
+ .debug_macro   0x00000f58      0x1e7 ./Core/Src/usart.o
+ .debug_macro   0x0000113f      0x21c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o
+ .debug_macro   0x0000135b      0x1ce ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o
+ .debug_macro   0x00001529      0x1d5 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o
+ .debug_macro   0x000016fe      0x1f8 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o
+ .debug_macro   0x000018f6      0x210 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o
+ .debug_macro   0x00001b06      0x1f8 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o
+ .debug_macro   0x00001cfe      0x1d6 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.o
+ .debug_macro   0x00001ed4      0x1d4 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.o
+ .debug_macro   0x000020a8      0x1f9 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.o
+ .debug_macro   0x000022a1      0x1da ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.o
 
 .debug_line     0x00000000    0x132ca
  .debug_line    0x00000000      0x723 ./Core/Src/Encoder.o
