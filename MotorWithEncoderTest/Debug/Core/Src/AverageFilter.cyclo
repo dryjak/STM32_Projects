@@ -1,0 +1,2 @@
+../Core/Src/AverageFilter.c:11:6:Average_Init	2
+../Core/Src/AverageFilter.c:22:7:Average_Calculate	3
