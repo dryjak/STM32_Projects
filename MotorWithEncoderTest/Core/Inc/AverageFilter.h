@@ -10,17 +10,18 @@
 
 #include "main.h"
 
-#define SIZE 50
+#define AVERAGE_SIZE 50
 
 typedef struct
 {
-	float Buffer[SIZE];
+	float Buffer[AVERAGE_SIZE];
 	double Sum;
 	uint8_t CurrentSample;
 	uint8_t Filled;
+	uint8_t Size;
 }Average_t;
 
 void Average_Init(Average_t *Average, uint8_t Sum);
-void Average_Calculate(Average_t *Average, float Input, float *Output);
+float Average_Calculate(Average_t *Average, float Input, float *Output);
 
 #endif /* INC_AVERAGEFILTER_H_ */

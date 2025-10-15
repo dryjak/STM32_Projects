@@ -8,21 +8,33 @@
 
 #include "AverageFilter.h"
 
-void Average_Init(Average_t *Average, uint8_t Size)
+void Average_Init(Average_t *Average)
 {
-
-	Average->Size = Size;
-
+	Average->Sum = 0;
 	for(uint8_t i = 0; i < Average->Sum; i++)
 	{
-		Average->Buffer[i] = 0.0f;
+		Average->Buffer[i] = 0.0;
 	}
 
 }
 
 
-void Average_Calculate(Average_t *Average, float Input, float *Output)
+float Average_Calculate(Average_t *Average, float Input, float *Output)
 {
 
+	Average->Sum -= Average->Buffer[Average->CurrentSample];
+	Average->Buffer[Average->CurrentSample] = Input;
+
+	Average->Sum += Input;
+
+	Average->CurrentSample++;
+
+
+	uint8_t Divisor = Average->Filled ? AVERAGE_SIZE : Average->CurrentSample;
+
+	if(Divisor == 0)
+		Divisor = 1;
+
+	return (float)Average->Sum / Divisor;
 }
 
