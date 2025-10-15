@@ -11,6 +11,7 @@
 void Average_Init(Average_t *Average)
 {
 	Average->Sum = 0;
+	Average->Filled = 0;
 	for(uint8_t i = 0; i < Average->Sum; i++)
 	{
 		Average->Buffer[i] = 0.0;
@@ -21,6 +22,7 @@ void Average_Init(Average_t *Average)
 
 float Average_Calculate(Average_t *Average, float Input, float *Output)
 {
+
 
 	Average->Sum -= Average->Buffer[Average->CurrentSample];
 	Average->Buffer[Average->CurrentSample] = Input;

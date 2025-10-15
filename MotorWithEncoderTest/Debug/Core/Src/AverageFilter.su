@@ -1,2 +1,2 @@
 ../Core/Src/AverageFilter.c:11:6:Average_Init	24	static
-../Core/Src/AverageFilter.c:22:7:Average_Calculate	40	static
+../Core/Src/AverageFilter.c:23:7:Average_Calculate	40	static

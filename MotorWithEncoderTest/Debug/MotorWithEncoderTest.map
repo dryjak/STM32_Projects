@@ -112,7 +112,7 @@ Discarded input sections
  .data          0x00000000        0x0 ./Core/Src/AverageFilter.o
  .bss           0x00000000        0x0 ./Core/Src/AverageFilter.o
  .text.Average_Init
-                0x00000000       0x52 ./Core/Src/AverageFilter.o
+                0x00000000       0x5a ./Core/Src/AverageFilter.o
  .text.Average_Calculate
                 0x00000000       0xce ./Core/Src/AverageFilter.o
  .debug_info    0x00000000      0x197 ./Core/Src/AverageFilter.o
@@ -161,7 +161,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xa6 ./Core/Src/AverageFilter.o
  .debug_macro   0x00000000      0x358 ./Core/Src/AverageFilter.o
  .debug_macro   0x00000000       0xa6 ./Core/Src/AverageFilter.o
- .debug_line    0x00000000      0x73b ./Core/Src/AverageFilter.o
+ .debug_line    0x00000000      0x73e ./Core/Src/AverageFilter.o
  .debug_str     0x00000000    0xf2e47 ./Core/Src/AverageFilter.o
  .comment       0x00000000       0x44 ./Core/Src/AverageFilter.o
  .debug_frame   0x00000000       0x5c ./Core/Src/AverageFilter.o
