@@ -69,7 +69,11 @@ float D = 0;
 float AngularVelocitySet = 600.0;
 float PID_SpeedSampleTime = 0.1;
 float PID_MinValue = 0;
-float PID_MaxValue = 1000;
+float PID_MaxValue = 100;
+
+uint8_t flag = 0;
+
+float PID_Output;
 
 /* USER CODE END PV */
 
@@ -129,7 +133,7 @@ int main(void)
   Encoder_Init(&Encoder, &htim3, EncoderResolution, EncoderSampleTime);
   HAL_TIM_Base_Start_IT(&htim1);
 
-  PID_Init(&PID_Speed, P, I, D, PID_SpeedSampleTime, PID_MinValue, PID_MinValue);
+  PID_Init(&PID_Speed, P, I, D, PID_SpeedSampleTime, PID_MinValue, PID_MaxValue);
 
   /* USER CODE END 2 */
 
@@ -150,6 +154,8 @@ int main(void)
 	  HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
 	  HAL_Delay(3000);
 	  */
+
+	  /*
 	  Motor_SetRideParameters(&Motor, 50, 1);
 	  Motor_Ride(&Motor);
 	  HAL_Delay(5000);
@@ -157,6 +163,15 @@ int main(void)
 	  Motor_SetRideParameters(&Motor, 70, 1);
 	  Motor_Ride(&Motor);
 	  HAL_Delay(5000);
+	  */
+
+	  if (flag == 1)
+	  {
+		  flag = 0;
+		  PID_Output = PID_Compute(&PID_Speed, EncoderAngularVelocity, AngularVelocitySet);
+		  Motor_SetRideParameters(&Motor, PID_Output, 1);
+		  Motor_Ride(&Motor);
+	  }
 
     /* USER CODE END WHILE */
 
@@ -227,9 +242,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim->Instance == TIM1)
 	{
-		EncoderAngle = 0;
-		EncoderAngularVelocity = 0;
+		//EncoderAngle = 0;
+		//EncoderAngularVelocity = 0;
 		Encoder_AngularVelocity(&Encoder, &EncoderAngle, &EncoderAngularVelocity);
+
+		flag = 1;
+
 	}
 }
 /* USER CODE END 4 */
