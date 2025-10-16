@@ -62,8 +62,8 @@ float EncoderAngularVelocity = 0;
 
 
 PID_t PID_Speed;
-float P = 1;
-float I = 0;
+float P = 3;
+float I = 1;
 float D = 0;
 
 float AngularVelocitySet = 600.0;
@@ -133,7 +133,7 @@ int main(void)
   Encoder_Init(&Encoder, &htim3, EncoderResolution, EncoderSampleTime);
   HAL_TIM_Base_Start_IT(&htim1);
 
-  PID_Init(&PID_Speed, P, I, D, PID_SpeedSampleTime, PID_MinValue, PID_MaxValue);
+  PID_Init(&PID_Speed, P, I, D, PID_SpeedSampleTime, PID_MaxValue, PID_MinValue);
 
   /* USER CODE END 2 */
 

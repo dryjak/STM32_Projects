@@ -4438,7 +4438,7 @@ LOAD /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.
 .rel.dyn        0x08005938        0x0
  .rel.iplt      0x08005938        0x0 /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.data           0x20000000       0x24 load address 0x08005938
+.data           0x20000000       0x28 load address 0x08005938
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -4453,54 +4453,54 @@ LOAD /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.
                 0x20000004                EncoderSampleTime
  .data.P        0x20000008        0x4 ./Core/Src/main.o
                 0x20000008                P
+ .data.I        0x2000000c        0x4 ./Core/Src/main.o
+                0x2000000c                I
  .data.AngularVelocitySet
-                0x2000000c        0x4 ./Core/Src/main.o
-                0x2000000c                AngularVelocitySet
- .data.PID_SpeedSampleTime
                 0x20000010        0x4 ./Core/Src/main.o
-                0x20000010                PID_SpeedSampleTime
- .data.PID_MaxValue
+                0x20000010                AngularVelocitySet
+ .data.PID_SpeedSampleTime
                 0x20000014        0x4 ./Core/Src/main.o
-                0x20000014                PID_MaxValue
+                0x20000014                PID_SpeedSampleTime
+ .data.PID_MaxValue
+                0x20000018        0x4 ./Core/Src/main.o
+                0x20000018                PID_MaxValue
  .data.SystemCoreClock
-                0x20000018        0x4 ./Core/Src/system_stm32g4xx.o
-                0x20000018                SystemCoreClock
+                0x2000001c        0x4 ./Core/Src/system_stm32g4xx.o
+                0x2000001c                SystemCoreClock
  .data.uwTickPrio
-                0x2000001c        0x4 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o
-                0x2000001c                uwTickPrio
- .data.uwTickFreq
                 0x20000020        0x4 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o
-                0x20000020                uwTickFreq
+                0x20000020                uwTickPrio
+ .data.uwTickFreq
+                0x20000024        0x4 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o
+                0x20000024                uwTickFreq
  *(.RamFunc)
  *(.RamFunc*)
-                0x20000024                        . = ALIGN (0x4)
-                0x20000024                        _edata = .
+                0x20000028                        . = ALIGN (0x4)
+                0x20000028                        _edata = .
 
-.igot.plt       0x20000024        0x0 load address 0x0800595c
- .igot.plt      0x20000024        0x0 /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
-                0x20000024                        . = ALIGN (0x4)
+.igot.plt       0x20000028        0x0 load address 0x08005960
+ .igot.plt      0x20000028        0x0 /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x20000028                        . = ALIGN (0x4)
 
-.bss            0x20000024      0x208 load address 0x0800595c
-                0x20000024                        _sbss = .
-                0x20000024                        __bss_start__ = _sbss
+.bss            0x20000028      0x204 load address 0x08005960
+                0x20000028                        _sbss = .
+                0x20000028                        __bss_start__ = _sbss
  *(.bss)
- .bss           0x20000024       0x1c /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .bss           0x20000028       0x1c /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
  *(.bss*)
- .bss.Motor     0x20000040       0x18 ./Core/Src/main.o
-                0x20000040                Motor
- .bss.Encoder   0x20000058       0x18 ./Core/Src/main.o
-                0x20000058                Encoder
+ .bss.Motor     0x20000044       0x18 ./Core/Src/main.o
+                0x20000044                Motor
+ .bss.Encoder   0x2000005c       0x18 ./Core/Src/main.o
+                0x2000005c                Encoder
  .bss.EncoderAngle
-                0x20000070        0x4 ./Core/Src/main.o
-                0x20000070                EncoderAngle
- .bss.EncoderAngularVelocity
                 0x20000074        0x4 ./Core/Src/main.o
-                0x20000074                EncoderAngularVelocity
+                0x20000074                EncoderAngle
+ .bss.EncoderAngularVelocity
+                0x20000078        0x4 ./Core/Src/main.o
+                0x20000078                EncoderAngularVelocity
  .bss.PID_Speed
-                0x20000078       0x24 ./Core/Src/main.o
-                0x20000078                PID_Speed
- .bss.I         0x2000009c        0x4 ./Core/Src/main.o
-                0x2000009c                I
+                0x2000007c       0x24 ./Core/Src/main.o
+                0x2000007c                PID_Speed
  .bss.D         0x200000a0        0x4 ./Core/Src/main.o
                 0x200000a0                D
  .bss.PID_MinValue
@@ -4528,7 +4528,7 @@ LOAD /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.
                 0x2000022c                        __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x2000022c      0x604 load address 0x0800595c
+                0x2000022c      0x604 load address 0x08005960
                 0x20000230                        . = ALIGN (0x8)
  *fill*         0x2000022c        0x4 
                 [!provide]                        PROVIDE (end = .)
