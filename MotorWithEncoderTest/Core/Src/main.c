@@ -26,7 +26,9 @@
 /* USER CODE BEGIN Includes */
 #include "motor_simple.h"
 #include "Encoder.h"
-#include "PID_Constant_Speed.h"
+//#include "PID_Constant_Speed.h"
+#include "PID.h"
+#include "AverageFilter.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -57,6 +59,18 @@ uint16_t EncoderResolution = 3840;
 float EncoderSampleTime = 0.1;
 float EncoderAngle = 0;
 float EncoderAngularVelocity = 0;
+
+
+PID_t PID_Speed;
+float P = 1;
+float I = 0;
+float D = 0;
+
+float AngularVelocitySet = 600.0;
+float PID_SpeedSampleTime = 0.1;
+float PID_MinValue = 0;
+float PID_MaxValue = 1000;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -114,6 +128,8 @@ int main(void)
   Motor_Init(&Motor, &htim4, TIM_CHANNEL_1, PWM, MOTOR_DIR1_GPIO_Port,  MOTOR_DIR1_Pin, MOTOR_DIR2_GPIO_Port,  MOTOR_DIR2_Pin);
   Encoder_Init(&Encoder, &htim3, EncoderResolution, EncoderSampleTime);
   HAL_TIM_Base_Start_IT(&htim1);
+
+  PID_Init(&PID_Speed, P, I, D, PID_SpeedSampleTime, PID_MinValue, PID_MinValue);
 
   /* USER CODE END 2 */
 
