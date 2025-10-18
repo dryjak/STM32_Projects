@@ -29,6 +29,8 @@
 //#include "PID_Constant_Speed.h"
 #include "PID.h"
 #include "AverageFilter.h"
+#include "string.h"
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -62,7 +64,7 @@ float EncoderAngularVelocity = 0;
 
 
 PID_t PID_Speed;
-float P = 25;
+float P = 23;
 float I = 0;
 float D = 0;
 
@@ -75,9 +77,14 @@ uint8_t flag = 0;
 
 float PID_Output;
 float PID_Output_Angle;
+float PID_Output_Filtered;
 
 float MaxAngularVelocity = 960;
 
+Average_t Average;
+
+
+char Message[128];
 
 /* USER CODE END PV */
 
@@ -140,6 +147,9 @@ int main(void)
 
   PID_Init(&PID_Speed, P, I, D, PID_SpeedSampleTime, MaxAngularVelocity, PID_MinValue);
 
+  Average_Init(&Average);
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -176,11 +186,17 @@ int main(void)
 	  {
 		  flag = 0;
 		  PID_Output = PID_Compute(&PID_Speed, EncoderAngularVelocity, AngularVelocitySet);
-		  PID_Output_Angle = MapValues(960.0, PID_Output);
+
+		  Average_Calculate(&Average, PID_Output, &PID_Output_Filtered);
+
+		  PID_Output_Angle = MapValues(960.0, PID_Output_Filtered);
 
 		  Motor_SetRideParameters(&Motor, PID_Output_Angle, 1);
 
 		  Motor_Ride(&Motor);
+
+		  sprintf(Message, "%.3f \n", PID_Output_Filtered);
+		  HAL_UART_Transmit(&hlpuart1, (uint8_t *) Message, strlen(Message), HAL_MAX_DELAY);
 	  }
 
 

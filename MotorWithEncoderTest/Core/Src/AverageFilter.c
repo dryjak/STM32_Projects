@@ -20,7 +20,7 @@ void Average_Init(Average_t *Average)
 }
 
 
-float Average_Calculate(Average_t *Average, float Input, float *Output)
+void Average_Calculate(Average_t *Average, float Input, float *Output)
 {
 
 
@@ -37,6 +37,6 @@ float Average_Calculate(Average_t *Average, float Input, float *Output)
 	if(Divisor == 0)
 		Divisor = 1;
 
-	return (float)Average->Sum / Divisor;
+	//return (float)Average->Sum / Divisor;
 }
 
