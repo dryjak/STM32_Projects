@@ -64,8 +64,8 @@ float EncoderAngularVelocity = 0;
 
 
 PID_t PID_Speed;
-float P = 23;
-float I = 0;
+float P = 13.5;
+float I = 4.93;
 float D = 0;
 
 float AngularVelocitySet = 100.0;
@@ -77,11 +77,12 @@ uint8_t flag = 0;
 
 float PID_Output;
 float PID_Output_Angle;
-float PID_Output_Filtered;
+
 
 float MaxAngularVelocity = 960;
 
 Average_t Average;
+float PID_Output_Filtered;
 
 
 char Message[128];
@@ -187,7 +188,7 @@ int main(void)
 		  flag = 0;
 		  PID_Output = PID_Compute(&PID_Speed, EncoderAngularVelocity, AngularVelocitySet);
 
-		  Average_Calculate(&Average, PID_Output, &PID_Output_Filtered);
+		  PID_Output_Filtered = Average_Calculate(&Average, PID_Output);
 
 		  PID_Output_Angle = MapValues(960.0, PID_Output_Filtered);
 

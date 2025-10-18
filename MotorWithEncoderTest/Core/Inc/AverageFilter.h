@@ -22,6 +22,6 @@ typedef struct
 }Average_t;
 
 void Average_Init(Average_t *Average);
-void Average_Calculate(Average_t *Average, float Input, float *Output);
+float Average_Calculate(Average_t *Average, float Input);
 
 #endif /* INC_AVERAGEFILTER_H_ */
