@@ -62,7 +62,7 @@ float EncoderAngularVelocity = 0;
 
 
 PID_t PID_Speed;
-float P = 14;
+float P = 25;
 float I = 0;
 float D = 0;
 
