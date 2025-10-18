@@ -1,5 +1,6 @@
-../Core/Src/main.c:96:5:main	2
-../Core/Src/main.c:187:6:SystemClock_Config	3
-../Core/Src/main.c:233:13:MX_NVIC_Init	1
-../Core/Src/main.c:241:6:HAL_TIM_PeriodElapsedCallback	2
-../Core/Src/main.c:259:6:Error_Handler	1
+../Core/Src/main.c:101:5:main	2
+../Core/Src/main.c:200:6:SystemClock_Config	3
+../Core/Src/main.c:246:13:MX_NVIC_Init	1
+../Core/Src/main.c:254:7:MapValues	1
+../Core/Src/main.c:260:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/main.c:278:6:Error_Handler	1

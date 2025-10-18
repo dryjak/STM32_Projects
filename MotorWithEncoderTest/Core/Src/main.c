@@ -62,11 +62,11 @@ float EncoderAngularVelocity = 0;
 
 
 PID_t PID_Speed;
-float P = 3;
-float I = 1;
+float P = 14;
+float I = 0;
 float D = 0;
 
-float AngularVelocitySet = 600.0;
+float AngularVelocitySet = 100.0;
 float PID_SpeedSampleTime = 0.1;
 float PID_MinValue = 0;
 float PID_MaxValue = 100;
@@ -74,6 +74,10 @@ float PID_MaxValue = 100;
 uint8_t flag = 0;
 
 float PID_Output;
+float PID_Output_Angle;
+
+float MaxAngularVelocity = 960;
+
 
 /* USER CODE END PV */
 
@@ -81,6 +85,7 @@ float PID_Output;
 void SystemClock_Config(void);
 static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
+float MapValues(float MaxValue, float Value);
 
 /* USER CODE END PFP */
 
@@ -133,7 +138,7 @@ int main(void)
   Encoder_Init(&Encoder, &htim3, EncoderResolution, EncoderSampleTime);
   HAL_TIM_Base_Start_IT(&htim1);
 
-  PID_Init(&PID_Speed, P, I, D, PID_SpeedSampleTime, PID_MaxValue, PID_MinValue);
+  PID_Init(&PID_Speed, P, I, D, PID_SpeedSampleTime, MaxAngularVelocity, PID_MinValue);
 
   /* USER CODE END 2 */
 
@@ -155,23 +160,31 @@ int main(void)
 	  HAL_Delay(3000);
 	  */
 
-	  /*
-	  Motor_SetRideParameters(&Motor, 50, 1);
+/*
+	  Motor_SetRideParameters(&Motor, 100, 1);
 	  Motor_Ride(&Motor);
 	  HAL_Delay(5000);
 
-	  Motor_SetRideParameters(&Motor, 70, 1);
+	  Motor_SetRideParameters(&Motor, 50, 1);
 	  Motor_Ride(&Motor);
 	  HAL_Delay(5000);
-	  */
+*/
+
+
 
 	  if (flag == 1)
 	  {
 		  flag = 0;
 		  PID_Output = PID_Compute(&PID_Speed, EncoderAngularVelocity, AngularVelocitySet);
-		  Motor_SetRideParameters(&Motor, PID_Output, 1);
+		  PID_Output_Angle = MapValues(960.0, PID_Output);
+
+		  Motor_SetRideParameters(&Motor, PID_Output_Angle, 1);
+
 		  Motor_Ride(&Motor);
 	  }
+
+
+
 
     /* USER CODE END WHILE */
 
@@ -238,6 +251,12 @@ static void MX_NVIC_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+float MapValues(float MaxValue, float Value)
+{
+	float X = (float)(Value * 100.0) / (float)MaxValue;
+	return X;
+}
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim->Instance == TIM1)
