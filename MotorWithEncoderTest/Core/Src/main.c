@@ -64,9 +64,9 @@ float EncoderAngularVelocity = 0;
 
 
 PID_t PID_Speed;
-float P = 13.5;
-float I = 4.93;
-float D = 0;
+float P = 28;
+float I = 2.5;
+float D = 0.8;
 
 float AngularVelocitySet = 100.0;
 float PID_SpeedSampleTime = 0.1;
