@@ -1,0 +1,241 @@
+11:34:47 **** Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Startup/startup_stm32f411retx.d" -MT"Core/Startup/startup_stm32f411retx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Startup/startup_stm32f411retx.o" "../Core/Startup/startup_stm32f411retx.s"
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc "../Core/Src/gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/gpio.d" -MT"Core/Src/gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/gpio.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32f4xx.d" -MT"Core/Src/system_stm32f4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f4xx.o"
+arm-none-eabi-gcc "../Core/Src/usart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/usart.d" -MT"Core/Src/usart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/usart.o"
+In file included from ../Core/Src/Button.c:8:
+../Core/Inc/Button.h:22:9: error: unknown type name 'GPIO_TypeDef'
+   22 |         GPIO_TypeDef    *GpioPort;
+      |         ^~~~~~~~~~~~
+../Core/Inc/Button.h:23:9: error: unknown type name 'uint16_t'
+   23 |         uint16_t                GpioPin;
+      |         ^~~~~~~~
+../Core/Inc/Button.h:25:9: error: unknown type name 'uint32_t'
+   25 |         uint32_t                TimerDebounce;  //how much time to wait for debounce
+      |         ^~~~~~~~
+../Core/Inc/Button.h:26:9: error: unknown type name 'uint32_t'
+   26 |         uint32_t                LastTick;
+      |         ^~~~~~~~
+../Core/Inc/Button.h:28:15: error: field 'ButtonPressed' declared as a function
+   28 |         void *ButtonPressed(void);
+      |               ^~~~~~~~~~~~~
+../Core/Src/Button.c:11:35: error: unknown type name 'GPIO_InitTypeDef'
+   11 | void ButtonInit(Button_t* Button, GPIO_InitTypeDef *GpioPort, uint16_t GpioPin, uint32_t TimerDebuonce)
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/Button.c:11:63: error: unknown type name 'uint16_t'
+   11 | void ButtonInit(Button_t* Button, GPIO_InitTypeDef *GpioPort, uint16_t GpioPin, uint32_t TimerDebuonce)
+      |                                                               ^~~~~~~~
+../Core/Src/Button.c:9:1: note: 'uint16_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+    8 | #include "Button.h"
+  +++ |+#include <stdint.h>
+    9 | 
+../Core/Src/Button.c:11:81: error: unknown type name 'uint32_t'
+   11 | void ButtonInit(Button_t* Button, GPIO_InitTypeDef *GpioPort, uint16_t GpioPin, uint32_t TimerDebuonce)
+      |                                                                                 ^~~~~~~~
+../Core/Src/Button.c:11:81: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:99:29: error: 'GPIOx' undeclared (first use in this function); did you mean 'GPIOD'?
+   99 |           HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState);
+      |                             ^~~~~
+      |                             GPIOD
+../Core/Src/main.c:99:29: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:99:36: error: 'GPIO_Pin' undeclared (first use in this function); did you mean 'GPIO_PinState'?
+   99 |           HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState);
+      |                                    ^~~~~~~~
+      |                                    GPIO_PinState
+../Core/Src/main.c:99:46: error: 'PinState' undeclared (first use in this function)
+   99 |           HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState);
+      |                                              ^~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:36:19 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/Button.c:8:
+../Core/Inc/Button.h:22:9: error: unknown type name 'GPIO_TypeDef'
+   22 |         GPIO_TypeDef    *GpioPort;
+      |         ^~~~~~~~~~~~
+../Core/Inc/Button.h:23:9: error: unknown type name 'uint16_t'
+   23 |         uint16_t                GpioPin;
+      |         ^~~~~~~~
+../Core/Inc/Button.h:25:9: error: unknown type name 'uint32_t'
+   25 |         uint32_t                TimerDebounce;  //how much time to wait for debounce
+      |         ^~~~~~~~
+../Core/Inc/Button.h:26:9: error: unknown type name 'uint32_t'
+   26 |         uint32_t                LastTick;
+      |         ^~~~~~~~
+../Core/Inc/Button.h:28:15: error: field 'ButtonPressed' declared as a function
+   28 |         void *ButtonPressed(void);
+      |               ^~~~~~~~~~~~~
+../Core/Src/Button.c:11:35: error: unknown type name 'GPIO_InitTypeDef'
+   11 | void ButtonInit(Button_t* Button, GPIO_InitTypeDef *GpioPort, uint16_t GpioPin, uint32_t TimerDebuonce)
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/Button.c:11:63: error: unknown type name 'uint16_t'
+   11 | void ButtonInit(Button_t* Button, GPIO_InitTypeDef *GpioPort, uint16_t GpioPin, uint32_t TimerDebuonce)
+      |                                                               ^~~~~~~~
+../Core/Src/Button.c:9:1: note: 'uint16_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+    8 | #include "Button.h"
+  +++ |+#include <stdint.h>
+    9 | 
+../Core/Src/Button.c:11:81: error: unknown type name 'uint32_t'
+   11 | void ButtonInit(Button_t* Button, GPIO_InitTypeDef *GpioPort, uint16_t GpioPin, uint32_t TimerDebuonce)
+      |                                                                                 ^~~~~~~~
+../Core/Src/Button.c:11:81: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:37:01 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+In file included from ../Core/Src/Button.c:8:
+../Core/Inc/Button.h:29:15: error: field 'ButtonPressed' declared as a function
+   29 |         void *ButtonPressed(void);
+      |               ^~~~~~~~~~~~~
+../Core/Src/Button.c: In function 'ButtonInit':
+../Core/Src/Button.c:14:26: warning: assignment to 'GPIO_TypeDef *' from incompatible pointer type 'GPIO_InitTypeDef *' [-Wincompatible-pointer-types]
+   14 |         Button->GpioPort = GpioPort;
+      |                          ^
+../Core/Src/Button.c:16:33: error: 'TimerDebounce' undeclared (first use in this function); did you mean 'TimerDebuonce'?
+   16 |         Button->TimerDebounce = TimerDebounce;
+      |                                 ^~~~~~~~~~~~~
+      |                                 TimerDebuonce
+../Core/Src/Button.c:16:33: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:37:29 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+In file included from ../Core/Src/Button.c:8:
+../Core/Inc/Button.h:29:15: error: field 'ButtonPressed' declared as a function
+   29 |         void *ButtonPressed(void);
+      |               ^~~~~~~~~~~~~
+../Core/Src/Button.c: In function 'ButtonInit':
+../Core/Src/Button.c:14:26: warning: assignment to 'GPIO_TypeDef *' from incompatible pointer type 'GPIO_InitTypeDef *' [-Wincompatible-pointer-types]
+   14 |         Button->GpioPort = GpioPort;
+      |                          ^
+../Core/Src/Button.c:16:33: error: 'TimerDebounce' undeclared (first use in this function); did you mean 'TimerDebouonce'?
+   16 |         Button->TimerDebounce = TimerDebounce;
+      |                                 ^~~~~~~~~~~~~
+      |                                 TimerDebouonce
+../Core/Src/Button.c:16:33: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:37:47 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+In file included from ../Core/Src/Button.c:8:
+../Core/Inc/Button.h:29:15: error: field 'ButtonPressed' declared as a function
+   29 |         void *ButtonPressed(void);
+      |               ^~~~~~~~~~~~~
+../Core/Src/Button.c: In function 'ButtonInit':
+../Core/Src/Button.c:14:26: warning: assignment to 'GPIO_TypeDef *' from incompatible pointer type 'GPIO_InitTypeDef *' [-Wincompatible-pointer-types]
+   14 |         Button->GpioPort = GpioPort;
+      |                          ^
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:38:18 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+In file included from ../Core/Src/Button.c:8:
+../Core/Inc/Button.h:29:15: error: field 'ButtonPressed' declared as a function
+   29 |         void *ButtonPressed(void);
+      |               ^~~~~~~~~~~~~
+../Core/Src/Button.c:11:6: error: conflicting types for 'ButtonInit'; have 'void(Button_t *, GPIO_TypeDef *, uint16_t,  uint32_t)' {aka 'void(Button_t *, GPIO_TypeDef *, short unsigned int,  long unsigned int)'}
+   11 | void ButtonInit(Button_t* Button, GPIO_TypeDef *GpioPort, uint16_t GpioPin, uint32_t TimerDebounce)
+      |      ^~~~~~~~~~
+../Core/Inc/Button.h:32:6: note: previous declaration of 'ButtonInit' with type 'void(Button_t *, GPIO_InitTypeDef *, uint16_t,  uint32_t)' {aka 'void(Button_t *, GPIO_InitTypeDef *, short unsigned int,  long unsigned int)'}
+   32 | void ButtonInit(Button_t* Button, GPIO_InitTypeDef *GpioPort, uint16_t GpioPin, uint32_t TimerDebuonce);
+      |      ^~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:38:35 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+In file included from ../Core/Src/Button.c:8:
+../Core/Inc/Button.h:29:15: error: field 'ButtonPressed' declared as a function
+   29 |         void *ButtonPressed(void);
+      |               ^~~~~~~~~~~~~
+../Core/Src/Button.c:11:6: error: conflicting types for 'ButtonInit'; have 'void(Button_t *, GPIO_TypeDef *, uint16_t,  uint32_t)' {aka 'void(Button_t *, GPIO_TypeDef *, short unsigned int,  long unsigned int)'}
+   11 | void ButtonInit(Button_t* Button, GPIO_TypeDef *GpioPort, uint16_t GpioPin, uint32_t TimerDebounce)
+      |      ^~~~~~~~~~
+../Core/Inc/Button.h:32:6: note: previous declaration of 'ButtonInit' with type 'void(Button_t *, GPIO_InitTypeDef *, uint16_t,  uint32_t)' {aka 'void(Button_t *, GPIO_InitTypeDef *, short unsigned int,  long unsigned int)'}
+   32 | void ButtonInit(Button_t* Button, GPIO_InitTypeDef *GpioPort, uint16_t GpioPin, uint32_t TimerDebuonce);
+      |      ^~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:39:26 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/Button.c:8:
+../Core/Inc/Button.h:29:15: error: field 'ButtonPressed' declared as a function
+   29 |         void *ButtonPressed(void);
+      |               ^~~~~~~~~~~~~
+../Core/Src/Button.c:11:6: error: conflicting types for 'ButtonInit'; have 'void(Button_t *, GPIO_TypeDef *, uint16_t,  uint32_t)' {aka 'void(Button_t *, GPIO_TypeDef *, short unsigned int,  long unsigned int)'}
+   11 | void ButtonInit(Button_t* Button, GPIO_TypeDef* GpioPort, uint16_t GpioPin, uint32_t TimerDebounce)
+      |      ^~~~~~~~~~
+../Core/Inc/Button.h:32:6: note: previous declaration of 'ButtonInit' with type 'void(Button_t *, GPIO_InitTypeDef *, uint16_t,  uint32_t)' {aka 'void(Button_t *, GPIO_InitTypeDef *, short unsigned int,  long unsigned int)'}
+   32 | void ButtonInit(Button_t* Button, GPIO_InitTypeDef *GpioPort, uint16_t GpioPin, uint32_t TimerDebuonce);
+      |      ^~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:39:41 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+In file included from ../Core/Src/Button.c:8:
+../Core/Inc/Button.h:29:15: error: field 'ButtonPressed' declared as a function
+   29 |         void *ButtonPressed(void);
+      |               ^~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:40:04 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+In file included from ../Core/Src/Button.c:8:
+../Core/Inc/Button.h:29:15: error: field 'ButtonPressed' declared as a function
+   29 |         void *ButtonPressed(void);
+      |               ^~~~~~~~~~~~~
+../Core/Src/Button.c: In function 'ButtonPressed':
+../Core/Src/Button.c:24:1: warning: control reaches end of non-void function [-Wreturn-type]
+   24 | }
+      | ^
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:40:55 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+In file included from ../Core/Src/Button.c:8:
+../Core/Inc/Button.h:29:15: error: field 'ButtonPressed' declared as a function
+   29 |         void *ButtonPressed(void);
+      |               ^~~~~~~~~~~~~
+../Core/Src/Button.c: In function 'ButtonPressed':
+../Core/Src/Button.c:24:1: warning: control reaches end of non-void function [-Wreturn-type]
+   24 | }
+      | ^
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.

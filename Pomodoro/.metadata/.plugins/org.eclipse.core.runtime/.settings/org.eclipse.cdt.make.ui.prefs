@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+org.eclipse.cdt.make.ui.editor.comment=98,98,98
+org.eclipse.cdt.make.ui.editor.default=200,200,200
+org.eclipse.cdt.make.ui.editor.function=18,144,195
+org.eclipse.cdt.make.ui.editor.keyword=221,40,103
+org.eclipse.cdt.make.ui.editor.macro_def=255,191,38
+org.eclipse.cdt.make.ui.editor.macro_ref=121,171,255
+org.eclipse.cdt.make.ui.editor.matching.brackets.color=170,170,170
+overriddenByCSS=,org.eclipse.cdt.make.ui.editor.comment,org.eclipse.cdt.make.ui.editor.keyword,org.eclipse.cdt.make.ui.editor.macro_ref,org.eclipse.cdt.make.ui.editor.macro_def,org.eclipse.cdt.make.ui.editor.function,org.eclipse.cdt.make.ui.editor.default,org.eclipse.cdt.make.ui.editor.matching.brackets.color,
