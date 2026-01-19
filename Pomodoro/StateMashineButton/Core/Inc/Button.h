@@ -26,13 +26,17 @@ typedef struct {
 	uint32_t 		TimerDebounce;	//how much time to wait for debounce
 	uint32_t 		LastTick;
 
-	void *ButtonPressed(void);
+	void (*ButtonPressed)(void);
 }Button_t;
 
-void ButtonInit(Button_t* Button, GPIO_TypeDef* GpioPort, uint16_t GpioPin, uint32_t TimerDebounce);
-
-
 //Functions
+void ButtonInit(Button_t* Button, GPIO_TypeDef* GpioPort, uint16_t GpioPin, uint32_t TimerDebounce);
+void ButtonTask (Button_t *Button);
+void ButtonRegisterPressCallback(Button_t *Button, void *Callback);
+
+
+
+
 
 
 

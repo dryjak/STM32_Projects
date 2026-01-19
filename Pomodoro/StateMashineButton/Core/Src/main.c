@@ -23,7 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "Button.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,7 +44,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint32_t TimerDebounce = 50;
+Button_t Button1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -89,7 +90,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  ButtonInit(&Button1, Button1_GPIO_Port, Button1_Pin, TimerDebounce);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -97,6 +98,8 @@ int main(void)
   while (1)
   {
 	  //HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState), GPIO_Pin, PinState);
+	 ButtonTask (&Button1);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
