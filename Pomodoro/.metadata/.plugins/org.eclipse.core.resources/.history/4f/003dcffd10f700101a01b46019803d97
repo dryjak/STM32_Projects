@@ -39,7 +39,6 @@ typedef struct {
 	void (*ButtonPressed)(void);
 	void (*ButtonLongPressed)(void);
 	void (*ButtonRepeat)(void);
-	void (*ButtonReturnToIdle)(void);
 }Button_t;
 
 //Functions
@@ -53,7 +52,6 @@ void ButtonSetRepeatTime(Button_t *Button, uint32_t Milliseconds);
 void ButtonRegisterPressCallback(Button_t *Button, void *Callback);
 void ButtonRegisterRepeatCallback(Button_t *Button, void *Callback);
 void ButtonRegisterLongPressCallback(Button_t *Button, void *Callback);
-void ButtonRegisterGoToIdleCallback(Button_t *Button, void *Callback);
 
 
 

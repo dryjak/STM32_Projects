@@ -23,14 +23,6 @@ void ButtonSetDebounceTime(Button_t *Button, uint32_t Milliseconds)
 {
 	Button->TimerDebounce = Milliseconds;
 }
-void ButtonSetLongPressTime(Button_t *Button, uint32_t Milliseconds)
-{
-	Button->TimerLongPress = Milliseconds;
-}
-void ButtonSetRepeatTime(Button_t *Button, uint32_t Milliseconds)
-{
-	Button->TimerRepeat = Milliseconds;
-}
 //Register callbacks
 void ButtonRegisterPressCallback(Button_t *Button, void *Callback)
 {
@@ -43,10 +35,6 @@ void ButtonRegisterLongPressCallback(Button_t *Button, void *Callback)
 void ButtonRegisterRepeatCallback(Button_t *Button, void *Callback)
 {
 	Button->ButtonRepeat = Callback;
-}
-void ButtonRegisterGoToIdleCallback(Button_t *Button, void *Callback)
-{
-	Button->ButtonReturnToIdle = Callback;
 }
 
 //States of state machine
@@ -64,9 +52,8 @@ void ButtonDebounceRoutine(Button_t *Button)
 {
 	if(HAL_GetTick() - Button->LastTick >= Button->TimerDebounce)
 	{
-		if (GPIO_PIN_RESET == HAL_GPIO_ReadPin(Button->GpioPort, Button->GpioPin))	//when button is pressed
+		if (GPIO_PIN_RESET == HAL_GPIO_ReadPin(Button->GpioPort, Button->GpioPin))
 		{
-			Button->LastTick = HAL_GetTick();
 			Button->State = PRESSED;
 			if(Button->ButtonPressed != NULL)
 			{
@@ -78,74 +65,28 @@ void ButtonDebounceRoutine(Button_t *Button)
 			Button->State = IDLE;
 		}
 	}
+	Button->LastTick = HAL_GetTick();
 }
 
 void ButtonPressedRoutine(Button_t *Button)
 {
-	if(HAL_GetTick() - Button->LastTick >= Button->TimerLongPress)
+	if(HAL_GetTick() - Button->LastTick >= TimerLongPress)
 	{
 		Button->State = LONG_PRESSED;
-		Button->LastTick = HAL_GetTick();
 		if(Button->ButtonLongPressed != NULL)
 		{
 			Button->ButtonLongPressed();
 		}
 	}
-	else if(GPIO_PIN_SET == HAL_GPIO_ReadPin(Button->GpioPort, Button->GpioPin))	//if button is released
+	else if(GPIO_PIN_SET == HAL_GPIO_ReadPin(Button->GpioPort, Button->GpioPin))
 	{
 		Button->State = IDLE;
-		{
-			Button->ButtonReturnToIdle();
-		}
 	}
 }
 
 void ButtonLongPressedRoutine (Button_t *Button)
 {
-	if (GPIO_PIN_SET == HAL_GPIO_ReadPin(Button->GpioPort, Button->GpioPin))
-	{
-		Button->State = IDLE;
-		if(Button->ButtonReturnToIdle != NULL)
-		{
-			Button->ButtonReturnToIdle();
-		}
-	}
-	else
-	{
-		if(HAL_GetTick() - Button->LastTick >= Button-> TimerRepeat)
-		{
-			Button->LastTick = HAL_GetTick();
-			Button->State = REPEAT;
-			if(Button->ButtonRepeat != NULL)
-			{
-				Button->ButtonRepeat();
-			}
-		}
-	}
 
-}
-void ButtonRepeatRoutine(Button_t *Button)
-{
-	if (GPIO_PIN_SET == HAL_GPIO_ReadPin(Button->GpioPort, Button->GpioPin))
-	{
-		Button->State = IDLE;
-		if(Button->ButtonReturnToIdle != NULL)
-		{
-			Button->ButtonReturnToIdle();
-		}
-
-	}
-	else
-	{
-		if(HAL_GetTick() - Button->LastTick >= Button->TimerRepeat)
-		{
-			Button->LastTick = HAL_GetTick();
-			if(Button->ButtonRepeat != NULL)
-			{
-				Button->ButtonRepeat();
-			}
-		}
-	}
 }
 
 
@@ -169,9 +110,6 @@ void ButtonTask (Button_t *Button)
 	case LONG_PRESSED:
 		//do LONG PRESSED
 		ButtonLongPressedRoutine(Button);
-		break;
-	case REPEAT:
-		ButtonRepeatRoutine(Button);
 		break;
 	}
 

@@ -54,9 +54,6 @@ Button_t Button1;
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void ToggleLed();
-void TurnOnLed();
-void TurnOffLed();
-
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -96,10 +93,7 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   ButtonInit(&Button1, Button1_GPIO_Port, Button1_Pin, TimerDebounce,TimerLongPress, TimerRepeat);
-  ButtonRegisterPressCallback(&Button1, TurnOnLed);
-  ButtonRegisterLongPressCallback(&Button1, TurnOffLed);
-  ButtonRegisterRepeatCallback(&Button1, ToggleLed);
-  ButtonRegisterGoToIdleCallback(&Button1, TurnOffLed);
+  ButtonRegisterPressCallback(&Button1, ToggleLed);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -165,17 +159,8 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void ToggleLed()
 {
-	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	HAL_GPIO_TogglePin(Button1.GpioPort, Button1.GpioPin);
 }
-void TurnOnLed()
-{
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-}
-void TurnOffLed()
-{
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin,GPIO_PIN_RESET);
-}
-
 
 /* USER CODE END 4 */
 

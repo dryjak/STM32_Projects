@@ -14,8 +14,7 @@ typedef enum{
 	IDLE = 0,
 	DEBOUNCE,
 	PRESSED,
-	LONG_PRESSED,
-	REPEAT
+	LONG_PRESSED
 }BUTTON_STATE;
 
 typedef enum{
@@ -39,23 +38,13 @@ typedef struct {
 	void (*ButtonPressed)(void);
 	void (*ButtonLongPressed)(void);
 	void (*ButtonRepeat)(void);
-	void (*ButtonReturnToIdle)(void);
 }Button_t;
 
 //Functions
 void ButtonInit(Button_t* Button, GPIO_TypeDef* GpioPort, uint16_t GpioPin, uint32_t TimerDebounce, uint32_t TimerLongPress, uint32_t TimerRepeat);
 void ButtonTask (Button_t *Button);
-
-void ButtonSetDebounceTime(Button_t *Button, uint32_t Milliseconds);
-void ButtonSetLongPressTime(Button_t *Button, uint32_t Milliseconds);
-void ButtonSetRepeatTime(Button_t *Button, uint32_t Milliseconds);
-
 void ButtonRegisterPressCallback(Button_t *Button, void *Callback);
-void ButtonRegisterRepeatCallback(Button_t *Button, void *Callback);
-void ButtonRegisterLongPressCallback(Button_t *Button, void *Callback);
-void ButtonRegisterGoToIdleCallback(Button_t *Button, void *Callback);
-
-
+void ButtonSetDebounceTime(Button_t *Button, uint32_t Milliseconds);
 
 
 #endif /* INC_BUTTON_H_ */

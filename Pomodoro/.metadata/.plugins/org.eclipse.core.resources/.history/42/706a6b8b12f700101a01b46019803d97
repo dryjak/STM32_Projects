@@ -46,7 +46,7 @@ void ButtonRegisterRepeatCallback(Button_t *Button, void *Callback)
 }
 void ButtonRegisterGoToIdleCallback(Button_t *Button, void *Callback)
 {
-	Button->ButtonReturnToIdle = Callback;
+	Button->ButtonRepeat = Callback;
 }
 
 //States of state machine

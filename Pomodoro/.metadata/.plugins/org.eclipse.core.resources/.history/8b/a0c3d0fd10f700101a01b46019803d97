@@ -44,10 +44,6 @@ void ButtonRegisterRepeatCallback(Button_t *Button, void *Callback)
 {
 	Button->ButtonRepeat = Callback;
 }
-void ButtonRegisterGoToIdleCallback(Button_t *Button, void *Callback)
-{
-	Button->ButtonReturnToIdle = Callback;
-}
 
 //States of state machine
 void ButtonIdleRoutine(Button_t *Button)
@@ -94,9 +90,6 @@ void ButtonPressedRoutine(Button_t *Button)
 	else if(GPIO_PIN_SET == HAL_GPIO_ReadPin(Button->GpioPort, Button->GpioPin))	//if button is released
 	{
 		Button->State = IDLE;
-		{
-			Button->ButtonReturnToIdle();
-		}
 	}
 }
 
@@ -105,10 +98,6 @@ void ButtonLongPressedRoutine (Button_t *Button)
 	if (GPIO_PIN_SET == HAL_GPIO_ReadPin(Button->GpioPort, Button->GpioPin))
 	{
 		Button->State = IDLE;
-		if(Button->ButtonReturnToIdle != NULL)
-		{
-			Button->ButtonReturnToIdle();
-		}
 	}
 	else
 	{
@@ -129,11 +118,6 @@ void ButtonRepeatRoutine(Button_t *Button)
 	if (GPIO_PIN_SET == HAL_GPIO_ReadPin(Button->GpioPort, Button->GpioPin))
 	{
 		Button->State = IDLE;
-		if(Button->ButtonReturnToIdle != NULL)
-		{
-			Button->ButtonReturnToIdle();
-		}
-
 	}
 	else
 	{

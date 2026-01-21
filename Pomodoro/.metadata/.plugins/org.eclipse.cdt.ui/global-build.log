@@ -612,3 +612,302 @@ arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -D
 make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
 make: *** Waiting for unfinished jobs....
 "make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:40:01 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/Button.c: In function 'ButtonPressedRoutine':
+../Core/Src/Button.c:73:48: error: 'TimerLongPress' undeclared (first use in this function)
+   73 |         if(HAL_GetTick() - Button->LastTick >= TimerLongPress)
+      |                                                ^~~~~~~~~~~~~~
+../Core/Src/Button.c:73:48: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:53:19 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/Button.c: In function 'ButtonTask':
+../Core/Src/Button.c:118:9: warning: enumeration value 'REPEAT' not handled in switch [-Wswitch]
+  118 |         switch (Button->State)
+      |         ^~~~~~
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+   8448	     24	   1680	  10152	   27a8	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 
+22:13:49 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+../Core/Src/Button.c: In function 'ButtonLongPressedRoutine':
+../Core/Src/Button.c:115:9: error: 'else' without a previous 'if'
+  115 |         else
+      |         ^~~~
+../Core/Src/Button.c: In function 'ButtonRepeatRoutine':
+../Core/Src/Button.c:119:52: error: invalid type argument of '->' (have 'Button_t')
+  119 |         if (GPIO_PIN_SET == HAL_GPIO_ReadPin(Button->GpioPort, Button->GpioPin))
+      |                                                    ^~
+../Core/Src/Button.c:119:70: error: invalid type argument of '->' (have 'Button_t')
+  119 |         if (GPIO_PIN_SET == HAL_GPIO_ReadPin(Button->GpioPort, Button->GpioPin))
+      |                                                                      ^~
+../Core/Src/Button.c:121:23: error: invalid type argument of '->' (have 'Button_t')
+  121 |                 Button->State = IDLE;
+      |                       ^~
+../Core/Src/Button.c:125:42: error: invalid type argument of '->' (have 'Button_t')
+  125 |                 if(HAL_GetTick() - Button->LastTick >= Button->TimerRepeat)
+      |                                          ^~
+../Core/Src/Button.c:125:62: error: invalid type argument of '->' (have 'Button_t')
+  125 |                 if(HAL_GetTick() - Button->LastTick >= Button->TimerRepeat)
+      |                                                              ^~
+../Core/Src/Button.c:127:31: error: invalid type argument of '->' (have 'Button_t')
+  127 |                         Button->LastTick = HAL_GetTick();
+      |                               ^~
+../Core/Src/Button.c:128:34: error: invalid type argument of '->' (have 'Button_t')
+  128 |                         if(Button->ButtonRepeat != NULL)
+      |                                  ^~
+../Core/Src/Button.c:130:39: error: invalid type argument of '->' (have 'Button_t')
+  130 |                                 Button->ButtonRepeat();
+      |                                       ^~
+../Core/Src/Button.c: In function 'ButtonTask':
+../Core/Src/Button.c:159:37: error: incompatible type for argument 1 of 'ButtonRepeatRoutine'
+  159 |                 ButtonRepeatRoutine(Button);
+      |                                     ^~~~~~
+      |                                     |
+      |                                     Button_t *
+../Core/Src/Button.c:117:35: note: expected 'Button_t' but argument is of type 'Button_t *'
+  117 | void ButtonRepeatRoutine(Button_t Button)
+      |                          ~~~~~~~~~^~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:13:59 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+../Core/Src/Button.c: In function 'ButtonRepeatRoutine':
+../Core/Src/Button.c:118:52: error: invalid type argument of '->' (have 'Button_t')
+  118 |         if (GPIO_PIN_SET == HAL_GPIO_ReadPin(Button->GpioPort, Button->GpioPin))
+      |                                                    ^~
+../Core/Src/Button.c:118:70: error: invalid type argument of '->' (have 'Button_t')
+  118 |         if (GPIO_PIN_SET == HAL_GPIO_ReadPin(Button->GpioPort, Button->GpioPin))
+      |                                                                      ^~
+../Core/Src/Button.c:120:23: error: invalid type argument of '->' (have 'Button_t')
+  120 |                 Button->State = IDLE;
+      |                       ^~
+../Core/Src/Button.c:124:42: error: invalid type argument of '->' (have 'Button_t')
+  124 |                 if(HAL_GetTick() - Button->LastTick >= Button->TimerRepeat)
+      |                                          ^~
+../Core/Src/Button.c:124:62: error: invalid type argument of '->' (have 'Button_t')
+  124 |                 if(HAL_GetTick() - Button->LastTick >= Button->TimerRepeat)
+      |                                                              ^~
+../Core/Src/Button.c:126:31: error: invalid type argument of '->' (have 'Button_t')
+  126 |                         Button->LastTick = HAL_GetTick();
+      |                               ^~
+../Core/Src/Button.c:127:34: error: invalid type argument of '->' (have 'Button_t')
+  127 |                         if(Button->ButtonRepeat != NULL)
+      |                                  ^~
+../Core/Src/Button.c:129:39: error: invalid type argument of '->' (have 'Button_t')
+  129 |                                 Button->ButtonRepeat();
+      |                                       ^~
+../Core/Src/Button.c: In function 'ButtonTask':
+../Core/Src/Button.c:158:37: error: incompatible type for argument 1 of 'ButtonRepeatRoutine'
+  158 |                 ButtonRepeatRoutine(Button);
+      |                                     ^~~~~~
+      |                                     |
+      |                                     Button_t *
+../Core/Src/Button.c:116:35: note: expected 'Button_t' but argument is of type 'Button_t *'
+  116 | void ButtonRepeatRoutine(Button_t Button)
+      |                          ~~~~~~~~~^~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:14:22 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+   8548	     24	   1680	  10252	   280c	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 
+22:20:25 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:173:6: error: redefinition of 'TurnOnLed'
+  173 | void TurnOnLed()
+      |      ^~~~~~~~~
+../Core/Src/main.c:169:6: note: previous definition of 'TurnOnLed' with type 'void()'
+  169 | void TurnOnLed()
+      |      ^~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:20:39 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+   8684	     24	   1680	  10388	   2894	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 
+22:21:10 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-size  StateMashineButton.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8684	     24	   1680	  10388	   2894	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+22:27:03 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'TurnOnLed':
+../Core/Src/main.c:171:9: error: too few arguments to function 'HAL_GPIO_WritePin'
+  171 |         HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin);
+      |         ^~~~~~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:279,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h:235:6: note: declared here
+  235 | void HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |      ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'TurnOffLed':
+../Core/Src/main.c:175:9: error: too few arguments to function 'HAL_GPIO_WritePin'
+  175 |         HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin);
+      |         ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h:235:6: note: declared here
+  235 | void HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |      ^~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:27:39 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+   8668	     24	   1680	  10372	   2884	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 
+22:27:45 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-size  StateMashineButton.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8668	     24	   1680	  10372	   2884	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+22:34:40 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:102:3: error: 'ButtonRegister' undeclared (first use in this function)
+  102 |   ButtonRegister
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:102:3: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:102:17: error: expected ';' before 'while'
+  102 |   ButtonRegister
+      |                 ^
+      |                 ;
+......
+  107 |   while (1)
+      |   ~~~~~          
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:34:59 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+   8720	     24	   1688	  10432	   28c0	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 
+22:35:07 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-size  StateMashineButton.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8720	     24	   1688	  10432	   28c0	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+22:36:42 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-size  StateMashineButton.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8720	     24	   1688	  10432	   28c0	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+22:37:58 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+   8720	     24	   1688	  10432	   28c0	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 
+22:42:46 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+   8740	     24	   1688	  10452	   28d4	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 
+22:45:47 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+   8740	     24	   1688	  10452	   28d4	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 
+22:45:59 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-size  StateMashineButton.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8740	     24	   1688	  10452	   28d4	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
