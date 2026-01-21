@@ -51,7 +51,7 @@ Button_t Button1;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-void ToggleLed();
+void ToggleLed(GPIO_TypeDef *Port, uint16_t Pin);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -91,7 +91,7 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   ButtonInit(&Button1, Button1_GPIO_Port, Button1_Pin, TimerDebounce);
-  ButtonRegisterPressCallback(&Button1, ToggleLed);
+  ButtonRegisterPressCallback(&Button1, ToggleLed(&Button1.GpioPort, Button1.GpioPin));
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -155,9 +155,9 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void ToggleLed()
+void ToggleLed(GPIO_TypeDef *Port, uint16_t Pin)
 {
-	HAL_GPIO_TogglePin(Button1.GpioPort, Button1.GpioPin);
+	HAL_GPIO_TogglePin(Port, Pin);
 }
 
 /* USER CODE END 4 */
