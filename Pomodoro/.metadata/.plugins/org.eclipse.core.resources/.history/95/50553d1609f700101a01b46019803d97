@@ -37,7 +37,7 @@ typedef struct {
 
 	void (*ButtonPressed)(void);
 	void (*ButtonLongPressed)(void);
-	void (*ButtonRepeat)(void);
+	void (*ButtonRepeatd)(void);
 }Button_t;
 
 //Functions

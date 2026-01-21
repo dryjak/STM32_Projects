@@ -512,3 +512,27 @@
 2026-01-21 21:02:41,447 [WARN] ConditionMgr:1044 - genDependencies : Invalid condition id : UX DEVICE CLASS RTOS Condition cause : null
 2026-01-21 21:02:41,447 [WARN] ConditionMgr:1044 - genDependencies : Invalid condition id : UX DEVICE CLASS RTOS Condition cause : null
 2026-01-21 21:02:41,459 [WARN] ConditionMgr:438 - getConditionDescription Invalid condition id : Cortex-A Device cause : null
+2026-01-21 21:02:41,489 [WARN] ConditionMgr:1044 - genDependencies : Invalid condition id : Cortex-A Device cause : null
+2026-01-21 21:02:41,489 [WARN] ConditionMgr:1044 - genDependencies : Invalid condition id : Cortex-A Device cause : null
+2026-01-21 21:02:41,489 [WARN] ConditionMgr:1044 - genDependencies : Invalid condition id : Cortex-A Device cause : null
+2026-01-21 21:02:41,511 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-SUBG2.5.0.0
+2026-01-21 21:02:41,559 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-AZRTOS-H7RS.1.1.0
+2026-01-21 21:02:41,592 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-AZRTOS-G4.2.0.0
+2026-01-21 21:02:41,604 [WARN] PackLoader:240 - Cannot read IP mode file for wolfSSL.I-CUBE-wolfSSH.1.4.20
+2026-01-21 21:02:41,613 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-NFC7.2.0.0
+2026-01-21 21:02:41,625 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-ALS.1.0.2
+2026-01-21 21:02:41,641 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-STSE01.1.0.0
+2026-01-21 21:02:41,708 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-TOF1.3.4.3
+2026-01-21 21:02:41,736 [INFO] ThirdParty:978 - Integrity check success = true
+2026-01-21 21:02:41,736 [INFO] IntegrityCheckThread:100 - exiting critical section [integrity check]
+2026-01-21 21:02:41,736 [INFO] IntegrityCheckThread:103 - End integrity checks thread
+2026-01-21 21:02:42,014 [INFO] WebApp:463 - Apply proxy settings
+2026-01-21 21:02:42,015 [INFO] WebApp:548 - Chromium requires no authentication
+2026-01-21 21:02:42,031 [INFO] WebApp:491 - Direct internet connection detected
+2026-01-21 21:02:42,088 [INFO] WebApp:900 - Register for checkConnection events
+2026-01-21 21:02:42,089 [INFO] WebApp:463 - Apply proxy settings
+2026-01-21 21:02:42,089 [INFO] WebApp:548 - Chromium requires no authentication
+2026-01-21 21:02:42,089 [INFO] WebApp:491 - Direct internet connection detected
+2026-01-21 21:02:42,476 [INFO] WebApp:225 - Starting web application
+2026-01-21 21:02:42,477 [INFO] WebApp:593 - Web application path used D:\Programy Potrzebne\STM32CubeIDE_Folder\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.15.0.202507011659\db\plugins\mcufinder\reactClient1\index.html
+2026-01-21 21:02:42,918 [INFO] WebApp:191 - Connection restablished

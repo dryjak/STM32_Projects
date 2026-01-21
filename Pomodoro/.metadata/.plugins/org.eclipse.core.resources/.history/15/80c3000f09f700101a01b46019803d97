@@ -28,14 +28,7 @@ void ButtonRegisterPressCallback(Button_t *Button, void *Callback)
 {
 	Button->ButtonPressed = Callback;
 }
-void ButtonRegisterLongPressCallback(Button_t *Button, void *Callback)
-{
-	Button->ButtonLongPressed = Callback;
-}
-void ButtonRegisterRepeatCallback(Button_t *Button, void *Callback)
-{
-	Button->ButtonRepeat = Callback;
-}
+
 
 //States of state machine
 void ButtonIdleRoutine(Button_t *Button)

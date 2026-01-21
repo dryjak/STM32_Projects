@@ -36,8 +36,6 @@ typedef struct {
 	uint32_t 		LastTick;
 
 	void (*ButtonPressed)(void);
-	void (*ButtonLongPressed)(void);
-	void (*ButtonRepeat)(void);
 }Button_t;
 
 //Functions

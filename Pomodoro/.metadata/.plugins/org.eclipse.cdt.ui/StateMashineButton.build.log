@@ -1,27 +1,15 @@
-13:14:33 **** Incremental Build of configuration Debug for project StateMashineButton ****
+21:38:05 **** Incremental Build of configuration Debug for project StateMashineButton ****
 make -j12 all 
 arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/Button.c: In function 'Button_PressedRoutine':
-../Core/Src/Button.c:60:48: error: 'TimerDebounceLongPress' undeclared (first use in this function)
-   60 |         if(HAL_GetTick() - Button->LastTick >= TimerDebounceLongPress)
-      |                                                ^~~~~~~~~~~~~~~~~~~~~~
-../Core/Src/Button.c:60:48: note: each undeclared identifier is reported only once for each function it appears in
-../Core/Src/Button.c:63:28: error: 'Button_t' has no member named 'ButtonLongPressed'; did you mean 'ButtonPressed'?
-   63 |                 if(Button->ButtonLongPressed != NULL)
-      |                            ^~~~~~~~~~~~~~~~~
-      |                            ButtonPressed
-../Core/Src/Button.c:65:33: error: 'Button_t' has no member named 'ButtonLongPressed'; did you mean 'ButtonPressed'?
-   65 |                         Button->ButtonLongPressed();
-      |                                 ^~~~~~~~~~~~~~~~~
-      |                                 ButtonPressed
-../Core/Src/Button.c: In function 'ButtonTask':
-../Core/Src/Button.c:78:9: warning: enumeration value 'LONG_PRESSED' not handled in switch [-Wswitch]
-   78 |         switch (Button->State)
-      |         ^~~~~~
+../Core/Src/Button.c: In function 'ButtonPressedRoutine':
+../Core/Src/Button.c:73:48: error: 'TimerLongPress' undeclared (first use in this function)
+   73 |         if(HAL_GetTick() - Button->LastTick >= TimerLongPress)
+      |                                                ^~~~~~~~~~~~~~
+../Core/Src/Button.c:73:48: note: each undeclared identifier is reported only once for each function it appears in
 make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
 make: *** Waiting for unfinished jobs....
 "make -j12 all" terminated with exit code 2. Build might be incomplete.
 
-13:14:34 Build Failed. 5 errors, 1 warnings. (took 1s.139ms)
+21:38:06 Build Failed. 3 errors, 0 warnings. (took 1s.31ms)
 

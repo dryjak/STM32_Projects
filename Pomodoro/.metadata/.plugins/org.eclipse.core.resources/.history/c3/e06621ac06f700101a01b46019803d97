@@ -8,34 +8,21 @@
 #include "Button.h"
 
 //Init function
-void ButtonInit(Button_t* Button, GPIO_TypeDef* GpioPort, uint16_t GpioPin, uint32_t TimerDebounce,
-		uint32_t TimerLongPress, uint32_t TimerRepeat)
+void ButtonInit(Button_t* Button, GPIO_TypeDef* GpioPort, uint16_t GpioPin, uint32_t TimerDebounce)
 {
 	Button->State = IDLE;
 	Button->GpioPort = GpioPort;
 	Button->GpioPin  = GpioPin;
 	Button->TimerDebounce = TimerDebounce;
-	Button->TimerLongPress = TimerLongPress;
-	Button->TimerRepeat = TimerRepeat;
 }
 //Time setting functions
-void ButtonSetDebounceTime(Button_t *Button, uint32_t Milliseconds)
-{
-	Button->TimerDebounce = Milliseconds;
-}
+
 //Register callbacks
 void ButtonRegisterPressCallback(Button_t *Button, void *Callback)
 {
 	Button->ButtonPressed = Callback;
 }
-void ButtonRegisterLongPressCallback(Button_t *Button, void *Callback)
-{
-	Button->ButtonLongPressed = Callback;
-}
-void ButtonRegisterRepeatCallback(Button_t *Button, void *Callback)
-{
-	Button->ButtonRepeat = Callback;
-}
+
 
 //States of state machine
 void ButtonIdleRoutine(Button_t *Button)
@@ -68,9 +55,9 @@ void ButtonDebounceRoutine(Button_t *Button)
 	Button->LastTick = HAL_GetTick();
 }
 
-void ButtonPressedRoutine(Button_t *Button)
+void Button_PressedRoutine(Button_t *Button)
 {
-	if(HAL_GetTick() - Button->LastTick >= TimerLongPress)
+	if(HAL_GetTick() - Button->LastTick >= TimerDebounceLongPress)
 	{
 		Button->State = LONG_PRESSED;
 		if(Button->ButtonLongPressed != NULL)
@@ -82,11 +69,6 @@ void ButtonPressedRoutine(Button_t *Button)
 	{
 		Button->State = IDLE;
 	}
-}
-
-void ButtonLongPressedRoutine (Button_t *Button)
-{
-
 }
 
 
@@ -105,11 +87,7 @@ void ButtonTask (Button_t *Button)
 		break;
 	case PRESSED:
 		//do PRESSED;
-		ButtonPressedRoutine(Button);
-		break;
-	case LONG_PRESSED:
-		//do LONG PRESSED
-		ButtonLongPressedRoutine(Button);
+		Button_PressedRoutine(Button);
 		break;
 	}
 

@@ -36,12 +36,10 @@ typedef struct {
 	uint32_t 		LastTick;
 
 	void (*ButtonPressed)(void);
-	void (*ButtonLongPressed)(void);
-	void (*ButtonRepeat)(void);
 }Button_t;
 
 //Functions
-void ButtonInit(Button_t* Button, GPIO_TypeDef* GpioPort, uint16_t GpioPin, uint32_t TimerDebounce, uint32_t TimerLongPress, uint32_t TimerRepeat);
+void ButtonInit(Button_t* Button, GPIO_TypeDef* GpioPort, uint16_t GpioPin, uint32_t TimerDebounce);
 void ButtonTask (Button_t *Button);
 void ButtonRegisterPressCallback(Button_t *Button, void *Callback);
 void ButtonSetDebounceTime(Button_t *Button, uint32_t Milliseconds);

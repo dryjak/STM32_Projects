@@ -28,14 +28,7 @@ void ButtonRegisterPressCallback(Button_t *Button, void *Callback)
 {
 	Button->ButtonPressed = Callback;
 }
-void ButtonRegisterLongPressCallback(Button_t *Button, void *Callback)
-{
-	Button->ButtonLongPressed = Callback;
-}
-void ButtonRegisterRepeatCallback(Button_t *Button, void *Callback)
-{
-	Button->ButtonRepeat = Callback;
-}
+
 
 //States of state machine
 void ButtonIdleRoutine(Button_t *Button)
@@ -70,7 +63,7 @@ void ButtonDebounceRoutine(Button_t *Button)
 
 void ButtonPressedRoutine(Button_t *Button)
 {
-	if(HAL_GetTick() - Button->LastTick >= TimerLongPress)
+	if(HAL_GetTick() - Button->LastTick >= TimerDebounceLongPress)
 	{
 		Button->State = LONG_PRESSED;
 		if(Button->ButtonLongPressed != NULL)

@@ -460,3 +460,155 @@ arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -D
 make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
 make: *** Waiting for unfinished jobs....
 "make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:20:48 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/Button.c:11:6: error: conflicting types for 'ButtonInit'; have 'void(Button_t *, GPIO_TypeDef *, uint16_t,  uint32_t,  uint32_t,  uint32_t)' {aka 'void(Button_t *, GPIO_TypeDef *, short unsigned int,  long unsigned int,  long unsigned int,  long unsigned int)'}
+   11 | void ButtonInit(Button_t* Button, GPIO_TypeDef* GpioPort, uint16_t GpioPin, uint32_t TimerDebounce,
+      |      ^~~~~~~~~~
+In file included from ../Core/Src/Button.c:8:
+../Core/Inc/Button.h:42:6: note: previous declaration of 'ButtonInit' with type 'void(Button_t *, GPIO_TypeDef *, uint16_t,  uint32_t)' {aka 'void(Button_t *, GPIO_TypeDef *, short unsigned int,  long unsigned int)'}
+   42 | void ButtonInit(Button_t* Button, GPIO_TypeDef* GpioPort, uint16_t GpioPin, uint32_t TimerDebounce);
+      |      ^~~~~~~~~~
+../Core/Src/Button.c: In function 'ButtonPressedRoutine':
+../Core/Src/Button.c:66:48: error: 'TimerDebounceLongPress' undeclared (first use in this function)
+   66 |         if(HAL_GetTick() - Button->LastTick >= TimerDebounceLongPress)
+      |                                                ^~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/Button.c:66:48: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/Button.c:69:28: error: 'Button_t' has no member named 'ButtonLongPressed'; did you mean 'ButtonPressed'?
+   69 |                 if(Button->ButtonLongPressed != NULL)
+      |                            ^~~~~~~~~~~~~~~~~
+      |                            ButtonPressed
+../Core/Src/Button.c:71:33: error: 'Button_t' has no member named 'ButtonLongPressed'; did you mean 'ButtonPressed'?
+   71 |                         Button->ButtonLongPressed();
+      |                                 ^~~~~~~~~~~~~~~~~
+      |                                 ButtonPressed
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:21:10 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:93:3: error: too few arguments to function 'ButtonInit'
+   93 |   ButtonInit(&Button1, Button1_GPIO_Port, Button1_Pin, TimerDebounce);
+      |   ^~~~~~~~~~
+In file included from ../Core/Src/main.c:26:
+../Core/Inc/Button.h:42:6: note: declared here
+   42 | void ButtonInit(Button_t* Button, GPIO_TypeDef* GpioPort, uint16_t GpioPin, uint32_t TimerDebounce,
+      |      ^~~~~~~~~~
+../Core/Src/Button.c: In function 'ButtonPressedRoutine':
+../Core/Src/Button.c:66:48: error: 'TimerDebounceLongPress' undeclared (first use in this function)
+   66 |         if(HAL_GetTick() - Button->LastTick >= TimerDebounceLongPress)
+      |                                                ^~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/Button.c:66:48: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/Button.c:69:28: error: 'Button_t' has no member named 'ButtonLongPressed'; did you mean 'ButtonPressed'?
+   69 |                 if(Button->ButtonLongPressed != NULL)
+      |                            ^~~~~~~~~~~~~~~~~
+      |                            ButtonPressed
+../Core/Src/Button.c:71:33: error: 'Button_t' has no member named 'ButtonLongPressed'; did you mean 'ButtonPressed'?
+   71 |                         Button->ButtonLongPressed();
+      |                                 ^~~~~~~~~~~~~~~~~
+      |                                 ButtonPressed
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:21:36 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:93:3: error: too few arguments to function 'ButtonInit'
+   93 |   ButtonInit(&Button1, Button1_GPIO_Port, Button1_Pin, TimerDebounce);
+      |   ^~~~~~~~~~
+In file included from ../Core/Src/main.c:26:
+../Core/Inc/Button.h:42:6: note: declared here
+   42 | void ButtonInit(Button_t* Button, GPIO_TypeDef* GpioPort, uint16_t GpioPin, uint32_t TimerDebounce, uint32_t TimerLongPress, uint32_t TimerRepeat);
+      |      ^~~~~~~~~~
+../Core/Src/Button.c: In function 'ButtonPressedRoutine':
+../Core/Src/Button.c:66:48: error: 'TimerDebounceLongPress' undeclared (first use in this function)
+   66 |         if(HAL_GetTick() - Button->LastTick >= TimerDebounceLongPress)
+      |                                                ^~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/Button.c:66:48: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/Button.c:69:28: error: 'Button_t' has no member named 'ButtonLongPressed'; did you mean 'ButtonPressed'?
+   69 |                 if(Button->ButtonLongPressed != NULL)
+      |                            ^~~~~~~~~~~~~~~~~
+      |                            ButtonPressed
+../Core/Src/Button.c:71:33: error: 'Button_t' has no member named 'ButtonLongPressed'; did you mean 'ButtonPressed'?
+   71 |                         Button->ButtonLongPressed();
+      |                                 ^~~~~~~~~~~~~~~~~
+      |                                 ButtonPressed
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:22:56 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/Button.c: In function 'ButtonPressedRoutine':
+../Core/Src/Button.c:66:48: error: 'TimerDebounceLongPress' undeclared (first use in this function)
+   66 |         if(HAL_GetTick() - Button->LastTick >= TimerDebounceLongPress)
+      |                                                ^~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/Button.c:66:48: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/Button.c:69:28: error: 'Button_t' has no member named 'ButtonLongPressed'; did you mean 'ButtonPressed'?
+   69 |                 if(Button->ButtonLongPressed != NULL)
+      |                            ^~~~~~~~~~~~~~~~~
+      |                            ButtonPressed
+../Core/Src/Button.c:71:33: error: 'Button_t' has no member named 'ButtonLongPressed'; did you mean 'ButtonPressed'?
+   71 |                         Button->ButtonLongPressed();
+      |                                 ^~~~~~~~~~~~~~~~~
+      |                                 ButtonPressed
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:23:10 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+../Core/Src/Button.c: In function 'ButtonPressedRoutine':
+../Core/Src/Button.c:66:48: error: 'TimerLongPress' undeclared (first use in this function)
+   66 |         if(HAL_GetTick() - Button->LastTick >= TimerLongPress)
+      |                                                ^~~~~~~~~~~~~~
+../Core/Src/Button.c:66:48: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/Button.c:69:28: error: 'Button_t' has no member named 'ButtonLongPressed'; did you mean 'ButtonPressed'?
+   69 |                 if(Button->ButtonLongPressed != NULL)
+      |                            ^~~~~~~~~~~~~~~~~
+      |                            ButtonPressed
+../Core/Src/Button.c:71:33: error: 'Button_t' has no member named 'ButtonLongPressed'; did you mean 'ButtonPressed'?
+   71 |                         Button->ButtonLongPressed();
+      |                                 ^~~~~~~~~~~~~~~~~
+      |                                 ButtonPressed
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:37:52 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/Button.c: In function 'ButtonRegisterRepeatCallback':
+../Core/Src/Button.c:37:17: error: 'Button_t' has no member named 'ButtonRepeat'; did you mean 'ButtonRepeatd'?
+   37 |         Button->ButtonRepeat = Callback;
+      |                 ^~~~~~~~~~~~
+      |                 ButtonRepeatd
+../Core/Src/Button.c: In function 'ButtonPressedRoutine':
+../Core/Src/Button.c:73:48: error: 'TimerLongPress' undeclared (first use in this function)
+   73 |         if(HAL_GetTick() - Button->LastTick >= TimerLongPress)
+      |                                                ^~~~~~~~~~~~~~
+../Core/Src/Button.c:73:48: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:38:05 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/Button.c: In function 'ButtonPressedRoutine':
+../Core/Src/Button.c:73:48: error: 'TimerLongPress' undeclared (first use in this function)
+   73 |         if(HAL_GetTick() - Button->LastTick >= TimerLongPress)
+      |                                                ^~~~~~~~~~~~~~
+../Core/Src/Button.c:73:48: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:43: Core/Src/Button.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
