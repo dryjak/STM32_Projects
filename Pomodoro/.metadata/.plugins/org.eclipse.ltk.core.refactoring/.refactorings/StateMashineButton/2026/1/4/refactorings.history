@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;StateMashineButton/Core/Inc/SSD1306_OLED.H&apos; to &apos;SSD1306_OLED.h&apos;" description="Rename resource &apos;SSD1306_OLED.H&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/SSD1306_OLED.H" name="SSD1306_OLED.h" stamp="1769168417775" updateReferences="true"/>
+</session>
