@@ -1,10 +1,10 @@
-14:04:33 **** Incremental Build of configuration Debug for project StateMashineButton ****
+16:19:35 **** Incremental Build of configuration Debug for project StateMashineButton ****
 make -j12 all 
 arm-none-eabi-size  StateMashineButton.elf 
    text	   data	    bss	    dec	    hex	filename
-  11620	     24	   1776	  13420	   346c	StateMashineButton.elf
+  11748	     24	   2800	  14572	   38ec	StateMashineButton.elf
 Finished building: default.size.stdout
  
 
-14:04:33 Build Finished. 0 errors, 0 warnings. (took 560ms)
+16:19:35 Build Finished. 0 errors, 0 warnings. (took 585ms)
 

@@ -1,3 +1,4 @@
-../Core/Src/SSD1306_OLED.c:12:6:SSD1306_Command	32	static
-../Core/Src/SSD1306_OLED.c:17:6:SSD1306_Data	32	static
-../Core/Src/SSD1306_OLED.c:22:6:SSD1306_Init	16	static
+../Core/Src/SSD1306_OLED.c:14:6:SSD1306_Command	32	static
+../Core/Src/SSD1306_OLED.c:19:6:SSD1306_Data	32	static
+../Core/Src/SSD1306_OLED.c:27:6:SSD1306_Display	8	static
+../Core/Src/SSD1306_OLED.c:42:6:SSD1306_Init	16	static

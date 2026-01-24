@@ -9,34 +9,14 @@
 
 I2C_HandleTypeDef *SSD1306_i2c;
 
-static uint8_t Buffer[SSD1306_BUFFER_SIZE];
-
 void SSD1306_Command(uint8_t Command)
 {
 	HAL_I2C_Mem_Write(SSD1306_i2c, (SSD1306_ADRESS << 1), 0x00, 1, &Command, 1, SSD1306_TIMEOUT);
 }
 
-void SSD1306_Data(uint8_t *Data, uint16_t Size)
+void SSD1306_Data(uint8_t Data)
 {
-	HAL_I2C_Mem_Write(SSD1306_i2c, (SSD1306_ADRESS << 1), 0x40, 1, Data, Size, SSD1306_TIMEOUT);
-}
-
-//
-//Display
-//
-void SSD1306_Display(void)
-{
-	SSD1306_Command(SSD1306_PAGEADDR);
-	SSD1306_Command(0);                   	// Page start address
-	SSD1306_Command(0xFF);             		// Page end (not really, but works here)
-	SSD1306_Command(SSD1306_COLUMNADDR); 	// Column start address
-	SSD1306_Command(0);
-	SSD1306_Command(SSD1306_LCDWIDTH - 1);	//Column stop address
-
-	SSD1306_Command(0);           			// Column start
-	SSD1306_Command((SSD1306_LCDWIDTH - 1)); // Column end address
-
-	SSD1306_Data(Buffer, SSD1306_BUFFER_SIZE);
+	HAL_I2C_Mem_Write(SSD1306_i2c, (SSD1306_ADRESS << 1), 0x40, 1, &Data, 1, SSD1306_TIMEOUT);
 }
 
 void SSD1306_Init(I2C_HandleTypeDef *i2c)
