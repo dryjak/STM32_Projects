@@ -1176,3 +1176,98 @@ arm-none-eabi-size  StateMashineButton.elf
   11748	     24	   2800	  14572	   38ec	StateMashineButton.elf
 Finished building: default.size.stdout
  
+22:26:21 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/SSD1306_OLED.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/SSD1306_OLED.d" -MT"Core/Src/SSD1306_OLED.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SSD1306_OLED.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/SSD1306_OLED.c: In function 'SSD1306_Clear':
+../Core/Src/SSD1306_OLED.c:32:17: warning: statement with no effect [-Wunused-value]
+   32 |                 memset
+      |                 ^~~~~~
+../Core/Src/SSD1306_OLED.c:32:23: error: expected ';' before 'break'
+   32 |                 memset
+      |                       ^
+      |                       ;
+   33 |                 break;
+      |                 ~~~~~  
+make: *** [Core/Src/subdir.mk:49: Core/Src/SSD1306_OLED.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:27:10 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/SSD1306_OLED.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/SSD1306_OLED.d" -MT"Core/Src/SSD1306_OLED.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SSD1306_OLED.o"
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+  11748	     24	   2800	  14572	   38ec	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 
+22:28:00 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/SSD1306_OLED.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/SSD1306_OLED.d" -MT"Core/Src/SSD1306_OLED.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SSD1306_OLED.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+  11816	     24	   2800	  14640	   3930	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 
+22:28:12 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-size  StateMashineButton.elf 
+   text	   data	    bss	    dec	    hex	filename
+  11816	     24	   2800	  14640	   3930	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+22:28:54 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/SSD1306_OLED.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/SSD1306_OLED.d" -MT"Core/Src/SSD1306_OLED.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SSD1306_OLED.o"
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+  11816	     24	   2800	  14640	   3930	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 
+22:29:42 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/SSD1306_OLED.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/SSD1306_OLED.d" -MT"Core/Src/SSD1306_OLED.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SSD1306_OLED.o"
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+  11816	     24	   2800	  14640	   3930	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 
+22:30:29 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+  11820	     24	   2800	  14644	   3934	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 

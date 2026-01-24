@@ -33,7 +33,7 @@ void SSD1306_Clear(uint8_t Color)
 		break;
 
 	case BLACK:
-		memset(Buffer, 0x00, SSD1306_BUFFER_SIZE);
+
 		break;
 
 	}

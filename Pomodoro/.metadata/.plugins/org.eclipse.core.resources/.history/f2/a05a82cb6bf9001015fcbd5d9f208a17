@@ -29,11 +29,11 @@ void SSD1306_Clear(uint8_t Color)
 	switch(Color)
 	{
 	case WHITE:
-		memset(Buffer, 0xFF, SSD1306_BUFFER_SIZE);
+		memset(Buffer, 0x00, SSD1306_BUFFER_SIZE);
 		break;
 
 	case BLACK:
-		memset(Buffer, 0x00, SSD1306_BUFFER_SIZE);
+		memset(Buffer, 0xFF, SSD1306_BUFFER_SIZE);
 		break;
 
 	}

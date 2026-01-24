@@ -1,4 +1,5 @@
-../Core/Src/SSD1306_OLED.c:14:6:SSD1306_Command	1
-../Core/Src/SSD1306_OLED.c:19:6:SSD1306_Data	1
-../Core/Src/SSD1306_OLED.c:27:6:SSD1306_Display	1
-../Core/Src/SSD1306_OLED.c:42:6:SSD1306_Init	1
+../Core/Src/SSD1306_OLED.c:15:6:SSD1306_Command	1
+../Core/Src/SSD1306_OLED.c:20:6:SSD1306_Data	1
+../Core/Src/SSD1306_OLED.c:27:6:SSD1306_Clear	3
+../Core/Src/SSD1306_OLED.c:44:6:SSD1306_Display	1
+../Core/Src/SSD1306_OLED.c:59:6:SSD1306_Init	1

@@ -67,8 +67,6 @@
 
 void SSD1306_Init(I2C_HandleTypeDef *i2c);
 void SSD1306_Display(void);
-void SSD1306_Clear(uint8_t Color);
-
 
 
 

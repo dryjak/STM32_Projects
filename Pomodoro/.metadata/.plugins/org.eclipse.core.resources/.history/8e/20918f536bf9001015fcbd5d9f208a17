@@ -6,7 +6,6 @@
  */
 #include "SSD1306_OLED.h"
 #include "main.h"
-#include "string.h"
 
 I2C_HandleTypeDef *SSD1306_i2c;
 
@@ -21,23 +20,7 @@ void SSD1306_Data(uint8_t *Data, uint16_t Size)
 {
 	HAL_I2C_Mem_Write(SSD1306_i2c, (SSD1306_ADRESS << 1), 0x40, 1, Data, Size, SSD1306_TIMEOUT);
 }
-//
-//Clear
-//
-void SSD1306_Clear(uint8_t Color)
-{
-	switch(Color)
-	{
-	case WHITE:
-		memset(Buffer, 0xFF, SSD1306_BUFFER_SIZE);
-		break;
 
-	case BLACK:
-		memset(Buffer, 0x00, SSD1306_BUFFER_SIZE);
-		break;
-
-	}
-}
 //
 //Display
 //

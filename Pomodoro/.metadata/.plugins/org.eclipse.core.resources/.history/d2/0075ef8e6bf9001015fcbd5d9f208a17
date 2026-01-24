@@ -106,9 +106,6 @@ int main(void)
   /* USER CODE END 2 */
   SSD1306_Init(&hi2c1);
   SSD1306_Display();
-  SSD1306_Clear(WHITE);
-  SSD1306_Display();
-
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
