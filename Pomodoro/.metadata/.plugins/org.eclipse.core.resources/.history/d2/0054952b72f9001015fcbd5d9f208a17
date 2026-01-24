@@ -109,7 +109,6 @@ int main(void)
   SSD1306_Clear(WHITE);
   SSD1306_Display();
   SSD1306_DrawPixel(10, 10, INVERSE);
-  SSD1306_Display();
 
 
   /* Infinite loop */

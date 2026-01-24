@@ -1,6 +1,6 @@
 ../Core/Src/main.c:73:5:main	1
-../Core/Src/main.c:131:6:SystemClock_Config	3
-../Core/Src/main.c:174:6:ToggleLed	1
-../Core/Src/main.c:178:6:TurnOnLed	1
-../Core/Src/main.c:182:6:TurnOffLed	1
-../Core/Src/main.c:194:6:Error_Handler	1
+../Core/Src/main.c:133:6:SystemClock_Config	3
+../Core/Src/main.c:176:6:ToggleLed	1
+../Core/Src/main.c:180:6:TurnOnLed	1
+../Core/Src/main.c:184:6:TurnOffLed	1
+../Core/Src/main.c:196:6:Error_Handler	1
