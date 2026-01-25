@@ -26,7 +26,6 @@
 /* USER CODE BEGIN Includes */
 #include "Button.h"
 #include "SSD1306_OLED.h"
-#include "GFX_BlackWhite.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -108,9 +107,8 @@ int main(void)
   SSD1306_Init(&hi2c1);
 
   SSD1306_Clear(BLACK);
-  GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
+  SSD1306_DrawPixel(10, 10, WHITE);
   SSD1306_Display();
-
 
 
   /* Infinite loop */

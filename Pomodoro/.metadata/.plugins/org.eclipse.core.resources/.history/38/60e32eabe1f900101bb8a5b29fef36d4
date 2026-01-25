@@ -108,7 +108,7 @@ int main(void)
   SSD1306_Init(&hi2c1);
 
   SSD1306_Clear(BLACK);
-  GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
+  GFX_DrawRectangle(0, 0, 128, 64, PIXEL_WHITE);
   SSD1306_Display();
 
 

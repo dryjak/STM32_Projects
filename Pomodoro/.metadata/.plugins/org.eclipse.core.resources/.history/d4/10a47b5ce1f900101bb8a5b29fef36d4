@@ -108,7 +108,10 @@ int main(void)
   SSD1306_Init(&hi2c1);
 
   SSD1306_Clear(BLACK);
-  GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
+  for(uint8_t i = 0; i < 50; i++)
+  {
+	  SSD1306_DrawPixel(10+i, 10+i, WHITE);
+  }
   SSD1306_Display();
 
 
