@@ -1,5 +1,6 @@
-12:33:28 **** Incremental Build of configuration Debug for project StateMashineButton ****
+22:14:58 **** Incremental Build of configuration Debug for project StateMashineButton ****
 make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: StateMashineButton.elf
@@ -7,11 +8,11 @@ Finished building target: StateMashineButton.elf
 arm-none-eabi-size  StateMashineButton.elf 
 arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
    text	   data	    bss	    dec	    hex	filename
-  12588	     24	   2800	  15412	   3c34	StateMashineButton.elf
+  13760	     28	   2804	  16592	   40d0	StateMashineButton.elf
 Finished building: default.size.stdout
  
 Finished building: StateMashineButton.list
  
 
-12:33:30 Build Finished. 0 errors, 0 warnings. (took 1s.825ms)
+22:15:00 Build Finished. 0 errors, 0 warnings. (took 1s.996ms)
 

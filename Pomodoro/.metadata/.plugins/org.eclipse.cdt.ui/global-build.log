@@ -1458,3 +1458,236 @@ Finished building: default.size.stdout
  
 Finished building: StateMashineButton.list
  
+12:52:28 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:30:10: fatal error: fonts.h: No such file or directory
+   30 | #include "fonts.h"
+      |          ^~~~~~~~~
+compilation terminated.
+make: *** [Core/Src/subdir.mk:52: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+14:25:02 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:15: warning: passing argument 1 of 'GFX_SetFont' from incompatible pointer type [-Wincompatible-pointer-types]
+  109 |   GFX_SetFont(&font_8x5);
+      |               ^~~~~~~~~
+      |               |
+      |               const uint8_t (*)[477] {aka const unsigned char (*)[477]}
+In file included from ../Core/Src/main.c:29:
+../Core/Inc/GFX_BlackWhite.h:76:33: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'const uint8_t (*)[477]' {aka 'const unsigned char (*)[477]'}
+   76 | void GFX_SetFont(const uint8_t* font_t);
+      |                  ~~~~~~~~~~~~~~~^~~~~~
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+  13760	     28	   2804	  16592	   40d0	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 
+14:38:01 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:15: warning: passing argument 1 of 'GFX_SetFont' makes pointer from integer without a cast [-Wint-conversion]
+  109 |   GFX_SetFont(*font_8x5);
+      |               ^~~~~~~~~
+      |               |
+      |               uint8_t {aka unsigned char}
+In file included from ../Core/Src/main.c:29:
+../Core/Inc/GFX_BlackWhite.h:76:33: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'uint8_t' {aka 'unsigned char'}
+   76 | void GFX_SetFont(const uint8_t* font_t);
+      |                  ~~~~~~~~~~~~~~~^~~~~~
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+  13280	     28	   2804	  16112	   3ef0	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 
+14:38:13 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+  13760	     28	   2804	  16592	   40d0	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 
+22:14:10 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/Button.c:8:
+../Core/Inc/Button.h:22:9: error: redeclaration of enumerator 'IDLE'
+   22 |         IDLE=0,
+      |         ^~~~
+../Core/Inc/Button.h:14:9: note: previous definition of 'IDLE' with type 'enum <anonymous>'
+   14 |         IDLE = 0,
+      |         ^~~~
+../Core/Inc/Button.h:23:9: error: redeclaration of enumerator 'PRESSED'
+   23 |         PRESSED,
+      |         ^~~~~~~
+../Core/Inc/Button.h:16:9: note: previous definition of 'PRESSED' with type 'enum <anonymous>'
+   16 |         PRESSED,
+      |         ^~~~~~~
+../Core/Inc/Button.h:24:9: error: redeclaration of enumerator 'LONG_PRESSED'
+   24 |         LONG_PRESSED,
+      |         ^~~~~~~~~~~~
+../Core/Inc/Button.h:17:9: note: previous definition of 'LONG_PRESSED' with type 'enum <anonymous>'
+   17 |         LONG_PRESSED,
+      |         ^~~~~~~~~~~~
+../Core/Inc/Button.h:25:9: error: redeclaration of enumerator 'REPEAT'
+   25 |         REPEAT
+      |         ^~~~~~
+../Core/Inc/Button.h:18:9: note: previous definition of 'REPEAT' with type 'enum <anonymous>'
+   18 |         REPEAT
+      |         ^~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Inc/Button.h:22:9: error: redeclaration of enumerator 'IDLE'
+   22 |         IDLE=0,
+      |         ^~~~
+../Core/Inc/Button.h:14:9: note: previous definition of 'IDLE' with type 'enum <anonymous>'
+   14 |         IDLE = 0,
+      |         ^~~~
+../Core/Inc/Button.h:23:9: error: redeclaration of enumerator 'PRESSED'
+   23 |         PRESSED,
+      |         ^~~~~~~
+../Core/Inc/Button.h:16:9: note: previous definition of 'PRESSED' with type 'enum <anonymous>'
+   16 |         PRESSED,
+      |         ^~~~~~~
+../Core/Inc/Button.h:24:9: error: redeclaration of enumerator 'LONG_PRESSED'
+   24 |         LONG_PRESSED,
+      |         ^~~~~~~~~~~~
+../Core/Inc/Button.h:17:9: note: previous definition of 'LONG_PRESSED' with type 'enum <anonymous>'
+   17 |         LONG_PRESSED,
+      |         ^~~~~~~~~~~~
+../Core/Inc/Button.h:25:9: error: redeclaration of enumerator 'REPEAT'
+   25 |         REPEAT
+      |         ^~~~~~
+../Core/Inc/Button.h:18:9: note: previous definition of 'REPEAT' with type 'enum <anonymous>'
+   18 |         REPEAT
+      |         ^~~~~~
+../Core/Src/Button.c: In function 'ButtonDebounceRoutine':
+../Core/Src/Button.c:72:25: error: 'Button_State' undeclared (first use in this function); did you mean 'Button_t'?
+   72 |                         Button_State = PRESSED;
+      |                         ^~~~~~~~~~~~
+      |                         Button_t
+../Core/Src/Button.c:72:25: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/Button.c: In function 'ButtonPressedRoutine':
+../Core/Src/Button.c:94:25: error: 'Button_State' undeclared (first use in this function); did you mean 'Button_t'?
+   94 |                         Button_State = LONG_PRESSED;
+      |                         ^~~~~~~~~~~~
+      |                         Button_t
+../Core/Src/Button.c: In function 'ButtonTask':
+../Core/Src/Button.c:167:9: error: duplicate case value
+  167 |         case PRESSED:
+      |         ^~~~
+../Core/Src/Button.c:163:9: note: previously used here
+  163 |         case DEBOUNCE:
+      |         ^~~~
+../Core/Src/Button.c:157:9: warning: enumeration value 'REPEAT' not handled in switch [-Wswitch]
+  157 |         switch (Button->State)
+      |         ^~~~~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Core/Src/subdir.mk:52: Core/Src/Button.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:14:30 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/Button.c:8:
+../Core/Inc/Button.h:22:9: error: redeclaration of enumerator 'IDLE'
+   22 |         IDLE=0,
+      |         ^~~~
+../Core/Inc/Button.h:14:9: note: previous definition of 'IDLE' with type 'enum <anonymous>'
+   14 |         IDLE = 0,
+      |         ^~~~
+../Core/Inc/Button.h:23:9: error: redeclaration of enumerator 'PRESSED'
+   23 |         PRESSED,
+      |         ^~~~~~~
+../Core/Inc/Button.h:16:9: note: previous definition of 'PRESSED' with type 'enum <anonymous>'
+   16 |         PRESSED,
+      |         ^~~~~~~
+../Core/Inc/Button.h:24:9: error: redeclaration of enumerator 'LONG_PRESSED'
+   24 |         LONG_PRESSED,
+      |         ^~~~~~~~~~~~
+../Core/Inc/Button.h:17:9: note: previous definition of 'LONG_PRESSED' with type 'enum <anonymous>'
+   17 |         LONG_PRESSED,
+      |         ^~~~~~~~~~~~
+../Core/Inc/Button.h:25:9: error: redeclaration of enumerator 'REPEAT'
+   25 |         REPEAT
+      |         ^~~~~~
+../Core/Inc/Button.h:18:9: note: previous definition of 'REPEAT' with type 'enum <anonymous>'
+   18 |         REPEAT
+      |         ^~~~~~
+../Core/Src/Button.c: In function 'ButtonTask':
+../Core/Src/Button.c:165:9: error: duplicate case value
+  165 |         case PRESSED:
+      |         ^~~~
+../Core/Src/Button.c:161:9: note: previously used here
+  161 |         case DEBOUNCE:
+      |         ^~~~
+../Core/Src/Button.c:155:9: warning: enumeration value 'REPEAT' not handled in switch [-Wswitch]
+  155 |         switch (Button->State)
+      |         ^~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Inc/Button.h:22:9: error: redeclaration of enumerator 'IDLE'
+   22 |         IDLE=0,
+      |         ^~~~
+../Core/Inc/Button.h:14:9: note: previous definition of 'IDLE' with type 'enum <anonymous>'
+   14 |         IDLE = 0,
+      |         ^~~~
+../Core/Inc/Button.h:23:9: error: redeclaration of enumerator 'PRESSED'
+   23 |         PRESSED,
+      |         ^~~~~~~
+../Core/Inc/Button.h:16:9: note: previous definition of 'PRESSED' with type 'enum <anonymous>'
+   16 |         PRESSED,
+      |         ^~~~~~~
+../Core/Inc/Button.h:24:9: error: redeclaration of enumerator 'LONG_PRESSED'
+   24 |         LONG_PRESSED,
+      |         ^~~~~~~~~~~~
+../Core/Inc/Button.h:17:9: note: previous definition of 'LONG_PRESSED' with type 'enum <anonymous>'
+   17 |         LONG_PRESSED,
+      |         ^~~~~~~~~~~~
+../Core/Inc/Button.h:25:9: error: redeclaration of enumerator 'REPEAT'
+   25 |         REPEAT
+      |         ^~~~~~
+../Core/Inc/Button.h:18:9: note: previous definition of 'REPEAT' with type 'enum <anonymous>'
+   18 |         REPEAT
+      |         ^~~~~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/Button.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Core/Src/subdir.mk:52: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:14:58 **** Incremental Build of configuration Debug for project StateMashineButton ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/Button.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Button.d" -MT"Core/Src/Button.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Button.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "StateMashineButton.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\STM32Project\Pomodoro\StateMashineButton\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="StateMashineButton.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: StateMashineButton.elf
+ 
+arm-none-eabi-size  StateMashineButton.elf 
+arm-none-eabi-objdump -h -S StateMashineButton.elf  > "StateMashineButton.list"
+   text	   data	    bss	    dec	    hex	filename
+  13760	     28	   2804	  16592	   40d0	StateMashineButton.elf
+Finished building: default.size.stdout
+ 
+Finished building: StateMashineButton.list
+ 

@@ -17,6 +17,7 @@ void ButtonInit(Button_t* Button, GPIO_TypeDef* GpioPort, uint16_t GpioPin, uint
 	Button->TimerDebounce = TimerDebounce;
 	Button->TimerLongPress = TimerLongPress;
 	Button->TimerRepeat = TimerRepeat;
+
 }
 //Time setting functions
 void ButtonSetDebounceTime(Button_t *Button, uint32_t Milliseconds)
@@ -122,7 +123,6 @@ void ButtonLongPressedRoutine (Button_t *Button)
 			}
 		}
 	}
-
 }
 void ButtonRepeatRoutine(Button_t *Button)
 {

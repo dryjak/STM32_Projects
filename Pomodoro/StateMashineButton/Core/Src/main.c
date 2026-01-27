@@ -27,6 +27,7 @@
 #include "Button.h"
 #include "SSD1306_OLED.h"
 #include "GFX_BlackWhite.h"
+#include "fonts/fonts.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -104,14 +105,15 @@ int main(void)
   ButtonRegisterLongPressCallback(&Button1, TurnOffLed);
   ButtonRegisterRepeatCallback(&Button1, ToggleLed);
   ButtonRegisterGoToIdleCallback(&Button1, TurnOffLed);
+
+  GFX_SetFont(font_8x5);
   /* USER CODE END 2 */
   SSD1306_Init(&hi2c1);
 
   SSD1306_Clear(BLACK);
   GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
+  GFX_DrawString(30,30, "START", PIXEL_WHITE, 0);
   SSD1306_Display();
-
-
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -186,8 +188,6 @@ void TurnOffLed()
 {
 	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin,GPIO_PIN_RESET);
 }
-
-
 /* USER CODE END 4 */
 
 /**

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;StateMashineButton/Core/Inc/ButtonStateMashine.h&apos; to &apos;Button.h&apos;" description="Rename resource &apos;ButtonStateMashine.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/ButtonStateMashine.h" name="Button.h" stamp="1768645333798" updateReferences="true"/>
+</session>

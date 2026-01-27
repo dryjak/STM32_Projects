@@ -1,0 +1,15 @@
+//org.eclipse.ui.commands/state/com.st.stm32cube.ide.mcu.buildanalyzer.showstate/org.eclipse.ui.commands.radioState=human
+//org.eclipse.ui.commands/state/org.eclipse.ui.navigator.resources.nested.changeProjectPresentation/org.eclipse.ui.commands.radioState=false
+UIActivities.org.eclipse.cdt.debug.dsfgdbActivity=true
+eclipse.preferences.version=1
+editors=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<editors>\r\n<descriptor id\="org.eclipse.ui.browser.editorSupport" image\="$nl$/icons/obj16/internal_browser.png" internal\="false" label\="Web Browser" launcher\="org.eclipse.ui.internal.browser.BrowserLauncher" openMode\="4" open_in_place\="false" plugin\="org.eclipse.ui.browser"/>\r\n<descriptor class\="com.st.stm32cube.ide.mpu.linux.ide.editor.DTSEditor" id\="com.st.stm32cube.ide.mpu.linux.ide.editor.DTSEditor" image\="icons/dts_icon.png" internal\="true" label\="Device Tree Editor" openMode\="1" open_in_place\="false" plugin\="com.st.stm32cube.ide.mpu.linux.ide"/>\r\n<descriptor class\="com.st.stm32cube.common.mx.editor.CubeMxEditor" id\="com.st.stm32cube.common.mx.startCubeMx" image\="icons/MicroXplorer.png" internal\="true" label\="Device Configuration Tool" openMode\="1" open_in_place\="false" plugin\="com.st.stm32cube.common.mx"/>\r\n</editors>
+org.eclipse.ui.workbench.ACTIVE_NOFOCUS_TAB_BG_END=41,41,41
+org.eclipse.ui.workbench.ACTIVE_NOFOCUS_TAB_BG_START=43,44,45
+org.eclipse.ui.workbench.ACTIVE_NOFOCUS_TAB_TEXT_COLOR=204,204,204
+org.eclipse.ui.workbench.ACTIVE_TAB_BG_END=41,41,41
+org.eclipse.ui.workbench.ACTIVE_TAB_BG_START=43,44,45
+org.eclipse.ui.workbench.ACTIVE_TAB_TEXT_COLOR=221,221,221
+org.eclipse.ui.workbench.INACTIVE_TAB_BG_END=49,53,56
+org.eclipse.ui.workbench.INACTIVE_TAB_BG_START=59,64,66
+org.eclipse.ui.workbench.INACTIVE_TAB_TEXT_COLOR=187,187,187
+resourcetypes=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<editors version\="3.1">\r\n<info extension\="shtml" name\="*">\r\n<editor id\="org.eclipse.ui.browser.editorSupport"/>\r\n</info>\r\n<info extension\="dtsi" name\="*">\r\n<editor id\="com.st.stm32cube.ide.mpu.linux.ide.editor.DTSEditor"/>\r\n</info>\r\n<info extension\="dts" name\="*">\r\n<editor id\="com.st.stm32cube.ide.mpu.linux.ide.editor.DTSEditor"/>\r\n</info>\r\n<info extension\="htm" name\="*">\r\n<editor id\="org.eclipse.ui.browser.editorSupport"/>\r\n</info>\r\n<info extension\="html" name\="*">\r\n<editor id\="org.eclipse.ui.browser.editorSupport"/>\r\n</info>\r\n<info extension\="ioc" name\="*">\r\n<editor id\="com.st.stm32cube.common.mx.startCubeMx"/>\r\n</info>\r\n</editors>

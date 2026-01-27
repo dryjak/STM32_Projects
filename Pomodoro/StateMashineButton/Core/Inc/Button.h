@@ -18,12 +18,6 @@ typedef enum{
 	REPEAT
 }BUTTON_STATE;
 
-typedef enum{
-	BTN_NONE=0,
-	BTN_PRESSED,
-	BTN_LONG_PRESSED
-}BUTTON_EVENT;
-
 //Button Structure
 typedef struct {
 	BUTTON_STATE 	State;
@@ -54,8 +48,5 @@ void ButtonRegisterPressCallback(Button_t *Button, void *Callback);
 void ButtonRegisterRepeatCallback(Button_t *Button, void *Callback);
 void ButtonRegisterLongPressCallback(Button_t *Button, void *Callback);
 void ButtonRegisterGoToIdleCallback(Button_t *Button, void *Callback);
-
-
-
 
 #endif /* INC_BUTTON_H_ */

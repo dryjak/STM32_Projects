@@ -1,0 +1,37 @@
+/*
+ * ButtonStateMashine.h
+ *
+ *  Created on: Jan 17, 2026
+ *      Author: dryla
+ */
+
+#ifndef INC_BUTTON_H_
+#define INC_BUTTON_H_
+
+//States of state machine
+typedef enum{
+	Idle = 0,
+	Debounce,
+	Pressed
+}BUTTON_STATE;
+
+//Button Structure
+typedef struct {
+	BUTTON_STATE 	State;
+
+	GPIO_TypeDef 	*GpioPort;
+	uint16_t 		GpioPin;
+
+	uint32_t 		TimerDebounce;	//how much time to wait for debounce
+	uint32_t 		LastTick;
+
+	void *ButtonPressed(void);
+}Button_t;
+
+
+
+//Functions
+
+
+
+#endif /* INC_BUTTON_H_ */

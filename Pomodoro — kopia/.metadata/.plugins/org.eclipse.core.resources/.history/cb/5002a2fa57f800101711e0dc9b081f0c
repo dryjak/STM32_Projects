@@ -1,0 +1,15 @@
+/*
+ * SSD1306_OLED.H
+ *
+ *  Created on: Jan 23, 2026
+ *      Author: dryla
+ */
+
+#ifndef INC_SSD1306_OLED_H_
+#define INC_SSD1306_OLED_H_
+
+#define SSD1306_ADRESS	(0x03)
+#define SSD1306_TIMEOUT	1000
+
+
+#endif /* INC_SSD1306_OLED_H_ */
