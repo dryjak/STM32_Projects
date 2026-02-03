@@ -55,12 +55,32 @@ uint32_t TimerRepeat = 500;
 Button_t ButtonMiddle;
 Button_t ButtonTop;
 Button_t ButtonBottom;
+uint8_t Length;
 
-int16_t WorkTime = 0;
-int16_t RelaxTime = 0;
-uint8_t DisplayFlag = 0;
+typedef enum{
+	NORMAL_MODE = 0,
+	EDIT_MODE
+}SystemMode_t;
 
-char Buffer[8];
+typedef enum {
+    TARGET_WORK = 0,
+    TARGET_RELAX
+} EditTarget_t;
+
+typedef struct{
+	int16_t WorkTime;
+	int16_t RelaxTime;
+	uint8_t DispalyNeedsUpdate;
+
+	SystemMode_t CurrentMode;
+	EditTarget_t   EditTarget;
+
+}ApplicationData_t;
+
+//init default values
+ApplicationData_t App = {25, 5, 1, NORMAL_MODE, TARGET_WORK};
+
+char Buffer[32];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -70,13 +90,26 @@ void ToggleLed();
 void TurnOnLed();
 void TurnOffLed();
 
+//Button Top
 void ButtonTopPress();
 void ButtonTopLongPress();
 void ButtonTopRepeat();
 
+//Button Bottom
 void ButtonBottomPress();
 void ButtonBottomLongPress();
 void ButtonBottomRepeat();
+
+//Button Middle
+void ButtonMidLongPress();
+void ButtonMidPress();
+
+
+
+//Function to update display
+void UpdateDisplay();
+
+//Button Middle
 
 /* USER CODE END PFP */
 
@@ -119,8 +152,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   //Init middle button
   ButtonInit(&ButtonMiddle, ButtonMiddle_GPIO_Port, ButtonMiddle_Pin, TimerDebounce,TimerLongPress, TimerRepeat);
-  ButtonRegisterPressCallback(&ButtonMiddle, TurnOnLed);
-  ButtonRegisterLongPressCallback(&ButtonMiddle, TurnOffLed);
+  ButtonRegisterPressCallback(&ButtonMiddle, ButtonMidPress);
+  ButtonRegisterLongPressCallback(&ButtonMiddle, ButtonMidLongPress);
   ButtonRegisterRepeatCallback(&ButtonMiddle, ToggleLed);
   ButtonRegisterGoToIdleCallback(&ButtonMiddle, TurnOffLed);
 
@@ -140,15 +173,9 @@ int main(void)
 
 
   GFX_SetFont(font_8x5);
-
   SSD1306_Init(&hi2c1);
+  UpdateDisplay();
 
-  SSD1306_Clear(BLACK);
-  GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
-  GFX_DrawString(10,5, "WORK:  128", PIXEL_WHITE, 0);
-  GFX_DrawString(10,18, "RELAX: 128", PIXEL_WHITE, 0);
-  GFX_DrawString(10,31, "START", PIXEL_WHITE, 0);
-  SSD1306_Display();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -159,10 +186,10 @@ int main(void)
 	 ButtonTask (&ButtonMiddle);
 	 ButtonTask (&ButtonTop);
 	 ButtonTask (&ButtonBottom);
-	 if(DisplayFlag == 1)
+	 if(App.DispalyNeedsUpdate == 1)
 	 {
-		 DisplayFlag = 0;
-		 SSD1306_Display();
+		 App.DispalyNeedsUpdate = 0;
+		 UpdateDisplay();
 	 }
 
     /* USER CODE END WHILE */
@@ -219,65 +246,136 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void UpdateDisplay()
+{
+	if(App.CurrentMode == NORMAL_MODE)
+	{
+		SSD1306_Clear(BLACK);
+		GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
+
+		sprintf(Buffer, "WORK: %d", App.WorkTime);
+		GFX_DrawString(10,5, Buffer, PIXEL_WHITE, 0);
+
+		sprintf(Buffer, "RELAX: %d", App.RelaxTime);
+		GFX_DrawString(10,18, Buffer, PIXEL_WHITE, 0);
+
+		GFX_DrawString(10,31, "START", PIXEL_WHITE, 0);
+		SSD1306_Display();
+	}
+	else
+	{
+		if(App.EditTarget == TARGET_WORK)
+		{
+			SSD1306_Clear(BLACK);
+			//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
+			GFX_SetFont(font_8x5);
+
+			Length = sprintf(Buffer, "WORK: %d", App.WorkTime);
+			GFX_DrawFillRectangle(8, 3, Length * 8, 12, PIXEL_WHITE);
+			GFX_DrawString(10,5, Buffer, PIXEL_BLACK, 1);
+
+
+			sprintf(Buffer, "RELAX: %d", App.RelaxTime);
+			GFX_DrawString(10,18, Buffer, PIXEL_WHITE, 0);
+
+			SSD1306_Display();
+		}
+		else
+		{
+			SSD1306_Clear(BLACK);
+			//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
+			GFX_SetFont(font_8x5);
+
+			sprintf(Buffer, "WORK: %d", App.WorkTime);
+			GFX_DrawString(10,5, Buffer, PIXEL_WHITE, 0);
+
+			Length = sprintf(Buffer, "RELAX: %d", App.RelaxTime);
+			GFX_DrawFillRectangle(8, 16, Length * 8, 12, PIXEL_WHITE);
+			GFX_DrawString(10,18, Buffer, PIXEL_BLACK, 1);
+
+			SSD1306_Display();
+		}
+	}
+
+}
+void ModifyWorkTime(int8_t ChangeTimeAmount)
+{
+	App.WorkTime += ChangeTimeAmount;
+	if (App.WorkTime < 0)
+	{
+		App.WorkTime = 0;
+	}
+	if (App.WorkTime > 999)
+	{
+		App.WorkTime = 999;
+	}
+	App.DispalyNeedsUpdate = 1;
+}
+void ButtonMidPress()
+{
+	TurnOnLed();
+	if(App.CurrentMode == NORMAL_MODE) //do start stop
+	{
+		TurnOnLed();
+	}
+	else //do change mode
+	{
+
+		if(App.EditTarget == TARGET_WORK)
+		{
+			App.EditTarget = TARGET_RELAX;	//change to target relax
+		}
+		else
+		{
+			App.EditTarget = TARGET_WORK;	//change to target work
+		}
+		App.DispalyNeedsUpdate = 1;
+	}
+
+}
+void ButtonMidLongPress()
+{
+	TurnOffLed();
+	if(App.CurrentMode == NORMAL_MODE)
+	{
+		App.CurrentMode = EDIT_MODE;
+		App.EditTarget = TARGET_WORK;
+	}
+	else
+	{
+		App.CurrentMode = NORMAL_MODE;
+	}
+	App.DispalyNeedsUpdate = 1;
+}
 void ButtonTopPress()
 {
 	TurnOnLed();
-	WorkTime += 1;
-	sprintf(Buffer,"%d", WorkTime);
-	GFX_DrawString(80, 10, Buffer, PIXEL_WHITE, 0);
-	SSD1306_Display();
+	ModifyWorkTime(1);
 }
 void ButtonTopLongPress()
 {
 	TurnOffLed();
-	WorkTime += 4;
-	sprintf(Buffer,"%d", WorkTime);
-	GFX_DrawString(80, 10, Buffer, PIXEL_WHITE, 0);
-	SSD1306_Display();
+	ModifyWorkTime(4);
 }
 void ButtonTopRepeat()
 {
 	ToggleLed();
-	WorkTime += 5;
-	sprintf(Buffer,"%d", WorkTime);
-	GFX_DrawString(80, 10, Buffer, PIXEL_WHITE, 0);
-	SSD1306_Display();
+	ModifyWorkTime(5);
 }
 void ButtonBottomPress()
 {
 	TurnOnLed();
-	WorkTime -= 1;
-	if(WorkTime <= 0)
-	{
-		WorkTime = 0;
-	}
-	sprintf(Buffer,"%d", WorkTime);
-	GFX_DrawString(80, 10, Buffer, PIXEL_WHITE, 0);
-	SSD1306_Display();
+	ModifyWorkTime(-1);
 }
 void ButtonBottomLongPress()
 {
 	TurnOffLed();
-	WorkTime -= 4;
-	if(WorkTime <= 0)
-	{
-		WorkTime = 0;
-	}
-	sprintf(Buffer,"%d", WorkTime);
-	GFX_DrawString(80, 10, Buffer, PIXEL_WHITE, 0);
-	SSD1306_Display();
+	ModifyWorkTime(-4);
 }
 void ButtonBottomRepeat()
 {
 	ToggleLed();
-	WorkTime -= 5;
-	if(WorkTime <= 0)
-	{
-		WorkTime = 0;
-	}
-	sprintf(Buffer,"%d", WorkTime);
-	GFX_DrawString(80, 10, Buffer, PIXEL_WHITE, 0);
-	SSD1306_Display();
+	ModifyWorkTime(-5);
 }
 
 void ToggleLed()
