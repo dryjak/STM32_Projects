@@ -21,7 +21,7 @@
 #include "i2c.h"
 #include "usart.h"
 #include "gpio.h"
-
+#include "stdio.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Button.h"
@@ -55,6 +55,12 @@ uint32_t TimerRepeat = 500;
 Button_t ButtonMiddle;
 Button_t ButtonTop;
 Button_t ButtonBottom;
+
+int16_t WorkTime = 0;
+int16_t RelaxTime = 0;
+uint8_t DisplayFlag = 0;
+
+char Buffer[8];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -63,6 +69,14 @@ void SystemClock_Config(void);
 void ToggleLed();
 void TurnOnLed();
 void TurnOffLed();
+
+void ButtonTopPress();
+void ButtonTopLongPress();
+void ButtonTopRepeat();
+
+void ButtonBottomPress();
+void ButtonBottomLongPress();
+void ButtonBottomRepeat();
 
 /* USER CODE END PFP */
 
@@ -112,16 +126,16 @@ int main(void)
 
   //Init top button
   ButtonInit(&ButtonTop, ButtonTop_GPIO_Port, ButtonTop_Pin, TimerDebounce, TimerLongPress, TimerRepeat);
-  ButtonRegisterPressCallback(&ButtonTop, TurnOnLed);
-  ButtonRegisterLongPressCallback(&ButtonTop, TurnOffLed);
-  ButtonRegisterRepeatCallback(&ButtonTop, ToggleLed);
+  ButtonRegisterPressCallback(&ButtonTop, ButtonTopPress);
+  ButtonRegisterLongPressCallback(&ButtonTop, ButtonTopLongPress);
+  ButtonRegisterRepeatCallback(&ButtonTop, ButtonTopRepeat);
   ButtonRegisterGoToIdleCallback(&ButtonTop, TurnOffLed);
 
   //Init Bottom Button
   ButtonInit(&ButtonBottom, ButtonBottom_GPIO_Port, ButtonBottom_Pin, TimerDebounce, TimerLongPress, TimerRepeat);
-  ButtonRegisterPressCallback(&ButtonBottom, TurnOnLed);
-  ButtonRegisterLongPressCallback(&ButtonBottom, TurnOffLed);
-  ButtonRegisterRepeatCallback(&ButtonBottom, ToggleLed);
+  ButtonRegisterPressCallback(&ButtonBottom, ButtonBottomPress);
+  ButtonRegisterLongPressCallback(&ButtonBottom, ButtonBottomLongPress);
+  ButtonRegisterRepeatCallback(&ButtonBottom, ButtonBottomRepeat);
   ButtonRegisterGoToIdleCallback(&ButtonBottom, TurnOffLed);
 
 
@@ -131,7 +145,9 @@ int main(void)
 
   SSD1306_Clear(BLACK);
   GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
-  GFX_DrawString(30,30, "START", PIXEL_WHITE, 0);
+  GFX_DrawString(10,5, "WORK:  128", PIXEL_WHITE, 0);
+  GFX_DrawString(10,18, "RELAX: 128", PIXEL_WHITE, 0);
+  GFX_DrawString(10,31, "START", PIXEL_WHITE, 0);
   SSD1306_Display();
   /* USER CODE END 2 */
 
@@ -143,6 +159,11 @@ int main(void)
 	 ButtonTask (&ButtonMiddle);
 	 ButtonTask (&ButtonTop);
 	 ButtonTask (&ButtonBottom);
+	 if(DisplayFlag == 1)
+	 {
+		 DisplayFlag = 0;
+		 SSD1306_Display();
+	 }
 
     /* USER CODE END WHILE */
 
@@ -198,6 +219,67 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void ButtonTopPress()
+{
+	TurnOnLed();
+	WorkTime += 1;
+	sprintf(Buffer,"%d", WorkTime);
+	GFX_DrawString(80, 10, Buffer, PIXEL_WHITE, 0);
+	SSD1306_Display();
+}
+void ButtonTopLongPress()
+{
+	TurnOffLed();
+	WorkTime += 4;
+	sprintf(Buffer,"%d", WorkTime);
+	GFX_DrawString(80, 10, Buffer, PIXEL_WHITE, 0);
+	SSD1306_Display();
+}
+void ButtonTopRepeat()
+{
+	ToggleLed();
+	WorkTime += 5;
+	sprintf(Buffer,"%d", WorkTime);
+	GFX_DrawString(80, 10, Buffer, PIXEL_WHITE, 0);
+	SSD1306_Display();
+}
+void ButtonBottomPress()
+{
+	TurnOnLed();
+	WorkTime -= 1;
+	if(WorkTime <= 0)
+	{
+		WorkTime = 0;
+	}
+	sprintf(Buffer,"%d", WorkTime);
+	GFX_DrawString(80, 10, Buffer, PIXEL_WHITE, 0);
+	SSD1306_Display();
+}
+void ButtonBottomLongPress()
+{
+	TurnOffLed();
+	WorkTime -= 4;
+	if(WorkTime <= 0)
+	{
+		WorkTime = 0;
+	}
+	sprintf(Buffer,"%d", WorkTime);
+	GFX_DrawString(80, 10, Buffer, PIXEL_WHITE, 0);
+	SSD1306_Display();
+}
+void ButtonBottomRepeat()
+{
+	ToggleLed();
+	WorkTime -= 5;
+	if(WorkTime <= 0)
+	{
+		WorkTime = 0;
+	}
+	sprintf(Buffer,"%d", WorkTime);
+	GFX_DrawString(80, 10, Buffer, PIXEL_WHITE, 0);
+	SSD1306_Display();
+}
+
 void ToggleLed()
 {
 	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);

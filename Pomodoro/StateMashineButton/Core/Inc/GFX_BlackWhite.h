@@ -89,7 +89,7 @@ void GFX_DrawLine(int x_start, int y_start, int x_end, int y_end, uint8_t color)
 #if USING_RECTANGLE == 1
 void GFX_DrawRectangle(int x, int y, uint16_t w, uint16_t h, uint8_t color);
 #endif
-#if USING_FILL_RECTANGLE ==1
+#if USING_FILL_RECTANGLE == 1
 void GFX_DrawFillRectangle(int x, int y, uint16_t w, uint16_t h, uint8_t color);
 #endif
 #if USING_CIRCLE == 1
