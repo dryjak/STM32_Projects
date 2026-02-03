@@ -271,7 +271,7 @@ void UpdateDisplay()
 			GFX_SetFont(font_8x5);
 
 			Length = sprintf(Buffer, "WORK: %d", App.WorkTime);
-			GFX_DrawFillRectangle(8, 3, Length * 8, 12, PIXEL_WHITE);
+			GFX_DrawFillRectangle(8, 3, (Length + 1) * 8, 12, PIXEL_WHITE);
 			GFX_DrawString(10,5, Buffer, PIXEL_BLACK, 1);
 
 
@@ -300,15 +300,19 @@ void UpdateDisplay()
 }
 void ModifyWorkTime(int8_t ChangeTimeAmount)
 {
-	App.WorkTime += ChangeTimeAmount;
-	if (App.WorkTime < 0)
+	if(App.EditTarget == TARGET_WORK)
 	{
-		App.WorkTime = 0;
+		App.WorkTime += ChangeTimeAmount;
 	}
-	if (App.WorkTime > 999)
+	else
 	{
-		App.WorkTime = 999;
+		App.RelaxTime += ChangeTimeAmount;
 	}
+
+	if (App.WorkTime < 0){App.WorkTime = 0;}
+	else if (App.WorkTime > 999){App.WorkTime = 999;}
+	if (App.RelaxTime < 0){App.RelaxTime = 0;}
+	else if (App.RelaxTime > 999){App.RelaxTime = 999;}
 	App.DispalyNeedsUpdate = 1;
 }
 void ButtonMidPress()
@@ -350,6 +354,7 @@ void ButtonMidLongPress()
 void ButtonTopPress()
 {
 	TurnOnLed();
+
 	ModifyWorkTime(1);
 }
 void ButtonTopLongPress()
