@@ -267,7 +267,7 @@ void UpdateDisplay()
 		if(App.EditTarget == TARGET_WORK)
 		{
 			SSD1306_Clear(BLACK);
-			//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
+			//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);;
 			GFX_SetFont(font_8x5);
 
 			Length = sprintf(Buffer, "WORK: %d", App.WorkTime);
