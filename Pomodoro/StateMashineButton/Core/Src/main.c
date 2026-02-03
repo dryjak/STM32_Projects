@@ -51,6 +51,7 @@
 uint32_t TimerDebounce = 50;
 uint32_t TimerLongPress = 2000;
 uint32_t TimerRepeat = 500;
+
 Button_t ButtonMiddle;
 Button_t ButtonTop;
 Button_t ButtonBottom;
@@ -102,13 +103,36 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
+  //Init middle button
   ButtonInit(&ButtonMiddle, ButtonMiddle_GPIO_Port, ButtonMiddle_Pin, TimerDebounce,TimerLongPress, TimerRepeat);
   ButtonRegisterPressCallback(&ButtonMiddle, TurnOnLed);
   ButtonRegisterLongPressCallback(&ButtonMiddle, TurnOffLed);
   ButtonRegisterRepeatCallback(&ButtonMiddle, ToggleLed);
   ButtonRegisterGoToIdleCallback(&ButtonMiddle, TurnOffLed);
 
+  //Init top button
+  ButtonInit(&ButtonTop, ButtonTop_GPIO_Port, ButtonTop_Pin, TimerDebounce, TimerLongPress, TimerRepeat);
+  ButtonRegisterPressCallback(&ButtonTop, TurnOnLed);
+  ButtonRegisterLongPressCallback(&ButtonTop, TurnOffLed);
+  ButtonRegisterRepeatCallback(&ButtonTop, ToggleLed);
+  ButtonRegisterGoToIdleCallback(&ButtonTop, TurnOffLed);
+
+  //Init Bottom Button
+  ButtonInit(&ButtonBottom, ButtonBottom_GPIO_Port, ButtonBottom_Pin, TimerDebounce, TimerLongPress, TimerRepeat);
+  ButtonRegisterPressCallback(&ButtonBottom, TurnOnLed);
+  ButtonRegisterLongPressCallback(&ButtonBottom, TurnOffLed);
+  ButtonRegisterRepeatCallback(&ButtonBottom, ToggleLed);
+  ButtonRegisterGoToIdleCallback(&ButtonBottom, TurnOffLed);
+
+
   GFX_SetFont(font_8x5);
+
+  SSD1306_Init(&hi2c1);
+
+  SSD1306_Clear(BLACK);
+  GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
+  GFX_DrawString(30,30, "START", PIXEL_WHITE, 0);
+  SSD1306_Display();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -117,6 +141,8 @@ int main(void)
   {
 	 // HAL_GPIO_WritePin( , GPIO_Pin, PinState), GPIO_Pin, PinState);
 	 ButtonTask (&ButtonMiddle);
+	 ButtonTask (&ButtonTop);
+	 ButtonTask (&ButtonBottom);
 
     /* USER CODE END WHILE */
 
