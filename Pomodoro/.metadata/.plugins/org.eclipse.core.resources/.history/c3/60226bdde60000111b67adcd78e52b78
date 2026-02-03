@@ -51,9 +51,7 @@
 uint32_t TimerDebounce = 50;
 uint32_t TimerLongPress = 2000;
 uint32_t TimerRepeat = 500;
-Button_t ButtonMiddle;
-Button_t ButtonTop;
-Button_t ButtonBottom;
+Button_t Button1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -102,11 +100,11 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  ButtonInit(&ButtonMiddle, ButtonMiddle_GPIO_Port, ButtonMiddle_Pin, TimerDebounce,TimerLongPress, TimerRepeat);
-  ButtonRegisterPressCallback(&ButtonMiddle, TurnOnLed);
-  ButtonRegisterLongPressCallback(&ButtonMiddle, TurnOffLed);
-  ButtonRegisterRepeatCallback(&ButtonMiddle, ToggleLed);
-  ButtonRegisterGoToIdleCallback(&ButtonMiddle, TurnOffLed);
+  ButtonInit(&Button1, Button1_GPIO_Port, Button1_Pin, TimerDebounce,TimerLongPress, TimerRepeat);
+  ButtonRegisterPressCallback(&Button1, TurnOnLed);
+  ButtonRegisterLongPressCallback(&Button1, TurnOffLed);
+  ButtonRegisterRepeatCallback(&Button1, ToggleLed);
+  ButtonRegisterGoToIdleCallback(&Button1, TurnOffLed);
 
   GFX_SetFont(font_8x5);
   /* USER CODE END 2 */
@@ -116,7 +114,7 @@ int main(void)
   while (1)
   {
 	 // HAL_GPIO_WritePin( , GPIO_Pin, PinState), GPIO_Pin, PinState);
-	 ButtonTask (&ButtonMiddle);
+	 ButtonTask (&Button1);
 
     /* USER CODE END WHILE */
 
