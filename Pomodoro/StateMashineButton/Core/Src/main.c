@@ -300,6 +300,7 @@ void UpdateDisplay()
 }
 void ModifyWorkTime(int8_t ChangeTimeAmount)
 {
+	if(App.CurrentMode != EDIT_MODE) return;
 	if(App.EditTarget == TARGET_WORK)
 	{
 		App.WorkTime += ChangeTimeAmount;
