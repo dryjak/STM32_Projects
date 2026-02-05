@@ -108,7 +108,7 @@ void ButtonMidPress();
 
 //Function to update display
 void UpdateDisplay();
-void DrawMenuItem(uint8_t y, uint8_t w, uint8_t IsSelected, uint16_t Value, char* Label);
+void DrawMenuItem(uint8_t y, char* Label, uint16_t Value, uint8_t IsSelected);
 
 //Button Middle
 
@@ -254,66 +254,53 @@ void UpdateDisplay()
 		SSD1306_Clear(BLACK);
 		GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
 
-		sprintf(Buffer, "WORK: %d", App.WorkTime);
-		GFX_DrawString(10,5, Buffer, PIXEL_WHITE, 0);
+		DrawMenuItem(5, "WORK", App.WorkTime, 0);
+		DrawMenuItem(17, "RELAX", App.RelaxTime, 0);
+		DrawMenuItem(29, "START", 0, 0);
 
-		sprintf(Buffer, "RELAX: %d", App.RelaxTime);
-		GFX_DrawString(10,18, Buffer, PIXEL_WHITE, 0);
-
-		GFX_DrawString(10,31, "START", PIXEL_WHITE, 0);
 		SSD1306_Display();
 	}
 	else
 	{
-		if(App.EditTarget == TARGET_WORK)
+		if(App.EditTarget == TARGET_WORK)	//if work is selected
 		{
 			SSD1306_Clear(BLACK);
 			//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);;
 			GFX_SetFont(font_8x5);
-
-			Length = sprintf(Buffer, "WORK: %d", App.WorkTime);
-			GFX_DrawFillRectangle(8, 3, (Length + 1) * 8, 12, PIXEL_WHITE);
-			GFX_DrawString(10,5, Buffer, PIXEL_BLACK, 1);
-
-
-			sprintf(Buffer, "RELAX: %d", App.RelaxTime);
-			GFX_DrawString(10,18, Buffer, PIXEL_WHITE, 0);
+			DrawMenuItem(5, "WORK", App.WorkTime, 1);
+			DrawMenuItem(17, "RELAX", App.RelaxTime, 0);
 
 			SSD1306_Display();
 		}
-		else
+		else	//if relax is selected
 		{
 			SSD1306_Clear(BLACK);
 			//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
 			GFX_SetFont(font_8x5);
-
-			sprintf(Buffer, "WORK: %d", App.WorkTime);
-			GFX_DrawString(10,5, Buffer, PIXEL_WHITE, 0);
-
-			Length = sprintf(Buffer, "RELAX: %d", App.RelaxTime);
-			GFX_DrawFillRectangle(8, 16, Length * 8, 12, PIXEL_WHITE);
-			GFX_DrawString(10,18, Buffer, PIXEL_BLACK, 1);
+			DrawMenuItem(5, "WORK", App.WorkTime, 0);
+			DrawMenuItem(17, "RELAX", App.RelaxTime, 1);
 
 			SSD1306_Display();
 		}
 	}
 
 }
-void DrawMenuItem(uint8_t y, uint8_t w, uint8_t IsSelected, uint16_t Value, char* Label)
+void DrawMenuItem(uint8_t y, char* Label, uint16_t Value, uint8_t IsSelected)
 {
 	char TempBuffer[32];
 	uint8_t Length;
+	uint8_t x = 10;
 
 	Length = sprintf(TempBuffer, "%s: %d", Label, Value);
 
 	if(IsSelected)
 	{
-		GFX_DrawFillRectangle(8, y - 2, Length * 6 + 4, 8 + 4, PIXEL_WHITE);
-		GFX_DrawString(10, y, TempBuffer, PIXEL_BLACK, 1);	//black text
+		GFX_DrawFillRectangle(x - 2 , y - 2, Length * 6 + 4, 8 + 4, PIXEL_WHITE);
+		GFX_DrawString(x, y, TempBuffer, PIXEL_BLACK, 1);	//black text
 	}
 	else
 	{
-		GFX_DrawString(2, y, TempBuffer, PIXEL_WHITE, 0);	//white text
+		GFX_DrawString(x, y, TempBuffer, PIXEL_WHITE, 0);	//white text
 	}
 }
 void ModifyWorkTime(int8_t ChangeTimeAmount)
