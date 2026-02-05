@@ -108,6 +108,7 @@ void ButtonMidPress();
 
 //Function to update display
 void UpdateDisplay();
+void DrawMenuItem(uint8_t y, uint8_t w, uint8_t IsSelected, uint16_t Value, char* Label);
 
 //Button Middle
 
@@ -298,6 +299,23 @@ void UpdateDisplay()
 	}
 
 }
+void DrawMenuItem(uint8_t y, uint8_t w, uint8_t IsSelected, uint16_t Value, char* Label)
+{
+	char TempBuffer[32];
+	uint8_t Length;
+
+	Length = sprintf(TempBuffer, "%s: %d", Label, Value);
+
+	if(IsSelected)
+	{
+		GFX_DrawFillRectangle(8, y - 2, Length * 6 + 4, 8 + 4, PIXEL_WHITE);
+		GFX_DrawString(10, y, TempBuffer, PIXEL_BLACK, 1);	//black text
+	}
+	else
+	{
+		GFX_DrawString(2, y, TempBuffer, PIXEL_WHITE, 0);	//white text
+	}
+}
 void ModifyWorkTime(int8_t ChangeTimeAmount)
 {
 	if(App.CurrentMode != EDIT_MODE) return;
@@ -316,6 +334,7 @@ void ModifyWorkTime(int8_t ChangeTimeAmount)
 	else if (App.RelaxTime > 999){App.RelaxTime = 999;}
 	App.DispalyNeedsUpdate = 1;
 }
+
 void ButtonMidPress()
 {
 	TurnOnLed();
