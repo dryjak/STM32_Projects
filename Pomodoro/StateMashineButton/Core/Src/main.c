@@ -83,6 +83,11 @@ typedef struct{
 ApplicationData_t App = {25, 5, 1, NORMAL_MODE, TARGET_WORK};
 
 char Buffer[32];
+
+RTC_TimeTypeDef Time;
+RTC_DateTypeDef Date;
+uint32_t TargetTimeStamp, CurrentTimeStamp;
+uint8_t StartStop;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -105,8 +110,6 @@ void ButtonBottomRepeat();
 //Button Middle
 void ButtonMidLongPress();
 void ButtonMidPress();
-
-
 
 //Function to update display
 void UpdateDisplay();
@@ -195,6 +198,9 @@ int main(void)
 		 App.DispalyNeedsUpdate = 0;
 		 UpdateDisplay();
 	 }
+
+	 HAL_RTC_GetTime(&hrtc, &Time, RTC_FORMAT_BIN);
+	 HAL_RTC_GetDate(&hrtc, &Date, RTC_FORMAT_BIN);
 
     /* USER CODE END WHILE */
 
@@ -337,12 +343,17 @@ void UpdateDateWithSeconds(RTC_TimeTypeDef *Time, uint32_t SecondsToAdd)
 	Time->Hours = HoursToAdd % 24;
 }
 
+void TimeToSeconds(RTC_TimeTypeDef Time, uint32_t *Seconds)
+{
+	Seconds = Time.Seconds + Time.Minutes * 60 + Time.Hours * 3600;
+}
 void ButtonMidPress()
 {
 	TurnOnLed();
 	if(App.CurrentMode == NORMAL_MODE) //do start stop
 	{
 		TurnOnLed();
+
 	}
 	else //do change mode
 	{
