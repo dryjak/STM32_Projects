@@ -19,15 +19,17 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "i2c.h"
+#include "rtc.h"
 #include "usart.h"
 #include "gpio.h"
-#include "stdio.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Button.h"
 #include "SSD1306_OLED.h"
 #include "GFX_BlackWhite.h"
 #include "fonts/fonts.h"
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -150,6 +152,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   MX_I2C1_Init();
+  MX_RTC_Init();
   /* USER CODE BEGIN 2 */
   //Init middle button
   ButtonInit(&ButtonMiddle, ButtonMiddle_GPIO_Port, ButtonMiddle_Pin, TimerDebounce,TimerLongPress, TimerRepeat);
@@ -217,7 +220,8 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_LSE;
+  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
@@ -320,6 +324,17 @@ void ModifyWorkTime(int8_t ChangeTimeAmount)
 	if (App.RelaxTime < 0){App.RelaxTime = 0;}
 	else if (App.RelaxTime > 999){App.RelaxTime = 999;}
 	App.DispalyNeedsUpdate = 1;
+}
+
+void UpdateDateWithSeconds(RTC_TimeTypeDef *Time, uint32_t SecondsToAdd)
+{
+	Time->Seconds = SecondsToAdd % 60;
+
+	uint32_t MinutesToAdd = SecondsToAdd / 60;
+	Time->Minutes = MinutesToAdd % 60;
+
+	uint32_t HoursToAdd = MinutesToAdd / 24;
+	Time->Hours = HoursToAdd % 24;
 }
 
 void ButtonMidPress()
