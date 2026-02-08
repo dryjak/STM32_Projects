@@ -6,6 +6,10 @@
  */
 #include <PomodoroFSM.h>
 
+void PomodoroInit(Pomodoro_t *Pomodoro)
+{
+
+}
 
 
 
@@ -24,6 +28,9 @@ void PomodoroTask(Pomodoro_t *Pomodoro, int32_t CurrentTime)
 		break;
 	case POMO_STATE_ALARM:
 		//do alarm
+		break;
+	case POMO_STATE_EDIT:
+		//do edit
 		break;
 	}
 }

@@ -313,14 +313,16 @@ Discarded input sections
  .text          0x00000000        0x0 ./Core/Src/PomodoroFSM.o
  .data          0x00000000        0x0 ./Core/Src/PomodoroFSM.o
  .bss           0x00000000        0x0 ./Core/Src/PomodoroFSM.o
+ .text.PomodoroInit
+                0x00000000       0x14 ./Core/Src/PomodoroFSM.o
  .text.PomodoroTask
-                0x00000000       0x38 ./Core/Src/PomodoroFSM.o
- .debug_info    0x00000000      0x200 ./Core/Src/PomodoroFSM.o
- .debug_abbrev  0x00000000       0xb3 ./Core/Src/PomodoroFSM.o
+                0x00000000       0x3c ./Core/Src/PomodoroFSM.o
+ .debug_info    0x00000000      0x223 ./Core/Src/PomodoroFSM.o
+ .debug_abbrev  0x00000000       0xcb ./Core/Src/PomodoroFSM.o
  .debug_aranges
-                0x00000000       0x20 ./Core/Src/PomodoroFSM.o
+                0x00000000       0x28 ./Core/Src/PomodoroFSM.o
  .debug_rnglists
-                0x00000000       0x13 ./Core/Src/PomodoroFSM.o
+                0x00000000       0x19 ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000      0x205 ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000      0xad8 ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000      0x2a1 ./Core/Src/PomodoroFSM.o
@@ -366,10 +368,10 @@ Discarded input sections
  .debug_macro   0x00000000      0x2aa ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000      0x126 ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000       0x7c ./Core/Src/PomodoroFSM.o
- .debug_line    0x00000000      0x789 ./Core/Src/PomodoroFSM.o
- .debug_str     0x00000000    0x87498 ./Core/Src/PomodoroFSM.o
+ .debug_line    0x00000000      0x79b ./Core/Src/PomodoroFSM.o
+ .debug_str     0x00000000    0x874a5 ./Core/Src/PomodoroFSM.o
  .comment       0x00000000       0x44 ./Core/Src/PomodoroFSM.o
- .debug_frame   0x00000000       0x38 ./Core/Src/PomodoroFSM.o
+ .debug_frame   0x00000000       0x60 ./Core/Src/PomodoroFSM.o
  .ARM.attributes
                 0x00000000       0x34 ./Core/Src/PomodoroFSM.o
  .group         0x00000000        0xc ./Core/Src/SSD1306_OLED.o
