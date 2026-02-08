@@ -25,6 +25,13 @@ void PomodoroInit(Pomodoro_t *Pomodoro)
 	Pomodoro->NeedsRedraw		= 0;
 }
 
+int32_t ChangeTimeToSeconds(RTC_TimeTypeDef Time)
+{
+	int32_t TimeInSeconds = 0;
+	TimeInSeconds  = Time.Seconds + Time.Minutes * 60 + Time.Hours * 3600;
+	return  TimeInSeconds;
+}
+
 void CalculateFormatDisplayTime(Pomodoro_t *Pomodoro)
 {
 	Pomodoro->TimeToDisplayHours = 0;
@@ -66,11 +73,19 @@ void PomodoroStateIdle(Pomodoro_t *Pomodoro)
 	}
 }
 
-int32_t ChangeTimeToSeconds(RTC_TimeTypeDef Time)
+void PomodoroStateRunning(Pomodoro_t *Pomodoro)
 {
-	int32_t TimeInSeconds = 0;
-	TimeInSeconds  = Time.Seconds + Time.Minutes * 60 + Time.Hours * 3600;
-	return  TimeInSeconds;
+	if(Pomodoro->Event == POMO_EVENT_ACTION)
+	{
+		//Go to paused state
+	}
+	else if (Pomodoro->Event == POMO_EVENT_ACTION_2)
+	{
+		//go to edit mode
+		Pomodoro->CurrentState = POMO_STATE_EDIT;
+		Pomodoro->EditTarget = POMO_EDIT_WORK;
+		Pomodoro->NeedsRedraw = 1;
+	}
 }
 
 
