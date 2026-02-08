@@ -588,6 +588,7 @@ void ButtonIdleRoutine(Button_t *Button)
  8000686:	687b      	ldr	r3, [r7, #4]
  8000688:	619a      	str	r2, [r3, #24]
 	}
+
 }
  800068a:	bf00      	nop
  800068c:	3708      	adds	r7, #8

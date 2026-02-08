@@ -59,6 +59,7 @@ void ButtonIdleRoutine(Button_t *Button)
 		Button->State = DEBOUNCE;
 		Button->LastTick = HAL_GetTick();
 	}
+
 }
 
 void ButtonDebounceRoutine(Button_t *Button)

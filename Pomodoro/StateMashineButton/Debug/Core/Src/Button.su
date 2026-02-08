@@ -7,8 +7,8 @@
 ../Core/Src/Button.c:44:6:ButtonRegisterRepeatCallback	16	static
 ../Core/Src/Button.c:48:6:ButtonRegisterGoToIdleCallback	16	static
 ../Core/Src/Button.c:54:6:ButtonIdleRoutine	16	static
-../Core/Src/Button.c:64:6:ButtonDebounceRoutine	16	static
-../Core/Src/Button.c:84:6:ButtonPressedRoutine	16	static
-../Core/Src/Button.c:104:6:ButtonLongPressedRoutine	16	static
-../Core/Src/Button.c:127:6:ButtonRepeatRoutine	16	static
-../Core/Src/Button.c:153:6:ButtonTask	16	static
+../Core/Src/Button.c:65:6:ButtonDebounceRoutine	16	static
+../Core/Src/Button.c:85:6:ButtonPressedRoutine	16	static
+../Core/Src/Button.c:105:6:ButtonLongPressedRoutine	16	static
+../Core/Src/Button.c:128:6:ButtonRepeatRoutine	16	static
+../Core/Src/Button.c:154:6:ButtonTask	16	static
