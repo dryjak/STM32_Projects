@@ -1,2 +1,5 @@
-../Core/Src/PomodoroFSM.c:9:6:PomodoroInit	16	static
-../Core/Src/PomodoroFSM.c:28:6:PomodoroTask	16	static
+../Core/Src/PomodoroFSM.c:10:6:PomodoroInit	16	static
+../Core/Src/PomodoroFSM.c:28:6:CalculateFormatDisplayTime	24	static
+../Core/Src/PomodoroFSM.c:45:6:PomodoroStateIdle	16	static
+../Core/Src/PomodoroFSM.c:69:9:ChangeTimeToSeconds	16	static
+../Core/Src/PomodoroFSM.c:77:6:PomodoroTask	16	static

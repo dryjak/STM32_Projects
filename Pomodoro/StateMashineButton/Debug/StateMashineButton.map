@@ -310,20 +310,45 @@ Discarded input sections
  .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
  .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
  .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
+ .group         0x00000000        0xc ./Core/Src/PomodoroFSM.o
  .text          0x00000000        0x0 ./Core/Src/PomodoroFSM.o
  .data          0x00000000        0x0 ./Core/Src/PomodoroFSM.o
  .bss           0x00000000        0x0 ./Core/Src/PomodoroFSM.o
  .text.PomodoroInit
-                0x00000000       0x50 ./Core/Src/PomodoroFSM.o
+                0x00000000       0x56 ./Core/Src/PomodoroFSM.o
+ .text.CalculateFormatDisplayTime
+                0x00000000       0xb8 ./Core/Src/PomodoroFSM.o
+ .text.PomodoroStateIdle
+                0x00000000       0x5e ./Core/Src/PomodoroFSM.o
+ .text.ChangeTimeToSeconds
+                0x00000000       0x46 ./Core/Src/PomodoroFSM.o
  .text.PomodoroTask
                 0x00000000       0x3c ./Core/Src/PomodoroFSM.o
- .debug_info    0x00000000      0x223 ./Core/Src/PomodoroFSM.o
- .debug_abbrev  0x00000000       0xcb ./Core/Src/PomodoroFSM.o
+ .debug_info    0x00000000      0x3e5 ./Core/Src/PomodoroFSM.o
+ .debug_abbrev  0x00000000      0x118 ./Core/Src/PomodoroFSM.o
  .debug_aranges
-                0x00000000       0x28 ./Core/Src/PomodoroFSM.o
+                0x00000000       0x40 ./Core/Src/PomodoroFSM.o
  .debug_rnglists
-                0x00000000       0x19 ./Core/Src/PomodoroFSM.o
- .debug_macro   0x00000000      0x205 ./Core/Src/PomodoroFSM.o
+                0x00000000       0x2c ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000      0x2dd ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000      0xad8 ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000      0x2a1 ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000       0x2e ./Core/Src/PomodoroFSM.o
@@ -368,10 +393,29 @@ Discarded input sections
  .debug_macro   0x00000000      0x2aa ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000      0x126 ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000       0x7c ./Core/Src/PomodoroFSM.o
- .debug_line    0x00000000      0x7b3 ./Core/Src/PomodoroFSM.o
- .debug_str     0x00000000    0x874a4 ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x61 ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x2a ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x43 ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x34 ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x16 ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x3c ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000      0x370 ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x10 ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x16 ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x4a ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x34 ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x10 ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x58 ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x8e ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x1c ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000      0x185 ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x16 ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000       0x16 ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000      0x146 ./Core/Src/PomodoroFSM.o
+ .debug_line    0x00000000      0x9e4 ./Core/Src/PomodoroFSM.o
+ .debug_str     0x00000000    0x8adfc ./Core/Src/PomodoroFSM.o
  .comment       0x00000000       0x44 ./Core/Src/PomodoroFSM.o
- .debug_frame   0x00000000       0x60 ./Core/Src/PomodoroFSM.o
+ .debug_frame   0x00000000       0xd8 ./Core/Src/PomodoroFSM.o
  .ARM.attributes
                 0x00000000       0x34 ./Core/Src/PomodoroFSM.o
  .group         0x00000000        0xc ./Core/Src/SSD1306_OLED.o
@@ -812,8 +856,10 @@ Discarded input sections
  .debug_macro   0x00000000       0x2a ./Core/Src/main.o
  .debug_macro   0x00000000       0x43 ./Core/Src/main.o
  .debug_macro   0x00000000       0x34 ./Core/Src/main.o
+ .debug_macro   0x00000000       0x16 ./Core/Src/main.o
  .debug_macro   0x00000000       0x3c ./Core/Src/main.o
  .debug_macro   0x00000000      0x370 ./Core/Src/main.o
+ .debug_macro   0x00000000       0x10 ./Core/Src/main.o
  .debug_macro   0x00000000       0x16 ./Core/Src/main.o
  .debug_macro   0x00000000       0x4a ./Core/Src/main.o
  .debug_macro   0x00000000       0x34 ./Core/Src/main.o
@@ -822,6 +868,9 @@ Discarded input sections
  .debug_macro   0x00000000       0x8e ./Core/Src/main.o
  .debug_macro   0x00000000       0x1c ./Core/Src/main.o
  .debug_macro   0x00000000      0x185 ./Core/Src/main.o
+ .debug_macro   0x00000000       0x16 ./Core/Src/main.o
+ .debug_macro   0x00000000       0x16 ./Core/Src/main.o
+ .debug_macro   0x00000000      0x146 ./Core/Src/main.o
  .group         0x00000000        0xc ./Core/Src/rtc.o
  .group         0x00000000        0xc ./Core/Src/rtc.o
  .group         0x00000000        0xc ./Core/Src/rtc.o
@@ -5060,7 +5109,7 @@ LOAD D:/Programy Potrzebne/STM32CubeIDE_Folder/STM32CubeIDE_1.19.0/STM32CubeIDE/
  .debug_rnglists
                 0x00000824      0x1bc ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
 
-.debug_macro    0x00000000    0x17b8d
+.debug_macro    0x00000000    0x179f5
  .debug_macro   0x00000000      0x205 ./Core/Src/Button.o
  .debug_macro   0x00000205      0xad8 ./Core/Src/Button.o
  .debug_macro   0x00000cdd      0x2a1 ./Core/Src/Button.o
@@ -5133,26 +5182,21 @@ LOAD D:/Programy Potrzebne/STM32CubeIDE_Folder/STM32CubeIDE_1.19.0/STM32CubeIDE/
  .debug_macro   0x00015734      0x205 ./Core/Src/i2c.o
  .debug_macro   0x00015939      0x32e ./Core/Src/main.o
  .debug_macro   0x00015c67       0x10 ./Core/Src/main.o
- .debug_macro   0x00015c77       0x16 ./Core/Src/main.o
- .debug_macro   0x00015c8d       0x10 ./Core/Src/main.o
- .debug_macro   0x00015c9d       0x16 ./Core/Src/main.o
- .debug_macro   0x00015cb3       0x16 ./Core/Src/main.o
- .debug_macro   0x00015cc9      0x146 ./Core/Src/main.o
- .debug_macro   0x00015e0f      0x205 ./Core/Src/rtc.o
- .debug_macro   0x00016014      0x1fb ./Core/Src/stm32f4xx_hal_msp.o
- .debug_macro   0x0001620f      0x205 ./Core/Src/stm32f4xx_it.o
- .debug_macro   0x00016414      0x112 ./Core/Src/sysmem.o
- .debug_macro   0x00016526      0x23c ./Core/Src/sysmem.o
- .debug_macro   0x00016762      0x1ec ./Core/Src/system_stm32f4xx.o
- .debug_macro   0x0001694e      0x205 ./Core/Src/usart.o
- .debug_macro   0x00016b53      0x24c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
- .debug_macro   0x00016d9f      0x1ec ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
- .debug_macro   0x00016f8b      0x1f2 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
- .debug_macro   0x0001717d      0x23a ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o
- .debug_macro   0x000173b7      0x210 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
- .debug_macro   0x000175c7      0x1ec ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
- .debug_macro   0x000177b3      0x1ed ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc.o
- .debug_macro   0x000179a0      0x1ed ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
+ .debug_macro   0x00015c77      0x205 ./Core/Src/rtc.o
+ .debug_macro   0x00015e7c      0x1fb ./Core/Src/stm32f4xx_hal_msp.o
+ .debug_macro   0x00016077      0x205 ./Core/Src/stm32f4xx_it.o
+ .debug_macro   0x0001627c      0x112 ./Core/Src/sysmem.o
+ .debug_macro   0x0001638e      0x23c ./Core/Src/sysmem.o
+ .debug_macro   0x000165ca      0x1ec ./Core/Src/system_stm32f4xx.o
+ .debug_macro   0x000167b6      0x205 ./Core/Src/usart.o
+ .debug_macro   0x000169bb      0x24c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+ .debug_macro   0x00016c07      0x1ec ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
+ .debug_macro   0x00016df3      0x1f2 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
+ .debug_macro   0x00016fe5      0x23a ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o
+ .debug_macro   0x0001721f      0x210 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
+ .debug_macro   0x0001742f      0x1ec ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
+ .debug_macro   0x0001761b      0x1ed ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc.o
+ .debug_macro   0x00017808      0x1ed ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
 
 .debug_line     0x00000000    0x11c38
  .debug_line    0x00000000      0xa12 ./Core/Src/Button.o

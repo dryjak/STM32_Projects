@@ -6,6 +6,7 @@
  */
 #include <PomodoroFSM.h>
 
+
 void PomodoroInit(Pomodoro_t *Pomodoro)
 {
 	Pomodoro->CfgWorkTime = 25;
@@ -15,14 +16,62 @@ void PomodoroInit(Pomodoro_t *Pomodoro)
 	Pomodoro->CurrentMode 	= POMO_MODE_NORMAL;
 	Pomodoro->EditTarget 	= POMO_EDIT_WORK;
 
-	Pomodoro->TargetTimestamp	= 0;
+	Pomodoro->TargetTimeStamp	= 0;
 	Pomodoro->SavedTimeLeft 	= 0;
+	Pomodoro->Event 			= POMO_EVENT_IDLE;
 
-	Pomodoro->TimeToDisplay 	= 0;
+	Pomodoro->NeedsRedraw 	= 0;
 	Pomodoro->TriggerAlarm 		= 0;
-	Pomodoro->NeedsRedraw		= 1;
+	Pomodoro->NeedsRedraw		= 0;
 }
 
+void CalculateFormatDisplayTime(Pomodoro_t *Pomodoro)
+{
+	Pomodoro->TimeToDisplayHours = 0;
+	Pomodoro->TimeToDisplayMinutes = 0;
+	Pomodoro->TimeToDisplaySeconds = 0;
+
+	int32_t TmpTime;
+	Pomodoro->TimeToDisplaySeconds = (Pomodoro->SavedTimeLeft) % 60;
+
+	TmpTime = (Pomodoro->SavedTimeLeft) / 60;
+	Pomodoro->TimeToDisplayMinutes = TmpTime % 60;
+
+	TmpTime = (Pomodoro->SavedTimeLeft) / 60;
+	Pomodoro->TimeToDisplayHours = TmpTime % 24;
+}
+
+//Do Idle
+void PomodoroStateIdle(Pomodoro_t *Pomodoro)
+{
+	//Check if there was input
+	if(Pomodoro->Event == POMO_EVENT_ACTION)
+	{
+		//go to Running
+		Pomodoro->CurrentState = POMO_STATE_RUNNING;
+		//calculate end time in seconds
+		Pomodoro->TargetTimeStamp = Pomodoro->TimeBeginInSeconds + Pomodoro->CfgWorkTime * 60;
+		CalculateFormatDisplayTime(Pomodoro);
+		//calculate end time in seconds
+
+		 Pomodoro->NeedsRedraw = 1;
+
+	}
+	else if(Pomodoro->Event == POMO_EVENT_ACTION_2)
+	{
+		//go to edit mode
+		Pomodoro->CurrentState = POMO_STATE_EDIT;
+		Pomodoro->EditTarget = POMO_EDIT_WORK;
+		Pomodoro->NeedsRedraw = 1;
+	}
+}
+
+int32_t ChangeTimeToSeconds(RTC_TimeTypeDef Time)
+{
+	int32_t TimeInSeconds = 0;
+	TimeInSeconds  = Time.Seconds + Time.Minutes * 60 + Time.Hours * 3600;
+	return  TimeInSeconds;
+}
 
 
 void PomodoroTask(Pomodoro_t *Pomodoro, int32_t CurrentTime)
