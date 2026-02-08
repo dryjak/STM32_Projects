@@ -314,7 +314,7 @@ Discarded input sections
  .data          0x00000000        0x0 ./Core/Src/PomodoroFSM.o
  .bss           0x00000000        0x0 ./Core/Src/PomodoroFSM.o
  .text.PomodoroInit
-                0x00000000       0x14 ./Core/Src/PomodoroFSM.o
+                0x00000000       0x50 ./Core/Src/PomodoroFSM.o
  .text.PomodoroTask
                 0x00000000       0x3c ./Core/Src/PomodoroFSM.o
  .debug_info    0x00000000      0x223 ./Core/Src/PomodoroFSM.o
@@ -368,8 +368,8 @@ Discarded input sections
  .debug_macro   0x00000000      0x2aa ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000      0x126 ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000       0x7c ./Core/Src/PomodoroFSM.o
- .debug_line    0x00000000      0x79b ./Core/Src/PomodoroFSM.o
- .debug_str     0x00000000    0x874a5 ./Core/Src/PomodoroFSM.o
+ .debug_line    0x00000000      0x7b3 ./Core/Src/PomodoroFSM.o
+ .debug_str     0x00000000    0x874a4 ./Core/Src/PomodoroFSM.o
  .comment       0x00000000       0x44 ./Core/Src/PomodoroFSM.o
  .debug_frame   0x00000000       0x60 ./Core/Src/PomodoroFSM.o
  .ARM.attributes

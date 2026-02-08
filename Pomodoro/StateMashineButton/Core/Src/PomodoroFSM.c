@@ -8,7 +8,19 @@
 
 void PomodoroInit(Pomodoro_t *Pomodoro)
 {
+	Pomodoro->CfgWorkTime = 25;
+	Pomodoro->CfgRelaxTie = 5;
 
+	Pomodoro->CurrentState	= POMO_STATE_IDLE;
+	Pomodoro->CurrentMode 	= POMO_MODE_NORMAL;
+	Pomodoro->EditTarget 	= POMO_EDIT_WORK;
+
+	Pomodoro->TargetTimestamp	= 0;
+	Pomodoro->SavedTimeLeft 	= 0;
+
+	Pomodoro->TimeToDisplay 	= 0;
+	Pomodoro->TriggerAlarm 		= 0;
+	Pomodoro->NeedsRedraw		= 1;
 }
 
 

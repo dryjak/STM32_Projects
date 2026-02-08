@@ -43,7 +43,7 @@ typedef struct{
 	uint16_t CfgRelaxTie;	//Configured time to relax
 
 	PomoState_t 		CurrentState;	//IDLE, RUNNING, PAUSED ...
-	PomoMode_t 			CurrentPhase;	//Work or relax
+	PomoMode_t 			CurrentMode;	//Work or relax
 	PomoEditTarget_t	EditTarget;		//what do we edit Worktime or Relaxtime
 
 	int32_t TargetTimestamp;
