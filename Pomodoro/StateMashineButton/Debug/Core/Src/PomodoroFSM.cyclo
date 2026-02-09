@@ -1,6 +1,7 @@
 ../Core/Src/PomodoroFSM.c:10:6:PomodoroInit	1
-../Core/Src/PomodoroFSM.c:28:9:ChangeTimeToSeconds	1
-../Core/Src/PomodoroFSM.c:35:6:CalculateFormatDisplayTime	1
-../Core/Src/PomodoroFSM.c:52:6:PomodoroStateIdle	3
-../Core/Src/PomodoroFSM.c:76:6:PomodoroStateRunning	3
-../Core/Src/PomodoroFSM.c:92:6:PomodoroTask	2
+../Core/Src/PomodoroFSM.c:28:13:UpdateDisplayTime	3
+../Core/Src/PomodoroFSM.c:44:6:PomodoroStateIdle	4
+../Core/Src/PomodoroFSM.c:66:6:PomodoroStateRunning	4
+../Core/Src/PomodoroFSM.c:92:6:PomodoroStatePause	2
+../Core/Src/PomodoroFSM.c:102:6:PomodoroStateAlarm	4
+../Core/Src/PomodoroFSM.c:124:6:PomodoroTask	2

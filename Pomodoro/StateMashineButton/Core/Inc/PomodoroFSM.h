@@ -8,14 +8,14 @@
 #ifndef INC_POMODOROFSM_H_
 #define INC_POMODOROFSM_H_
 
-#include <main.h>
+#include <stdint.h>
 #include <stdio.h>
+#include <rtc.h>
 
 typedef enum{
-	POMO_EVENT_IDLE = 0,
+	POMO_EVENT_NONE = 0,
 
 	POMO_EVENT_ACTION,
-	POMO_EVENT_MODE_TOGGLE,
 	POMO_EVENT_ACTION_2,
 
 	POMO_EVENT_INC,
@@ -31,40 +31,45 @@ typedef enum{
 }PomoState_t;
 
 typedef enum{
-	POMO_MODE_NORMAL = 0,
-	POMO_MODE_EDIT
-}PomoMode_t;
-
-typedef enum{
 	POMO_EDIT_WORK = 0,
 	POMO_EDIT_RELAX
 }PomoEditTarget_t;
 
+typedef enum{
+    POMO_PHASE_WORK = 0,
+    POMO_PHASE_RELAX
+} PomoPhase_t;
+
 typedef struct{
 	uint16_t CfgWorkTime;	//Configured time to work in minutes
-	uint16_t CfgRelaxTie;	//Configured time to relax in minutes
+	uint16_t CfgRelaxTime;	//Configured time to relax in minutes
 
 	PomoState_t 		CurrentState;	//IDLE, RUNNING, PAUSED ...
-	PomoMode_t 			CurrentMode;	//Work or relax
+	PomoPhase_t         CurrentPhase;   //(Work/Relax)
 	PomoEditTarget_t	EditTarget;		//what do we edit Worktime or Relaxtime
 	PomoEvent_t 		Event;			//variable value is based on inputs
 
-	int32_t TargetTimeStamp;
-	int32_t CurrentTimeStamp;
-	int32_t TimeBeginInSeconds;
-	int32_t SavedTimeLeft;
+	int32_t TargetTimeStamp;		//when is the end
+	int32_t TimeToDisplay;			//whoale time in seconds to display
+	int32_t SavedTimeLeft;			//time left
 
-	int8_t TimeToDisplayHours;
-	int8_t TimeToDisplayMinutes;
-	int8_t TimeToDisplaySeconds;
+//	int8_t TimeToDisplayHours;
+//	int8_t TimeToDisplayMinutes;
+//	int8_t TimeToDisplaySeconds;
+
 	uint8_t NeedsRedraw;	//Flag: 1 - display needs redraw
 	uint8_t TriggerAlarm;	//Flag: 1 - trigger alarm
 }Pomodoro_t;
 
 
-#endif /* INC_POMODOROFSM_H_ */
 
 void PomodoroInit(Pomodoro_t *Pomodoro);
+void PomodoroTask(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime);
+
+
+#endif /* INC_POMODOROFSM_H_ */
+
+
 
 
 
