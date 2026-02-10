@@ -152,27 +152,23 @@ void PomodoroStateEdit(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		//increase value
 		if(Pomodoro->EditTarget == POMO_EDIT_WORK)
 		{
-			//or change to callback to add different time on click, long click and repeat
-			Pomodoro->CfgWorkTime += 1;
+			ModifyConfigValue(&Pomodoro->CfgWorkTime, Pomodoro->EventParam);
 		}
-		else
+		else if(Pomodoro->EditTarget == POMO_EDIT_RELAX)
 		{
-			//or change to callback to add different time on click, long click and repeat
-			Pomodoro->CfgRelaxTime += 1;
+			ModifyConfigValue(&Pomodoro->CfgRelaxTime, Pomodoro->EventParam);
 		}
 	}
 	if(Pomodoro->Event == POMO_EVENT_DEC)
 	{
-		//decline value
+		//decline value (Pomodoro->EventParam can be < 0)
 		if(Pomodoro->EditTarget == POMO_EDIT_WORK)
 		{
-			//or change to callback to add different time on click, long click and repeat
-			Pomodoro->CfgWorkTime -= 1;
+			ModifyConfigValue(&Pomodoro->CfgWorkTime, Pomodoro->EventParam);
 		}
-		else
+		else if(Pomodoro->EditTarget == POMO_EDIT_RELAX)
 		{
-			//or change to callback to add different time on click, long click and repeat
-			Pomodoro->CfgRelaxTime -= 1;
+			ModifyConfigValue(&Pomodoro->CfgRelaxTime, Pomodoro->EventParam);
 		}
 	}
 }

@@ -43,7 +43,7 @@ typedef enum{
 typedef struct{
 	uint16_t CfgWorkTime;	//Configured time to work in minutes
 	uint16_t CfgRelaxTime;	//Configured time to relax in minutes
-	uint8_t EventParam;
+	int8_t EventParam;
 
 	PomoState_t 		CurrentState;	//IDLE, RUNNING, PAUSED ...
 	PomoPhase_t         CurrentPhase;   //(Work/Relax)
@@ -66,6 +66,11 @@ typedef struct{
 
 void PomodoroInit(Pomodoro_t *Pomodoro);
 void PomodoroTask(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime);
+
+
+//function that modifies value e.g. CfgWorkTime or CfgRelaxTime
+void ModifyConfigValue(uint16_t *ValueToModify, uint8_t ValueThatModifies);
+
 
 
 #endif /* INC_POMODOROFSM_H_ */
