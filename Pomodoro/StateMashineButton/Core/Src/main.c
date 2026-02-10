@@ -120,6 +120,9 @@ void ButtonMidPress();
 void UpdateDisplay();
 void DrawMenuItem(uint8_t y, char* Label, uint16_t Value, uint8_t IsSelected);
 
+int32_t GetCurrentUnixTime(RTC_HandleTypeDef *hrtc);
+
+
 //Button Middle
 
 /* USER CODE END PFP */
@@ -200,14 +203,16 @@ int main(void)
 	 ButtonTask (&ButtonMiddle);
 	 ButtonTask (&ButtonTop);
 	 ButtonTask (&ButtonBottom);
-	 if(App.DispalyNeedsUpdate == 1)
+
+	 //get current time
+	 int32_t Now = GetCurrentUnixTime(&hrtc);
+	 //pomodoro logic
+	 PomodoroTask(&Pomodoro, Now);
+	 if(Pomodoro.NeedsRedraw == 1)
 	 {
-		 App.DispalyNeedsUpdate = 0;
+		 Pomodoro.NeedsRedraw = 0;
 		 UpdateDisplay();
 	 }
-
-	 HAL_RTC_GetTime(&hrtc, &Time, RTC_FORMAT_BIN);
-	 HAL_RTC_GetDate(&hrtc, &Date, RTC_FORMAT_BIN);
 
     /* USER CODE END WHILE */
 
@@ -272,25 +277,25 @@ void UpdateDisplay()
 			SSD1306_Clear(BLACK);
 			GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
 
-			DrawMenuItem(5, "IDLE", Pomodoro.CfgWorkTime, 0);
+			GFX_DrawString(10, 5, "IDLE", PIXEL_WHITE, 0);
 			DrawMenuItem(17, "WORK", Pomodoro.CfgWorkTime, 0);
 			DrawMenuItem(29, "RELAX", Pomodoro.CfgRelaxTime, 0);
-			DrawMenuItem(37, "START / IDLE", 0, 0);
+			DrawMenuItem(41, "START / IDLE", 0, 0);
 
 			SSD1306_Display();
 		break;
 	case POMO_STATE_RUNNING:	//draw running
 			SSD1306_Clear(BLACK);
 			GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
-			DrawMenuItem(5, "RUNNING", 0, 0);
+			GFX_DrawString(10, 5, "RUNNING", PIXEL_WHITE, 0);
 
-			if (Pomodoro.EditTarget == POMO_EDIT_WORK)
+			if (Pomodoro.CurrentPhase == POMO_PHASE_WORK)
 			{
-				DrawMenuItem(17, "WORK REMAINED", Pomodoro.SavedTimeLeft, 0);
+				DrawMenuItem(17, "WORK REMAINED", Pomodoro.TimeToDisplay, 0);
 			}
-			else
+			else if(Pomodoro.CurrentPhase == POMO_PHASE_RELAX)
 			{
-				DrawMenuItem(17, "RELAX REMAINED", Pomodoro.SavedTimeLeft, 0);
+				DrawMenuItem(17, "RELAX REMAINED", Pomodoro.TimeToDisplay, 0);
 			}
 
 			SSD1306_Display();
@@ -298,9 +303,9 @@ void UpdateDisplay()
 	case POMO_STATE_PAUSED:		//draw paused
 			SSD1306_Clear(BLACK);
 
-			DrawMenuItem(5, "PAUSED", 0, 0);
+			GFX_DrawString(10, 5, "PAUSED", PIXEL_WHITE, 0);
 
-			if (Pomodoro.EditTarget == POMO_EDIT_WORK)
+			if (Pomodoro.CurrentPhase == POMO_PHASE_WORK)
 			{
 				DrawMenuItem(17, "WORK REMAINED", Pomodoro.SavedTimeLeft, 0);
 			}
@@ -315,15 +320,15 @@ void UpdateDisplay()
 	case POMO_STATE_ALARM:		//draw alarm
 			SSD1306_Clear(BLACK);
 
-			DrawMenuItem(5, "ALARM!", Pomodoro.CfgWorkTime, 0);
+			GFX_DrawString(10, 5, "ALARM", PIXEL_WHITE, 0);
 
-			if (Pomodoro.EditTarget == POMO_EDIT_WORK)
+			if  (Pomodoro.CurrentPhase == POMO_PHASE_WORK)
 			{
-				GFX_DrawString(5, 17, "Be ready to: relax!", PIXEL_WHITE, 0);
+				GFX_DrawString(5, 17, "Get ready to work!", PIXEL_WHITE, 0);
 			}
 			else
 			{
-				GFX_DrawString(5, 17, "Be ready to: work!", PIXEL_WHITE, 0);
+				GFX_DrawString(5, 17, "Get ready to relax!", PIXEL_WHITE, 0);
 			}
 
 			SSD1306_Display();

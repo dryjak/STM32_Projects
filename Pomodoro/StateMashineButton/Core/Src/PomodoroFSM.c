@@ -92,6 +92,7 @@ static void PomodoroStateRunning(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		Pomodoro->TriggerAlarm = 1;
 	}
 
+
 }
 
 static void PomodoroStatePause(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
