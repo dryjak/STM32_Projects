@@ -9,6 +9,13 @@
 #define MAX_EVENT_TIME 99
 #define MIN_EVENT_TIME 1
 
+//private function prototypes
+static void UpdateDisplayTime(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime);
+static void PomodoroStateRunning(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime);
+static void PomodoroStatePause(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime);
+static void PomodoroStateAlarm(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime);
+static void PomodoroStateEdit(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime);
+
 
 void PomodoroInit(Pomodoro_t *Pomodoro)
 {
@@ -53,7 +60,7 @@ static void PomodoroStateIdle(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		//START
 		Pomodoro->CurrentState = POMO_STATE_RUNNING;
 		//calculate time
-		int32_t Duration;
+		int32_t Duration = 0;
 		if(Pomodoro->CurrentPhase == POMO_PHASE_WORK)
 		{
 			Duration = Pomodoro->CfgWorkTime * 60;
@@ -91,8 +98,6 @@ static void PomodoroStateRunning(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		Pomodoro->NeedsRedraw = 1;
 		Pomodoro->TriggerAlarm = 1;
 	}
-
-
 }
 
 static void PomodoroStatePause(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)

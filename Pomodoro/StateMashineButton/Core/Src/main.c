@@ -61,35 +61,10 @@ Button_t ButtonTop;
 Button_t ButtonBottom;
 uint8_t Length;
 
-typedef enum{
-	NORMAL_MODE = 0,
-	EDIT_MODE
-}SystemMode_t;
-
-typedef enum {
-    TARGET_WORK = 0,
-    TARGET_RELAX
-} EditTarget_t;
-
-typedef struct{
-	int16_t WorkTime;
-	int16_t RelaxTime;
-	uint8_t DispalyNeedsUpdate;
-
-	SystemMode_t CurrentMode;
-	EditTarget_t   EditTarget;
-
-}ApplicationData_t;
-
-//init default values
-ApplicationData_t App = {25, 5, 1, NORMAL_MODE, TARGET_WORK};
-
 char Buffer[32];
 
 RTC_TimeTypeDef Time;
 RTC_DateTypeDef Date;
-uint32_t TargetTimeStamp, CurrentTimeStamp;
-uint8_t StartStop;
 
 //Pomodoro FSM variables
 Pomodoro_t Pomodoro;
@@ -322,7 +297,7 @@ void UpdateDisplay()
 
 			GFX_DrawString(10, 5, "ALARM", PIXEL_WHITE, 0);
 
-			if  (Pomodoro.CurrentPhase == POMO_PHASE_WORK)
+			if  (Pomodoro.CurrentPhase == POMO_PHASE_RELAX)
 			{
 				GFX_DrawString(5, 17, "Get ready to work!", PIXEL_WHITE, 0);
 			}
