@@ -6,33 +6,34 @@
  */
 #include <PomodoroFSM.h>
 
-#define MAX_EVENT_TIME 240
-#define MIN_EVENT_TIME 0
+#define MAX_EVENT_TIME 99
+#define MIN_EVENT_TIME 1
 
 
 void PomodoroInit(Pomodoro_t *Pomodoro)
 {
-	Pomodoro->CfgWorkTime = 25;
-	Pomodoro->CfgRelaxTime = 5;
+	Pomodoro->CfgWorkTime	= 25;
+	Pomodoro->CfgRelaxTime 	= 5;
+	Pomodoro->EventParam 	= 1;
 
 	Pomodoro->CurrentState	= POMO_STATE_IDLE;
-	Pomodoro->CurrentPhase = POMO_PHASE_WORK;
+	Pomodoro->CurrentPhase 	= POMO_PHASE_WORK;
 	Pomodoro->EditTarget 	= POMO_EDIT_WORK;
 
 	Pomodoro->TargetTimeStamp	= 0;
-	Pomodoro->SavedTimeLeft   = Pomodoro->CfgWorkTime * 60; // Na start pokaż pełny czas
-	Pomodoro->TimeToDisplay   = Pomodoro->SavedTimeLeft;
+	Pomodoro->SavedTimeLeft   	= Pomodoro->CfgWorkTime * 60; // Na start pokaż pełny czas
+	Pomodoro->TimeToDisplay   	= Pomodoro->SavedTimeLeft;
 	Pomodoro->Event 			= POMO_EVENT_NONE;
 
-	Pomodoro->NeedsRedraw 	= 1;
+	Pomodoro->NeedsRedraw		= 1;
 	Pomodoro->TriggerAlarm 		= 0;
 }
 
-static void UpdateDisplayTime(Pomodoro_t *Pomodoro, int32_t CurrentTime)
+static void UpdateDisplayTime(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 {
     if (Pomodoro->CurrentState == POMO_STATE_RUNNING)
     {
-        int32_t Remaining = Pomodoro->TargetTimeStamp - CurrentTime;
+        int32_t Remaining = Pomodoro->TargetTimeStamp - CurrentUnixTime;
         if (Remaining < 0) Remaining = 0;
         Pomodoro->TimeToDisplay = Remaining;
     }
@@ -53,7 +54,15 @@ void PomodoroStateIdle(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		Pomodoro->CurrentState = POMO_STATE_RUNNING;
 		//calculate time
 		int32_t Duration;
-		Duration = (Pomodoro->CurrentPhase) ? (Pomodoro->CfgWorkTime * 60) : (Pomodoro->CfgRelaxTime * 60);
+		if(Pomodoro->CurrentPhase == POMO_PHASE_WORK)
+		{
+			Duration = Pomodoro->CfgWorkTime * 60;
+		}
+		else if(Pomodoro->CurrentPhase == POMO_PHASE_RELAX)
+		{
+			Duration = Pomodoro->CfgRelaxTime * 60;
+
+		}
 		Pomodoro->TargetTimeStamp = CurrentUnixTime + Duration;
 		Pomodoro->NeedsRedraw = 1;
 	}
@@ -70,7 +79,7 @@ void PomodoroStateRunning(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 {
 	if(Pomodoro->Event == POMO_EVENT_ACTION)
 	{
-		//Go to paused state
+		//PAUSE
 		Pomodoro->CurrentState = POMO_STATE_PAUSED;
 		//Remember time left
 		Pomodoro->SavedTimeLeft = Pomodoro->TargetTimeStamp - CurrentUnixTime;
@@ -83,13 +92,6 @@ void PomodoroStateRunning(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		Pomodoro->TriggerAlarm = 1;
 	}
 
-	if (Pomodoro->Event == POMO_EVENT_ACTION_2)
-	{
-		//go to edit mode
-		Pomodoro->CurrentState = POMO_STATE_EDIT;
-		Pomodoro->EditTarget = POMO_EDIT_WORK;
-		Pomodoro->NeedsRedraw = 1;
-	}
 }
 
 void PomodoroStatePause(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
@@ -99,6 +101,13 @@ void PomodoroStatePause(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		//RESUME
 		Pomodoro->CurrentState = POMO_STATE_RUNNING;
 		Pomodoro->TargetTimeStamp = CurrentUnixTime + Pomodoro->SavedTimeLeft;
+		Pomodoro->NeedsRedraw = 1;
+	}
+	if (Pomodoro->Event == POMO_EVENT_ACTION_2)
+	{
+		//go to edit mode
+		Pomodoro->CurrentState = POMO_STATE_EDIT;
+		Pomodoro->EditTarget = POMO_EDIT_WORK;
 		Pomodoro->NeedsRedraw = 1;
 	}
 }
@@ -112,15 +121,17 @@ void PomodoroStateAlarm(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		if(Pomodoro->CurrentPhase == POMO_PHASE_WORK)
 		{
 			Pomodoro->CurrentPhase = POMO_PHASE_RELAX;
-			Pomodoro->TargetTimeStamp = CurrentUnixTime + Pomodoro->CfgRelaxTime;
+			Pomodoro->SavedTimeLeft = Pomodoro->CfgRelaxTime * 60;
+			//Pomodoro->TargetTimeStamp = CurrentUnixTime + Pomodoro->CfgRelaxTime;
 		}
 		else if(Pomodoro->CurrentPhase == POMO_PHASE_RELAX)
 		{
 			Pomodoro->CurrentPhase = POMO_PHASE_WORK;
-			Pomodoro->TargetTimeStamp = CurrentUnixTime + Pomodoro->CfgWorkTime;
+			Pomodoro->SavedTimeLeft = Pomodoro->CfgRelaxTime * 60;
+			//Pomodoro->TargetTimeStamp = CurrentUnixTime + Pomodoro->CfgWorkTime;
 		}
+		Pomodoro->NeedsRedraw = 1;
 	}
-	Pomodoro->NeedsRedraw = 1;
 }
 void PomodoroStateEdit(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 {
@@ -135,6 +146,7 @@ void PomodoroStateEdit(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		{
 			Pomodoro->EditTarget = POMO_EDIT_WORK;
 		}
+		Pomodoro->NeedsRedraw = 1;
 	}
 	//go to idle
 	if(Pomodoro->Event == POMO_EVENT_ACTION_2)
@@ -142,9 +154,10 @@ void PomodoroStateEdit(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		Pomodoro->CurrentState = POMO_STATE_IDLE;
 
 		if(Pomodoro->CurrentPhase == POMO_PHASE_WORK)
-			Pomodoro->CurrentPhase = POMO_PHASE_RELAX;
+			Pomodoro->SavedTimeLeft = Pomodoro->CfgWorkTime * 60;
 		else
-			Pomodoro->CurrentPhase = POMO_PHASE_WORK;
+			Pomodoro->SavedTimeLeft = Pomodoro->CfgRelaxTime * 60;
+
 		Pomodoro->NeedsRedraw = 1;
 	}
 	if(Pomodoro->Event == POMO_EVENT_INC)
@@ -158,6 +171,7 @@ void PomodoroStateEdit(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		{
 			ModifyConfigValue(&Pomodoro->CfgRelaxTime, Pomodoro->EventParam);
 		}
+		Pomodoro->NeedsRedraw = 1;
 	}
 	if(Pomodoro->Event == POMO_EVENT_DEC)
 	{
@@ -170,10 +184,11 @@ void PomodoroStateEdit(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		{
 			ModifyConfigValue(&Pomodoro->CfgRelaxTime, Pomodoro->EventParam);
 		}
+		Pomodoro->NeedsRedraw = 1;
 	}
 }
 
-void ModifyConfigValue(uint16_t *ValueToModify, uint8_t ValueThatModifies)
+void ModifyConfigValue(uint16_t *ValueToModify, int8_t ValueThatModifies)
 {
 	int32_t Tmp = *ValueToModify + ValueThatModifies;
 
@@ -190,18 +205,33 @@ void PomodoroTask(Pomodoro_t *Pomodoro, int32_t CurrentTime)
 	{
 	case POMO_STATE_IDLE:
 		//do idle
+		PomodoroStateIdle(Pomodoro, CurrentTime);
 		break;
 	case POMO_STATE_RUNNING:
 		//do running
+		PomodoroStateRunning(Pomodoro, CurrentTime);
 		break;
 	case POMO_STATE_PAUSED:
 		//do pause
+		PomodoroStatePause(Pomodoro, CurrentTime);
 		break;
 	case POMO_STATE_ALARM:
 		//do alarm
+		PomodoroStateAlarm(Pomodoro, CurrentTime);
 		break;
 	case POMO_STATE_EDIT:
 		//do edit
+		PomodoroStateEdit(Pomodoro, CurrentTime);
 		break;
+	}
+	Pomodoro->Event = POMO_EVENT_NONE;
+
+	//update time to display
+	int32_t lastTime = Pomodoro->TimeToDisplay;
+	UpdateDisplayTime(Pomodoro, CurrentTime);
+
+	if (lastTime != Pomodoro->TimeToDisplay)
+	{
+		Pomodoro->NeedsRedraw = 1;
 	}
 }
