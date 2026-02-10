@@ -6,6 +6,9 @@
  */
 #include <PomodoroFSM.h>
 
+#define MAX_EVENT_TIME 240
+#define MIN_EVENT_TIME 0
+
 
 void PomodoroInit(Pomodoro_t *Pomodoro)
 {
@@ -126,11 +129,11 @@ void PomodoroStateEdit(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		//change edited column
 		if(Pomodoro->EditTarget == POMO_EDIT_WORK)
 		{
-			Pomodoro->EditTarget == POMO_EDIT_RELAX;
+			Pomodoro->EditTarget = POMO_EDIT_RELAX;
 		}
 		else
 		{
-			Pomodoro->EditTarget == POMO_EDIT_WORK;
+			Pomodoro->EditTarget = POMO_EDIT_WORK;
 		}
 	}
 	//go to idle
@@ -138,7 +141,7 @@ void PomodoroStateEdit(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 	{
 		Pomodoro->CurrentState = POMO_STATE_IDLE;
 
-		if(Pomodoro->CurrentPhase = POMO_PHASE_WORK)
+		if(Pomodoro->CurrentPhase == POMO_PHASE_WORK)
 			Pomodoro->CurrentPhase = POMO_PHASE_RELAX;
 		else
 			Pomodoro->CurrentPhase = POMO_PHASE_WORK;
@@ -172,6 +175,16 @@ void PomodoroStateEdit(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 			Pomodoro->CfgRelaxTime -= 1;
 		}
 	}
+}
+
+void ModifyConfigValue(uint16_t *ValueToModify, uint8_t ValueThatModifies)
+{
+	int32_t Tmp = *ValueToModify + ValueThatModifies;
+
+	if(Tmp < MIN_EVENT_TIME) Tmp = MIN_EVENT_TIME;
+	else if(Tmp > MAX_EVENT_TIME) Tmp = MAX_EVENT_TIME;
+
+	*ValueToModify = (uint16_t)Tmp;
 }
 
 

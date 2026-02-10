@@ -344,15 +344,19 @@ Discarded input sections
                 0x00000000       0x36 ./Core/Src/PomodoroFSM.o
  .text.PomodoroStateAlarm
                 0x00000000       0x6a ./Core/Src/PomodoroFSM.o
+ .text.PomodoroStateEdit
+                0x00000000       0xb2 ./Core/Src/PomodoroFSM.o
+ .text.ModifyConfigValue
+                0x00000000       0x42 ./Core/Src/PomodoroFSM.o
  .text.PomodoroTask
                 0x00000000       0x3c ./Core/Src/PomodoroFSM.o
- .debug_info    0x00000000      0x390 ./Core/Src/PomodoroFSM.o
- .debug_abbrev  0x00000000      0x101 ./Core/Src/PomodoroFSM.o
+ .debug_info    0x00000000      0x411 ./Core/Src/PomodoroFSM.o
+ .debug_abbrev  0x00000000      0x113 ./Core/Src/PomodoroFSM.o
  .debug_aranges
-                0x00000000       0x50 ./Core/Src/PomodoroFSM.o
+                0x00000000       0x60 ./Core/Src/PomodoroFSM.o
  .debug_rnglists
-                0x00000000       0x37 ./Core/Src/PomodoroFSM.o
- .debug_macro   0x00000000      0x2e7 ./Core/Src/PomodoroFSM.o
+                0x00000000       0x44 ./Core/Src/PomodoroFSM.o
+ .debug_macro   0x00000000      0x2f3 ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000      0xad8 ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000       0x22 ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000       0x8e ./Core/Src/PomodoroFSM.o
@@ -416,10 +420,10 @@ Discarded input sections
  .debug_macro   0x00000000      0x2aa ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000      0x126 ./Core/Src/PomodoroFSM.o
  .debug_macro   0x00000000       0x7c ./Core/Src/PomodoroFSM.o
- .debug_line    0x00000000      0xa95 ./Core/Src/PomodoroFSM.o
- .debug_str     0x00000000    0x8ad3a ./Core/Src/PomodoroFSM.o
+ .debug_line    0x00000000      0xb3b ./Core/Src/PomodoroFSM.o
+ .debug_str     0x00000000    0x8adad ./Core/Src/PomodoroFSM.o
  .comment       0x00000000       0x44 ./Core/Src/PomodoroFSM.o
- .debug_frame   0x00000000      0x128 ./Core/Src/PomodoroFSM.o
+ .debug_frame   0x00000000      0x178 ./Core/Src/PomodoroFSM.o
  .ARM.attributes
                 0x00000000       0x34 ./Core/Src/PomodoroFSM.o
  .group         0x00000000        0xc ./Core/Src/SSD1306_OLED.o
