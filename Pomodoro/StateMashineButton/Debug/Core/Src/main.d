@@ -32,7 +32,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Inc/i2c.h ../Core/Inc/main.h ../Core/Inc/rtc.h \
  ../Core/Inc/usart.h ../Core/Inc/gpio.h ../Core/Inc/Button.h \
  ../Core/Inc/SSD1306_OLED.h ../Core/Inc/GFX_BlackWhite.h \
- ../Core/Inc/fonts/fonts.h ../Core/Inc/fonts/font_8x5.h
+ ../Core/Inc/fonts/fonts.h ../Core/Inc/fonts/font_8x5.h \
+ ../Core/Inc/PomodoroFSM.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -74,3 +75,4 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/GFX_BlackWhite.h:
 ../Core/Inc/fonts/fonts.h:
 ../Core/Inc/fonts/font_8x5.h:
+../Core/Inc/PomodoroFSM.h:

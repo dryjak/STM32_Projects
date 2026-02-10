@@ -45,7 +45,7 @@ static void UpdateDisplayTime(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 }
 
 //Do Idle
-void PomodoroStateIdle(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
+static void PomodoroStateIdle(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 {
 	//Check if there was input
 	if(Pomodoro->Event == POMO_EVENT_ACTION)
@@ -75,7 +75,7 @@ void PomodoroStateIdle(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 	}
 }
 
-void PomodoroStateRunning(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
+static void PomodoroStateRunning(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 {
 	if(Pomodoro->Event == POMO_EVENT_ACTION)
 	{
@@ -94,7 +94,7 @@ void PomodoroStateRunning(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 
 }
 
-void PomodoroStatePause(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
+static void PomodoroStatePause(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 {
 	if(Pomodoro->Event == POMO_EVENT_ACTION)
 	{
@@ -111,7 +111,7 @@ void PomodoroStatePause(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		Pomodoro->NeedsRedraw = 1;
 	}
 }
-void PomodoroStateAlarm(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
+static void PomodoroStateAlarm(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 {
 	if(Pomodoro->Event == POMO_EVENT_ACTION)
 	{
@@ -133,7 +133,7 @@ void PomodoroStateAlarm(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		Pomodoro->NeedsRedraw = 1;
 	}
 }
-void PomodoroStateEdit(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
+static void PomodoroStateEdit(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 {
 	if(Pomodoro->Event == POMO_EVENT_ACTION)
 	{

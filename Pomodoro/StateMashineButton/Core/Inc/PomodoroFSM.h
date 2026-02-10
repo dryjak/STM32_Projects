@@ -67,7 +67,6 @@ typedef struct{
 void PomodoroInit(Pomodoro_t *Pomodoro);
 void PomodoroTask(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime);
 
-
 //function that modifies value e.g. CfgWorkTime or CfgRelaxTime
 void ModifyConfigValue(uint16_t *ValueToModify, int8_t ValueThatModifies);
 

@@ -30,6 +30,8 @@
 #include "GFX_BlackWhite.h"
 #include "fonts/fonts.h"
 #include "stdio.h"
+#include "PomodoroFSM.h"
+#include "time.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -88,6 +90,9 @@ RTC_TimeTypeDef Time;
 RTC_DateTypeDef Date;
 uint32_t TargetTimeStamp, CurrentTimeStamp;
 uint8_t StartStop;
+
+//Pomodoro FSM variables
+Pomodoro_t Pomodoro;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -178,6 +183,8 @@ int main(void)
   ButtonRegisterRepeatCallback(&ButtonBottom, ButtonBottomRepeat);
   ButtonRegisterGoToIdleCallback(&ButtonBottom, TurnOffLed);
 
+  //Pomodoro FSM init
+  PomodoroInit(&Pomodoro);
 
   GFX_SetFont(font_8x5);
   SSD1306_Init(&hi2c1);
@@ -259,41 +266,91 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void UpdateDisplay()
 {
-	if(App.CurrentMode == NORMAL_MODE)
+	switch(Pomodoro.CurrentState)
 	{
-		SSD1306_Clear(BLACK);
-		GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
-
-		DrawMenuItem(5, "WORK", App.WorkTime, 0);
-		DrawMenuItem(17, "RELAX", App.RelaxTime, 0);
-		DrawMenuItem(29, "START", 0, 0);
-
-		SSD1306_Display();
-	}
-	else
-	{
-		if(App.EditTarget == TARGET_WORK)	//if work is selected
-		{
+	case POMO_STATE_IDLE:		//draw idle
 			SSD1306_Clear(BLACK);
-			//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);;
-			GFX_SetFont(font_8x5);
-			DrawMenuItem(5, "WORK", App.WorkTime, 1);
-			DrawMenuItem(17, "RELAX", App.RelaxTime, 0);
+			GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
+
+			DrawMenuItem(5, "IDLE", Pomodoro.CfgWorkTime, 0);
+			DrawMenuItem(17, "WORK", Pomodoro.CfgWorkTime, 0);
+			DrawMenuItem(29, "RELAX", Pomodoro.CfgRelaxTime, 0);
+			DrawMenuItem(37, "START / IDLE", 0, 0);
 
 			SSD1306_Display();
-		}
-		else	//if relax is selected
-		{
+		break;
+	case POMO_STATE_RUNNING:	//draw running
 			SSD1306_Clear(BLACK);
-			//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
-			GFX_SetFont(font_8x5);
-			DrawMenuItem(5, "WORK", App.WorkTime, 0);
-			DrawMenuItem(17, "RELAX", App.RelaxTime, 1);
+			GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
+			DrawMenuItem(5, "RUNNING", 0, 0);
+
+			if (Pomodoro.EditTarget == POMO_EDIT_WORK)
+			{
+				DrawMenuItem(17, "WORK REMAINED", Pomodoro.SavedTimeLeft, 0);
+			}
+			else
+			{
+				DrawMenuItem(17, "RELAX REMAINED", Pomodoro.SavedTimeLeft, 0);
+			}
 
 			SSD1306_Display();
-		}
-	}
+		break;
+	case POMO_STATE_PAUSED:		//draw paused
+			SSD1306_Clear(BLACK);
 
+			DrawMenuItem(5, "PAUSED", 0, 0);
+
+			if (Pomodoro.EditTarget == POMO_EDIT_WORK)
+			{
+				DrawMenuItem(17, "WORK REMAINED", Pomodoro.SavedTimeLeft, 0);
+			}
+			else
+			{
+				DrawMenuItem(17, "RELAX REMAINED", Pomodoro.SavedTimeLeft, 0);
+			}
+			DrawMenuItem(37, "RESUME", 0, 0);
+
+			SSD1306_Display();
+		break;
+	case POMO_STATE_ALARM:		//draw alarm
+			SSD1306_Clear(BLACK);
+
+			DrawMenuItem(5, "ALARM!", Pomodoro.CfgWorkTime, 0);
+
+			if (Pomodoro.EditTarget == POMO_EDIT_WORK)
+			{
+				GFX_DrawString(5, 17, "Be ready to: relax!", PIXEL_WHITE, 0);
+			}
+			else
+			{
+				GFX_DrawString(5, 17, "Be ready to: work!", PIXEL_WHITE, 0);
+			}
+
+			SSD1306_Display();
+		break;
+	case POMO_STATE_EDIT:		//draw edit
+			if (Pomodoro.EditTarget == POMO_EDIT_WORK)
+			{
+				SSD1306_Clear(BLACK);
+				//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);;
+				GFX_SetFont(font_8x5);
+				DrawMenuItem(5, "WORK TIME:", Pomodoro.CfgWorkTime, 1);
+				DrawMenuItem(17, "RELAX TIME:", Pomodoro.CfgRelaxTime, 0);
+
+				SSD1306_Display();
+			}
+			else
+			{
+				SSD1306_Clear(BLACK);
+				//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
+				GFX_SetFont(font_8x5);
+				DrawMenuItem(5, "WORK TIME:", Pomodoro.CfgWorkTime, 0);
+				DrawMenuItem(17, "RELAX TIME:", Pomodoro.CfgRelaxTime, 1);
+
+				SSD1306_Display();
+			}
+		break;
+	}
 }
 void DrawMenuItem(uint8_t y, char* Label, uint16_t Value, uint8_t IsSelected)
 {
@@ -313,6 +370,7 @@ void DrawMenuItem(uint8_t y, char* Label, uint16_t Value, uint8_t IsSelected)
 		GFX_DrawString(x, y, TempBuffer, PIXEL_WHITE, 0);	//white text
 	}
 }
+/*
 void ModifyWorkTime(int8_t ChangeTimeAmount)
 {
 	if(App.CurrentMode != EDIT_MODE) return;
@@ -331,7 +389,9 @@ void ModifyWorkTime(int8_t ChangeTimeAmount)
 	else if (App.RelaxTime > 999){App.RelaxTime = 999;}
 	App.DispalyNeedsUpdate = 1;
 }
+*/
 
+/*
 void UpdateDateWithSeconds(RTC_TimeTypeDef *Time, uint32_t SecondsToAdd)
 {
 	Time->Seconds = SecondsToAdd % 60;
@@ -342,78 +402,59 @@ void UpdateDateWithSeconds(RTC_TimeTypeDef *Time, uint32_t SecondsToAdd)
 	uint32_t HoursToAdd = MinutesToAdd / 24;
 	Time->Hours = HoursToAdd % 24;
 }
+*/
 
+/*
 void TimeToSeconds(RTC_TimeTypeDef Time, uint32_t *Seconds)
 {
 	Seconds = Time.Seconds + Time.Minutes * 60 + Time.Hours * 3600;
 }
+*/
 void ButtonMidPress()
 {
 	TurnOnLed();
-	if(App.CurrentMode == NORMAL_MODE) //do start stop
-	{
-		TurnOnLed();
-
-	}
-	else //do change mode
-	{
-
-		if(App.EditTarget == TARGET_WORK)
-		{
-			App.EditTarget = TARGET_RELAX;	//change to target relax
-		}
-		else
-		{
-			App.EditTarget = TARGET_WORK;	//change to target work
-		}
-		App.DispalyNeedsUpdate = 1;
-	}
-
+	Pomodoro.Event = POMO_EVENT_ACTION;
 }
 void ButtonMidLongPress()
 {
 	TurnOffLed();
-	if(App.CurrentMode == NORMAL_MODE)
-	{
-		App.CurrentMode = EDIT_MODE;
-		App.EditTarget = TARGET_WORK;
-	}
-	else
-	{
-		App.CurrentMode = NORMAL_MODE;
-	}
-	App.DispalyNeedsUpdate = 1;
+	Pomodoro.Event = POMO_EVENT_ACTION_2;
 }
 void ButtonTopPress()
 {
 	TurnOnLed();
-
-	ModifyWorkTime(1);
+	Pomodoro.Event = POMO_EVENT_INC;
+	Pomodoro.EventParam = 1;
 }
 void ButtonTopLongPress()
 {
 	TurnOffLed();
-	ModifyWorkTime(4);
+	Pomodoro.Event = POMO_EVENT_INC;
+	Pomodoro.EventParam = 4;
 }
 void ButtonTopRepeat()
 {
 	ToggleLed();
-	ModifyWorkTime(5);
+	Pomodoro.Event = POMO_EVENT_INC;
+	Pomodoro.EventParam = 5;
 }
 void ButtonBottomPress()
 {
 	TurnOnLed();
-	ModifyWorkTime(-1);
+	Pomodoro.Event = POMO_EVENT_INC;
+	Pomodoro.EventParam = -1;
 }
 void ButtonBottomLongPress()
 {
 	TurnOffLed();
-	ModifyWorkTime(-4);
+	Pomodoro.Event = POMO_EVENT_INC;
+	Pomodoro.EventParam = -4;
 }
 void ButtonBottomRepeat()
 {
 	ToggleLed();
-	ModifyWorkTime(-5);
+	Pomodoro.Event = POMO_EVENT_INC;
+	Pomodoro.EventParam = -5;
 }
 
 void ToggleLed()
@@ -427,6 +468,28 @@ void TurnOnLed()
 void TurnOffLed()
 {
 	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin,GPIO_PIN_RESET);
+}
+
+//calculate unix time (seconds passed from 1900)
+int32_t GetCurrentUnixTime(RTC_HandleTypeDef *hrtc)
+{
+    RTC_TimeTypeDef sTime = {0};
+    RTC_DateTypeDef sDate = {0};
+    struct tm timeStruct = {0};
+
+    // WAŻNE: W STM32 musisz odczytać najpierw CZAS, potem DATĘ!
+    HAL_RTC_GetTime(hrtc, &sTime, RTC_FORMAT_BIN);
+    HAL_RTC_GetDate(hrtc, &sDate, RTC_FORMAT_BIN);
+
+    timeStruct.tm_year = sDate.Year + 100; // od 1900 roku
+    timeStruct.tm_mon  = sDate.Month - 1;  // 0-11
+    timeStruct.tm_mday = sDate.Date;
+    timeStruct.tm_hour = sTime.Hours;
+    timeStruct.tm_min  = sTime.Minutes;
+    timeStruct.tm_sec  = sTime.Seconds;
+    timeStruct.tm_isdst = -1;
+
+    return (int32_t)mktime(&timeStruct);
 }
 /* USER CODE END 4 */
 
