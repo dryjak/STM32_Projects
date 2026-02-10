@@ -250,18 +250,19 @@ void UpdateDisplay()
 	{
 	case POMO_STATE_IDLE:		//draw idle
 			SSD1306_Clear(BLACK);
-			GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
+			//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
 
 			GFX_DrawString(10, 5, "IDLE", PIXEL_WHITE, 0);
 			DrawMenuItem(17, "WORK", Pomodoro.CfgWorkTime, 0);
 			DrawMenuItem(29, "RELAX", Pomodoro.CfgRelaxTime, 0);
-			DrawMenuItem(41, "START / IDLE", 0, 0);
+			GFX_DrawString(10, 5, "CLICK TO START", PIXEL_WHITE, 0);
+			//DrawMenuItem(41, "START / IDLE", 0, 0);
 
 			SSD1306_Display();
 		break;
 	case POMO_STATE_RUNNING:	//draw running
 			SSD1306_Clear(BLACK);
-			GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
+			//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
 			GFX_DrawString(10, 5, "RUNNING", PIXEL_WHITE, 0);
 
 			if (Pomodoro.CurrentPhase == POMO_PHASE_WORK)
