@@ -136,6 +136,13 @@ static void PomodoroStateAlarm(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 			Pomodoro->SavedTimeLeft = Pomodoro->CfgRelaxTime * 60;
 			//Pomodoro->TargetTimeStamp = CurrentUnixTime + Pomodoro->CfgWorkTime;
 		}
+		if(Pomodoro->CurrentPhase == POMO_PHASE_RELAX)	//after finishing work go straight to relax (without idle state)
+		{
+			Pomodoro->CurrentState = POMO_STATE_RUNNING;
+			int32_t Duration = 0;
+			Duration = Pomodoro->CfgRelaxTime * 60;
+			Pomodoro->TargetTimeStamp = CurrentUnixTime + Duration;
+		}
 		Pomodoro->NeedsRedraw = 1;
 	}
 }
