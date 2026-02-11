@@ -98,6 +98,13 @@ static void PomodoroStateRunning(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
 		Pomodoro->NeedsRedraw = 1;
 		Pomodoro->TriggerAlarm = 1;
 	}
+	if(Pomodoro->Event == POMO_EVENT_ACTION_2)
+	{
+		//go to edit mode
+		Pomodoro->CurrentState = POMO_STATE_EDIT;
+		Pomodoro->EditTarget = POMO_EDIT_WORK;
+		Pomodoro->NeedsRedraw = 1;
+	}
 }
 
 static void PomodoroStatePause(Pomodoro_t *Pomodoro, int32_t CurrentUnixTime)
