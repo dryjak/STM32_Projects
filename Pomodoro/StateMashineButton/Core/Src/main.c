@@ -66,6 +66,11 @@ char Buffer[32];
 RTC_TimeTypeDef Time;
 RTC_DateTypeDef Date;
 
+uint8_t Seconds;
+uint8_t Minutes;
+uint8_t Hours;
+char TimeBuffer[16];
+
 //Pomodoro FSM variables
 Pomodoro_t Pomodoro;
 /* USER CODE END PV */
@@ -96,6 +101,8 @@ void UpdateDisplay();
 void DrawMenuItem(uint8_t y, char* Label, uint16_t Value, uint8_t IsSelected);
 
 int32_t GetCurrentUnixTime(RTC_HandleTypeDef *hrtc);
+void ChangeTimeFormat(int32_t TimeInSeconds, uint8_t *Hours, uint8_t *Minutes, uint8_t *Seconds);
+
 
 
 //Button Middle
@@ -263,8 +270,27 @@ void UpdateDisplay()
 	case POMO_STATE_RUNNING:	//draw running
 			SSD1306_Clear(BLACK);
 			//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
-			GFX_DrawString(10, 5, "RUNNING", PIXEL_WHITE, 0);
+			if (Pomodoro.CurrentPhase == POMO_PHASE_WORK)
+			{
+				GFX_DrawString(10, 5, "WORK REMAINED", PIXEL_WHITE, 0);
+			}
+			else if(Pomodoro.CurrentPhase == POMO_PHASE_RELAX)
+			{
+				GFX_DrawString(10, 5, "RELAX REMAINED", PIXEL_WHITE, 0);
+			}
 
+			Hours = Pomodoro.TimeToDisplay / 3600;
+			Minutes = (Pomodoro.TimeToDisplay / 60) % 60;
+			Seconds = Pomodoro.TimeToDisplay % 60;
+
+
+			if(Hours > 0)
+				sprintf(TimeBuffer, "%02d:%02d:%02d", Hours, Minutes, Seconds);
+			else
+				sprintf(TimeBuffer, "%02d:%02d", Minutes, Seconds);
+
+			GFX_DrawString(10, 20, TimeBuffer, PIXEL_WHITE, 0);
+/*
 			if (Pomodoro.CurrentPhase == POMO_PHASE_WORK)
 			{
 				DrawMenuItem(17, "WORK REMAINED", Pomodoro.TimeToDisplay, 0);
@@ -273,24 +299,30 @@ void UpdateDisplay()
 			{
 				DrawMenuItem(17, "RELAX REMAINED", Pomodoro.TimeToDisplay, 0);
 			}
-
+*/
 			SSD1306_Display();
 		break;
 	case POMO_STATE_PAUSED:		//draw paused
 			SSD1306_Clear(BLACK);
 
-			GFX_DrawString(10, 5, "PAUSED", PIXEL_WHITE, 0);
+			//GFX_DrawString(10, 5, "PAUSED", PIXEL_WHITE, 0);
 
 			if (Pomodoro.CurrentPhase == POMO_PHASE_WORK)
 			{
-				DrawMenuItem(17, "WORK REMAINED", Pomodoro.SavedTimeLeft, 0);
+				GFX_DrawString(5, 5, "PAUSED WORK REMAINED", PIXEL_WHITE, 0);
 			}
 			else
 			{
-				DrawMenuItem(17, "RELAX REMAINED", Pomodoro.SavedTimeLeft, 0);
+				GFX_DrawString(5, 5, "PAUSED RELAX REMAINED", PIXEL_WHITE, 0);
 			}
-			DrawMenuItem(37, "RESUME", 0, 0);
 
+			//draw remaining time
+			ChangeTimeFormat(Pomodoro.TimeToDisplay, &Hours, &Minutes, &Seconds);
+
+			GFX_DrawString(10, 20, TimeBuffer, PIXEL_WHITE, 0);
+
+
+			GFX_DrawString(10, 47, "CLICK TO RESUME", PIXEL_WHITE, 0);
 			SSD1306_Display();
 		break;
 	case POMO_STATE_ALARM:		//draw alarm
@@ -333,6 +365,19 @@ void UpdateDisplay()
 		break;
 	}
 }
+void ChangeTimeFormat(int32_t TimeInSeconds, uint8_t *Hours, uint8_t *Minutes, uint8_t *Seconds)
+{
+	*Seconds = (uint8_t) (TimeInSeconds % 60);
+
+	*Minutes = (uint8_t) ((TimeInSeconds / 60) % 60);
+
+	*Hours = (uint8_t) (TimeInSeconds / 3600);
+	if(Hours > 0)
+		sprintf(TimeBuffer, "%02d:%02d:%02d", *Hours, *Minutes, *Seconds);
+	else
+		sprintf(TimeBuffer, "%02d:%02d", *Minutes, *Seconds);
+}
+
 void DrawMenuItem(uint8_t y, char* Label, uint16_t Value, uint8_t IsSelected)
 {
 	char TempBuffer[32];
@@ -472,6 +517,7 @@ int32_t GetCurrentUnixTime(RTC_HandleTypeDef *hrtc)
 
     return (int32_t)mktime(&timeStruct);
 }
+
 /* USER CODE END 4 */
 
 /**
