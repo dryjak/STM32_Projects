@@ -259,10 +259,22 @@ void UpdateDisplay()
 			SSD1306_Clear(BLACK);
 			//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
 
-			GFX_DrawString(10, 5, "IDLE", PIXEL_WHITE, 0);
-			DrawMenuItem(17, "WORK", Pomodoro.CfgWorkTime, 0);
-			DrawMenuItem(29, "RELAX", Pomodoro.CfgRelaxTime, 0);
 			GFX_DrawString(10, 5, "CLICK TO START", PIXEL_WHITE, 0);
+
+			//DrawMenuItem(17, "WORK", Pomodoro.CfgWorkTime, 0);
+			//draw remaining time
+			ChangeTimeFormat(Pomodoro.CfgWorkTime, &Hours, &Minutes, &Seconds);
+			sprintf(Buffer,"WORK: %s", TimeBuffer);
+			GFX_DrawString(10, 17, Buffer, PIXEL_WHITE, 0);
+
+
+
+			//DrawMenuItem(29, "RELAX", Pomodoro.CfgRelaxTime, 0);
+			//GFX_DrawString(10, 5, "CLICK TO START", PIXEL_WHITE, 0);
+
+			ChangeTimeFormat(Pomodoro.CfgRelaxTime, &Hours, &Minutes, &Seconds);
+			sprintf(Buffer,"RELAX: %s", TimeBuffer);
+			GFX_DrawString(10, 29, Buffer, PIXEL_WHITE, 0);
 			//DrawMenuItem(41, "START / IDLE", 0, 0);
 
 			SSD1306_Display();
@@ -279,17 +291,10 @@ void UpdateDisplay()
 				GFX_DrawString(10, 5, "RELAX REMAINED", PIXEL_WHITE, 0);
 			}
 
-			Hours = Pomodoro.TimeToDisplay / 3600;
-			Minutes = (Pomodoro.TimeToDisplay / 60) % 60;
-			Seconds = Pomodoro.TimeToDisplay % 60;
-
-
-			if(Hours > 0)
-				sprintf(TimeBuffer, "%02d:%02d:%02d", Hours, Minutes, Seconds);
-			else
-				sprintf(TimeBuffer, "%02d:%02d", Minutes, Seconds);
-
+			//draw remaining time
+			ChangeTimeFormat(Pomodoro.TimeToDisplay, &Hours, &Minutes, &Seconds);
 			GFX_DrawString(10, 20, TimeBuffer, PIXEL_WHITE, 0);
+
 /*
 			if (Pomodoro.CurrentPhase == POMO_PHASE_WORK)
 			{
@@ -318,9 +323,7 @@ void UpdateDisplay()
 
 			//draw remaining time
 			ChangeTimeFormat(Pomodoro.TimeToDisplay, &Hours, &Minutes, &Seconds);
-
 			GFX_DrawString(10, 20, TimeBuffer, PIXEL_WHITE, 0);
-
 
 			GFX_DrawString(10, 47, "CLICK TO RESUME", PIXEL_WHITE, 0);
 			SSD1306_Display();
@@ -347,8 +350,24 @@ void UpdateDisplay()
 				SSD1306_Clear(BLACK);
 				//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);;
 				GFX_SetFont(font_8x5);
-				DrawMenuItem(5, "WORK TIME:", Pomodoro.CfgWorkTime, 1);
-				DrawMenuItem(17, "RELAX TIME:", Pomodoro.CfgRelaxTime, 0);
+
+				uint8_t Length = 0;
+
+				Minutes = Pomodoro.CfgWorkTime % 60;
+				Hours = Pomodoro.CfgWorkTime / 60;
+				sprintf(TimeBuffer, "%02d:%02d", Hours, Minutes);
+				Length = sprintf(Buffer, "WORK TIME: %s", TimeBuffer);
+				GFX_DrawFillRectangle(5 - 2 , 5 - 2, Length * 6 + 4, 8 + 4, PIXEL_WHITE);
+				GFX_DrawString(5, 5, Buffer, PIXEL_BLACK, 1);
+
+
+				Minutes = Pomodoro.CfgRelaxTime % 60;
+				Hours = Pomodoro.CfgRelaxTime / 60;
+				sprintf(TimeBuffer, "%02d:%02d", Hours, Minutes);
+				Length = sprintf(Buffer, "RELAX TIME: %s", TimeBuffer);
+				GFX_DrawString(5, 17, Buffer, PIXEL_WHITE, 0);
+				//GFX_DrawString(5, 17, "RELAX TIME: %s", TimeBuffer, PIXEL_WHITE, 0);
+
 
 				SSD1306_Display();
 			}
@@ -357,8 +376,22 @@ void UpdateDisplay()
 				SSD1306_Clear(BLACK);
 				//GFX_DrawRectangle(0, 0, 128, 63, PIXEL_WHITE);
 				GFX_SetFont(font_8x5);
-				DrawMenuItem(5, "WORK TIME:", Pomodoro.CfgWorkTime, 0);
-				DrawMenuItem(17, "RELAX TIME:", Pomodoro.CfgRelaxTime, 1);
+				//DrawMenuItem(5, "WORK TIME:", Pomodoro.CfgWorkTime, 0);
+				//DrawMenuItem(17, "RELAX TIME:", Pomodoro.CfgRelaxTime, 1);
+				uint8_t Length = 0;
+
+				Minutes = Pomodoro.CfgWorkTime % 60;
+				Hours = Pomodoro.CfgWorkTime / 60;
+				sprintf(TimeBuffer, "%02d:%02d", Hours, Minutes);
+				Length = sprintf(Buffer, "WORK TIME: %s", TimeBuffer);
+				GFX_DrawString(5, 5, Buffer, PIXEL_WHITE, 0);
+
+				Minutes = Pomodoro.CfgRelaxTime % 60;
+				Hours = Pomodoro.CfgRelaxTime / 60;
+				sprintf(TimeBuffer, "%02d:%02d", Hours, Minutes);
+				Length = sprintf(Buffer, "RELAX TIME: %s", TimeBuffer);
+				GFX_DrawFillRectangle(5 - 2 , 17 - 2, Length * 6 + 4, 8 + 4, PIXEL_WHITE);
+				GFX_DrawString(5, 17, Buffer, PIXEL_BLACK, 1);
 
 				SSD1306_Display();
 			}
@@ -372,7 +405,7 @@ void ChangeTimeFormat(int32_t TimeInSeconds, uint8_t *Hours, uint8_t *Minutes, u
 	*Minutes = (uint8_t) ((TimeInSeconds / 60) % 60);
 
 	*Hours = (uint8_t) (TimeInSeconds / 3600);
-	if(Hours > 0)
+	if(*Hours > 0)
 		sprintf(TimeBuffer, "%02d:%02d:%02d", *Hours, *Minutes, *Seconds);
 	else
 		sprintf(TimeBuffer, "%02d:%02d", *Minutes, *Seconds);
