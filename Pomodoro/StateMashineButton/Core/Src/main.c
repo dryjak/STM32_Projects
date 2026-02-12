@@ -292,8 +292,10 @@ void UpdateDisplay()
 			}
 
 			//draw remaining time
+			  GFX_SetFontSize(4);
 			ChangeTimeFormat(Pomodoro.TimeToDisplay, &Hours, &Minutes, &Seconds);
 			GFX_DrawString(10, 20, TimeBuffer, PIXEL_WHITE, 0);
+			  GFX_SetFontSize(1);
 
 /*
 			if (Pomodoro.CurrentPhase == POMO_PHASE_WORK)
@@ -323,9 +325,11 @@ void UpdateDisplay()
 
 			//draw remaining time
 			ChangeTimeFormat(Pomodoro.TimeToDisplay, &Hours, &Minutes, &Seconds);
+			GFX_SetFontSize(4);
 			GFX_DrawString(10, 20, TimeBuffer, PIXEL_WHITE, 0);
+			GFX_SetFontSize(1);
 
-			GFX_DrawString(10, 47, "CLICK TO RESUME", PIXEL_WHITE, 0);
+			//GFX_DrawString(10, 47, "CLICK TO RESUME", PIXEL_WHITE, 0);
 			SSD1306_Display();
 		break;
 	case POMO_STATE_ALARM:		//draw alarm
