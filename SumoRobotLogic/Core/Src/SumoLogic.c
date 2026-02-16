@@ -12,15 +12,21 @@ void Init_RobotSignal(RobotState_t *RobotState, GPIO_TypeDef *GpioPort ,uint16_t
 	RobotState->GpioPin  = GpioPin;
 }
 
-void Check_RobotSignal(RobotState_t *RobotState)
+void RobotSignalTask(RobotState_t *RobotState)
 {
 	//Check if there was signal to start
-
-	//Wait 5s
-
-	//check if there is still signal to start
-
-	//Change mode to fight
+	switch (RobotState->SumoSignal)
+	{
+	case STOP:
+		break;
+	case COUNTDOWN:
+		//Wait 5s
+		break;
+	case FIGHT:
+		//Check if there is still signal to start
+		//Change mode to fight
+		break;
+	}
 }
 
 

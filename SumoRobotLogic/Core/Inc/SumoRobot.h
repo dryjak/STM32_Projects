@@ -20,6 +20,9 @@ typedef struct{
 	GPIO_TypeDef 	*GpioPort;
 	uint16_t 		GpioPin;
 
+	uint32_t TimerDebounce;
+	uint32_t LastTick;
+
 }RobotState_t;
 
 
