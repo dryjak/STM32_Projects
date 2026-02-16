@@ -10,6 +10,8 @@
 
 void Init_RobotSignal(Signal_t *Signal, GPIO_TypeDef *GpioPort ,uint16_t GpioPin, uint32_t TimerDebounce)
 {
+	Signal->State = SIGNAL_STOP;
+
 	Signal->GpioPort = GpioPort;
 	Signal->GpioPin  = GpioPin;
 

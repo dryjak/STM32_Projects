@@ -13,7 +13,7 @@
 
 typedef enum{
 	SIGNAL_STOP = 0,
-	SIGNAL_DEBOUNCE,
+	SIGNAL_DEBOUNCE,//CHANGE TO COUNTDOWN
 	SIGNAL_START
 }SIGNAL_STATE;
 
@@ -30,7 +30,7 @@ typedef struct{
 	void (*SignalStart)(void);
 	void (*SignalReturnToStop)(void);
 
-}Signal_t;
+}Signal_t;//CHANGE TO STARTmODULE
 
 void Init_RobotSignal(Signal_t *Signal, GPIO_TypeDef *GpioPort ,uint16_t GpioPin, uint32_t TimerDebounce);
 void RobotSignalTask(Signal_t *Signal);
