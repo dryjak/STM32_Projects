@@ -6,23 +6,64 @@
  */
 #include <SumoRobot.h>
 
-void Init_RobotSignal(RobotState_t *RobotState, GPIO_TypeDef *GpioPort ,uint16_t GpioPin)
+
+
+void Init_RobotSignal(Signal_t *Signal, GPIO_TypeDef *GpioPort ,uint16_t GpioPin)
 {
-	RobotState->GpioPort = GpioPort;
-	RobotState->GpioPin  = GpioPin;
+	Signal->GpioPort = GpioPort;
+	Signal->GpioPin  = GpioPin;
 }
 
-void RobotSignalTask(RobotState_t *RobotState)
+void RobotStopRoute(Signal_t *Signal)
+{
+	if(HAL_GPIO_ReadPin(Signal->GpioPort, Signal->GpioPin) == SIGNAL_START_VALUE)
+	{
+		Signal->LastTick = HAL_GetTick();
+		Signal->State = SIGNAL_DEBOUNCE;
+	}
+}
+
+void RobotCountdownRoute(Signal_t *Signal)
+{
+	if(HAL_GetTick() - Signal->LastTick >= Signal->TimerDebounce)
+	{
+		//Go to the fight state
+		Signal->State = SIGNAL_START;
+	}
+	else
+	{
+		//Go back to stop state
+		Signal->State = SIGNAL_STOP;
+	}
+}
+
+void RobotFightRoute(Signal_t *Signal)
+{
+	if(Signal->SignalStart == NULL)
+	{
+		return;
+	}
+
+	Signal->SignalStart();
+}
+
+//callbacks
+void SignalStartCallback(Signal_t *Signal, void *Callback)
+{
+	Signal->SignalStart = Callback;
+}
+
+void RobotSignalTask(Signal_t *Signal)
 {
 	//Check if there was signal to start
-	switch (RobotState->SumoSignal)
+	switch (Signal->State)
 	{
-	case STOP:
+	case SIGNAL_STOP:
 		break;
-	case COUNTDOWN:
+	case SIGNAL_DEBOUNCE:
 		//Wait 5s
 		break;
-	case FIGHT:
+	case SIGNAL_START:
 		//Check if there is still signal to start
 		//Change mode to fight
 		break;

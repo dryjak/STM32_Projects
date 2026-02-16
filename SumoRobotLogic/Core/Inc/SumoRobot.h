@@ -9,21 +9,28 @@
 #define INC_SUMOROBOT_H_
 #include <main.h>
 
+#define SIGNAL_START_VALUE 1
+
 typedef enum{
-	STOP = 0,
-	COUNTDOWN,
-	FIGHT
-}RobotSignal;
+	SIGNAL_STOP = 0,
+	SIGNAL_DEBOUNCE,
+	SIGNAL_START
+}SIGNAL_STATE;
+
 
 typedef struct{
-	RobotSignal 	SumoSignal;
+	SIGNAL_STATE 	State;
+
 	GPIO_TypeDef 	*GpioPort;
 	uint16_t 		GpioPin;
 
 	uint32_t TimerDebounce;
 	uint32_t LastTick;
 
-}RobotState_t;
+	void (*SignalStart)(void);
+	void (*SignalReturnToStop)(void);
+
+}Signal_t;
 
 
 
