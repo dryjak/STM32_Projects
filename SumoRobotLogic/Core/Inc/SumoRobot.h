@@ -32,6 +32,10 @@ typedef struct{
 
 }Signal_t;
 
+void Init_RobotSignal(Signal_t *Signal, GPIO_TypeDef *GpioPort ,uint16_t GpioPin, uint32_t TimerDebounce);
+void RobotSignalTask(Signal_t *Signal);
+
+
 
 
 

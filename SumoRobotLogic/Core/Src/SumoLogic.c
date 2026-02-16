@@ -8,10 +8,15 @@
 
 
 
-void Init_RobotSignal(Signal_t *Signal, GPIO_TypeDef *GpioPort ,uint16_t GpioPin)
+void Init_RobotSignal(Signal_t *Signal, GPIO_TypeDef *GpioPort ,uint16_t GpioPin, uint32_t TimerDebounce)
 {
 	Signal->GpioPort = GpioPort;
 	Signal->GpioPin  = GpioPin;
+
+	Signal->TimerDebounce = TimerDebounce;
+
+	Signal->SignalStart = NULL;
+	Signal->SignalReturnToStop = NULL;
 }
 
 void RobotStopRoute(Signal_t *Signal)
@@ -29,6 +34,10 @@ void RobotCountdownRoute(Signal_t *Signal)
 	{
 		//Go to the fight state
 		Signal->State = SIGNAL_START;
+		if(Signal->SignalStart != NULL)
+		{
+			Signal->SignalStart();
+		}
 	}
 	else
 	{
@@ -43,12 +52,18 @@ void RobotCountdownRoute(Signal_t *Signal)
 
 void RobotFightRoute(Signal_t *Signal)
 {
-	if(Signal->SignalStart == NULL)
+	if(HAL_GPIO_ReadPin(Signal->GpioPort, Signal->GpioPin) != SIGNAL_START_VALUE)
 	{
-		return;
+		Signal->State = SIGNAL_STOP;
+	}
+	if(Signal->SignalReturnToStop != NULL)
+	{
+		Signal->SignalReturnToStop();
 	}
 
-	Signal->SignalStart();
+
+
+
 }
 
 //Callback
