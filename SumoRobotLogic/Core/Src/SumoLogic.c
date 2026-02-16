@@ -34,6 +34,10 @@ void RobotCountdownRoute(Signal_t *Signal)
 	{
 		//Go back to stop state
 		Signal->State = SIGNAL_STOP;
+		if(Signal->SignalReturnToStop != NULL)
+		{
+			Signal->SignalReturnToStop();
+		}
 	}
 }
 
@@ -47,12 +51,18 @@ void RobotFightRoute(Signal_t *Signal)
 	Signal->SignalStart();
 }
 
-//callbacks
+//Callback
 void SignalStartCallback(Signal_t *Signal, void *Callback)
 {
 	Signal->SignalStart = Callback;
 }
 
+void SignalReturnToStopCallback(Signal_t *Signal, void *Callback)
+{
+	Signal->SignalReturnToStop = Callback;
+}
+
+//Finite state machine
 void RobotSignalTask(Signal_t *Signal)
 {
 	//Check if there was signal to start
