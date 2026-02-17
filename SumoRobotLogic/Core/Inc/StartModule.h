@@ -10,7 +10,7 @@
 
 #include <main.h>
 
-#define SIGNAL_START_VALUE GPIO_PIN_SET
+#define SIGNAL_START_VALUE GPIO_PIN_RESET
 
 typedef enum{
 	MODULE_STOP = 0,
