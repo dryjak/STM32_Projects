@@ -8,91 +8,90 @@
 
 
 
-void Init_RobotSignal(Signal_t *Signal, GPIO_TypeDef *GpioPort ,uint16_t GpioPin, uint32_t TimerDebounce)
+void StartModule_Init(StartModule_t *StartModule, GPIO_TypeDef *GpioPort ,uint16_t GpioPin, uint32_t TimerDebounce)
 {
-	Signal->State = SIGNAL_STOP;
+	StartModule->State = MODULE_STOP;
 
-	Signal->GpioPort = GpioPort;
-	Signal->GpioPin  = GpioPin;
+	StartModule->GpioPort = GpioPort;
+	StartModule->GpioPin  = GpioPin;
 
-	Signal->TimerDebounce = TimerDebounce;
+	StartModule->TimerDebounce = TimerDebounce;
 
-	Signal->SignalStart = NULL;
-	Signal->SignalReturnToStop = NULL;
+	StartModule->SignalStart = NULL;
+	StartModule->SignalReturnToStop = NULL;
 }
 
-void RobotStopRoute(Signal_t *Signal)
+void StartModule_StopRoute(StartModule_t *StartModule)
 {
-	if(HAL_GPIO_ReadPin(Signal->GpioPort, Signal->GpioPin) == SIGNAL_START_VALUE)
+	if(HAL_GPIO_ReadPin(StartModule->GpioPort, StartModule->GpioPin) == SIGNAL_START_VALUE)
 	{
-		Signal->LastTick = HAL_GetTick();
-		Signal->State = SIGNAL_DEBOUNCE;
+		StartModule->LastTick = HAL_GetTick();
+		StartModule->State = MODULE_COUNTDOWN;
 	}
 }
 
-void RobotCountdownRoute(Signal_t *Signal)
+void StartModule_CountdownRoute(StartModule_t *StartModule)
 {
-	if(HAL_GetTick() - Signal->LastTick >= Signal->TimerDebounce)
+	if(HAL_GetTick() - StartModule->LastTick >= StartModule->TimerDebounce)
 	{
-		//Go to the fight state
-		Signal->State = SIGNAL_START;
-		if(Signal->SignalStart != NULL)
+		//Go to the start state
+		StartModule->State = MODULE_START;
+		if(StartModule->SignalStart != NULL)
 		{
-			Signal->SignalStart();
+			StartModule->SignalStart();
 		}
 	}
-	else
+	else if(HAL_GPIO_ReadPin(StartModule->GpioPort, StartModule->GpioPin) != SIGNAL_START_VALUE)
 	{
 		//Go back to stop state
-		Signal->State = SIGNAL_STOP;
-		if(Signal->SignalReturnToStop != NULL)
+		StartModule->State = MODULE_STOP;
+		if(StartModule->SignalReturnToStop != NULL)
 		{
-			Signal->SignalReturnToStop();
+			StartModule->SignalReturnToStop();
 		}
 	}
 }
 
-void RobotFightRoute(Signal_t *Signal)
+void StartModule_StartRoute(StartModule_t *StartModule)
 {
-	if(HAL_GPIO_ReadPin(Signal->GpioPort, Signal->GpioPin) != SIGNAL_START_VALUE)
+	if(HAL_GPIO_ReadPin(StartModule->GpioPort, StartModule->GpioPin) != SIGNAL_START_VALUE)
 	{
-		Signal->State = SIGNAL_STOP;
+		StartModule->State = MODULE_STOP;
+		if(StartModule->SignalReturnToStop != NULL)
+		{
+			StartModule->SignalReturnToStop();
+		}
 	}
-	if(Signal->SignalReturnToStop != NULL)
-	{
-		Signal->SignalReturnToStop();
-	}
-
-
-
-
 }
 
 //Callback
-void SignalStartCallback(Signal_t *Signal, void *Callback)
+void StartModule_StartCallback(StartModule_t *StartModule, void *Callback)
 {
-	Signal->SignalStart = Callback;
+	StartModule->SignalStart = Callback;
 }
 
-void SignalReturnToStopCallback(Signal_t *Signal, void *Callback)
+void StartModule_ReturnToStopCallback(StartModule_t *StartModule, void *Callback)
 {
-	Signal->SignalReturnToStop = Callback;
+	StartModule->SignalReturnToStop = Callback;
 }
 
 //Finite state machine
-void RobotSignalTask(Signal_t *Signal)
+void StartModule_Task(StartModule_t *StartModule)
 {
 	//Check if there was signal to start
-	switch (Signal->State)
+	switch (StartModule->State)
 	{
-	case SIGNAL_STOP:
+	case MODULE_STOP:
+		StartModule_StopRoute(StartModule);
 		break;
-	case SIGNAL_DEBOUNCE:
-		//Wait 5s
+	case MODULE_COUNTDOWN:
+		//Wait e.g. 5s
+		StartModule_CountdownRoute(StartModule);
 		break;
-	case SIGNAL_START:
+	case MODULE_START:
 		//Check if there is still signal to start
 		//Change mode to fight
+		StartModule_StartRoute(StartModule);
 		break;
 	}
 }

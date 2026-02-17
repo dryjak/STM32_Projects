@@ -9,17 +9,17 @@
 #define INC_SUMOROBOT_H_
 #include <main.h>
 
-#define SIGNAL_START_VALUE 1
+#define SIGNAL_START_VALUE GPIO_PIN_SET
 
 typedef enum{
-	SIGNAL_STOP = 0,
-	SIGNAL_DEBOUNCE,//CHANGE TO COUNTDOWN
-	SIGNAL_START
-}SIGNAL_STATE;
+	MODULE_STOP = 0,
+	MODULE_COUNTDOWN,
+	MODULE_START
+}START_MODULE_STATE;
 
 
 typedef struct{
-	SIGNAL_STATE 	State;
+	START_MODULE_STATE 	State;
 
 	GPIO_TypeDef 	*GpioPort;
 	uint16_t 		GpioPin;
@@ -30,10 +30,14 @@ typedef struct{
 	void (*SignalStart)(void);
 	void (*SignalReturnToStop)(void);
 
-}Signal_t;//CHANGE TO STARTmODULE
+}StartModule_t;
 
-void Init_RobotSignal(Signal_t *Signal, GPIO_TypeDef *GpioPort ,uint16_t GpioPin, uint32_t TimerDebounce);
-void RobotSignalTask(Signal_t *Signal);
+void StartModule_Init(StartModule_t *StartModule, GPIO_TypeDef *GpioPort ,uint16_t GpioPin, uint32_t TimerDebounce);
+void StartModule_Task(StartModule_t *StartModule);
+
+//Callback
+void StartModule_StartCallback(StartModule_t *StartModule, void *Callback);
+void StartModule_ReturnToStopCallback(StartModule_t *StartModule, void *Callback);
 
 
 

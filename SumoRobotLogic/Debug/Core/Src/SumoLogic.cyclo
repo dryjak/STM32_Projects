@@ -1,0 +1,7 @@
+../Core/Src/SumoLogic.c:11:6:StartModule_Init	1
+../Core/Src/SumoLogic.c:24:6:StartModule_StopRoute	2
+../Core/Src/SumoLogic.c:33:6:StartModule_CountdownRoute	5
+../Core/Src/SumoLogic.c:55:6:StartModule_StartRoute	3
+../Core/Src/SumoLogic.c:68:6:StartModule_StartCallback	1
+../Core/Src/SumoLogic.c:73:6:StartModule_ReturnToStopCallback	1
+../Core/Src/SumoLogic.c:79:6:StartModule_Task	5
