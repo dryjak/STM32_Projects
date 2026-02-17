@@ -23,7 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <StartModule.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,13 +44,16 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+StartModule_t StartModule;
+uint32_t TimerDebounce = 5000;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+void TurnGreenLedOn();
+void TurnRedLedOn();
+void TurnLedOff();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -75,7 +78,9 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+  StartModule_Init(&StartModule, StartModule_GPIO_Port, StartModule_Pin, TimerDebounce);
+  StartModule_StartCallback(&StartModule, TurnRedLedOn);
+  StartModule_ReturnToStopCallback(&StartModule, TurnLedOff);
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -97,6 +102,11 @@ int main(void)
   while (1)
   {
 	  //HAL_GPIO_ReadPin(GPIOx, GPIO_Pin)
+	 StartModule_Task(&StartModule);
+	 if(StartModule.State == MODULE_COUNTDOWN)
+	 {
+		 TurnGreenLedOn();
+	 }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -151,6 +161,21 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void TurnGreenLedOn()
+{
+	//Turn led on
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+}
+void TurnRedLedOn()
+{
+	//Turn led on
+	HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
+}
+void TurnLedOff()
+{
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
+}
 
 /* USER CODE END 4 */
 
