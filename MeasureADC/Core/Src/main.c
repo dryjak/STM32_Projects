@@ -46,7 +46,9 @@ DMA_HandleTypeDef hdma_adc1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-volatile uint16_t AdcValue;
+volatile uint16_t AdcValue[10];
+uint16_t AdcSum;
+uint16_t AdcMeanValue;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -97,14 +99,19 @@ int main(void)
   MX_USART2_UART_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_ADC_Start_DMA(&hadc1, &AdcValue, 1);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)AdcValue, 10);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
+	  for(uint8_t i = 0; i < 10; i++)
+	  {
+		  AdcSum += AdcValue[i];
+	  }
+	  AdcMeanValue = AdcSum / 10;
+	  AdcSum = 0;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
