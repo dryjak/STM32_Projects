@@ -45,7 +45,7 @@ ADC_HandleTypeDef hadc1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-uint16_t AdcValue;
+volatile uint16_t AdcValue;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -53,6 +53,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_ADC1_Init(void);
+static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -93,23 +94,21 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   MX_ADC1_Init();
-  /* USER CODE BEGIN 2 */
 
+  /* Initialize interrupts */
+  MX_NVIC_Init();
+
+  /* USER CODE BEGIN 2 */
+  HAL_ADC_Start_IT(&hadc1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
     /* USER CODE END WHILE */
-	  HAL_ADC_Start(&hadc1);
 
-	  if(HAL_ADC_PollForConversion(&hadc1, 1000) == HAL_OK)
-	  {
-		  HAL_ADC_GetValue(&hadc1);
-	  }
-
-	  HAL_Delay(2000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -159,6 +158,17 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief NVIC Configuration.
+  * @retval None
+  */
+static void MX_NVIC_Init(void)
+{
+  /* ADC_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(ADC_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(ADC_IRQn);
 }
 
 /**
@@ -286,7 +296,11 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
+{
+	AdcValue = HAL_ADC_GetValue(&hadc1);
+	HAL_ADC_Start_IT(&hadc1);
+}
 /* USER CODE END 4 */
 
 /**
