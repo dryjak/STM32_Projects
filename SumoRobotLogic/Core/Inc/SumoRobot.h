@@ -1,7 +1,7 @@
 /*
  * SumoRobot.h
  *
- *  Created on: Feb 16, 2026
+ *  Created on: Feb 19, 2026
  *      Author: dryla
  */
 
@@ -9,38 +9,51 @@
 #define INC_SUMOROBOT_H_
 #include <main.h>
 
-#define SIGNAL_START_VALUE GPIO_PIN_SET
+typedef struct{
+	GPIO_TypeDef *FlorPortL;	uint16_t FlorPinL;
+	GPIO_TypeDef *FlorPortR;	uint16_t FlorPinR;
+
+	GPIO_TypeDef *DistancePortM;	uint16_t DistancePinM;
+	GPIO_TypeDef *DistancePortL;	uint16_t DistancePinL;
+	GPIO_TypeDef *DistancePortR;	uint16_t DistancePinR;
+
+	//I have used 3 pin dip switch
+	GPIO_TypeDef *DipSwitchPort1;	uint16_t DipSwitchPin1;
+	GPIO_TypeDef *DipSwitchPort2;	uint16_t DipSwitchPin2;
+	GPIO_TypeDef *DipSwitchPort3;	uint16_t DipSwitchPin3;
+
+	//place for motors
+}SumoRobotHardware_t;
+
+typedef union{
+	struct{
+		uint8_t FlorL : 1;		//1 - black, 0 - white
+		uint8_t FlorR : 1;
+		uint8_t DistanceM : 1;	//1 - not detected, 0 - detected
+		uint8_t DistanceR : 1;
+		uint8_t DistanceL : 1;
+		uint8_t EmptySpace: 3;
+	};
+	uint8_t AllSensors;
+}SumoRobotSensors_t	;
 
 typedef enum{
-	MODULE_STOP = 0,
-	MODULE_COUNTDOWN,
-	MODULE_START
-}START_MODULE_STATE;
-
+	STOP = 0,
+	FORWARD,
+	TURN_LEFT,
+	TURN_RIGHT,
+	TURN_SLIGHT_LEFT,
+	TURN_SLIGHT_RIGHT,
+	BACKWARD,
+}SumoRobotMove_t;
 
 typedef struct{
-	START_MODULE_STATE 	State;
+	uint8_t Tactics;	//reading from dip switch
+	SumoRobotSensors_t Sensors;
+	SumoRobotMove_t Move;
+	SumoRobotHardware_t Hardware;
 
-	GPIO_TypeDef 	*GpioPort;
-	uint16_t 		GpioPin;
-
-	uint32_t TimerDebounce;
-	uint32_t LastTick;
-
-	void (*SignalStart)(void);
-	void (*SignalReturnToStop)(void);
-
-}StartModule_t;
-
-void StartModule_Init(StartModule_t *StartModule, GPIO_TypeDef *GpioPort ,uint16_t GpioPin, uint32_t TimerDebounce);
-void StartModule_Task(StartModule_t *StartModule);
-
-//Callback
-void StartModule_StartCallback(StartModule_t *StartModule, void *Callback);
-void StartModule_ReturnToStopCallback(StartModule_t *StartModule, void *Callback);
-
-
-
+}SumoRobot_t;
 
 
 #endif /* INC_SUMOROBOT_H_ */
