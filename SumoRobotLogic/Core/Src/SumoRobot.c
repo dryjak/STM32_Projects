@@ -24,6 +24,31 @@ void SumoRobot_ReadTactics(SumoRobot_t *SumoRobot)
 	}
 }
 
+void SumoRobot_UpdateSensors(SumoRobot_t *SumoRobot)
+{
+
+}
+
+void CheckFloorColor(SumoRobot_t *SumoRobot)
+{
+	if(SumoRobot->FlorSensorAdcL > ADC_FLOR_SENSOR_BORDER)	// darker area results in higher number
+	{
+		SumoRobot->Sensors.FlorL = 0;
+	}
+	else
+	{
+		SumoRobot->Sensors.FlorL = 1;
+	}
+	if(SumoRobot->FlorSensorAdcR > ADC_FLOR_SENSOR_BORDER)	// darker area results in higher number
+	{
+		SumoRobot->Sensors.FlorR = 0;
+	}
+	else
+	{
+		SumoRobot->Sensors.FlorR= 1;
+	}
+}
+
 void SumoRobot_Init(SumoRobot_t *SumoRobot,
 GPIO_TypeDef *FlorPortL,	uint16_t FlorPinL,
 GPIO_TypeDef *FlorPortR,	uint16_t FlorPinR,

@@ -9,6 +9,8 @@
 #define INC_SUMOROBOT_H_
 #include <main.h>
 
+#define ADC_FLOR_SENSOR_BORDER 2000
+
 typedef struct{
 	GPIO_TypeDef *FlorPortL;	uint16_t FlorPinL;
 	GPIO_TypeDef *FlorPortR;	uint16_t FlorPinR;
@@ -49,6 +51,7 @@ typedef enum{
 
 typedef struct{
 	uint8_t Tactics;	//reading from dip switch
+	uint16_t FlorSensorAdcL, FlorSensorAdcR;
 	SumoRobotSensors_t Sensors;
 	SumoRobotMove_t Move;
 	SumoRobotHardware_t Hardware;
