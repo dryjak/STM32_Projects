@@ -38,13 +38,13 @@ typedef union{
 }SumoRobotSensors_t	;
 
 typedef enum{
-	STOP = 0,
-	FORWARD,
-	TURN_LEFT,
-	TURN_RIGHT,
-	TURN_SLIGHT_LEFT,
-	TURN_SLIGHT_RIGHT,
-	BACKWARD,
+	MOVE_STOP = 0,
+	MOVE_FORWARD,
+	MOVE_TURN_LEFT,
+	MOVE_TURN_RIGHT,
+	MOVE_TURN_SLIGHT_LEFT,
+	MOVE_TURN_SLIGHT_RIGHT,
+	MOVE_BACKWARD,
 }SumoRobotMove_t;
 
 typedef struct{
@@ -55,5 +55,19 @@ typedef struct{
 
 }SumoRobot_t;
 
+
+//Initialize function
+void SumoRobotInit(SumoRobot_t *SumoRobot,
+GPIO_TypeDef *FlorPortL,	uint16_t FlorPinL,
+GPIO_TypeDef *FlorPortR,	uint16_t FlorPinR,
+
+GPIO_TypeDef *DistancePortM,	uint16_t DistancePinM,
+GPIO_TypeDef *DistancePortL,	uint16_t DistancePinL,
+GPIO_TypeDef *DistancePortR,	uint16_t DistancePinR,
+
+//I have used 3 pin dip switch
+GPIO_TypeDef *DipSwitchPort1,	uint16_t DipSwitchPin1,
+GPIO_TypeDef *DipSwitchPort2,	uint16_t DipSwitchPin2,
+GPIO_TypeDef *DipSwitchPort3,	uint16_t DipSwitchPin3);
 
 #endif /* INC_SUMOROBOT_H_ */
