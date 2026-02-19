@@ -7,6 +7,10 @@
 
 
 #include "SumoRobot.h"
+
+#define SUMO_HIGH_STATE 1	//used for sensors when white line is detected or enemy found
+#define SUMO_LOW_STATE  0
+
 static void CheckFloorColor(SumoRobot_t *SumoRobot);
 
 
@@ -30,19 +34,19 @@ void SumoRobot_UpdateSensors(SumoRobot_t *SumoRobot)
 {
 	//read distance sensor data
 	if(HAL_GPIO_ReadPin(SumoRobot->Hardware.DistancePortM, SumoRobot->Hardware.DistancePinM) == GPIO_PIN_RESET)
-		SumoRobot->Sensors.DistanceM = 1;
+		SumoRobot->Sensors.DistanceM = SUMO_HIGH_STATE;
 	else
-		SumoRobot->Sensors.DistanceM = 0;
+		SumoRobot->Sensors.DistanceM = SUMO_LOW_STATE;
 
 	if(HAL_GPIO_ReadPin(SumoRobot->Hardware.DistancePortR, SumoRobot->Hardware.DistancePinR) == GPIO_PIN_RESET)
-		SumoRobot->Sensors.DistanceR = 1;
+		SumoRobot->Sensors.DistanceR = SUMO_HIGH_STATE;
 	else
-		SumoRobot->Sensors.DistanceR = 0;
+		SumoRobot->Sensors.DistanceR = SUMO_LOW_STATE;
 
 	if(HAL_GPIO_ReadPin(SumoRobot->Hardware.DistancePortL, SumoRobot->Hardware.DistancePinL) == GPIO_PIN_RESET)
-		SumoRobot->Sensors.DistanceL = 1;
+		SumoRobot->Sensors.DistanceL = SUMO_HIGH_STATE;
 	else
-		SumoRobot->Sensors.DistanceL = 0;
+		SumoRobot->Sensors.DistanceL = SUMO_LOW_STATE;
 
 	//check floor color based on ADC readings
 	CheckFloorColor(SumoRobot);
@@ -52,19 +56,19 @@ static void CheckFloorColor(SumoRobot_t *SumoRobot)
 {
 	if(SumoRobot->FlorSensorAdcL > ADC_FLOR_SENSOR_BORDER)	// darker area results in higher number
 	{
-		SumoRobot->Sensors.FlorL = 0;
+		SumoRobot->Sensors.FlorL = SUMO_LOW_STATE;
 	}
 	else
 	{
-		SumoRobot->Sensors.FlorL = 1;
+		SumoRobot->Sensors.FlorL = SUMO_HIGH_STATE;
 	}
 	if(SumoRobot->FlorSensorAdcR > ADC_FLOR_SENSOR_BORDER)	// darker area results in higher number
 	{
-		SumoRobot->Sensors.FlorR = 0;
+		SumoRobot->Sensors.FlorR = SUMO_LOW_STATE;
 	}
 	else
 	{
-		SumoRobot->Sensors.FlorR= 1;
+		SumoRobot->Sensors.FlorR= SUMO_HIGH_STATE;
 	}
 }
 
