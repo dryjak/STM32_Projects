@@ -8,7 +8,23 @@
 
 #include "SumoRobot.h"
 
-void SumoRobotInit(SumoRobot_t *SumoRobot,
+void SumoRobot_ReadTactics(SumoRobot_t *SumoRobot)
+{
+	if(HAL_GPIO_ReadPin(SumoRobot->Hardware.DipSwitchPort1, SumoRobot->Hardware.DipSwitchPin1))
+	{
+		SumoRobot->Tactics |= (1 << 0);	// XXXX XXX1
+	}
+	if(HAL_GPIO_ReadPin(SumoRobot->Hardware.DipSwitchPort2, SumoRobot->Hardware.DipSwitchPin2))
+	{
+		SumoRobot->Tactics |= (1 << 1);	// XXXX XX1X
+	}
+	if(HAL_GPIO_ReadPin(SumoRobot->Hardware.DipSwitchPort3, SumoRobot->Hardware.DipSwitchPin3))
+	{
+		SumoRobot->Tactics |= (1 << 2);	// XXXXX1XX
+	}
+}
+
+void SumoRobot_Init(SumoRobot_t *SumoRobot,
 GPIO_TypeDef *FlorPortL,	uint16_t FlorPinL,
 GPIO_TypeDef *FlorPortR,	uint16_t FlorPinR,
 
@@ -21,8 +37,8 @@ GPIO_TypeDef *DipSwitchPort1,	uint16_t DipSwitchPin1,
 GPIO_TypeDef *DipSwitchPort2,	uint16_t DipSwitchPin2,
 GPIO_TypeDef *DipSwitchPort3,	uint16_t DipSwitchPin3)
 {
-	SumoRobot->Tactics = 0;
 	SumoRobot->Move = 0;
+	SumoRobot->Tactics = 0;
 	SumoRobot->Sensors.AllSensors = 0;
 
 	SumoRobot->Hardware.FlorPortR 	= FlorPortR;
@@ -37,3 +53,5 @@ GPIO_TypeDef *DipSwitchPort3,	uint16_t DipSwitchPin3)
 	SumoRobot->Hardware.DistancePortL	= DistancePortL;
 	SumoRobot->Hardware.DistancePinL 	= DistancePinL;
 }
+
+
