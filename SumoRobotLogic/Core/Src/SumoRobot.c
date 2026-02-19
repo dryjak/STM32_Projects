@@ -11,6 +11,14 @@
 #define SUMO_HIGH_STATE 1	//used for sensors when white line is detected or enemy found
 #define SUMO_LOW_STATE  0
 
+#define DIR_RIGHT 1
+#define DIR_LEFT  0
+
+typedef enum{
+	FIGHT_PHASE_OPENING = 0,
+	FIGHT_PHASE_NORMAL
+}FightPhase_t;
+
 static void CheckFloorColor(SumoRobot_t *SumoRobot);
 
 
@@ -70,6 +78,122 @@ static void CheckFloorColor(SumoRobot_t *SumoRobot)
 	{
 		SumoRobot->Sensors.FlorR= SUMO_HIGH_STATE;
 	}
+}
+
+void SumoRobot_StartTactics(SumoRobot_t *SumoRobot)
+{
+	static FightPhase_t CurrentPhase = FIGHT_PHASE_OPENING;
+	static uint32_t LastTick = 0;
+
+	//firstly we check the line, this is our priority
+	if (SumoRobot->Sensors.FlorL || SumoRobot->Sensors.FlorR)
+	{
+		CurrentPhase = FIGHT_PHASE_NORMAL;	//if we see the line we don't make starting sequence
+
+		if (SumoRobot->Sensors.FlorL && SumoRobot->Sensors.FlorR) {
+			SumoRobot->Move = MOVE_BACKWARD; 	// Line up front -> go backward
+		} else if (SumoRobot->Sensors.FlorL) {
+			SumoRobot->Move = MOVE_TURN_RIGHT;	// Line from left -> go right
+		} else {
+			SumoRobot->Move = MOVE_TURN_LEFT;  	// Line from right -> go left
+		}
+
+		return;
+	}
+
+	switch(CurrentPhase)
+	{
+	case FIGHT_PHASE_OPENING:
+
+		break;
+	case FIGHT_PHASE_NORMAL:
+
+		break;
+
+	}
+
+	//opening tactics
+	switch (SumoRobot->Tactics)
+	{
+	case 0:
+		CurrentPhase = FIGHT_PHASE_NORMAL;
+	break;
+	case 1:
+
+	break;
+	}
+
+}
+
+void SumoRobot_Task(SumoRobot_t *SumoRobot)
+{
+	static FightPhase_t CurrentPhase = FIGHT_PHASE_OPENING;
+	static uint32_t LastTick = 0;
+
+	//Firstly check if there is a line
+	if (SumoRobot->Sensors.FlorL || SumoRobot->Sensors.FlorR)
+	{
+		CurrentPhase = FIGHT_PHASE_NORMAL;	//if we see the line we don't make starting sequence
+
+		if (SumoRobot->Sensors.FlorL && SumoRobot->Sensors.FlorR) {
+			SumoRobot->Move = MOVE_BACKWARD; 	// Line up front -> go backward
+		} else if (SumoRobot->Sensors.FlorL) {
+			SumoRobot->Move = MOVE_TURN_RIGHT;	// Line from left -> go right
+		} else {
+			SumoRobot->Move = MOVE_TURN_LEFT;  	// Line from right -> go left
+		}
+
+		return;
+	}
+
+	switch (CurrentPhase)
+	{
+	case FIGHT_PHASE_OPENING:	//Fight phase opening
+
+
+		break;
+	case FIGHT_PHASE_NORMAL:	//Fight phase normal
+
+
+		break;
+	}
+
+}
+
+void SumoRobot_StartTactic(SumoRobot_t *SumoRobot)
+{
+	switch (SumoRobot->Tactics)
+	{
+	case 0:
+		break;
+	case 1:
+		break;
+	}
+}
+
+void SumoRobot_NormalMode(SumoRobot_t *SumoRobot)
+{
+	static uint8_t LastSeen = 0;
+
+	//check flor sensors
+	if(SumoRobot->Hardware.FlorPinR || SumoRobot->Hardware.FlorPortL)
+	{
+		if(SumoRobot->Hardware.FlorPinR && SumoRobot->Hardware.FlorPortL)
+		{
+			SumoRobot->Move = MOVE_BACKWARD; 	// Line up front -> go backward
+		}
+		else if(SumoRobot->Hardware.FlorPinR)
+		{
+			SumoRobot->Move = MOVE_TURN_RIGHT;	// Line from left -> go right
+		}
+		else if (SumoRobot->Hardware.FlorPinL)
+		{
+			SumoRobot->Move = MOVE_TURN_LEFT;  	// Line from right -> go left
+		}
+	}
+
+	//check distance sensors
+
 }
 
 void SumoRobot_Init(SumoRobot_t *SumoRobot,
