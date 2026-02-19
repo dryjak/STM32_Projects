@@ -31,7 +31,7 @@ typedef union{
 	struct{
 		uint8_t FlorL : 1;		//1 - black, 0 - white
 		uint8_t FlorR : 1;
-		uint8_t DistanceM : 1;	//1 - not detected, 0 - detected
+		uint8_t DistanceM : 1;	//1 - detected, 0 - not detected
 		uint8_t DistanceR : 1;
 		uint8_t DistanceL : 1;
 		uint8_t EmptySpace: 3;
