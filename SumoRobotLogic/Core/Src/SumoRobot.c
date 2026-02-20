@@ -87,51 +87,6 @@ static void CheckFloorColor(SumoRobot_t *SumoRobot)
 	}
 }
 
-void SumoRobot_StartTactics(SumoRobot_t *SumoRobot)
-{
-	static FightPhase_t CurrentPhase = FIGHT_PHASE_OPENING;
-	static uint32_t LastTick = 0;
-
-	//firstly we check the line, this is our priority
-	if (SumoRobot->Sensors.FlorL || SumoRobot->Sensors.FlorR)
-	{
-		CurrentPhase = FIGHT_PHASE_NORMAL;	//if we see the line we don't make starting sequence
-
-		if (SumoRobot->Sensors.FlorL && SumoRobot->Sensors.FlorR) {
-			SumoRobot->Move = MOVE_BACKWARD; 	// Line up front -> go backward
-		} else if (SumoRobot->Sensors.FlorL) {
-			SumoRobot->Move = MOVE_TURN_RIGHT;	// Line from left -> go right
-		} else {
-			SumoRobot->Move = MOVE_TURN_LEFT;  	// Line from right -> go left
-		}
-
-		return;
-	}
-
-	switch(CurrentPhase)
-	{
-	case FIGHT_PHASE_OPENING:
-
-		break;
-	case FIGHT_PHASE_NORMAL:
-
-		break;
-
-	}
-
-	//opening tactics
-	switch (SumoRobot->Tactics)
-	{
-	case 0:
-		CurrentPhase = FIGHT_PHASE_NORMAL;
-	break;
-	case 1:
-
-	break;
-	}
-
-}
-
 void SumoRobot_Task(SumoRobot_t *SumoRobot)
 {
 	static FightPhase_t CurrentPhase = FIGHT_PHASE_OPENING;
@@ -157,11 +112,10 @@ void SumoRobot_Task(SumoRobot_t *SumoRobot)
 	{
 	case FIGHT_PHASE_OPENING:	//Fight phase opening
 
-
+		CurrentPhase = FIGHT_PHASE_NORMAL;
 		break;
 	case FIGHT_PHASE_NORMAL:	//Fight phase normal
-
-
+		SumoRobot_NormalMode(SumoRobot);
 		break;
 	}
 
@@ -171,9 +125,26 @@ void SumoRobot_StartTactic(SumoRobot_t *SumoRobot)
 {
 	switch (SumoRobot->Tactics)
 	{
-	case 0:
+	case 0:	// 000 - normal mode
+
 		break;
-	case 1:
+	case 1:	// 001 - fast rotate left until middle sensor sees enemy
+
+		break;
+	case 2:	// 010 - fast rotate right until middle sensor sees enemy
+
+		break;
+	case 3: // 011 - go with curve right
+
+		break;
+	case 4:	// 100 - go with curve left
+
+		break;
+	case 5: // 101 - go back and wait
+
+		break;
+	case 8: // 111 - go straight for few seconds
+
 		break;
 	}
 }
@@ -200,17 +171,7 @@ void SumoRobot_NormalMode(SumoRobot_t *SumoRobot)
 			SumoRobot->Move = MOVE_TURN_LEFT;  	// Line from right -> go left
 			LastSeen = LAST_SEEN_LEFT;
 		}
-		else if(LastSeen != LAST_SEEN_NONE && LastSeen != LAST_SEEN_MIDDLE)
-		{
-			if(LastSeen == LAST_SEEN_LEFT)
-			{
-				SumoRobot->Move = MOVE_TURN_LEFT;
-			}
-			else if(LastSeen == LAST_SEEN_RIGHT)
-			{
-				SumoRobot->Move = MOVE_TURN_RIGHT;
-			}
-		}
+
 	}
 
 	//check distance sensors
@@ -223,6 +184,22 @@ void SumoRobot_NormalMode(SumoRobot_t *SumoRobot)
 	{
 		//go left
 		SumoRobot->Move = MOVE_TURN_LEFT;
+	}
+	else if(SumoRobot->Hardware.DistancePinL)
+	{
+		//go right
+		SumoRobot->Move = MOVE_TURN_RIGHT;
+	}
+	else if(LastSeen != LAST_SEEN_NONE && LastSeen != LAST_SEEN_MIDDLE)
+	{
+		if(LastSeen == LAST_SEEN_LEFT)
+		{
+			SumoRobot->Move = MOVE_TURN_LEFT;
+		}
+		else if(LastSeen == LAST_SEEN_RIGHT)
+		{
+			SumoRobot->Move = MOVE_TURN_RIGHT;
+		}
 	}
 }
 
