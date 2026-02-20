@@ -26,14 +26,17 @@ typedef enum{
 	LAST_SEEN_LEFT
 }LastSeen_t;
 
+//Static, private functions
 static void CheckFloorColor(SumoRobot_t *SumoRobot);
 static void SumoRobot_NormalMode(SumoRobot_t *SumoRobot);
 static void SumoRobot_StartTactic(SumoRobot_t *SumoRobot);
 
 static FightPhase_t CurrentPhase = FIGHT_PHASE_OPENING;
+static uint32_t OpeningPhaseStartTime = 0;
 
 void SumoRobot_ReadTactics(SumoRobot_t *SumoRobot)
 {
+	SumoRobot->Tactics = 0;
 	if(HAL_GPIO_ReadPin(SumoRobot->Hardware.DipSwitchPort1, SumoRobot->Hardware.DipSwitchPin1))
 	{
 		SumoRobot->Tactics |= (1 << 0);	// XXXX XXX1
@@ -72,6 +75,8 @@ void SumoRobot_UpdateSensors(SumoRobot_t *SumoRobot)
 
 static void CheckFloorColor(SumoRobot_t *SumoRobot)
 {
+	//should i make it shorter?
+
 	if(SumoRobot->FlorSensorAdcL > ADC_FLOR_SENSOR_BORDER)	// darker area results in higher number
 	{
 		SumoRobot->Sensors.FlorL = SUMO_LOW_STATE;
@@ -92,12 +97,11 @@ static void CheckFloorColor(SumoRobot_t *SumoRobot)
 
 void SumoRobot_Task(SumoRobot_t *SumoRobot)
 {
-
-
 	//Firstly check if there is a line
 	if (SumoRobot->Sensors.FlorL || SumoRobot->Sensors.FlorR)
 	{
 		CurrentPhase = FIGHT_PHASE_NORMAL;	//if we see the line we don't make starting sequence
+		OpeningPhaseStartTime = 0; //reset tactic timer
 
 		if (SumoRobot->Sensors.FlorL && SumoRobot->Sensors.FlorR) {
 			SumoRobot->Move = MOVE_BACKWARD; 	// Line up front -> go backward
@@ -110,6 +114,7 @@ void SumoRobot_Task(SumoRobot_t *SumoRobot)
 		return;
 	}
 
+	//fight stage
 	switch (CurrentPhase)
 	{
 	case FIGHT_PHASE_OPENING:	//Fight phase opening
@@ -124,8 +129,11 @@ void SumoRobot_Task(SumoRobot_t *SumoRobot)
 
 void SumoRobot_StartTactic(SumoRobot_t *SumoRobot)
 {
-	static uint32_t LastTick = 0;
-	uint32_t Elapsed = HAL_GetTick() - LastTick;
+	if (OpeningPhaseStartTime == 0)
+	{
+		OpeningPhaseStartTime = HAL_GetTick();
+	}
+	uint32_t Elapsed = HAL_GetTick() - OpeningPhaseStartTime;
 
 	switch (SumoRobot->Tactics)
 	{
@@ -133,97 +141,73 @@ void SumoRobot_StartTactic(SumoRobot_t *SumoRobot)
 		CurrentPhase = FIGHT_PHASE_NORMAL;
 		break;
 	case 1:	// 001 - fast rotate left until middle sensor sees enemy
-			LastTick =HAL_GetTick();
 			SumoRobot->Move = MOVE_TURN_LEFT;
 			// Stop rotating if we see enemy or time has passed
-			if (SumoRobot->Sensors.DistanceM == 0 || Elapsed > 500) {
+			if (SumoRobot->Sensors.DistanceM == SUMO_HIGH_STATE || Elapsed > 500) {
 				CurrentPhase = FIGHT_PHASE_NORMAL;
 			}
 		break;
 	case 2:	// 010 - fast rotate right until middle sensor sees enemy
-			LastTick =HAL_GetTick();
 			SumoRobot->Move = MOVE_TURN_RIGHT;
 			// Stop rotating if we see enemy or time has passed
-			if (SumoRobot->Sensors.DistanceM == 0 || Elapsed > 500) {
+			if (SumoRobot->Sensors.DistanceM == SUMO_HIGH_STATE || Elapsed > 500) {
 				CurrentPhase = FIGHT_PHASE_NORMAL;
 			}
 		break;
 	case 3: // 011 - go with curve left
-		LastTick =HAL_GetTick();
 		SumoRobot->Move = MOVE_TURN_SLIGHT_LEFT;
 		// Stop rotating if we see enemy or time has passed
-		if (Elapsed > 350) {
+		if (Elapsed > 350)
 			CurrentPhase = FIGHT_PHASE_NORMAL;
-		}
-
 		break;
 	case 4:	// 100 - go with curve right
-		LastTick =HAL_GetTick();
 		SumoRobot->Move = MOVE_TURN_SLIGHT_RIGHT;
 		// Stop rotating if we see enemy or time has passed
-		if (Elapsed > 350) {
+		if (Elapsed > 350)
 			CurrentPhase = FIGHT_PHASE_NORMAL;
-		}
 		break;
 	case 5: // 101 - go back and wait
-		LastTick =HAL_GetTick();
 		SumoRobot->Move = MOVE_SLIGHT_BACKWARD;
 		// Stop moving if time has passed
-		if (Elapsed > 350) {
+		if (Elapsed > 350)
 			CurrentPhase = FIGHT_PHASE_NORMAL;
-		}
 		break;
-	case 8: // 111 - go straight for few seconds
-		LastTick =HAL_GetTick();
+	case 7: // 111 - go straight for few seconds
 		SumoRobot->Move = MOVE_FORWARD;
 		// Stop moving if time has passed
 		if (Elapsed > 500) {
 			CurrentPhase = FIGHT_PHASE_NORMAL;
 		}
 		break;
+
+	default:
+		CurrentPhase = FIGHT_PHASE_NORMAL;
+		break;
 	}
 }
 
 void SumoRobot_NormalMode(SumoRobot_t *SumoRobot)
 {
-	LastSeen_t LastSeen = LAST_SEEN_NONE;
-
-	//check flor sensors
-	if(SumoRobot->Hardware.FlorPinR || SumoRobot->Hardware.FlorPortL)
-	{
-		if(SumoRobot->Hardware.FlorPinR && SumoRobot->Hardware.FlorPortL)
-		{
-			SumoRobot->Move = MOVE_BACKWARD; 	// Line up front -> go backward
-			LastSeen = LAST_SEEN_MIDDLE;
-		}
-		else if(SumoRobot->Hardware.FlorPinR)
-		{
-			SumoRobot->Move = MOVE_TURN_RIGHT;	// Line from left -> go right
-			LastSeen = LAST_SEEN_RIGHT;
-		}
-		else if (SumoRobot->Hardware.FlorPinL)
-		{
-			SumoRobot->Move = MOVE_TURN_LEFT;  	// Line from right -> go left
-			LastSeen = LAST_SEEN_LEFT;
-		}
-
-	}
+	static LastSeen_t LastSeen = LAST_SEEN_NONE;
 
 	//check distance sensors
 	if(SumoRobot->Hardware.DistancePinM)
 	{
 		//go straight
 		SumoRobot->Move = MOVE_FORWARD;
+		LastSeen = LAST_SEEN_MIDDLE;
 	}
 	else if(SumoRobot->Hardware.DistancePinL)
 	{
 		//go left
 		SumoRobot->Move = MOVE_TURN_LEFT;
+		LastSeen = LAST_SEEN_LEFT;
 	}
-	else if(SumoRobot->Hardware.DistancePinL)
+	else if(SumoRobot->Hardware.DistancePinR)
 	{
 		//go right
 		SumoRobot->Move = MOVE_TURN_RIGHT;
+		LastSeen = LAST_SEEN_RIGHT;
 	}
 	else if(LastSeen != LAST_SEEN_NONE && LastSeen != LAST_SEEN_MIDDLE)
 	{
@@ -262,8 +246,8 @@ GPIO_TypeDef *DipSwitchPort3,	uint16_t DipSwitchPin3)
 
 	SumoRobot->Hardware.DistancePortM	= DistancePortM;
 	SumoRobot->Hardware.DistancePinM 	= DistancePinM;
-	SumoRobot->Hardware.DistancePortM	= DistancePortR;
-	SumoRobot->Hardware.DistancePinM 	= DistancePinR;
+	SumoRobot->Hardware.DistancePortR	= DistancePortR;
+	SumoRobot->Hardware.DistancePinR 	= DistancePinR;
 	SumoRobot->Hardware.DistancePortL	= DistancePortL;
 	SumoRobot->Hardware.DistancePinL 	= DistancePinL;
 }

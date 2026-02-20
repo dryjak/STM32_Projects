@@ -62,7 +62,7 @@ typedef struct{
 
 
 //Initialize function
-void SumoRobotInit(SumoRobot_t *SumoRobot,
+void SumoRobot_Init(SumoRobot_t *SumoRobot,
 GPIO_TypeDef *FlorPortL,	uint16_t FlorPinL,
 GPIO_TypeDef *FlorPortR,	uint16_t FlorPinR,
 
