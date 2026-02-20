@@ -19,6 +19,13 @@ typedef enum{
 	FIGHT_PHASE_NORMAL
 }FightPhase_t;
 
+typedef enum{
+	LAST_SEEN_NONE = 0,
+	LAST_SEEN_MIDDLE,
+	LAST_SEEN_RIGHT,
+	LAST_SEEN_LEFT
+}LastSeen_t;
+
 static void CheckFloorColor(SumoRobot_t *SumoRobot);
 
 
@@ -173,7 +180,7 @@ void SumoRobot_StartTactic(SumoRobot_t *SumoRobot)
 
 void SumoRobot_NormalMode(SumoRobot_t *SumoRobot)
 {
-	static uint8_t LastSeen = 0;
+	LastSeen_t LastSeen = LAST_SEEN_NONE;
 
 	//check flor sensors
 	if(SumoRobot->Hardware.FlorPinR || SumoRobot->Hardware.FlorPortL)
@@ -181,19 +188,42 @@ void SumoRobot_NormalMode(SumoRobot_t *SumoRobot)
 		if(SumoRobot->Hardware.FlorPinR && SumoRobot->Hardware.FlorPortL)
 		{
 			SumoRobot->Move = MOVE_BACKWARD; 	// Line up front -> go backward
+			LastSeen = LAST_SEEN_MIDDLE;
 		}
 		else if(SumoRobot->Hardware.FlorPinR)
 		{
 			SumoRobot->Move = MOVE_TURN_RIGHT;	// Line from left -> go right
+			LastSeen = LAST_SEEN_RIGHT;
 		}
 		else if (SumoRobot->Hardware.FlorPinL)
 		{
 			SumoRobot->Move = MOVE_TURN_LEFT;  	// Line from right -> go left
+			LastSeen = LAST_SEEN_LEFT;
+		}
+		else if(LastSeen != LAST_SEEN_NONE && LastSeen != LAST_SEEN_MIDDLE)
+		{
+			if(LastSeen == LAST_SEEN_LEFT)
+			{
+				SumoRobot->Move = MOVE_TURN_LEFT;
+			}
+			else if(LastSeen == LAST_SEEN_RIGHT)
+			{
+				SumoRobot->Move = MOVE_TURN_RIGHT;
+			}
 		}
 	}
 
 	//check distance sensors
-
+	if(SumoRobot->Hardware.DistancePinM)
+	{
+		//go straight
+		SumoRobot->Move = MOVE_FORWARD;
+	}
+	else if(SumoRobot->Hardware.DistancePinL)
+	{
+		//go left
+		SumoRobot->Move = MOVE_TURN_LEFT;
+	}
 }
 
 void SumoRobot_Init(SumoRobot_t *SumoRobot,
