@@ -27,7 +27,10 @@ typedef enum{
 }LastSeen_t;
 
 static void CheckFloorColor(SumoRobot_t *SumoRobot);
+static void SumoRobot_NormalMode(SumoRobot_t *SumoRobot);
+static void SumoRobot_StartTactic(SumoRobot_t *SumoRobot);
 
+static FightPhase_t CurrentPhase = FIGHT_PHASE_OPENING;
 
 void SumoRobot_ReadTactics(SumoRobot_t *SumoRobot)
 {
@@ -89,8 +92,7 @@ static void CheckFloorColor(SumoRobot_t *SumoRobot)
 
 void SumoRobot_Task(SumoRobot_t *SumoRobot)
 {
-	static FightPhase_t CurrentPhase = FIGHT_PHASE_OPENING;
-	static uint32_t LastTick = 0;
+
 
 	//Firstly check if there is a line
 	if (SumoRobot->Sensors.FlorL || SumoRobot->Sensors.FlorR)
@@ -111,8 +113,7 @@ void SumoRobot_Task(SumoRobot_t *SumoRobot)
 	switch (CurrentPhase)
 	{
 	case FIGHT_PHASE_OPENING:	//Fight phase opening
-
-		CurrentPhase = FIGHT_PHASE_NORMAL;
+		SumoRobot_StartTactic(SumoRobot);
 		break;
 	case FIGHT_PHASE_NORMAL:	//Fight phase normal
 		SumoRobot_NormalMode(SumoRobot);
@@ -123,28 +124,62 @@ void SumoRobot_Task(SumoRobot_t *SumoRobot)
 
 void SumoRobot_StartTactic(SumoRobot_t *SumoRobot)
 {
+	static uint32_t LastTick = 0;
+	uint32_t Elapsed = HAL_GetTick() - LastTick;
+
 	switch (SumoRobot->Tactics)
 	{
 	case 0:	// 000 - normal mode
-
+		CurrentPhase = FIGHT_PHASE_NORMAL;
 		break;
 	case 1:	// 001 - fast rotate left until middle sensor sees enemy
-
+			LastTick =HAL_GetTick();
+			SumoRobot->Move = MOVE_TURN_LEFT;
+			// Stop rotating if we see enemy or time has passed
+			if (SumoRobot->Sensors.DistanceM == 0 || Elapsed > 500) {
+				CurrentPhase = FIGHT_PHASE_NORMAL;
+			}
 		break;
 	case 2:	// 010 - fast rotate right until middle sensor sees enemy
+			LastTick =HAL_GetTick();
+			SumoRobot->Move = MOVE_TURN_RIGHT;
+			// Stop rotating if we see enemy or time has passed
+			if (SumoRobot->Sensors.DistanceM == 0 || Elapsed > 500) {
+				CurrentPhase = FIGHT_PHASE_NORMAL;
+			}
+		break;
+	case 3: // 011 - go with curve left
+		LastTick =HAL_GetTick();
+		SumoRobot->Move = MOVE_TURN_SLIGHT_LEFT;
+		// Stop rotating if we see enemy or time has passed
+		if (Elapsed > 350) {
+			CurrentPhase = FIGHT_PHASE_NORMAL;
+		}
 
 		break;
-	case 3: // 011 - go with curve right
-
-		break;
-	case 4:	// 100 - go with curve left
-
+	case 4:	// 100 - go with curve right
+		LastTick =HAL_GetTick();
+		SumoRobot->Move = MOVE_TURN_SLIGHT_RIGHT;
+		// Stop rotating if we see enemy or time has passed
+		if (Elapsed > 350) {
+			CurrentPhase = FIGHT_PHASE_NORMAL;
+		}
 		break;
 	case 5: // 101 - go back and wait
-
+		LastTick =HAL_GetTick();
+		SumoRobot->Move = MOVE_SLIGHT_BACKWARD;
+		// Stop moving if time has passed
+		if (Elapsed > 350) {
+			CurrentPhase = FIGHT_PHASE_NORMAL;
+		}
 		break;
 	case 8: // 111 - go straight for few seconds
-
+		LastTick =HAL_GetTick();
+		SumoRobot->Move = MOVE_FORWARD;
+		// Stop moving if time has passed
+		if (Elapsed > 500) {
+			CurrentPhase = FIGHT_PHASE_NORMAL;
+		}
 		break;
 	}
 }

@@ -47,6 +47,7 @@ typedef enum{
 	MOVE_TURN_SLIGHT_LEFT,
 	MOVE_TURN_SLIGHT_RIGHT,
 	MOVE_BACKWARD,
+	MOVE_SLIGHT_BACKWARD
 }SumoRobotMove_t;
 
 typedef struct{
